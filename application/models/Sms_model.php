@@ -25,7 +25,7 @@ class Sms_model extends CI_Model
         $branchID = $this->application_model->get_branch_id();
         $sms_api = $this->application_model->smsServiceProvider($branchID);
         $template = $this->db->get_where('sms_template_details', array('template_id' => $id, 'branch_id' => $branchID))->row_array();
-        if (($template['notify_student'] == 1 || $template['notify_parent'] == 1) && $sms_api != 'disabled') {
+        if (!empty($template) && ($template['notify_student'] == 1 || $template['notify_parent'] == 1) && $sms_api != 'disabled') {
             $student = $this->application_model->getstudentdetails($data['student_id']);
             $text = str_replace('{name}', $student['first_name'] . ' ' . $student['last_name'], $template['template_body']);
             $text = str_replace('{register_no}', $student['register_no'], $text);
@@ -66,6 +66,21 @@ class Sms_model extends CI_Model
                         $this->_send($sms_api, $parent['mobileno'], $text, $template['dlt_template_id']);
                     }
                 }
+            }
+        }
+    }
+
+    public function alumniEvent($arrayData = [])
+    {
+        $sms_api = $this->application_model->smsServiceProvider($arrayData['branch_id']);
+        $template = $this->db->get_where('sms_template_details', array('template_id' => 11, 'branch_id' => $arrayData['branch_id']))->row_array();
+        if (!empty($template) && $template['notify_student'] == 1 && $sms_api != 'disabled') {
+            $text = str_replace('{student_name}', $arrayData['name'], $template['template_body']);
+            $text = str_replace('{start_date}', $arrayData['from_date'], $text);
+            $text = str_replace('{end_date}', $arrayData['to_date'], $text);
+            $text = str_replace('{event_title}', $arrayData['event_title'], $text);
+            if (!empty($arrayData['mobile_no'])) {
+                $this->_send($sms_api, $arrayData['mobile_no'], $text, $template['dlt_template_id']);
             }
         }
     }
@@ -243,9 +258,7 @@ class Sms_model extends CI_Model
         if ($sms_api == 2) {
             $res = $this->clickatell->send_message($receiver, $text);
         } elseif ($sms_api == 1) {
-            $get = $this->twilio->get_twilio();
-            $from = $get['number'];
-            $res = $this->twilio->sms($from, $receiver, $text);
+            $res = $this->twilio->sms($receiver, $text);
         } elseif ($sms_api == 4) {
             $res = $this->bulk->send($receiver, $text);
         } elseif ($sms_api == 3) {

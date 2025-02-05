@@ -69,15 +69,12 @@ class Authentication_model extends MY_Model
         $saasExisting = $this->app_lib->isExistingAddon('saas');
         if ($saasExisting && $this->db->table_exists("custom_domain")) {
             $getDomain = $this->getCurrentDomain();
-            if(!empty($getDomain)) {
+            if (!empty($getDomain)) {
                 return $getDomain->school_id;
             }
         }
 
-        $get = $this->db->select('branch_id')
-            ->where('url_alias', $url_alias)
-            ->get('front_cms_setting')
-            ->row_array();
+        $get = $this->db->select('branch_id')->where('url_alias', $url_alias)->get('front_cms_setting')->row_array();
         if (empty($url_alias) || empty($get)) {
             return null;
         } else {
@@ -91,7 +88,7 @@ class Authentication_model extends MY_Model
         if (empty($segment)) {
             return '';
         } else {
-            return '/' . $segment;
+            return $segment . '/';
         }
     }
 
@@ -99,8 +96,41 @@ class Authentication_model extends MY_Model
     {
         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $url = rtrim($url, '/');
-        $domain =  parse_url($url, PHP_URL_HOST);
+        $domain = parse_url($url, PHP_URL_HOST);
+        if (substr($domain, 0, 4) == 'www.') {
+            $domain = str_replace('www.', '', $domain);
+        }
         $getDomain = $this->db->select('school_id')->get_where('custom_domain', array('status' => 1, 'url' => $domain))->row();
         return $getDomain;
+    }
+
+    public function getSchoolDeatls($url_alias = '')
+    {
+        if (!empty($url_alias)) {
+            $this->db->select('fs.facebook_url,fs.twitter_url,fs.linkedin_url,fs.youtube_url,branch.address,branch.school_name');
+            $this->db->from('front_cms_setting as fs');
+            $this->db->join('branch', 'branch.id = fs.branch_id', 'left');
+            $this->db->where('fs.url_alias', $url_alias);
+            $get = $this->db->get()->row();
+            if (empty($get)) {
+                return '';
+            } else {
+                return $get;
+            }
+        } else {
+            return '';
+        }
+    }
+
+    public function getStudentLoginStatus($id = '')
+    {
+        $get = $this->db->select('IFNULL(student_login, 1) as login')->where('id', $id)->get('branch')->row()->login;
+        return $get;
+    }
+    
+    public function getParentLoginStatus($id = '')
+    {
+        $get = $this->db->select('IFNULL(parent_login, 1) as login')->where('id', $id)->get('branch')->row()->login;
+        return $get;
     }
 }

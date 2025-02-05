@@ -121,27 +121,23 @@ function certificate_printElem(elem, html = false)
     } else {
        var oContent = elem; 
     }
-    var frame1 = document.createElement('iframe');
-    frame1.name = "frame1";
-    frame1.style.position = "absolute";
-    frame1.style.top = "-1000000px";
-    document.body.appendChild(frame1);
-    var frameDoc = frame1.contentWindow ? frame1.contentWindow : frame1.contentDocument.document ? frame1.contentDocument.document : frame1.contentDocument;
+    var frameDoc=window.open('', 'document-print');
     frameDoc.document.open();
     //Create a new HTML document.
     frameDoc.document.write('<html><head><title></title>');
-    frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'assets/vendor/bootstrap/css/bootstrap.min.css">');
+    frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'assets/css/print-css.css">');
+    if (isRTLenabled == '1') {
+        frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'assets/css/bootstrap.rtl.min.css">');
+    }
     frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'assets/css/custom-style.css">');
     frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'assets/css/certificate.css">');
-    frameDoc.document.write('</head><body>');
+    frameDoc.document.write('</head><body onload="window.print()">');
     frameDoc.document.write(oContent);
     frameDoc.document.write('</body></html>');
     frameDoc.document.close();
     setTimeout(function () {
-        window.frames["frame1"].focus();
-        window.frames["frame1"].print();
-        frame1.remove();
-    }, 500);
+        frameDoc.close();      
+    }, 5000);
     return true;
 }
 

@@ -38,6 +38,7 @@
 	<!-- If user have enabled CSRF proctection this function will take care of the ajax requests and append custom header for CSRF -->
 	<script type="text/javascript">
 		var base_url = '<?php echo base_url(); ?>';
+		var isRTLenabled = '<?php echo $this->app_lib->isRTLenabled(); ?>';
 		var csrfData = <?php echo json_encode(csrf_jquery_token()); ?>;
 		$(function($) {
 			$.ajaxSetup({

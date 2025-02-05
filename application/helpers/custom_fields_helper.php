@@ -155,7 +155,11 @@ function get_table_custom_field_value($field_id, $rel_id)
     $CI->db->where('relid', $rel_id);
     $CI->db->where('field_id', $field_id);
     $row = $CI->db->get()->row_array();
-    return $row['value'];
+    if (empty($row)) {
+        return NULL;
+    } else {
+        return $row['value'];
+    }
 }
 
 // onlinea dmission custom_fields
@@ -274,6 +278,20 @@ function get_online_custom_field_value($rel_id, $field_id, $belongs_to)
     $CI->db->join('custom_fields_online_values', 'custom_fields_online_values.field_id = custom_field.id and custom_fields_online_values.relid = ' . $rel_id, 'inner');
     $CI->db->where('custom_field.form_to', $belongs_to);
     $CI->db->where('custom_fields_online_values.field_id', $field_id);
+    $row = $CI->db->get()->row_array();
+    if (empty($row)) {
+        return NULL;
+    } else {
+        return $row['value'];
+    }
+}
+
+function get_online_custom_table_custom_field_value($field_id, $rel_id)
+{
+    $CI = &get_instance();
+    $CI->db->from('custom_fields_online_values');
+    $CI->db->where('relid', $rel_id);
+    $CI->db->where('field_id', $field_id);
     $row = $CI->db->get()->row_array();
     if (empty($row)) {
         return NULL;

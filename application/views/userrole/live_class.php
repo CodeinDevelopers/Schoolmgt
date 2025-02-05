@@ -1,7 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
 		<section class="panel">
-		<?php echo form_open($this->uri->uri_string());?>
 			<header class="panel-heading">
 				<h4 class="panel-title"><i class="fas fa-headset"></i> <?=translate('live_class') . " " . translate('list')?></h4>
 			</header>
@@ -62,17 +61,14 @@
 							</td>
 							<td><?php echo _d($row['created_at']);?></td>
 							<td class="min-w-c">
-								<a href="javascript:void(0);" class="btn btn-circle btn-default" 
-								onclick="getJoinModal('<?=$row['meeting_id'] . "|" . $row['id'] ?>');">
-									<i class="fas fa-network-wired"></i> Join Class
-								</a>
+								<button class="btn btn-circle btn-default" onclick="getJoinModal('<?=$row['meeting_id'] . "|" . $row['id'] ?>', this);" data-loading-text="<i class='fas fa-spinner fa-spin'></i> Processing">
+									<i class="fas fa-network-wired"></i> <?php echo translate('join_class'); ?> 
+								</button>
 							</td>
 						</tr>
 						<?php } endforeach; ?>
 					</tbody>
 				</table>
-			
-			
 			</div>
 		</section>
 	</div>
@@ -97,16 +93,26 @@
 </div>
 
 <script type="text/javascript">
-	function getJoinModal(id) {
+	function getJoinModal(id, elem) {
+		var btn = $(elem);
 	    $.ajax({
 	        url: base_url + 'userrole/joinModal',
 	        type: 'POST',
 	        data: {'meeting_id': id},
 	        dataType: "html",
+            beforeSend: function () {
+                btn.button('loading');
+            },
 	        success: function (data) {
 	            $('#quick_view').html(data);
 	            mfp_modal('#modal');
-	        }
+	        },
+            error: function (xhr) {
+                btn.button('reset');
+            },
+            complete: function () {
+               btn.button('reset');
+            } 
 	    });
 	}
 </script>

@@ -69,9 +69,7 @@
 								<td class="min-w-xs">
 								<?php if (get_permission('student_category', 'is_edit')): ?>
 									<!-- update link -->
-									<a class="btn btn-default btn-circle icon" href="javascript:void(0);" onclick="getStudentCategory('<?php echo $row['id']; ?>')">
-										<i class="fas fa-pen-nib"></i>
-									</a>
+									<button class="btn btn-circle icon btn-default" data-loading-text="<i class='fas fa-spinner fa-spin'></i>" onclick="getStudentCategory('<?php echo $row['id']; ?>', this)"><i class="fas fa-pen-nib"></i></button>
 								<?php endif; if (get_permission('student_category', 'is_delete')): ?>
 									<!-- delete link -->
 									<?php echo btn_delete('student/category_delete/' . $row['id']); ?>

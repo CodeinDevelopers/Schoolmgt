@@ -15,7 +15,7 @@
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' onchange='getClassByBranch(this.value)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSectionByClass(this.value,0)'
-								required data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								required data-plugin-selectTwo data-width='100%' ");
 							?>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 							<?php
 								$arraySection = $this->app_lib->getSections(set_value('class_id'));
 								echo form_dropdown("section_id", $arraySection, set_value('section_id'), "class='form-control' id='section_id' required
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 						</div>
 					</div>
@@ -64,16 +64,17 @@
 						<div class="col-md-12">
 							<div class="alert alert-subl mb-lg">
 								<strong>Instructions :</strong><br/>
-								
+								1. The Roll field shows the previous roll and you can manually add new roll for promoted session.<br/>
 								2. Roll number is unique, so carefully enter the roll number. Automatically generate a roll when your entered roll exists.<br/>
-								3. For Enroll, You can select "Running Class" and "Promote To Class" same (Student will change in Session year but classes remain unchanged).<br/>
-								4. Please double check and Fill-up all fields carefully Then click  Promotion button.<br/>
-								5. If you Unchecked "Carry Forward Due in Next Session" the due fees will not be transferred to the next session.
+								3. Please double check and Fill-up all fields carefully Then click  Promotion button.<br/>
+								4. If you Unchecked "Carry Forward Due in Next Session" the due fees will not be transferred to the next session.<br/>
+								5. If you select "Running" in the class section, only the session of that student will change and will exist in the running class.<br/>
+								6. If you want to add a student to the alumni list, then "Leave / Add Alumni" status should be checked.
 							</div>
 						</div>
 						<div class="col-md-12 mb-md">
 							<div class="checkbox-replace">
-								<label class="i-checks"><input type="checkbox" name="due_forward" checked><i></i>Move Student Debts to Next Session</label>
+								<label class="i-checks"><input type="checkbox" name="due_forward"><i></i>Carry Forward Due in Next Session</label>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -86,7 +87,7 @@
 										$arraySession[$year->id] = $year->school_year;
 									}
 									echo form_dropdown("promote_session_id", $arraySession, set_value('promote_session_id'), "class='form-control' id='session_id'
-									data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+									data-plugin-selectTwo data-width='100%'");
 								?>
 								<span class="error"></span>
 							</div>
@@ -97,7 +98,7 @@
 								<?php
 									$arrayClass = $this->app_lib->getClass($branch_id);
 									echo form_dropdown("promote_class_id", $arrayClass, set_value('promote_class_id'), "class='form-control' id='class_promote_id'
-									data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+									data-plugin-selectTwo data-width='100%'");
 								?>
 								<span class="error"></span>
 							</div>
@@ -108,7 +109,7 @@
 								<?php
 									$arraySection = array("" => translate('select'));
 									echo form_dropdown("promote_section_id", $arraySection, set_value('promote_section_id'), "class='form-control' id='section_promote_id'
-									data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+									data-plugin-selectTwo data-width='100%'");
 								?>
 								<span class="error"></span>
 							</div>
@@ -118,18 +119,21 @@
 						<table class="table table-condensed nowrap table-hover table-bordered tbr-top">
 							<thead>
 								<tr>
-									<th width="50">#</th>
-									<th><?=translate('student_name')?></th>
-									<th><?=translate('register_no')?></th>
-									<th><?=translate('guardian_name')?></th>
-									<th><?=translate('mark_summary')?></th>
-									<th><?=translate('roll')?></th>
-									<th><?=translate('current_due_amount')?></th>
 									<th class="center">
 										<div class="checkbox-replace">
 											<label class="i-checks" data-toggle="tooltip" data-original-title="Promotion"><input type="checkbox" id="selectAllchkbox" checked><i></i></label>
 										</div>				
 									</th>
+									<th width="50">#</th>
+									<th><?=translate('student_name')?></th>
+									<th><?=translate('register_no')?></th>
+									<th><?=translate('guardian_name')?></th>
+									<th><?=translate('mark_summary')?></th>
+									<th><?=translate('class')?></th>
+									<th><?=translate('roll')?></th>
+									<th><?=translate('current_due_amount') . " (" .translate('with_fine')?>)</th>
+									<th><?=translate('status')?></th>
+
 								</tr>
 							</thead>
 							<tbody>
@@ -138,10 +142,15 @@
 								if (count($students)) {
 									$school = $this->fees_model->get('branch', array('id' => $branch_id), true);
 									foreach($students as $key => $row):
-										$due_amount = $this->fees_model->getPreviousSessionBalance($row['student_id'], get_session_id(), $school['due_with_fine']);
+										$due_amount = $this->fees_model->getPreviousSessionBalance($row['id'], get_session_id(), $school['due_with_fine']);
 								?>
 								<tr>
 									<input type="hidden" name="promote[<?=$key?>][student_id]" value="<?=$row['student_id']?>" />
+									<td  class="center checked-area">
+										<div class="pt-csm checkbox-replace">
+											<label class="i-checks"><input type="checkbox" checked name="promote[<?=$key?>][enroll_id]" value="<?=$row['id']?>" ><i></i></label>
+										</div>
+									</td>
 									<td><?php echo $count++;?></td>
 									<td><?php echo $row['fullname'];?> <span class="promoted" id="pstu<?php echo $row['student_id']; ?>"></span></td>
 									<td><?php echo $row['register_no'];?></td>
@@ -152,27 +161,37 @@
 										</a>
 									</td>
 									<td>
+										<div class="radio-custom radio-success radio-inline mt-xs">
+											<input type="radio" class="swa" value="running" name="promote[<?=$key?>][class_status]" id="running<?=$key?>">
+											<label for="running<?=$key?>"><?php echo translate('running') ?></label>
+										</div>
+										<div class="radio-custom radio-success radio-inline mt-xs">
+											<input type="radio" class="swa" checked value="promoted" name="promote[<?=$key?>][class_status]" id="promoted<?=$key?>">
+											<label for="promoted<?=$key?>"><?php echo translate('promoted') ?></label>
+										</div>
+									</td>
+									<td>
 										<div class="form-group">
-											<input type="number" class="form-control" name="promote[<?=$key?>][roll]" value="<?=$row['roll']?>" />
+											<input type="number" class="form-control swa" name="promote[<?=$key?>][roll]" value="<?=$row['roll']?>" />
 											<span class="error"></span>
 										</div>
 									</td>
 									<td>
 										<div class="form-group">
-											<input type="number" class="form-control" name="promote[<?=$key?>][due_amount]" value="<?php echo $due_amount; ?>" />
+											<input type="number" class="form-control swa" name="promote[<?=$key?>][due_amount]" value="<?php echo $due_amount; ?>" />
 											<span class="error"></span>
 										</div>
 									</td>
-									<td  class="center checked-area">
+									<td class="leave">
 										<div class="pt-csm checkbox-replace">
-											<label class="i-checks"><input type="checkbox" checked name="promote[<?=$key?>][enroll_id]" value="<?=$row['id']?>" ><i></i></label>
+											<label class="i-checks"><input type="checkbox" name="promote[<?=$key?>][leave]" value="<?=$row['id']?>" ><i></i> Leave / Add Alumni</label>
 										</div>
 									</td>
 								</tr>
 								<?php
 									endforeach;
 								} else {
-									echo '<tr><td colspan="7"><h5 class="text-danger text-center">'.translate('no_information_available').'</td></tr>';
+									echo '<tr><td colspan="10"><h5 class="text-danger text-center">'.translate('no_information_available').'</td></tr>';
 								}
 							?>
 							</tbody>
@@ -203,6 +222,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
+
+		$(document).on('change', ".leave input[type='checkbox']", function() {
+			$(this).closest('tr').find('.swa').prop('disabled', this.checked);
+		})
 
 		$("#session_id, #class_promote_id, #section_promote_id").on('change', function() {
 			var classID = $('#class_promote_id').val();

@@ -123,6 +123,26 @@ class App_lib
         return $hashed;
     }
 
+    public function isRTLenabled()
+    {
+        $rtl = $this->CI->session->userdata('is_rtl');
+        if (!empty($rtl) && $rtl == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getRTLStatus($lang)
+    {
+        $row = $this->CI->db->select('rtl')->where('lang_field', $lang)->get('language_list')->row()->rtl;
+        if ($row == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function verify_password($password, $encrypt_password)
     {
         $hashed = password_verify($password, $encrypt_password);
@@ -405,6 +425,17 @@ class App_lib
         return $months[$m];
     }
 
+    public function getMonthsDropdown($startMonth = '')
+    {
+        $array = array('' => translate('select'));
+        $startMonth = (empty($startMonth)) ? 01 : $startMonth;
+        for ($i = $startMonth; $i < $startMonth + 12; $i++) {
+            $month = date('m', mktime(0, 0, 0, $i, 10));
+            $array[$month] = translate(strtolower(date('F', mktime(0, 0, 0, $i, 10))));
+        }
+        return $array;
+    }
+
     public function getDateformat()
     {
         $date = array(
@@ -498,5 +529,48 @@ class App_lib
         } else {
             return false;
         }
+    }
+
+    function licenceVerify()
+    {
+        $file = APPPATH.'config/purchase_key.php';
+        @chmod($file, FILE_WRITE_MODE);
+        $purchase = file_get_contents($file);
+        if (empty($purchase)) {
+            return false;
+        }
+        $purchase = json_decode($purchase); 
+        $array = array();
+        if(!is_array($purchase)) {
+            return false;
+        } else {
+            if (empty($purchase[0]) || empty($purchase[1])) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    function getAttendanceType()
+    {
+        $ci = &get_instance();
+        $role_id = $ci->session->userdata('loggedin_role_id');
+        $branchID = $ci->session->userdata('loggedin_branch');
+        if ($role_id == 1) {
+            return 2;
+        }
+        $sql = "SELECT `attendance_type` FROM `branch` WHERE `id` = " . $ci->db->escape($branchID);
+        $result = $ci->db->query($sql)->row();
+        return $result->attendance_type;
+    }
+
+    function getSchoolConfig($branchID = '', $select = '*')
+    {
+        $ci = &get_instance();
+        $branch_id = empty($branchID) ? $ci->session->userdata('loggedin_branch') : $branchID;
+        $sql = "SELECT $select FROM branch WHERE id = " . $ci->db->escape($branch_id);
+        $result = $ci->db->query($sql)->row();
+        return $result;
     }
 }

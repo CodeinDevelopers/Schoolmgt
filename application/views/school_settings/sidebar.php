@@ -9,6 +9,7 @@ if ($this->input->get('branch_id')) {
         <ul class="nav nav-pills nav-stacked">
         <?php if(get_permission('school_settings', 'is_view')){ ?>
             <li <?=$sub_page == 'school_settings/school' ? 'class="active"' : '';?>><a href="<?=base_url('school_settings' . $url)?>"><i class="fas fa-school"></i> <?=translate('school') . " " . translate('details')?></a></li>
+            <li <?=$sub_page == 'school_settings/student_parent_panel' ? 'class="active"' : '';?>><a href="<?=base_url('school_settings/student_parent_panel' . $url)?>"><i class="fa-solid fa-users"></i> Student / Parent Panel</a></li>
         <?php } if(get_permission('live_class_config', 'is_view')){ ?>
             <li <?=$sub_page == 'school_settings/live_class_config' ? 'class="active"' : '';?>><a href="<?=base_url('school_settings/live_class_config' . $url)?>"><i class="fas fa-headset"></i> <?=translate('live_class') . " " . translate('settings')?></a></li>
         <?php } if(get_permission('payment_settings', 'is_view')){ ?>
@@ -21,6 +22,8 @@ if ($this->input->get('branch_id')) {
             <li <?=$sub_page == 'school_settings/accounting_links' ? 'class="active"' : '';?>><a href="<?=base_url('school_settings/accounting_links' . $url)?>"><i class="fas fa-random"></i> <?=translate('accounting_links')?></a></li>
         <?php } if (get_permission('whatsapp_config', 'is_view')) {?>
             <li <?=$sub_page == 'school_settings/whatsapp_settings' ? 'class="active"' : '';?>><a href="<?=base_url('school_settings/whatsapp_setting' . $url)?>"><i class="fab fa-whatsapp"></i> <?=translate('whatsapp_settings')?></a></li>
+        <?php } if (moduleIsEnabled('attendance')) { ?>
+            <li <?=$sub_page == 'school_settings/attendance_type' ? 'class="active"' : '';?>><a href="<?=base_url('school_settings/attendance_type' . $url)?>"><i class="fa-solid fa-signal"></i> <?=translate('attendance_type')?></a></li>
         <?php } ?>
         </ul>
     </div>

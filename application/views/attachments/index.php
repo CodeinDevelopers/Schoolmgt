@@ -86,7 +86,7 @@
 									<?php
 										$arrayBranch = $this->app_lib->getSelectList('branch');
 										echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' id='branch_id'
-										data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+										data-plugin-selectTwo data-width='100%'");
 									?>
 									<span class="error"></span>
 								</div>
@@ -105,7 +105,7 @@
 									<?php
 										$arrayType = $this->app_lib->getSelectByBranch('attachments_type', $branch_id);
 										echo form_dropdown("type_id", $arrayType, set_value('type_id'), "class='form-control' id='type_id' data-plugin-selectTwo
-										data-width='100%' data-minimum-results-for-search='Infinity' ");
+										data-width='100%'");
 									?>
 									<span class="error"></span>
 								</div>
@@ -123,7 +123,7 @@
 											<?php
 												$arrayClass = $this->app_lib->getClass($branch_id);
 												echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSubjectByClass(this.value)'
-												data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+												data-plugin-selectTwo data-width='100%'");
 											?>
 											<span class="error"></span>
 										</div>

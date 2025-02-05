@@ -90,7 +90,7 @@
                                 ?>
                             </td>
                             <td><?php echo $assign['stop_place'];?></td>
-                            <td><?php echo $assign['route_fare'];?></td>
+                            <td><?php echo currencyFormat($assign['route_fare']);?></td>
                             <td><?php echo $this->userrole_model->getVehicleList($assign['route_id']);?></td>
                         </tr>
                         <?php endforeach;  ?>

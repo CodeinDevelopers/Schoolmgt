@@ -204,11 +204,11 @@ class Home_model extends MY_Model
         if (!empty($classID)) {
             $this->db->where('timetable_exam.class_id', $classID);
         }
-
         if (!empty($sectionID)) {
             $this->db->where('timetable_exam.section_id', $sectionID);
         }
-
+        $this->db->where('exam.status', 1);
+        $this->db->where('exam.publish_result', 1);
         $this->db->where('timetable_exam.branch_id', $branchID);
         $this->db->where('timetable_exam.session_id', $sessionID);
         $this->db->group_by('timetable_exam.exam_id');
@@ -306,5 +306,61 @@ class Home_model extends MY_Model
         $this->db->where('id', 1);
         $row = $this->db->get('global_settings')->row_array();
         return $row['cms_default_branch'];
+    }
+
+    public function checkAdmissionReferenceNo($ref_no)
+    {
+        $this->db->select("id");
+        $this->db->from('online_admission');
+        $this->db->where("reference_no", $ref_no);
+        $query = $this->db->get();
+        $result = $query->row_array();
+        if (!empty($result)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function getLatestNews($branchID='')
+    {
+        $this->db->limit(10);
+        $this->db->where('show_web', 1);
+        $this->db->where('branch_id', $branchID);
+        $this->db->order_by("id", "desc");
+        $news_list = $this->db->get('front_cms_news_list')->result();
+        return $news_list;
+    }
+
+
+    public function getLatestNewsList($branchID='', $params = [])
+    {
+        $this->db->where('branch_id', $branchID);
+        $this->db->where('show_web', 1);
+        if (!empty($params['start']) && !empty($params['limit'])) {
+            $this->db->limit($params['limit'], $params['start']);
+        } elseif (empty($params['start']) && !empty($params['limit'])) {
+            $this->db->limit($params['limit']);
+        }
+        $q = $this->db->get('front_cms_news_list')->result_array();
+        return $q;
+    }
+
+    public function getLatestEventList($branchID='', $params = [])
+    {
+        $start_date = date('Y-m-d', strtotime("+7 day"));
+        $end_date = date('Y-m-d');
+        $this->db->where('start_date <=', $start_date);
+        $this->db->where('end_date >=', $end_date);
+        $this->db->where('branch_id', $branchID);
+        $this->db->where('status', 1);
+        $this->db->where('show_web', 1);
+        if (!empty($params['start']) && !empty($params['limit'])) {
+            $this->db->limit($params['limit'], $params['start']);
+        } elseif (empty($params['start']) && !empty($params['limit'])) {
+            $this->db->limit($params['limit']);
+        }
+        $q = $this->db->get('event')->result_array();
+        return $q;
     }
 }

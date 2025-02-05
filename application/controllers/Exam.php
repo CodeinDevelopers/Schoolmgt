@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 5.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.6
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Exam.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Exam extends Admin_Controller
@@ -20,6 +20,9 @@ class Exam extends Admin_Controller
         $this->load->model('exam_model');
         $this->load->model('subject_model');
         $this->load->model('sms_model');
+        $this->load->model('email_model');
+        $this->load->model('marksheet_template_model');
+        $this->load->model('exam_progress_model');
     }
 
     /* exam form validation rules */
@@ -44,7 +47,6 @@ class Exam extends Admin_Controller
                 ajax_access_denied();
             }
             $this->exam_validation();
-
             if ($this->form_validation->run() !== false) {
                 $post = $this->input->post();
                 $this->exam_model->exam_save($post);
@@ -383,7 +385,8 @@ class Exam extends Admin_Controller
             foreach ($inputMarks as $key => $value) {
                 if (!isset($value['absent'])) {
                     foreach ($value['assessment'] as $i => $row) {
-                        $this->form_validation->set_rules('mark[' . $key . '][assessment][' . $i . ']', translate('mark'), 'trim|numeric');
+                        $field = "mark[{$key}][assessment][{$i}]";
+                        $this->form_validation->set_rules($field, translate('mark'), "trim|numeric|callback_valid_Mark[$i]");
                     }
                 }
             }
@@ -439,6 +442,17 @@ class Exam extends Admin_Controller
         }
     }
 
+    //exam mark register validation check
+    public function valid_Mark($val, $i)
+    {
+        $fullMark = $this->input->post('max_mark_' .$i);
+        if ($fullMark < $val) {
+            $this->form_validation->set_message("valid_Mark", translate("invalid_marks"));
+            return false;
+        }
+        return true;
+    }
+
     /* exam grade form validation rules */
     protected function grade_validation()
     {
@@ -446,7 +460,7 @@ class Exam extends Admin_Controller
             $this->form_validation->set_rules('branch_id', translate('branch'), 'required');
         }
         $this->form_validation->set_rules('name', translate('name'), 'trim|required');
-        $this->form_validation->set_rules('grade_point', translate('grade_point'), 'trim|required');
+        $this->form_validation->set_rules('grade_point', translate('grade_point'), 'trim|required|numeric');
         $this->form_validation->set_rules('lower_mark', translate('mark_from'), 'trim|required');
         $this->form_validation->set_rules('upper_mark', translate('mark_upto'), 'trim|required');
     }
@@ -529,22 +543,36 @@ class Exam extends Admin_Controller
         }
         $branchID = $this->application_model->get_branch_id();
         if ($_POST) {
-            $sessionID = $this->input->post('session_id');
-            $examID = $this->input->post('exam_id');
-            $classID = $this->input->post('class_id');
-            $sectionID = $this->input->post('section_id');
-            $this->db->select('e.roll,s.*,c.name as category');
-            $this->db->from('enroll as e');
-            $this->db->join('student as s', 'e.student_id = s.id', 'inner');
-            $this->db->join('mark as m', 'm.student_id = s.id', 'inner');
-            $this->db->join('student_category as c', 'c.id = s.category_id', 'left');
-            $this->db->where('e.session_id', $sessionID);
-            $this->db->where('e.class_id', $classID);
-            $this->db->where('e.section_id', $sectionID);
-            $this->db->where('e.branch_id', $branchID);
-            $this->db->where('m.exam_id', $examID);
-            $this->db->group_by('m.student_id');
-            $this->data['student'] = $this->db->get()->result_array();
+
+            if (is_superadmin_loggedin()) {
+                $this->form_validation->set_rules('branch_id', translate('branch'), 'required');
+            }
+            $this->form_validation->set_rules('session_id', translate('academic_year'), 'trim|required');
+            $this->form_validation->set_rules('exam_id', translate('exam'), 'trim|required');
+            $this->form_validation->set_rules('class_id', translate('class'), 'trim|required');
+            $this->form_validation->set_rules('section_id', translate('section'), 'trim|required');
+            $this->form_validation->set_rules('template_id', translate('marksheet') . " " . translate('template'), 'trim|required');
+            if ($this->form_validation->run() == true) {
+                $sessionID = $this->input->post('session_id');
+                $examID = $this->input->post('exam_id');
+                $classID = $this->input->post('class_id');
+                $sectionID = $this->input->post('section_id');
+                $this->db->select('e.roll,e.id as enrollID,s.*,c.name as category');
+                $this->db->from('enroll as e');
+                $this->db->join('student as s', 'e.student_id = s.id', 'inner');
+                $this->db->join('mark as m', 's.id = m.student_id', 'inner');
+                $this->db->join('student_category as c', 'c.id = s.category_id', 'left');
+                $this->db->join('exam_rank as r', 'r.exam_id = m.exam_id and r.enroll_id = e.id', 'left');
+                $this->db->where('e.session_id', $sessionID);
+                $this->db->where('m.session_id', $sessionID);
+                $this->db->where('m.class_id', $classID);
+                $this->db->where('m.section_id', $sectionID);
+                $this->db->where('e.branch_id', $branchID);
+                $this->db->where('m.exam_id', $examID);
+                $this->db->group_by('m.student_id');
+                $this->db->order_by('r.rank', 'ASC');
+                $this->data['student'] = $this->db->get()->result_array();
+            }
         }
 
         $this->data['branch_id'] = $branchID;
@@ -561,13 +589,89 @@ class Exam extends Admin_Controller
                 ajax_access_denied();
             }
             $this->data['student_array'] = $this->input->post('student_id');
-            $this->data['remarks_array'] = $this->input->post('remarks');
-            $this->data['grade_scale'] = $this->input->post('grade_scale');
-            $this->data['attendance'] = $this->input->post('attendance');
             $this->data['print_date'] = $this->input->post('print_date');
             $this->data['examID'] = $this->input->post('exam_id');
+            $this->data['class_id'] = $this->input->post('class_id');
+            $this->data['section_id'] = $this->input->post('section_id');
             $this->data['sessionID'] = $this->input->post('session_id');
+            $this->data['templateID'] = $this->input->post('template_id');
+            $this->data['branchID'] = $this->application_model->get_branch_id();
             echo $this->load->view('exam/reportCard', $this->data, true);
+        }
+    }
+
+    public function reportCardPdf()
+    {
+        if ($_POST) {
+            if (!get_permission('report_card', 'is_view')) {
+                ajax_access_denied();
+            }
+            $this->data['student_array'] = $this->input->post('student_id');
+            $this->data['print_date'] = $this->input->post('print_date');
+            $this->data['examID'] = $this->input->post('exam_id');
+            $this->data['class_id'] = $this->input->post('class_id');
+            $this->data['section_id'] = $this->input->post('section_id');
+            $this->data['sessionID'] = $this->input->post('session_id');
+            $this->data['templateID'] = $this->input->post('template_id');
+            $this->data['branchID'] = $this->application_model->get_branch_id();
+            $this->data['marksheet_template'] = $this->marksheet_template_model->getTemplate($this->data['templateID'], $this->data['branchID']);
+            $html = $this->load->view('exam/reportCard_PDF', $this->data, true);
+
+            $this->load->library('html2pdf');
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/vendor/bootstrap/css/bootstrap.min.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/css/custom-style.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/css/pdf-style.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML($html);
+            $this->html2pdf->mpdf->SetDisplayMode('fullpage');
+            $this->html2pdf->mpdf->autoScriptToLang  = true;
+            $this->html2pdf->mpdf->baseScript        = 1;
+            $this->html2pdf->mpdf->autoLangToFont    = true;
+           
+            return $this->html2pdf->mpdf->Output(time() . '.pdf', "I");
+        }
+    }
+
+    public function pdf_sendByemail()
+    {
+        if ($_POST) {
+            if (!get_permission('report_card', 'is_view')) {
+                ajax_access_denied();
+            }
+            $enrollID = $this->input->post('enrollID');
+            $this->data['student_array'] = [$this->input->post('student_id')];
+            $this->data['print_date'] = $this->input->post('print_date');
+            $this->data['examID'] = $this->input->post('exam_id');
+            $this->data['class_id'] = $this->input->post('class_id');
+            $this->data['section_id'] = $this->input->post('section_id');
+            $this->data['sessionID'] = $this->input->post('session_id');
+            $this->data['templateID'] = $this->input->post('template_id');
+            $this->data['branchID'] = $this->application_model->get_branch_id();
+            $this->data['marksheet_template'] = $this->marksheet_template_model->getTemplate($this->data['templateID'], $this->data['branchID']);
+            $html = $this->load->view('exam/reportCard_PDF', $this->data, true);
+
+            $this->load->library('html2pdf');
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/vendor/bootstrap/css/bootstrap.min.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/css/custom-style.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/css/pdf-style.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML($html);
+            $this->html2pdf->mpdf->SetDisplayMode('fullpage');
+            $this->html2pdf->mpdf->autoScriptToLang  = true;
+            $this->html2pdf->mpdf->baseScript        = 1;
+            $this->html2pdf->mpdf->autoLangToFont    = true;
+           
+            $file = $this->html2pdf->mpdf->Output(time() . '.pdf', "S");
+            $data['exam_name'] = get_type_name_by_id('exam', $this->data['examID']);
+            $data['file'] = $file;
+            $data['enroll_id'] = $enrollID;
+            $response = $this->email_model->emailPDFexam_marksheet($data);
+            if ($response == true) {
+                $array = array('status' => 'success', 'message' => translate('mail_sent_successfully'));
+
+            } else {
+                $array = array('status' => 'error', 'message' => translate('something_went_wrong'));
+
+            }
+            echo json_encode($array);
         }
     }
 
@@ -577,12 +681,16 @@ class Exam extends Admin_Controller
         if (!get_permission('tabulation_sheet', 'is_view')) {
             access_denied();
         }
-        $this->data['branch_id'] = $this->application_model->get_branch_id();
+        $branchID = $this->application_model->get_branch_id();
+        $this->data['branch_id'] = $branchID;
         if (!empty($this->input->post('submit'))) {
             $classID = $this->input->post('class_id');
             $sectionID = $this->input->post('section_id');
             $examID = $this->input->post('exam_id');
             $sessionID = $this->input->post('session_id');
+
+            $this->data['students_list'] = $this->exam_model->searchExamStudentsByRank($classID, $sectionID, $sessionID, $examID, $branchID);
+            $this->data['exam_details'] = $this->exam_model->getExamByID($examID);
             $this->data['get_subjects'] = $this->exam_model->getSubjectList($examID, $classID, $sectionID, $sessionID);
         }
         $this->data['title'] = translate('tabulation_sheet');
@@ -607,4 +715,107 @@ class Exam extends Admin_Controller
         echo $html;
     }
 
+
+    // exam publish status
+    public function publish_status()
+    {
+        if (get_permission('exam', 'is_add')) {
+            $id = $this->input->post('id');
+            $status = $this->input->post('status');
+            if ($status == 'true') {
+                $arrayData['status'] = 1;
+            } else {
+                $arrayData['status'] = 0;
+            }
+            if (!is_superadmin_loggedin()) {
+                $this->db->where('branch_id', get_loggedin_branch_id());
+            }
+            $this->db->where('id', $id);
+            $this->db->update('exam', $arrayData);
+            $return = array('msg' => translate('information_has_been_updated_successfully'), 'status' => true);
+            echo json_encode($return);
+        }
+    }
+
+    // exam result publish status
+    public function publish_result_status()
+    {
+        if (get_permission('exam', 'is_add')) {
+            $id = $this->input->post('id');
+            $status = $this->input->post('status');
+            if ($status == 'true') {
+                $arrayData['publish_result'] = 1;
+            } else {
+                $arrayData['publish_result'] = 0;
+            }
+            if (!is_superadmin_loggedin()) {
+                $this->db->where('branch_id', get_loggedin_branch_id());
+            }
+            $this->db->where('id', $id);
+            $this->db->update('exam', $arrayData);
+            $return = array('msg' => translate('information_has_been_updated_successfully'), 'status' => true);
+            echo json_encode($return);
+        }
+    }
+
+
+    public function class_position()
+    {
+        if (!get_permission('generate_position', 'is_view')) {
+            access_denied();
+        }
+        $branchID = $this->application_model->get_branch_id();
+        $this->data['branch_id'] = $branchID;
+        if (!empty($this->input->post('submit'))) {
+            $classID = $this->input->post('class_id');
+            $sectionID = $this->input->post('section_id');
+            $examID = $this->input->post('exam_id');
+            $sessionID = $this->input->post('session_id');
+            $this->data['students_list'] = $this->exam_model->searchExamStudentsByRank($classID, $sectionID, $sessionID, $examID, $branchID);
+            $this->data['exam_details'] = $this->exam_model->getExamByID($examID);
+            $this->data['get_subjects'] = $this->exam_model->getSubjectList($examID, $classID, $sectionID, $sessionID);
+        }
+        $this->data['title'] = translate('class_position');
+        $this->data['sub_page'] = 'exam/class_position';
+        $this->data['main_menu'] = 'mark';
+        $this->load->view('layout/index', $this->data);
+    }
+
+    public function save_position()
+    {
+        if ($_POST) {
+            if (!get_permission('generate_position', 'is_view')) {
+                ajax_access_denied();
+            }
+            $rank = $this->input->post('rank');
+            foreach ($rank as $key => $value) {
+                $this->form_validation->set_rules('rank[' . $key . '][position]', translate('position'), 'trim|numeric|required');
+            }
+            if ($this->form_validation->run() == true) {
+                $examID = $this->input->post('exam_id');
+                foreach ($rank as $key => $value) {
+                    $q = $this->db->select('id')->where(array('exam_id' => $examID, 'enroll_id' => $value['enroll_id']))->get('exam_rank');
+                    if ($q->num_rows() == 0) {
+                        $arrayRank = array(
+                            'rank' => $value['position'], 
+                            'teacher_comments' => $value['teacher_comments'], 
+                            'principal_comments' => $value['principal_comments'], 
+                            'enroll_id' => $value['enroll_id'], 
+                            'exam_id' => $examID, 
+                        );
+                        $this->db->insert('exam_rank', $arrayRank);
+                    } else {
+                        $this->db->where('id', $q->row()->id);
+                        $this->db->update('exam_rank', ['rank' => $value['position'], 'teacher_comments' => $value['teacher_comments'] , 'principal_comments' => $value['principal_comments']]);
+                    }
+                }
+                $message = translate('information_has_been_saved_successfully');
+                $array = array('status' => 'success', 'message' => $message);
+            } else {
+                $error = $this->form_validation->error_array();
+                $array = array('status' => 'fail', 'error' => $error);
+            }
+            echo json_encode($array);
+        }
+    }
 }

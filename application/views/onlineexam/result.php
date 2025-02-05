@@ -15,7 +15,7 @@
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' onchange='getClassByBranch(this.value)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getExamByClass(this.value)'
-								required data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								required data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 							<?php
 								$arrayExam = $this->onlineexam_model->getSelectExamList(set_value('class_id'));
 								echo form_dropdown("exam_id", $arrayExam, set_value('exam_id'), "class='form-control' id='examID' required  
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 							<td><?php echo $row['mark'];?> / <?php echo $row['totalmark'];?></td>
 							<td><?php echo $row['score'];?>%</td>
 						<?php if($exam->exam_type == 1) { ?>
-							<td><?php echo $exam->fee . " " . $global_config['currency']; $totalamount += $exam->fee; ?></td>
+							<td><?php echo currencyFormat($exam->fee); $totalamount += $exam->fee; ?></td>
 						<?php } ?>
 							<td><?php echo ($exam->position_generated == 1 ? $row['position'] : "<span class='label label-danger-custom'>" . translate("not_generated") . "</span>");?></td>
 							<td class="action">
@@ -117,7 +117,7 @@
 							<th></th>
 							<th></th>
 							<th></th>
-							<th><?php echo ($currency_symbol . number_format($totalamount, 2, '.', '')); ?></th>
+							<th><?php echo currencyFormat($totalamount); ?></th>
 							<th></th>
 						</tr>
 					</tfoot>

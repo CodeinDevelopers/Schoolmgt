@@ -2,11 +2,15 @@
 
 namespace Omnipay\Stripe\Message;
 
+use GuzzleHttp\Psr7\Request;
 use Mockery;
 use Omnipay\Tests\TestCase;
 
 class AbstractRequestTest extends TestCase
 {
+    /** @var Mockery\Mock|AbstractRequest */
+    private $request;
+
     public function setUp()
     {
         $this->request = Mockery::mock('\Omnipay\Stripe\Message\AbstractRequest')->makePartial();
@@ -68,16 +72,34 @@ class AbstractRequestTest extends TestCase
         $this->assertArrayHasKey('Idempotency-Key', $headers);
         $this->assertSame('UUID', $headers['Idempotency-Key']);
 
-        $httpRequest = $this->getHttpClient()->createRequest(
+        $httpRequest = new Request(
             'GET',
             '/',
-            $headers,
-            array()
+            $headers
         );
 
         $this->assertTrue($httpRequest->hasHeader('Idempotency-Key'));
     }
 
+    public function testStripeVersion()
+    {
+        $this->request->setStripeVersion('2019-05-16');
+
+        $this->assertSame('2019-05-16', $this->request->getStripeVersion());
+
+        $headers = $this->request->getHeaders();
+
+        $this->assertArrayHasKey('Stripe-Version', $headers);
+        $this->assertSame('2019-05-16', $headers['Stripe-Version']);
+
+        $httpRequest = new Request(
+            'GET',
+            '/',
+            $headers
+        );
+
+        $this->assertTrue($httpRequest->hasHeader('Stripe-Version'));
+    }
 
     public function testConnectedStripeAccount()
     {
@@ -90,13 +112,22 @@ class AbstractRequestTest extends TestCase
         $this->assertArrayHasKey('Stripe-Account', $headers);
         $this->assertSame('ACCOUNT_ID', $headers['Stripe-Account']);
 
-        $httpRequest = $this->getHttpClient()->createRequest(
+        $httpRequest = new Request(
             'GET',
             '/',
-            $headers,
-            array()
+            $headers
         );
 
         $this->assertTrue($httpRequest->hasHeader('Stripe-Account'));
+    }
+
+    public function testExpandedEndpoint()
+    {
+        $this->request->shouldReceive('getEndpoint')->andReturn('https://api.stripe.com/v1');
+        $this->request->setExpand(['foo', 'bar']);
+
+        $actual = $this->request->getExpandedEndpoint();
+
+        $this->assertEquals('https://api.stripe.com/v1?expand[]=foo&expand[]=bar', $actual);
     }
 }

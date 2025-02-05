@@ -56,6 +56,9 @@ class Inventory_model extends MY_Model
         $this->db->join('product_category', 'product_category.id = product.category_id', 'left');
         $this->db->join('product_unit as p_unit', 'p_unit.id = product.purchase_unit_id', 'left');
         $this->db->join('product_unit as s_unit', 's_unit.id = product.sales_unit_id', 'left');
+        if (!is_superadmin_loggedin()) {
+            $this->db->where('product.branch_id', get_loggedin_branch_id());
+        }
         $this->db->order_by('product.id', 'ASC');
         return $this->db->get()->result_array();
     }

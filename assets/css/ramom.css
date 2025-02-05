@@ -47,7 +47,7 @@
 }
 
 .box-top-line.line-color-primary {
-	border-color: #512b8d;
+	border-color: #ffbd2e;
 }
 
 html.dark .box-top-line.line-color-primary {
@@ -159,7 +159,7 @@ html.dark .tab-content .panel .panel-footer-custom {
     height: 2px;
     left: 0;
     top: -16px;
-    background: #512b8d;
+    background: #ffbd2e;
 }
 
 html.dark .chart-title:before {
@@ -170,15 +170,18 @@ html.dark .chart-title:before {
 .page-header .page-title-icon {
 	display: flex;
 	align-items: center;
-	color: #000000;
+	color: #777;
 	text-align: center;
 	margin: 11px 0 0 10px;
+	border-radius: 0.25rem;
 	width: 28px;
 	height: 28px;
+	border: 1px solid #ffbd2e;
 	font-size: 15px;
 	float: left;
 	justify-content: center;
 	transition: .3s;
+	box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.13);
 }
 
 html.dark .page-header .page-title-icon {
@@ -237,7 +240,7 @@ html.dark .thememenu-sy .theme-box .theme-img {
 
 .thememenu-sy .theme-box .theme-img:hover {
 	box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.15);
-	border-color: #512b8d;
+	border-color: #ffbd2e;
 }
 
 html.dark .thememenu-sy .theme-box .theme-img:hover {
@@ -268,7 +271,7 @@ html.dark .thememenu-sy .theme-box .theme-img:hover {
 }
 
 .thememenu-sy .theme-box input:checked + .theme-img {
-	border-color: #512b8d;
+	border-color: #ffbd2e;
 }
 html.dark .thememenu-sy .theme-box input:checked + .theme-img {
 	border-color: #ff685c;
@@ -289,7 +292,7 @@ html.dark .thememenu-sy .theme-box input:checked + .theme-img {
 .mailbox .nav-pills > li > a:hover,
 .mailbox .nav-pills > li > a:focus {
 	background: #f2f7f8;
-	border-left-color: #512b8d;
+	border-left-color: #ffbd2e;
 	color: #747d8a;
 }
 
@@ -297,7 +300,7 @@ html.dark .thememenu-sy .theme-box input:checked + .theme-img {
 .mailbox .nav-pills > li.active > a:hover,
 .mailbox .nav-pills > li.active > a:focus {
 	background: #e7eaea;
-	border-left: 3px solid #512b8d;
+	border-left: 3px solid #ffbd2e;
 	color: #747d8a;
 }
 
@@ -321,7 +324,7 @@ html.dark .mailbox .nav-pills > li.active > a:focus {
 	font-size: 1.1rem;
 	padding: .3em .7em .4em;
 	margin: .2em .3em 0 0;
-	background: #512b8d;
+	background: #ffbd2e;
 }
 
 html.dark .mailbox .nav-pills a .label {
@@ -444,6 +447,7 @@ input[type="number"] {
     display: block;
     height: 27px;
     width: 27px;
+    background: #ffbd2e;
     border-radius: 3px;
     transform: rotate(45deg);
     content: "";
@@ -628,7 +632,7 @@ html.dark .image-content-center{
 	margin: 0 auto;
 	border-color: rgba(255,255,255,0.101);
 	background-color: rgba(127,129,131,0.501) !important;
-	box-shadow: 5px 5px 10px 0 rgba(127,129,131,0.501);
+	box-shadow: 5px 5px 10px 0 #624949;
 }
 
 .image-content-center.user-pro img{
@@ -665,7 +669,7 @@ html.dark.datepicker table tr td span.focused {
 .datepicker table tr td span.active:active,
 .datepicker table tr td span.active:hover.active,
 .datepicker table tr td span.active:hover:active {
-	background-color: #512b8d;
+	background-color: #ffbd2e;
 }
 
 .datepicker table tr td span.active.active.focus,
@@ -691,11 +695,11 @@ html.dark .daterangepicker {
 }
 
 .daterangepicker .ranges li.active {
-	background-color: #512b8d;
+	background-color: #ffbd2e;
 }
 
 .daterangepicker td.active, .daterangepicker td.active:hover {
-	background-color: #512b8d;
+	background-color: #ffbd2e;
 }
 
 html.dark .daterangepicker:before {
@@ -817,7 +821,7 @@ html.dark .session-top-hig {
     margin: 0 0 14px;
     line-height: 27px;
     padding: 0;
-    color: #512b8d;
+    color: #ffbd2e;
     font-size: 18px;
     position: relative;
     overflow: hidden;
@@ -893,7 +897,7 @@ html.dark .thumbnail {
 }
 
 .subl-heading {
-	border-bottom: 3px solid #512b8d;
+	border-bottom: 3px solid #ffbd2e;
 }
 
 /* custom progress bar css*/
@@ -927,8 +931,8 @@ html.dark .prog-subl {
 }
 
 .label-primary-custom {
-	border: #512b8d 1px solid;
-	color:#512b8d;
+	border: #ffbd2e 1px solid;
+	color:#ffbd2e;
 }
 
 .label-warning-custom {
@@ -958,7 +962,7 @@ html.dark .popover.top > .arrow:after {
 .quick_image .user-img-circle {
 	background: #fefefe;
 	position: inherit;
-	border: 2px solid #512b8d;
+	border: 2px solid #ffbd2e;
 	padding: 2px;
 	box-shadow: 5px 3px 8px 0 rgba(33, 33, 33, 0.17);
 	border-radius: 15px;
@@ -1583,4 +1587,74 @@ html.dark .select2loading {
 
 #bbb_config .form-group, #gmeet .form-group {
 	margin: 15px 0 !important;
+}
+
+.dashboard-page .widget-1 .panel {
+	background-color: #2f46c2;
+	color: #fff;
+	border: 0 !important;
+}
+
+.dashboard-page .widget-2 .panel {
+	background-color: #c22f2f !important;
+	color: #fff;
+	border: 0 !important;
+}
+
+.dashboard-page .widget-row-in .panel-body {
+	background-color: transparent;
+}
+
+/* Magnific Popup Custom CSS */
+.mfp-bg {
+	background: #fff;
+	filter: blur(4px);
+}
+
+html.dark .mfp-bg {
+	background: #717171;
+	filter: blur(4px);
+}
+
+.mfp-content .zoom-anim-dialog > .panel {
+	-webkit-box-shadow: 6px 8px 8px rgba(0, 0, 0, 0.1) !important;
+  	box-shadow: 6px 8px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mfp-content .panel-heading {
+	background-color: transparent;
+	border-bottom-width: 1px;
+}
+
+.au-none {
+	text-decoration: none !important;
+}
+
+ul.sibling {
+	padding: 0;
+}
+ul.sibling li {
+	list-style-type: none;
+	margin-bottom: 0;
+	padding: 5px;
+	border-radius: 0;
+	border-bottom: #ddd 1px solid;
+}
+
+ul.sibling li:last-child {
+	border-bottom: 0;
+}
+
+html.dark ul.sibling li {
+	border-color: #424447;
+}
+
+.btn-collect-fees {
+	padding: 5px 13px !important;
+	font-size: 13px !important;
+	color: #333 !important;
+}
+
+html.dark .btn-collect-fees {
+	color: #EEE !important;
 }

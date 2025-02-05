@@ -23,6 +23,7 @@
 									<th><?=translate('language')?></th>
 									<th><?=translate('flag')?></th>
 									<th width="85"><?=translate('stats')?></th>
+									<th width="85">RTL</th>
 									<th><?=translate('created_at')?></th>
 									<th><?=translate('updated_at')?></th>
 									<th><?=translate('action')?></th>
@@ -39,7 +40,10 @@
 									<td><?php echo ucwords($row->name);?></td>
 									<td><img class="img-fs" src="<?=$this->application_model->getLangImage($row->id, false)?>" /></td>
 									<td>
-										<input data-size="mini" data-lang="<?=$row->id?>" class="toggle-switch" data-width="70" data-on="<i class='fas fa-check'></i> ON" data-off="<i class='fas fa-times'></i> OFF" <?=($row->status == 1 ? 'checked' : '');?> data-style="bswitch" type="checkbox">
+										<input data-size="mini" data-lang="<?=$row->id?>" class="toggle-switch stats" data-width="70" data-on="<i class='fas fa-check'></i> ON" data-off="<i class='fas fa-times'></i> OFF" <?=($row->status == 1 ? 'checked' : '');?> data-style="bswitch" type="checkbox">
+									</td>
+									<td>
+										<input data-size="mini" data-lang="<?=$row->id?>" class="toggle-switch rtl" data-width="70" data-on="<i class='fas fa-check'></i> ON" data-off="<i class='fas fa-times'></i> OFF" <?=($row->rtl == 1 ? 'checked' : '');?> data-style="bswitch" type="checkbox">
 									</td>
 									<td><?php echo _d($row->created_at);?></td>
 									<td><?php echo _d($row->updated_at);?></td>
@@ -216,7 +220,7 @@
 			mfp_modal('#add_modal');
 		});
 		
-		$(document).on('change', '.toggle-switch', function() {
+		$(document).on('change', '.toggle-switch.stats', function() {
 			var state = $(this).prop('checked');
 			var lang_id = $(this).data('lang');
 			
@@ -238,6 +242,36 @@
 						buttonsStyling: false,
 						confirmButtonClass: 'btn btn-default swal2-btn-default',
 						footer: '*Note : You can undo this action at any time'
+					});
+				}
+			});
+		});
+
+		$(document).on('change', '.toggle-switch.rtl', function() {
+			var state = $(this).prop('checked');
+			var lang_id = $(this).data('lang');
+			$.ajax({
+				type: 'POST',
+				url: "<?=base_url('translations/isRTL')?>",
+				data: {
+					lang_id: lang_id,
+					status: state
+				},
+				dataType: "html",
+				success: function(data) {
+					swal({
+						type: 'success',
+						title: "<?=translate('successfully')?>",
+						text: data,
+						showCloseButton: true,
+						focusConfirm: false,
+						buttonsStyling: false,
+						confirmButtonClass: 'btn btn-default swal2-btn-default',
+						footer: '*Note : You can undo this action at any time'
+					}).then((result) => {
+						if (result.value) {
+							location.reload();
+						}
 					});
 				}
 			});

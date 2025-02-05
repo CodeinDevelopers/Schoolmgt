@@ -58,9 +58,9 @@
 						<tr>
 							<td><?php echo $count++; ?></td>
 							<td><?php echo $row['ac_name']; ?></td>
-							<td><?php echo $currency_symbol . $row['total_dr']; ?></td>
-							<td><?php echo $currency_symbol . $row['total_cr']; ?></td>
-							<td><?php echo $currency_symbol . $row['fbalance']; ?></td>
+							<td><?php echo currencyFormat($row['total_dr']); ?></td>
+							<td><?php echo currencyFormat($row['total_cr']); ?></td>
+							<td><?php echo currencyFormat($row['fbalance']); ?></td>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -70,7 +70,7 @@
 							<th></th>
 							<th></th>
 							<th></th>
-							<th><?php echo $currency_symbol . number_format($total_bal, 2, '.', ''); ?></th>
+							<th><?php echo currencyFormat($total_bal); ?></th>
 						</tr>
 					</tfoot>
 				</table>

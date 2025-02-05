@@ -114,4 +114,21 @@ class System_update_model extends MY_Model
             );
         }
     }
+
+    public function addonChk()
+    {
+        $this->db->select('prefix,version');
+        $addons = $this->db->get('addon')->result();
+        $data = [];
+        $result = "";
+        if (!empty($addons)) {
+            foreach ($addons as $key => $value) {
+                $data[] = $value->prefix ."-". $value->version; 
+            }
+        }
+        if (is_array($data) && !empty($data)) {
+            $result = implode("||", $data);
+        }
+        return $result;
+    }
 }

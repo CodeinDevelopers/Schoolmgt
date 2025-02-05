@@ -20,17 +20,8 @@
     <div class="row">
         <?php
         $url_alias = $cms_setting['url_alias'];
-        $start_date = date('Y-m-d', strtotime("+13 day"));
-        $end_date = date('Y-m-d', strtotime("-6 day"));
-        $this->db->where('start_date >=', $end_date);
-        $this->db->where('start_date <=', $start_date);
-        $this->db->where('branch_id', $branchID);
-        $this->db->where('status', 1);
-        $this->db->where('show_web', 1);
-        $q = $this->db->get('event');
-        if ($q->num_rows() > 0) {
-            $result = $q->result_array();
-            foreach ($result as $key => $value) {
+        if (!empty($results)) {
+            foreach ($results as $key => $value) {
         ?>
         <div class="col-sm-12 col-md-4" style="padding-top:20px">
             <div class="news-post-box">
@@ -39,7 +30,7 @@
                 </div>
                 <div class="inner">
                     <h5>
-                        <a href="#"><?php echo $value['title'] ?></a>
+                        <a href="<?=base_url("$url_alias/event_view/". $value['id'])?>"><?php echo $value['title'] ?></a>
                     </h5>
                     <ul class="list-unstyled list-inline post-meta">
                         <li class="list-inline-item">
@@ -65,7 +56,15 @@
             </div>
 
         </div>
- <?php } } else { ?>
+ <?php } ?>
+     <div class="pagination-bx mt-2">
+        <?php
+            if (isset($links)) {
+                echo $links;
+            }
+        ?>
+    </div>
+<?php } else { ?>
     <div class="col-md-12">
         <div class="alert alert-info">No Upcoming Events Found.</div>
     </div>

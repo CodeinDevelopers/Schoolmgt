@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.6
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Fees.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Fees extends Admin_Controller
@@ -18,6 +18,7 @@ class Fees extends Admin_Controller
     {
         parent::__construct();
         $this->load->model('fees_model');
+        $this->load->model('email_model');
         if (!moduleIsEnabled('student_accounting')) {
             access_denied();
         }
@@ -503,7 +504,7 @@ class Fees extends Admin_Controller
         $this->load->view('layout/index', $this->data);
     }
 
-    public function invoice_delete($student_id)
+    public function invoice_delete($enrollID = '')
     {
         if (!get_permission('invoice', 'is_delete')) {
             access_denied();
@@ -512,7 +513,7 @@ class Fees extends Admin_Controller
         if (!is_superadmin_loggedin()) {
             $this->db->where('branch_id', get_loggedin_branch_id());
         }
-        $this->db->where('student_id', $student_id);
+        $this->db->where('student_id', $enrollID);
         $result = $this->db->get('fee_allocation')->result_array();
         foreach ($result as $key => $value) {
             $this->db->where('allocation_id', $value['id']);
@@ -522,21 +523,21 @@ class Fees extends Admin_Controller
         if (!is_superadmin_loggedin()) {
             $this->db->where('branch_id', get_loggedin_branch_id());
         }
-        $this->db->where('student_id', $student_id);
+        $this->db->where('student_id', $enrollID);
         $this->db->delete('fee_allocation');
     }
 
     /* invoice user interface with information are controlled here */
-    public function invoice($id = '')
+    public function invoice($enrollID = '')
     {
         if (!get_permission('invoice', 'is_view')) {
             access_denied();
         }
-        $basic = $this->fees_model->getInvoiceBasic($id);
+        $basic = $this->fees_model->getInvoiceBasic($enrollID);
         if (empty($basic))
             redirect(base_url('dashboard'));
-        $this->data['invoice'] = $this->fees_model->getInvoiceStatus($id);
-        $this->data['basic'] = $this->fees_model->getInvoiceBasic($id);
+        $this->data['invoice'] = $this->fees_model->getInvoiceStatus($enrollID);
+        $this->data['basic'] = $basic;
         $this->data['title'] = translate('invoice_history');
         $this->data['main_menu'] = 'fees';
         $this->data['sub_page'] = 'fees/collect';
@@ -551,6 +552,60 @@ class Fees extends Admin_Controller
         if ($_POST) {
             $this->data['student_array'] = $this->input->post('student_id');
             echo $this->load->view('fees/invoicePrint', $this->data, true);
+        }
+    }
+
+    public function invoicePDFdownload()
+    {
+        if (!get_permission('invoice', 'is_view')) {
+            access_denied();
+        }
+        if ($_POST) {
+            $this->data['student_array'] = $this->input->post('student_id');
+            $html = $this->load->view('fees/invoicePDFdownload', $this->data, true);
+
+            $this->load->library('html2pdf');
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/vendor/bootstrap/css/bootstrap.min.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/css/custom-style.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/css/ramom.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML($html);
+            $this->html2pdf->mpdf->SetDisplayMode('fullpage');
+            $this->html2pdf->mpdf->autoScriptToLang  = true;
+            $this->html2pdf->mpdf->baseScript        = 1;
+            $this->html2pdf->mpdf->autoLangToFont    = true;
+            return $this->html2pdf->mpdf->Output(time() . '.pdf', "I");
+        }
+    }
+
+    public function pdf_sendByemail()
+    {
+        if (!get_permission('invoice', 'is_view')) {
+            access_denied();
+        }
+        if ($_POST) {
+            $this->data['student_array'] = [$this->input->post('enrollID')];
+            $html = $this->load->view('fees/invoicePDFdownload', $this->data, true);
+            $this->load->library('html2pdf');
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/vendor/bootstrap/css/bootstrap.min.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/css/custom-style.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML(file_get_contents(base_url('assets/css/ramom.css')), 1);
+            $this->html2pdf->mpdf->WriteHTML($html);
+            $this->html2pdf->mpdf->SetDisplayMode('fullpage');
+            $this->html2pdf->mpdf->autoScriptToLang  = true;
+            $this->html2pdf->mpdf->baseScript        = 1;
+            $this->html2pdf->mpdf->autoLangToFont    = true;
+
+            $file = $this->html2pdf->mpdf->Output(time() . '.pdf', "S");
+            $data['file'] = $file;
+            $data['enroll_id'] = $this->input->post('enrollID');
+            $response = $this->email_model->emailPDF_Fee_invoice($data);
+            if ($response == true) {
+                $array = array('status' => 'success', 'message' => translate('mail_sent_successfully'));
+            } else {
+                $array = array('status' => 'error', 'message' => translate('something_went_wrong'));
+
+            }
+            echo json_encode($array);
         }
     }
 
@@ -868,12 +923,12 @@ class Fees extends Admin_Controller
         if ($this->input->post('search')) {
             $classID = $this->input->post('class_id');
             $sectionID = $this->input->post('section_id');
-            $studentID = $this->input->post('student_id');
+            $enroll_id = $this->input->post('enroll_id');
             $typeID = $this->input->post('fees_type');
             $daterange = explode(' - ', $this->input->post('daterange'));
             $start = date("Y-m-d", strtotime($daterange[0]));
             $end = date("Y-m-d", strtotime($daterange[1]));
-            $this->data['invoicelist'] = $this->fees_model->getStuPaymentReport($classID, $sectionID, $studentID, $typeID, $start, $end, $branchID);
+            $this->data['invoicelist'] = $this->fees_model->getStuPaymentReport($classID, $sectionID, $enroll_id, $typeID, $start, $end, $branchID);
         }
         $this->data['branch_id'] = $branchID;
         $this->data['title'] = translate('student_fees_report');

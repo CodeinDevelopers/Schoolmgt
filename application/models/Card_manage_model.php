@@ -340,7 +340,7 @@ class Card_manage_model extends MY_Model
         $this->db->join('student_category as sc', 's.category_id=sc.id', 'left');
         $this->db->join('parent as p', 'p.id=s.parent_id', 'left');
         $this->db->join('branch as br', 'br.id = e.branch_id', 'left');
-        $this->db->where('e.id', $id);
+        $this->db->where('s.id', $id);
         $query = $this->db->get();
         return $query->row_array();
     }

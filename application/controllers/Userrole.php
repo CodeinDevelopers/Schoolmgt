@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Userrole.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Userrole extends User_Controller
@@ -32,6 +32,7 @@ class Userrole extends User_Controller
     public function teacher()
     {
         $this->data['title'] = translate('teachers');
+        $this->data['getSchoolConfig'] = $this->app_lib->getSchoolConfig('','teacher_mobile_visible,teacher_email_visible');
         $this->data['sub_page'] = 'userrole/teachers';
         $this->data['main_menu'] = 'teachers';
         $this->load->view('layout/index', $this->data);
@@ -404,8 +405,8 @@ class Userrole extends User_Controller
         $this->data['config'] = $this->get_payment_config();
         $this->data['getUser'] = $this->userrole_model->getUserDetails();
         $this->data['getOfflinePaymentsConfig'] = $this->userrole_model->getOfflinePaymentsConfig();
-        $this->data['invoice'] = $this->fees_model->getInvoiceStatus($stu['student_id']);
-        $this->data['basic'] = $this->fees_model->getInvoiceBasic($stu['student_id']);
+        $this->data['invoice'] = $this->fees_model->getInvoiceStatus($stu['enroll_id']);
+        $this->data['basic'] = $this->fees_model->getInvoiceBasic($stu['enroll_id']);
         $this->data['title'] = translate('fees_history');
         $this->data['main_menu'] = 'fees';
         $this->data['sub_page'] = 'userrole/collect';
@@ -425,7 +426,7 @@ class Userrole extends User_Controller
     public function homework()
     {
         $stu = $this->userrole_model->getStudentDetails();
-        $this->data['homeworklist'] = $this->userrole_model->getHomeworkList($stu['student_id']);
+        $this->data['homeworklist'] = $this->userrole_model->getHomeworkList($stu['enroll_id']);
         $this->data['title'] = translate('homework');
         $this->data['headerelements'] = array(
             'css' => array(
@@ -850,12 +851,14 @@ class Userrole extends User_Controller
                     $enc_name = $this->upload->data('file_name');
                 }
 
+                $stu = $this->userrole_model->getStudentDetails();
                 $arrayFees = array(
                     'fees_allocation_id' => $feesType[0],
                     'fees_type_id' => $feesType[1],
                     'invoice_no' => $invoice_no,
-                    'student_enroll_id' => get_loggedin_user_id(),
+                    'student_enroll_id' => $stu['enroll_id'],
                     'amount' => $this->input->post('fee_amount'),
+                    'fine' => $this->input->post('fine_amount'),
                     'payment_method' => $payment_method,
                     'reference' => $this->input->post('reference'),
                     'note' => $this->input->post('note'),
@@ -899,5 +902,33 @@ class Userrole extends User_Controller
             $fine = abs($fine - $b['fine']);
         }
         echo json_encode(array('balance' => $balance, 'fine' => $fine));
+    }
+
+    public function switchClass($enrollID = '')
+    {
+        $enrollID = $this->security->xss_clean($enrollID);
+        if (!empty($enrollID) && is_student_loggedin()) {
+            $getRow = $this->db->where('id', $enrollID)->get('enroll')->row();
+            if (!empty($getRow) && ($getRow->student_id == get_loggedin_user_id())) {
+
+                $this->db->where('student_id', $getRow->student_id);
+                $this->db->where('session_id', $getRow->session_id);
+                $this->db->update('enroll', ['default_login' => 0]);
+               
+                $this->db->where('id', $enrollID);
+                $this->db->update('enroll', ['default_login' => 1]);
+
+                $this->session->set_userdata('enrollID', $enrollID);
+                if (!empty($_SERVER['HTTP_REFERER'])) {
+                    redirect($_SERVER['HTTP_REFERER']);
+                } else {
+                    redirect(base_url('dashboard'), 'refresh');
+                }
+            } else {
+                redirect(base_url('dashboard'), 'refresh');
+            }
+        } else {
+            redirect(base_url(), 'refresh');
+        }
     }
 }

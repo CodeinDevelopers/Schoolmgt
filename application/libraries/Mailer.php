@@ -33,6 +33,11 @@ class Mailer
         } else {
             $mail->isSendmail();
         }
+
+        if (!empty($data['file'])) {
+           $mail->addStringAttachment($data['file'], $data['file_name']);
+        }
+
         $mail->setFrom($getConfig->email, $school_name);
         $mail->addReplyTo($getConfig->email, $school_name);
         $mail->addAddress($data['recipient']);

@@ -18,7 +18,7 @@ $currency_symbol = $global_config['currency_symbol'];
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' id='branch_id' onchange='getClassByBranch(this.value)'
-								required data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								required data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -29,7 +29,7 @@ $currency_symbol = $global_config['currency_symbol'];
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 						</div>
 					</div>
@@ -123,10 +123,10 @@ $currency_symbol = $global_config['currency_symbol'];
 								} ?></td>
 								<td><?php echo $row['pay_via'];?></td>
 								<td><?php echo $row['type_name'];?></td>
-								<td><?php echo $currency_symbol . $row['amount'];?></td>
-								<td><?php echo $currency_symbol . $row['discount'];?></td>
-								<td><?php echo $currency_symbol . $row['fine'];?></td>
-								<td><?php echo $currency_symbol . number_format($totalp, 2, '.', '');?></td>
+								<td><?php echo currencyFormat($row['amount']);?></td>
+								<td><?php echo currencyFormat($row['discount']);?></td>
+								<td><?php echo currencyFormat($row['fine']);?></td>
+								<td><?php echo currencyFormat($totalp);?></td>
 						
 							</tr>
 							<?php endforeach; ?>
@@ -142,10 +142,10 @@ $currency_symbol = $global_config['currency_symbol'];
 								<th></th>
 								<th></th>
 								<th></th>
-								<th><?php echo ($currency_symbol . number_format($totalamount, 2, '.', '')); ?></th>
-								<th><?php echo ($currency_symbol . number_format($totaldiscount, 2, '.', '')); ?></th>
-								<th><?php echo ($currency_symbol . number_format($totalfine, 2, '.', '')); ?></th>
-								<th><?php echo ($currency_symbol . number_format($total, 2, '.', '')); ?></th>
+								<th><?php echo (currencyFormat($totalamount)); ?></th>
+								<th><?php echo (currencyFormat($totaldiscount)); ?></th>
+								<th><?php echo (currencyFormat($totalfine)); ?></th>
+								<th><?php echo (currencyFormat($total)); ?></th>
 							</tr>
 						</tfoot>
 					</table>

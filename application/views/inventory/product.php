@@ -49,8 +49,8 @@
 							<td><?php echo html_escape($row['p_unit_name']); ?></td>
 							<td><?php echo html_escape($row['s_unit_name']); ?></td>
 							<td><?php echo html_escape($row['unit_ratio']); ?></td>
-							<td><?php echo html_escape($global_config['currency_symbol'] . $row['purchase_price']); ?></td>
-							<td><?php echo html_escape($global_config['currency_symbol'] . $row['sales_price']); ?></td>
+							<td><?php echo html_escape(currencyFormat($row['purchase_price'])); ?></td>
+							<td><?php echo html_escape(currencyFormat($row['sales_price'])); ?></td>
 							<td><?php echo html_escape($row['remarks']); ?></td>
 							<td class="min-w-xs">
 								<?php if (get_permission('product', 'is_edit')): ?>

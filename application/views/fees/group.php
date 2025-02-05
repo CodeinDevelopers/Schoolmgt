@@ -41,7 +41,7 @@
 								$result = $this->db->get('fee_groups_details')->result_array();
 								foreach ($result as $key => $value) {
 									$r = $this->db->where('id', $value['fee_type_id'])->get('fees_type')->row_array();
-									echo $r['name'] . " - " . $currency_symbol . $value['amount'] . '<br>';
+									echo $r['name'] . " - " . currencyFormat($value['amount']) . '<br>';
 								}
 								?></td>
 								<td><?php echo $row['description']; ?></td>

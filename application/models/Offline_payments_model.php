@@ -53,7 +53,7 @@ class Offline_payments_model extends MY_Model
             'allocation_id' => $r->fees_allocation_id,
             'type_id' => $r->fees_type_id,
             'amount' => $r->amount,
-            'fine' => 0,
+            'fine' => $r->fine,
             'collect_by' => "",
             'discount' => 0,
             'pay_via' => 15,

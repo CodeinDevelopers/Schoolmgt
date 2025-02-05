@@ -12,7 +12,7 @@ class Admissionpayment_model extends MY_Model
         $this->load->model('sms_model');
     }
 
-    public function getStudentDetails($studentID)
+    public function getStudentDetails($referenceNo)
     {
         $amount = 0;
         $status = 0;
@@ -22,7 +22,7 @@ class Admissionpayment_model extends MY_Model
         $this->db->join('class', 'class.id = online_admission.class_id', 'left');
         $this->db->join('section', 'section.id = online_admission.section_id', 'left');
         $this->db->join('front_cms_admission', 'front_cms_admission.branch_id = online_admission.branch_id', 'left');
-        $this->db->where('online_admission.id', $studentID);
+        $this->db->where('online_admission.reference_no', $referenceNo);
         $q = $this->db->get()->row_array();
         $classID = $q['class_id'];
         $elements = json_decode($q['fee_elements'], true);

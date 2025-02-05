@@ -66,7 +66,7 @@ class Subject_model extends MY_Model
                 if ($getClassTeacher == true) {
                     $query = $this->getSubjectList($classID, $sectionID);
                 } else {
-                    $this->db->select('timetable_class.subject_id,subject.name as subjectname');
+                    $this->db->select('timetable_class.subject_id,subject.name as subjectname,subject.subject_code');
                     $this->db->from('timetable_class');
                     $this->db->join('section', 'section.id = timetable_class.section_id', 'left');
                     $this->db->join('subject', 'subject.id = timetable_class.subject_id', 'left');
@@ -86,7 +86,7 @@ class Subject_model extends MY_Model
 
     public function getSubjectList($classID = '', $sectionID = '')
     {
-        $this->db->select('subject_assign.subject_id, subject.name as subjectname');
+        $this->db->select('subject_assign.subject_id, subject.name as subjectname,subject.subject_code');
         $this->db->from('subject_assign');
         $this->db->join('subject', 'subject.id = subject_assign.subject_id', 'left');
         $this->db->where('class_id', $classID);
@@ -111,7 +111,4 @@ class Subject_model extends MY_Model
             return false;
         }
     }
-
-    
-
 }

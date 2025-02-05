@@ -122,15 +122,26 @@ function getQuestionGroup(id) {
     });
 }
 
-function getQuestion(id) {
+function getQuestion(id, elem) {
+    var btn = $(elem);
     $.ajax({
         url: base_url + 'onlineexam/getQuestion',
         type: 'POST',
         data: { 'id': id },
         dataType: "html",
+        beforeSend: function () {
+            btn.button('loading');
+        },
         success: function (data) {
             $('#quick_view').html(data);
             mfp_modal('#modal');
+        },
+        error: function (xhr) {
+            btn.button('reset');
+        },
+        complete: function () {
+            btn.button('reset');
+            btn.tooltip("hide");
         }
     });
 }

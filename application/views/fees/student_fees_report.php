@@ -18,7 +18,7 @@ $currency_symbol = $global_config['currency_symbol'];
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' id='branch_id'
-								required data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								required data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -29,7 +29,7 @@ $currency_symbol = $global_config['currency_symbol'];
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSectionByClass(this.value,0)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -39,7 +39,7 @@ $currency_symbol = $global_config['currency_symbol'];
 							<?php
 								$arraySection = $this->app_lib->getSections(set_value('class_id'), false);
 								echo form_dropdown("section_id", $arraySection, set_value('section_id'), "class='form-control' id='section_id' required
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -56,7 +56,7 @@ $currency_symbol = $global_config['currency_symbol'];
 					<div class="col-md-4 mb-sm">
 						<div class="form-group">
 							<label class="control-label"><?=translate('student')?></label>
-							<select data-plugin-selectTwo class="form-control" name="student_id" id="student_id">
+							<select data-plugin-selectTwo class="form-control" name="enroll_id" id="enrollID">
 								
 							</select>
 						</div>
@@ -144,10 +144,10 @@ $currency_symbol = $global_config['currency_symbol'];
 								<td><?php echo _d($row['due_date']);?></td>
 								<td><?php echo _d($row['date']);?></td>
 								<td><?php echo $row['pay_via'];?></td>
-								<td><?php echo $currency_symbol . $row['amount'];?></td>
-								<td><?php echo $currency_symbol . $row['discount'];?></td>
-								<td><?php echo $currency_symbol . $row['fine'];?></td>
-								<td><?php echo $currency_symbol . number_format($totalp, 2, '.', '');?></td>
+								<td><?php echo currencyFormat($row['amount']);?></td>
+								<td><?php echo currencyFormat($row['discount']);?></td>
+								<td><?php echo currencyFormat($row['fine']);?></td>
+								<td><?php echo currencyFormat($totalp);?></td>
 						
 							</tr>
 							<?php endforeach; ?>
@@ -161,10 +161,10 @@ $currency_symbol = $global_config['currency_symbol'];
 								<th></th>
 								<th></th>
 								<th></th>
-								<th><?php echo ($currency_symbol . number_format($totalamount, 2, '.', '')); ?></th>
-								<th><?php echo ($currency_symbol . number_format($totaldiscount, 2, '.', '')); ?></th>
-								<th><?php echo ($currency_symbol . number_format($totalfine, 2, '.', '')); ?></th>
-								<th><?php echo ($currency_symbol . number_format($total, 2, '.', '')); ?></th>
+								<th><?php echo currencyFormat($totalamount); ?></th>
+								<th><?php echo currencyFormat($totaldiscount); ?></th>
+								<th><?php echo currencyFormat($totalfine); ?></th>
+								<th><?php echo currencyFormat($total); ?></th>
 							</tr>
 						</tfoot>
 					</table>
@@ -286,18 +286,18 @@ $currency_symbol = $global_config['currency_symbol'];
         });
 
         function getStudentByClass(branch_id, class_id, section_id) {
-			var student_id = "<?=set_value('student_id')?>";
+			var enroll_id = "<?=set_value('enroll_id')?>";
 			$.ajax({
-				url: base_url + 'ajax/getStudentByClass',
+				url: base_url + 'ajax/getStudentByClass/enroll',
 				type: 'POST',
 				data: {
 					branch_id: branch_id,
 					class_id: class_id,
 					section_id: section_id,
-					student_id: student_id
+					student_id: enroll_id
 				},
 				success: function (data) {
-					$('#student_id').html(data);
+					$('#enrollID').html(data);
 				}
 			});
         }

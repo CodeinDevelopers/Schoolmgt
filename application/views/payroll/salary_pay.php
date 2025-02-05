@@ -50,11 +50,11 @@
                                             </tr>
                                             <tr>
                                                 <th><?=translate('basic_salary')?> :</td>
-                                                <td><?php echo html_escape($global_config['currency_symbol'] . $employee->basic_salary);?></td>
+                                                <td><?php echo html_escape(currencyFormat($employee->basic_salary));?></td>
                                             </tr>
                                             <tr>
                                                 <th><?=translate('overtime')?> :</td>
-                                                <td><?php echo html_escape($global_config['currency_symbol'] . $employee->overtime_salary);?></td>
+                                                <td><?php echo html_escape(currencyFormat($employee->overtime_salary));?></td>
                                             </tr>
                                         </tbody>
                                     </table>

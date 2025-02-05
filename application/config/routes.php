@@ -50,26 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['(:any)/login'] = 'authentication/index/$1';
-$route['(:any)/teachers'] = 'home/teachers';
-$route['(:any)/events'] = 'home/events';
-$route['(:any)/about'] = 'home/about';
-$route['(:any)/faq'] = 'home/faq';
-$route['(:any)/admission'] = 'home/admission';
-$route['(:any)/gallery'] = 'home/gallery';
-$route['(:any)/contact'] = 'home/contact';
-$route['(:any)/admit_card'] = 'home/admit_card';
-$route['(:any)/exam_results'] = 'home/exam_results';
-$route['(:any)/certificates'] = 'home/certificates';
-$route['(:any)/page/(:any)'] = 'home/page/$2';
-$route['(:any)/gallery_view/(:any)'] = 'home/gallery_view/$2';
-$route['(:any)/event_view/(:num)'] = 'home/event_view/$2';
-$route['cbt'] = 'cbt/index';
-$route['cbt/ss1'] = 'cbt/ss1'; 
-$route['cbt/ss2'] = 'cbt/ss2'; 
-$route['cbt/ss3'] = 'cbt/ss3';
-$route['cbt/cert_exam'] = 'cbt/cert_exam';
-
+// Static routes
 $route['dashboard'] = 'dashboard/index';
 $route['branch'] = 'branch/index';
 $route['attachments'] = 'attachments/index';
@@ -99,12 +80,40 @@ $route['live_class'] = 'live_class/index';
 $route['exam'] = 'exam/index';
 $route['profile'] = 'profile/index';
 $route['sections'] = 'sections/index';
-
 $route['login'] = 'authentication/index';
+$route['install'] = 'install/index';
 $route['home'] = 'home/index';
+$route['cbt'] = 'cbt/index';
 
+// CBT specific routes
+$route['cbt/ss1'] = 'cbt/ss1';
+$route['cbt/ss2'] = 'cbt/ss2';
+$route['cbt/ss3'] = 'cbt/ss3';
+$route['cbt/cert_exam'] = 'cbt/cert_exam';
+
+// Dynamic routes with parameters
+$route['(:any)/login'] = 'authentication/index/$1';
+$route['(:any)/forgot'] = 'authentication/forgot/$1';
+$route['(:any)/teachers'] = 'home/teachers';
+$route['(:any)/events'] = 'home/events';
+$route['(:any)/news'] = 'home/news/';
+$route['(:any)/about'] = 'home/about';
+$route['(:any)/faq'] = 'home/faq';
+$route['(:any)/admission'] = 'home/admission';
+$route['(:any)/gallery'] = 'home/gallery';
+$route['(:any)/contact'] = 'home/contact';
+$route['(:any)/admit_card'] = 'home/admit_card';
+$route['(:any)/exam_results'] = 'home/exam_results';
+$route['(:any)/certificates'] = 'home/certificates';
+$route['(:any)/page/(:any)'] = 'home/page/$2';
+$route['(:any)/gallery_view/(:any)'] = 'home/gallery_view/$2';
+$route['(:any)/event_view/(:num)'] = 'home/event_view/$2';
+$route['(:any)/news_view/(:any)'] = 'home/news_view/$2';
+
+// System routes
 $route['404_override'] = 'errors';
 $route['default_controller'] = 'home';
-$route['(:any)'] = 'home/index/$1';
 $route['translate_uri_dashes'] = FALSE;
 
+// Catch-all route - must be last
+$route['(:any)'] = 'home/index/$1';

@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
+ * @package : Acamedium
  * @version : 5.8
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Admissionpayment.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Admissionpayment extends Frontend_Controller

@@ -8,12 +8,12 @@ if ($extINTL == true) {
 <div class="row">
 	<div class="col-lg-5 pull-right">
 		<ul class="amounts">
-			<li><strong><?=translate('grand_total')?> :</strong> <?=$currency_symbol . number_format($total_amount, 2, '.', ''); ?></li>
-			<li><strong><?=translate('discount')?> :</strong> <?=$currency_symbol . number_format($total_discount, 2, '.', ''); ?></li>
-			<li><strong><?=translate('paid')?> :</strong> <?=$currency_symbol . number_format($total_paid, 2, '.', ''); ?></li>
-			<li><strong><?=translate('fine')?> :</strong> <?=$currency_symbol . number_format($total_fine, 2, '.', ''); ?></li>
+			<li><strong><?=translate('grand_total')?> :</strong> <?=currencyFormat($total_amount); ?></li>
+			<li><strong><?=translate('discount')?> :</strong> <?=currencyFormat($total_discount); ?></li>
+			<li><strong><?=translate('paid')?> :</strong> <?=currencyFormat($total_paid); ?></li>
+			<li><strong><?=translate('fine')?> :</strong> <?=currencyFormat($total_fine); ?></li>
 			<?php if ($total_balance != 0): ?>
-			<li><strong><?=translate('total_paid')?> (<?=translate('with_fine')?>) :</strong> <?=$currency_symbol . number_format($total_paid + $total_fine, 2, '.', ''); ?></li>
+			<li><strong><?=translate('total_paid')?> (<?=translate('with_fine')?>) :</strong> <?=currencyFormat($total_paid + $total_fine); ?></li>
 			<li>
 				<strong><?=translate('balance')?> : </strong> 
 				<?php
@@ -22,7 +22,7 @@ if ($extINTL == true) {
 				if ($extINTL == true) {
 					$numberSPELL = ' </br>( ' . ucwords($spellout->format($total_balance)) . ' )';
 				}
-				echo $currency_symbol . $total_balance . $numberSPELL;
+				echo currencyFormat($total_balance) . $numberSPELL;
 				?>
 			</li>
 			<?php else:
@@ -35,7 +35,7 @@ if ($extINTL == true) {
 				if ($extINTL == true) {
 					$numberSPELL = ' </br>( ' . ucwords($spellout->format($paidWithFine)) . ' )';
 				}
-				echo $currency_symbol . $paidWithFine . $numberSPELL;
+				echo currencyFormat(($total_paid + $total_fine)) . $numberSPELL;
 				?>
 			</li>
 			<?php endif; ?>

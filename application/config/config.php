@@ -324,7 +324,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '34616463383662356463';
+$config['encryption_key'] = '33376439643339613361';
 
 /*
 |--------------------------------------------------------------------------
@@ -526,4 +526,4 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 $config['installed'] = TRUE;
-$config['product_name'] = 'ramom_school_v6.0';
+$config['product_name'] = 'ramom_school_v6.6';

@@ -119,14 +119,8 @@ class Sendsmsmail_model extends CI_Model
         $message = str_replace('{mobile_no}', $sendTo, $message);
         if ($smsGateway == 'twilio') {
             $this->load->library("twilio");
-            $get = $this->twilio->get_twilio();
-            $from = $get['number'];
-            $response = $this->twilio->sms($from, $sendTo, $message);
-            if ($response->IsError) {
-                return false;
-            } else {
-                return true;
-            }
+            $response = $this->twilio->sms($sendTo, $message);
+            return true;
         }
         if ($smsGateway == 'clickatell') {
             $this->load->library("clickatell");

@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 5.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Subject.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Subject extends Admin_Controller
@@ -314,7 +314,7 @@ class Subject extends Admin_Controller
                 $html .= '<option value="">' . translate('select') . '</option>';
                 $subjects = $query->result_array();
                 foreach ($subjects as $row) {
-                    $html .= '<option value="' . $row['subject_id'] . '">' . $row['subjectname'] . '</option>';
+                    $html .= '<option value="' . $row['subject_id'] . '">' . $row['subjectname'] . " (" . $row['subject_code'] . ')</option>';
                 }
             } else {
                 $html .= '<option value="">' . translate('no_information_available') . '</option>';

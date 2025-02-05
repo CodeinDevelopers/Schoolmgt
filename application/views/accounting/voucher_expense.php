@@ -44,9 +44,14 @@
 								<td><?php echo $row['ref']; ?></td>
 								<td><?php echo $row['description']; ?></td>
 								<td><?php echo $row['via_name']; ?></td>
-								<td><?php echo $currency_symbol . $row['amount']; ?></td>
+								<td><?php echo currencyFormat($row['amount']); ?></td>
 								<td><?php echo _d($row['date']); ?></td>
-								<td class="min-w-xs">
+								<td class="text-nowrap">
+									<?php if (!empty($row['attachments'])) { ?>
+										<a href="<?php echo base_url('accounting/expense_download?id=' . $row['id']); ?>" class="btn btn-circle btn-default icon" data-toggle="tooltip" data-original-title="<?php echo translate('download') . " " .  translate('attachments'); ?>"> 
+											<i class="fas fa-download"></i>
+										</a>
+									<?php } ?>
 									<?php if (get_permission('expense', 'is_edit')): ?>
 										<a href="<?php echo base_url('accounting/voucher_expense_edit/' . $row['id']); ?>" class="btn btn-circle btn-default icon"
 										data-toggle="tooltip" data-original-title="<?php echo translate('edit'); ?>"> 
@@ -148,7 +153,7 @@
 						<div class="row">
 							<div class="col-md-2 col-md-offset-3">
 								<button type="submit" class="btn btn-default btn-block" data-loading-text="<i class='fas fa-spinner fa-spin'></i> Processing">
-									<i class=""></i> <?php echo translate('save'); ?>
+									<i class="fas fa-plus-circle"></i> <?php echo translate('save'); ?>
 								</button>
 							</div>
 						</div>	

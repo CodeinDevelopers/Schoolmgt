@@ -21,6 +21,7 @@
 <?php
 		$student = $result['student'];
 		$getMarksList = $result['exam'];
+		$rankDetail = $this->db->where(array('exam_id ' => $examID, 'enroll_id  ' => $student['enrollID']))->get('exam_rank')->row();
 		$getExam = $this->db->where(array('id' => $examID))->get('exam')->row_array();
 		$getSchool = $this->db->where(array('id' => $getExam['branch_id']))->get('branch')->row_array();
 		$schoolYear = get_type_name_by_id('schoolyear', $sessionID, 'school_year');
@@ -212,6 +213,10 @@
 					<td valign="top" colspan="<?=$colspan?>"><?=$result_status == 0 ? 'Fail' : 'Pass'; ?></td>
 				</tr>
 			<?php } ?>
+				<tr class="text-weight-semibold">
+					<td valign="top">Position :</td>
+					<td valign="top" colspan="<?=$colspan?>"> <?php echo (!empty($rankDetail->rank) ? $rankDetail->rank : translate("not_generated"));?></td>
+				</tr>
 			</tbody>
 		</table>
 		
@@ -275,6 +280,25 @@
 			</div>
 	<?php } } ?>
 		</div>
+	<?php if (!empty($rankDetail->principal_comments) || !empty($rankDetail->teacher_comments)) { ?>
+		<div style="width: 100%;">
+			<table class="table table-condensed table-bordered">
+				<tbody>
+				<?php if (!empty($rankDetail->principal_comments)) { ?>
+					<tr>
+						<th style="width: 250px;">Principal Comments</th>
+						<td><?=$rankDetail->principal_comments?></td>
+					</tr>
+				<?php } if (!empty($rankDetail->teacher_comments)) { ?>
+					<tr>
+						<th style="width: 250px;">Teacher Comments</th>
+						<td><?=$rankDetail->teacher_comments?></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+		</div>
+	<?php } ?>
 		<table style="width:100%; outline:none; margin-top: 35px;">
 			<tbody>
 				<tr>

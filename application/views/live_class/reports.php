@@ -15,7 +15,7 @@
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' onchange='getClassByBranch(this.value)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSectionByClass(this.value,0)'
-								required data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								required data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 							<?php
 								$arraySection = $this->app_lib->getSections(set_value('class_id'));
 								echo form_dropdown("section_id", $arraySection, set_value('section_id'), "class='form-control' id='section_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>

@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 5.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Student_promotion.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Student_promotion extends Admin_Controller
@@ -31,7 +31,7 @@ class Student_promotion extends Admin_Controller
         if ($this->input->post()) {
             $this->data['class_id'] = $this->input->post('class_id');
             $this->data['section_id'] = $this->input->post('section_id');
-            $this->data['students'] = $this->application_model->getStudentListByClassSection($this->data['class_id'], $this->data['section_id'], $branchID, false, true);
+            $this->data['students'] = $this->application_model->getStudentListByClassSection($this->data['class_id'], $this->data['section_id'], $branchID, false, true, false);
         }
         $this->data['branch_id'] = $branchID;
         $this->data['title'] = translate('student_promotion');
@@ -50,8 +50,8 @@ class Student_promotion extends Admin_Controller
         if ($_POST) {
             $dueForward = (isset($_POST['due_forward']) ? 1 : 0);
             $this->form_validation->set_rules('promote_session_id', translate('promote_to_session'), 'required');
-            $this->form_validation->set_rules('promote_class_id', translate('promote_to_class'), 'required');
-            $this->form_validation->set_rules('promote_section_id', translate('promote_section_id'), 'required');
+            $this->form_validation->set_rules('promote_class_id', translate('promote_to_class'), 'required|callback_validClass');
+            $this->form_validation->set_rules('promote_section_id', translate('promote_section_id'), 'required|callback_validSection');
             $items = $this->input->post('promote');
             foreach ($items as $key => $value) {
                 if (isset($value['enroll_id'])) {
@@ -63,10 +63,11 @@ class Student_promotion extends Admin_Controller
                 $pre_class_id = $this->input->post('class_id');
                 $pre_section_id = $this->input->post('section_id');
                 $pre_session_id = get_session_id();
-
                 $promote_session_id = $this->input->post('promote_session_id');
-                $promote_class_id = $this->input->post('promote_class_id');
-                $promote_section_id = $this->input->post('promote_section_id');
+                
+                $promote_classID = $this->input->post('promote_class_id');
+                $promote_sectionID = $this->input->post('promote_section_id');
+
                 $branchID = $this->application_model->get_branch_id();
                 $promote = $this->input->post('promote');
 
@@ -76,51 +77,79 @@ class Student_promotion extends Admin_Controller
                 foreach ($promote as $key => $value) {
                     if (isset($value['enroll_id'])) {
 
-                        $promotion_history = array();
-                        $promotion_history['student_id'] = $value['student_id'];
-                        $promotion_history['pre_class'] = $pre_class_id;
-                        $promotion_history['pre_section'] = $pre_section_id;
-                        $promotion_history['pre_session'] = $pre_session_id;
-                        $promotion_history['pro_class'] = $promote_class_id;
-                        $promotion_history['pro_section'] = $promote_section_id;
-                        $promotion_history['pro_session'] = $promote_session_id;
-                        $promotion_history['date'] = date('Y-m-d H:i:s');
-                        $promotion_history['prev_due'] = 0;
-
-                        $roll = empty($value['roll']) ? 0 : $value['roll'];
-                        $enroll_id = $value['enroll_id'];
-                        $student_id = $value['student_id'];
-                        $this->db->where('student_id', $student_id);
-                        $this->db->where('session_id', $promote_session_id);
-                        $query = $this->db->get('enroll');
-                        $arrayData = array(
-                            'student_id' => $student_id,
-                            'class_id' => $promote_class_id,
-                            'roll' => $roll,
-                            'section_id' => $promote_section_id,
-                            'session_id' => $promote_session_id,
-                            'branch_id' => $branchID,
-                        );
-                        if ($query->num_rows() > 0) {
-                            $this->db->where('id', $enroll_id);
-                            $this->db->update('enroll', $arrayData);
+                        $leaveStatus = (isset($value['leave']) ? 1 : 0);
+                        if ($leaveStatus == 1) {
+                            $promote_class_id = $pre_class_id;
+                            $promote_section_id = $pre_section_id;
                         } else {
-                            $this->db->insert('enroll', $arrayData);
-                        }
-
-                        if ($dueForward == 1) {
-                            if (!empty($value['due_amount']) && $value['due_amount'] != 0) {
-                                $promotion_history['prev_due'] = $value['due_amount'];
-                                $arrayForwardDue = array(
-                                    'branch_id' => $branchID, 
-                                    'session_id' => $promote_session_id, 
-                                    'student_id' => $student_id, 
-                                    'prev_due' => $value['due_amount'], 
-                                    'due_date' => date('Y-m-d', strtotime("+$due_days Days")), 
-                                );
-                                $this->fees_model->carryForwardDue($arrayForwardDue);
+                            if ($value['class_status'] == 'running') {
+                                $promote_class_id = $pre_class_id;
+                                $promote_section_id = $pre_section_id;
+                            } else {
+                                $promote_class_id = $promote_classID;
+                                $promote_section_id = $promote_sectionID;
                             }
                         }
+
+                        $promotion_history                  = array();
+                        $promotion_history['student_id']    = $value['student_id'];
+                        $promotion_history['pre_class']     = $pre_class_id;
+                        $promotion_history['pre_section']   = $pre_section_id;
+                        $promotion_history['pre_session']   = $pre_session_id;
+                        $promotion_history['pro_class']     = $promote_class_id;
+                        $promotion_history['pro_section']   = $promote_section_id;
+                        $promotion_history['pro_session']   = ($leaveStatus == 1 ? $pre_session_id : $promote_session_id);
+                        $promotion_history['date']          = date('Y-m-d H:i:s');
+                        $promotion_history['prev_due']      = 0;
+                        $promotion_history['is_alumni']     = 0;
+
+                        $enroll_id = $value['enroll_id'];
+                        $student_id = $value['student_id'];
+
+                        if ($leaveStatus == 1) {
+                            $this->db->where('id', $enroll_id);
+                            $this->db->update('enroll', ['is_alumni' => 1]);
+                            $promotion_history['is_alumni'] = 1;
+                        } else {
+                            $roll = empty($value['roll']) ? 0 : $value['roll'];
+                            // check existing data
+                            $this->db->where('student_id', $student_id);
+                            $this->db->where('session_id', $promote_session_id);
+                            $query = $this->db->get('enroll');
+
+                            // insert promotion data
+                            $arrayData = array(
+                                'student_id'    => $student_id,
+                                'class_id'      => $promote_class_id,
+                                'roll'          => $roll,
+                                'section_id'    => $promote_section_id,
+                                'session_id'    => $promote_session_id,
+                                'branch_id'     => $branchID,
+                            );
+                            if ($query->num_rows() > 0) {
+                                $this->db->where('id', $query->row()->id);
+                                $this->db->update('enroll', $arrayData);
+                            } else {
+                                $this->db->insert('enroll', $arrayData);
+                            }
+
+                            // insert carry forward due data
+                            if ($dueForward == 1) {
+                                if (!empty($value['due_amount']) && $value['due_amount'] != 0) {
+                                    $promotion_history['prev_due'] = $value['due_amount'];
+                                    $arrayForwardDue = array(
+                                        'branch_id'     => $branchID, 
+                                        'session_id'    => $promote_session_id, 
+                                        'student_id'    => $enroll_id, 
+                                        'prev_due'      => $value['due_amount'], 
+                                        'due_date'      => date('Y-m-d', strtotime("+$due_days Days")), 
+                                    );
+                                    $this->fees_model->carryForwardDue($arrayForwardDue);
+                                }
+                            }
+                        }
+
+
                         $promotion_historys[] = $promotion_history;
                     }
                 }
@@ -191,4 +220,29 @@ class Student_promotion extends Admin_Controller
         return true;
     }
 
+    function validClass($classID) {
+        if (!empty($classID)) {
+            $pre_class_id = $this->input->post('class_id');
+            $promote_session_id = $this->input->post('promote_session_id');
+            if ($pre_class_id == $classID && $promote_session_id == get_session_id()) {
+                $this->form_validation->set_message('validClass', translate("wrong_command"));
+                return false;
+            }
+        }
+        return true; 
+    }
+
+    function validSection($sectionID) {
+        if (!empty($sectionID)) {
+            $pre_class_id = $this->input->post('class_id');
+            $pre_section_id = $this->input->post('section_id');
+            $promote_session_id = $this->input->post('promote_session_id');
+            $promote_class_id = $this->input->post('promote_class_id');
+            if (($promote_session_id == get_session_id()) && ($pre_class_id == $promote_class_id) && ($pre_section_id == $sectionID)) {
+                $this->form_validation->set_message('validSection', translate("wrong_command"));
+                return false;
+            }
+        }
+        return true; 
+    }
 }

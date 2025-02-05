@@ -1,5 +1,4 @@
 <?php
-$currency_symbol = $global_config['currency_symbol'];
 $widget = (is_superadmin_loggedin() ? 3 : 4);
 $branchID = $student['branch_id'];
 $getParent = $this->student_model->get('parent', array('id' => $student['parent_id']), true);
@@ -24,7 +23,9 @@ if (empty($student['previous_details'])) {
 				<p><?=translate('student')?> / <?=$student['category_name']?></p>
 				<ul>
 					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('guardian_name')?>"><i class="fas fa-users"></i></div> <?=(!empty($getParent['name']) ? $getParent['name'] : 'N/A'); ?></li>
+					<?php if (!empty($student['birthday'])) { ?>
 					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('birthday')?>"><i class="fas fa-birthday-cake"></i></div> <?=_d($student['birthday'])?></li>
+					<?php } ?>
 					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('class')?>"><i class="fas fa-school"></i></div> <?=$student['class_name'] . ' ('.$student['section_name'] . ')'?></li>
 					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('mobile_no')?>"><i class="fas fa-phone-volume"></i></div> <?=(!empty($student['mobileno']) ? $student['mobileno'] : 'N/A'); ?></li>
 					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('email')?>"><i class="far fa-envelope"></i></div> <?=(!empty($student['email']) ? $student['email'] : 'N/A'); ?></li>
@@ -135,8 +136,14 @@ if (empty($student['previous_details'])) {
 						<div class="headers-line">
 							<i class="fas fa-school"></i> <?=translate('academic_details')?>
 						</div>
+<?php 
+$roll = $this->student_fields_model->getStatus('roll', $branchID);
+$admission_date = $this->student_fields_model->getStatus('admission_date', $branchID);
+$v = (2 + floatval($roll['status']) + floatval($admission_date['status']));
+$div = floatval(12 / $v);
+?>
 						<div class="row">
-							<div class="col-md-3 mb-sm">
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
 									<label class="control-label"><?=translate('academic_year')?> <span class="required">*</span></label>
 									<?php
@@ -152,24 +159,25 @@ if (empty($student['previous_details'])) {
 								</div>
 							</div>
 
-							<div class="col-md-3 mb-sm">
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
 									<label class="control-label"><?=translate('register_no')?> <span class="required">*</span></label>
 									<input type="text" class="form-control" name="register_no" value="<?=set_value('register_no', $student['register_no'])?>" />
 									<span class="error"><?=form_error('register_no')?></span>
 								</div>
 							</div>
-
-							<div class="col-md-3 mb-sm">
+<?php if ($roll['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('roll')?></label>
+									<label class="control-label"><?=translate('roll')?><?php echo $roll['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="text" class="form-control" name="roll" value="<?=set_value('roll', $student['roll'])?>" />
 									<span class="error"><?=form_error('roll')?></span>
 								</div>
 							</div>
-							<div class="col-md-3 mb-sm">
+<?php } if ($admission_date['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('admission_date')?> <span class="required">*</span></label>
+									<label class="control-label"><?=translate('admission_date')?><?php echo $admission_date['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
 										<input type="text" class="form-control" name="admission_date"
@@ -178,11 +186,20 @@ if (empty($student['previous_details'])) {
 									<span class="error"><?=form_error('admission_date')?></span>
 								</div>
 							</div>
+<?php } ?>
 						</div>
-
+<?php
+	$category = $this->student_fields_model->getStatus('category', $branchID);
+	if (is_superadmin_loggedin()) {
+		$v = (3 + floatval($category['status']));
+	} else {
+		$v = (2 + floatval($category['status']));
+	}
+	$div = floatval(12 / $v);
+?>
 						<div class="row mb-md">
 							<?php if (is_superadmin_loggedin()): ?>
-							<div class="col-md-<?php echo $widget; ?> mb-sm">
+							<div class="col-md-<?php echo $div; ?> mb-sm">
 								<div class="form-group">
 									<label class="control-label"><?=translate('branch')?> <span class="required">*</span></label>
 									<?php
@@ -194,7 +211,7 @@ if (empty($student['previous_details'])) {
 								</div>
 							</div>
 							<?php endif; ?>
-							<div class="col-md-<?php echo $widget; ?> mb-sm">
+							<div class="col-md-<?php echo $div; ?> mb-sm">
 								<div class="form-group">
 									<label class="control-label"><?=translate('class')?> <span class="required">*</span></label>
 									<?php
@@ -205,7 +222,7 @@ if (empty($student['previous_details'])) {
 									<span class="error"><?=form_error('class_id')?></span>
 								</div>
 							</div>
-							<div class="col-md-<?php echo $widget; ?> mb-sm">
+							<div class="col-md-<?php echo $div; ?> mb-sm">
 								<div class="form-group">
 									<label class="control-label"><?=translate('section')?> <span class="required">*</span></label>
 									<?php
@@ -216,9 +233,10 @@ if (empty($student['previous_details'])) {
 									<span class="error"><?=form_error('section_id')?></span>
 								</div>
 							</div>
-							<div class="col-md-<?php echo $widget; ?> mb-sm">
+<?php if ($category['status']) { ?>
+							<div class="col-md-<?php echo $div; ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('category')?> <span class="required">*</span></label>
+									<label class="control-label"><?=translate('category')?><?php echo $category['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<?php
 										$arrayCategory = $this->app_lib->getStudentCategory($branchID);
 										echo form_dropdown("category_id", $arrayCategory, set_value('category_id', $student['category_id']), "class='form-control'
@@ -227,37 +245,45 @@ if (empty($student['previous_details'])) {
 									<span class="error"><?=form_error('category_id')?></span>
 								</div>
 							</div>
+<?php } ?>
 						</div>
 						
 						<!-- student details -->
 						<div class="headers-line mt-md">
 							<i class="fas fa-user-check"></i> <?=translate('student_details')?>
 						</div>
-						
+<?php
+$last_name = $this->student_fields_model->getStatus('last_name', $branchID);
+$gender = $this->student_fields_model->getStatus('gender', $branchID);
+$v = (1 + floatval($last_name['status']) + floatval($gender['status']));
+$div = floatval(12 / $v);
+?>
 						<div class="row">
-							<div class="col-md-4 mb-sm">
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
 									<label class="control-label"><?=translate('first_name')?> <span class="required">*</span></label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fas fa-user-graduate"></i></span>
 										<input type="text" class="form-control" name="first_name" value="<?=set_value('first_name', $student['first_name'])?>"/>
-										<span class="error"><?=form_error('first_name')?></span>
 									</div>
+									<span class="error"><?=form_error('first_name')?></span>
 								</div>
 							</div>
-							<div class="col-md-4 mb-sm">
+<?php if ($last_name['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('last_name')?> <span class="required">*</span> </label>
+									<label class="control-label"><?=translate('last_name')?><?php echo $last_name['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fas fa-user-graduate"></i></span>
 										<input type="text" class="form-control" name="last_name" value="<?=set_value('last_name', $student['last_name'])?>" />
-										<span class="error"><?=form_error('last_name')?></span>
 									</div>
+									<span class="error"><?=form_error('last_name')?></span>
 								</div>
 							</div>
-							<div class="col-md-4 mb-sm">
+<?php } if ($gender['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('gender')?> </label>
+									<label class="control-label"><?=translate('gender')?><?php echo $gender['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<?php
 										$arrayGender = array(
 											'male' => translate('male'),
@@ -266,58 +292,95 @@ if (empty($student['previous_details'])) {
 										echo form_dropdown("gender", $arrayGender, set_value('gender', $student['gender']), "class='form-control'
 										data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
 									?>
+									<span class="error"><?=form_error('gender')?></span>
 								</div>
 							</div>
+<?php } ?>
 						</div>
 
 						<div class="row">
-							<div class="col-md-6 mb-sm">
+<?php 
+$blood_group = $this->student_fields_model->getStatus('blood_group', $branchID);
+$birthday = $this->student_fields_model->getStatus('birthday', $branchID);
+$v = floatval($blood_group['status']) + floatval($birthday['status']);
+$div = ($v == 0) ? 12 : floatval(12 / $v);
+	if ($blood_group['status']) {
+?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('blood_group')?></label>
+									<label class="control-label"><?=translate('blood_group')?><?php echo $blood_group['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<?php
 										$bloodArray = $this->app_lib->getBloodgroup();
 										echo form_dropdown("blood_group", $bloodArray, set_value("blood_group", $student['blood_group']), "class='form-control populate' data-plugin-selectTwo 
 										data-width='100%' data-minimum-results-for-search='Infinity' ");
 									?>
+									<span class="error"><?=form_error('blood_group')?></span>
 								</div>
 							</div>
-							<div class="col-md-6 mb-sm">
+<?php } if ($birthday['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('birthday')?></label>
+									<label class="control-label"><?=translate('birthday')?><?php echo $birthday['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fas fa-birthday-cake"></i></span>
 										<input type="text" class="form-control" name="birthday" value="<?=set_value('birthday', $student['birthday'])?>" data-plugin-datepicker
 										data-plugin-options='{ "startView": 2 }' />
 									</div>
+									<span class="error"><?=form_error('birthday')?></span>
 								</div>
 							</div>
+<?php } ?>
 						</div>
 
 						<div class="row">
-							<div class="col-md-4 mb-sm">
+<?php 
+$mother_tongue = $this->student_fields_model->getStatus('mother_tongue', $branchID);
+$religion = $this->student_fields_model->getStatus('religion', $branchID);
+$caste = $this->student_fields_model->getStatus('caste', $branchID);
+$v = floatval($mother_tongue['status']) + floatval($religion['status']) + floatval($caste['status']);
+$div = ($v == 0) ? 12 : floatval(12 / $v);
+	if ($mother_tongue['status']) {
+?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('mother_tongue')?></label>
+									<label class="control-label"><?=translate('mother_tongue')?><?php echo $mother_tongue['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="text" class="form-control" name="mother_tongue" value="<?=set_value('mother_tongue', $student['mother_tongue'])?>" />
+									<span class="error"><?=form_error('mother_tongue')?></span>
 								</div>
 							</div>
-							<div class="col-md-4 mb-sm">
+<?php } if ($religion['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('religion')?></label>
+									<label class="control-label"><?=translate('religion')?><?php echo $religion['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="text" class="form-control" name="religion" value="<?=set_value('religion', $student['religion'])?>" />
+									<span class="error"><?=form_error('religion')?></span>
 								</div>
 							</div>
-							<div class="col-md-4 mb-sm">
+<?php } if ($caste['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('caste')?></label>
+									<label class="control-label"><?=translate('caste')?><?php echo $caste['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="text" class="form-control" name="caste" value="<?=set_value('caste', $student['caste'])?>" />
+									<span class="error"><?=form_error('caste')?></span>
 								</div>
 							</div>
+<?php } ?>
 						</div>
 
 						<div class="row">
-							<div class="col-md-3 mb-sm">
+<?php 
+$student_mobile_no = $this->student_fields_model->getStatus('student_mobile_no', $branchID);
+$student_email = $this->student_fields_model->getStatus('student_email', $branchID);
+$city = $this->student_fields_model->getStatus('city', $branchID);
+$state = $this->student_fields_model->getStatus('state', $branchID);
+
+$v = floatval($student_mobile_no['status']) + floatval($student_email['status']) + floatval($city['status'])  + floatval($state['status']);
+$div = ($v == 0) ? 12 : floatval(12 / $v);
+if ($student_mobile_no['status']) {
+?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('mobile_no')?> <span class="required">*</span></label>
+									<label class="control-label"><?=translate('mobile_no')?><?php echo $student_mobile_no['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fas fa-phone-volume"></i></span>
 										<input type="text" class="form-control" name="mobileno" value="<?=set_value('mobileno', $student['mobileno'])?>" />
@@ -325,9 +388,10 @@ if (empty($student['previous_details'])) {
 									<span class="error"><?=form_error('mobileno')?></span>
 								</div>
 							</div>
-							<div class="col-md-3 mb-sm">
+<?php } if ($student_email['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('email')?></label>
+									<label class="control-label"><?=translate('email')?><?php echo $student_email['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="far fa-envelope-open"></i></span>
 										<input type="text" class="form-control" name="email" id="email" value="<?=set_value('email', $student['email'])?>" />
@@ -335,33 +399,50 @@ if (empty($student['previous_details'])) {
 									<span class="error"><?=form_error('email')?></span>
 								</div>
 							</div>
-							<div class="col-md-3 mb-sm">
+<?php } if ($city['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('city')?></label>
+									<label class="control-label"><?=translate('city')?><?php echo $city['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="text" class="form-control" name="city" value="<?=set_value('city', $student['city'])?>" />
+									<span class="error"><?=form_error('city')?></span>
 								</div>
 							</div>
-							<div class="col-md-3 mb-sm">
+<?php } if ($state['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('state')?></label>
+									<label class="control-label"><?=translate('state')?><?php echo $state['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="text" class="form-control" name="state" value="<?=set_value('state', $student['state'])?>" />
+									<span class="error"><?=form_error('state')?></span>
 								</div>
 							</div>
+<?php } ?>
 						</div>
 
 						<div class="row">
-							<div class="col-md-6 mb-sm">
+<?php 
+$present_address = $this->student_fields_model->getStatus('present_address', $branchID);
+$permanent_address = $this->student_fields_model->getStatus('permanent_address', $branchID);
+$v = floatval($present_address['status']) + floatval($permanent_address['status']);
+$div = ($v == 0) ? 12 : floatval(12 / $v);
+
+if ($present_address['status']) {
+?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('present_address')?></label>
+									<label class="control-label"><?=translate('present_address')?><?php echo $present_address['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<textarea name="current_address" rows="2" class="form-control" aria-required="true"><?=set_value('current_address', $student['current_address'])?></textarea>
+									<span class="error"><?=form_error('current_address')?></span>
 								</div>
 							</div>
-							<div class="col-md-6 mb-sm">
+<?php } if ($permanent_address['status']) { ?>
+							<div class="col-md-<?php echo $div ?> mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('permanent_address')?></label>
+									<label class="control-label"><?=translate('permanent_address')?><?php echo $permanent_address['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<textarea name="permanent_address" rows="2" class="form-control" aria-required="true"><?=set_value('permanent_address', $student['permanent_address'])?></textarea>
+									<span class="error"><?=form_error('permanent_address')?></span>
 								</div>
 							</div>
+<?php } ?>
 						</div>
 
 						<!--custom fields details-->
@@ -370,14 +451,19 @@ if (empty($student['previous_details'])) {
 						</div>
 						
 						<div class="row">
+<?php 
+$student_photo = $this->student_fields_model->getStatus('student_photo', $branchID);
+if ($student_photo['status']) {
+?>
 							<div class="col-md-12 mb-sm">
 								<div class="form-group">
-									<label for="input-file-now"><?=translate('profile_picture')?></label>
+									<label for="input-file-now"><?=translate('profile_picture')?><?php echo $student_photo['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="file" name="user_photo" class="dropify" data-default-file="<?=get_image_url('student', $student['photo'])?>" />
 									<input type="hidden" name="old_user_photo" value="<?php echo $student['photo']; ?>" />
 								</div>
 								<span class="error"><?=form_error('user_photo')?></span>
 							</div>
+<?php } ?>
 						</div>
 
 						<!-- login details -->
@@ -474,7 +560,10 @@ if (empty($student['previous_details'])) {
 							</div>
 						</div>
 					<?php } ?>
-
+<?php
+$previous_school_details = $this->student_fields_model->getStatus('previous_school_details', $branchID);
+if ($previous_school_details['status']) {
+?>
 						<!-- previous school details -->
 						<div class="headers-line">
 							<i class="fas fa-bezier-curve"></i> <?=translate('previous_school_details')?>
@@ -482,14 +571,16 @@ if (empty($student['previous_details'])) {
 						<div class="row">
 							<div class="col-md-6 mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('school_name')?></label>
+									<label class="control-label"><?=translate('school_name')?><?php echo $previous_school_details['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="text" class="form-control" name="school_name" value="<?=set_value('school_name', $previous_details['school_name'])?>" />
+									<span class="error"><?=form_error('school_name')?></span>
 								</div>
 							</div>
 							<div class="col-md-6 mb-sm">
 								<div class="form-group">
-									<label class="control-label"><?=translate('qualification')?></label>
+									<label class="control-label"><?=translate('qualification')?><?php echo $previous_school_details['required'] == 1 ? ' <span class="required">*</span>' : ''; ?></label>
 									<input type="text" class="form-control" name="qualification" value="<?=set_value('qualification', $previous_details['qualification'])?>" />
+									<span class="error"><?=form_error('qualification')?></span>
 								</div>
 							</div>
 						</div>
@@ -501,6 +592,7 @@ if (empty($student['previous_details'])) {
 								</div>
 							</div>
 						</div>
+<?php } ?>
 					</div>
 					
 					<div class="panel-footer">
@@ -518,6 +610,13 @@ if (empty($student['previous_details'])) {
             <div class="panel panel-accordion">
 				<div class="panel-heading">
 					<h4 class="panel-title">
+						<?php if (get_permission('collect_fees', 'is_add')) { ?>
+						<div class="auth-pan">
+							<a href="<?php echo base_url('fees/invoice/' . $student['enrollid']);?>" class="btn btn-default btn-circle btn-collect-fees">
+								<i class="fas fa-dollar-sign"></i> <?=translate('collect_fees')?>
+							</a>
+						</div>
+						<?php } ?>
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#fees">
 							<i class="fas fa-money-check"></i> <?=translate('fees')?>
 						</a>
@@ -548,7 +647,7 @@ if (empty($student['previous_details'])) {
 										$total_paid = 0;
 										$total_balance = 0;
 										$total_amount = 0;
-										$allocations = $this->fees_model->getInvoiceDetails($student['id']);
+										$allocations = $this->fees_model->getInvoiceDetails($student['enrollid']);
 										if (!empty($allocations)) {
 										foreach ($allocations as $fee) {
 											$deposit = $this->fees_model->getStudentFeeDeposit($fee['allocation_id'], $fee['fee_type_id']);
@@ -582,11 +681,11 @@ if (empty($student['previous_details'])) {
 											}
 											echo "<span class='label ".$labelmode." '>".$status."</span>";
 										?></td>
-										<td><?php echo $currency_symbol . $fee['amount'];?></td>
-										<td><?php echo $currency_symbol . $type_discount;?></td>
-										<td><?php echo $currency_symbol . $type_fine;?></td>
-										<td><?php echo $currency_symbol . $type_amount;?></td>
-										<td><?php echo $currency_symbol . number_format($balance, 2, '.', '');?></td>
+										<td><?php echo currencyFormat($fee['amount']);?></td>
+										<td><?php echo currencyFormat($type_discount);?></td>
+										<td><?php echo currencyFormat($type_fine);?></td>
+										<td><?php echo currencyFormat($type_amount);?></td>
+										<td><?php echo currencyFormat($balance);?></td>
 									</tr>
 									<?php } } else { 
 										echo '<tr><td colspan="9"><h5 class="text-danger text-center">' . translate('no_information_available') . '</td></tr>';
@@ -598,11 +697,11 @@ if (empty($student['previous_details'])) {
 										<th></th>
 										<th></th>
 										<th></th>
-										<th><?php echo $currency_symbol . number_format($total_amount, 2, '.', ''); ?></th>
-										<th><?php echo $currency_symbol . number_format($total_discount, 2, '.', ''); ?></th>
-										<th><?php echo $currency_symbol . number_format($total_fine, 2, '.', ''); ?></th>
-										<th><?php echo $currency_symbol . number_format($total_paid, 2, '.', ''); ?></th>
-										<th><?php echo $currency_symbol . number_format($total_balance, 2, '.', ''); ?></th>
+										<th><?php echo currencyFormat($total_amount); ?></th>
+										<th><?php echo currencyFormat($total_discount); ?></th>
+										<th><?php echo currencyFormat($total_fine); ?></th>
+										<th><?php echo currencyFormat($total_paid); ?></th>
+										<th><?php echo currencyFormat($total_balance); ?></th>
 									</tr>
 								</tfoot>
 							</table>
@@ -637,9 +736,10 @@ if (empty($student['previous_details'])) {
 								</thead>
 								<tbody>
 									<?php
+									$label_leave = "<span class='text-danger'><b>" . translate('leave') . "</b></span>";
 									$count = 1;
-									$this->db->order_by('id', 'asc');
 									$this->db->where(array('student_id' => $student['id']));
+									$this->db->order_by('id', 'asc');
 									$historys = $this->db->get('promotion_history')->result();
 										if (count($historys)) {
 											foreach($historys as $history):
@@ -649,8 +749,8 @@ if (empty($student['previous_details'])) {
 											<td><?php echo get_type_name_by_id('class', $history->pre_class) . " (" . get_type_name_by_id('section', $history->pre_section) . ")"; ?></td>
 											<td><?php echo get_type_name_by_id('schoolyear', $history->pre_session, 'school_year'); ?></td>
 											<td><?php echo get_type_name_by_id('class', $history->pro_class) . " (" . get_type_name_by_id('section', $history->pro_section) . ")"; ?></td>
-											<td><?php echo get_type_name_by_id('schoolyear', $history->pro_session, 'school_year'); ?></td>
-											<td><?php echo $global_config['currency_symbol'] . number_format($history->prev_due, 2, '.', ''); ?></td>
+											<td><?php echo $history->is_alumni == 1 ? $label_leave : get_type_name_by_id('schoolyear', $history->pro_session, 'school_year'); ?></td>
+											<td><?php echo currencyFormat($history->prev_due); ?></td>
 											<td><?php echo _d($history->date);?></td>
 											
 										</tr>
@@ -707,9 +807,9 @@ if (empty($student['previous_details'])) {
 											<td>
 												<?php
 												if(empty($book['fine_amount'])){ 
-													echo $global_config['currency_symbol'] . "0.00";
+													echo currencyFormat(0);
 												} else {
-													echo $global_config['currency_symbol'] . $book['fine_amount'];
+													echo currencyFormat($book['fine_amount']);
 												}
 												?>
 											</td>
@@ -751,12 +851,17 @@ if (empty($student['previous_details'])) {
 					<div class="panel-body">
 						<?php 
 						$studentID = $student['id'];
-						$this->db->where('class_id', $student['class_id']);
-						$this->db->where('section_id', $student['section_id']);
-						$this->db->where('session_id', get_session_id());
+						$this->db->select('timetable_exam.*,exam.type_id,exam.mark_distribution as e_mark_distribution');
+						$this->db->from('timetable_exam');
+						$this->db->where('timetable_exam.class_id', $student['class_id']);
+						$this->db->where('timetable_exam.section_id', $student['section_id']);
+						$this->db->where('timetable_exam.session_id', get_session_id());
+						$this->db->where('exam.publish_result', 1);
+						$this->db->join('exam', 'exam.id = timetable_exam.exam_id', 'inner');
 						$this->db->group_by('exam_id');
-						$variable = $this->db->get('timetable_exam')->result_array();
-						foreach ($variable as  $erow) {
+						$e_result = $this->db->get()->result_array();
+						if (!empty($e_result)) {
+						foreach ($e_result as  $erow) {
 							$examID = $erow['exam_id'];
 						?>
 					        <section class="panel panel-subl-shadow mt-md mb-md">
@@ -768,7 +873,7 @@ if (empty($student['previous_details'])) {
 									$result = $this->exam_model->getStudentReportCard($studentID, $examID, get_session_id());
 									if (!empty($result['exam'])) {
 									$getMarksList = $result['exam'];
-									$getExam = $this->db->where(array('id' => $examID))->get('exam')->row_array();
+									$getExam = $this->db->select('branch_id')->where(array('id' => $examID))->get('exam')->row_array();
 									$getSchool = $this->db->where(array('id' => $getExam['branch_id']))->get('branch')->row_array();
 									$schoolYear = get_type_name_by_id('schoolyear', get_session_id(), 'school_year');
 									?>
@@ -778,17 +883,17 @@ if (empty($student['previous_details'])) {
 												<tr>
 													<th>Subjects</th>
 												<?php 
-												$markDistribution = json_decode($getExam['mark_distribution'], true);
+												$markDistribution = json_decode($erow['e_mark_distribution'], true);
 												foreach ($markDistribution as $id) {
 													?>
 													<th><?php echo get_type_name_by_id('exam_mark_distribution',$id)  ?></th>
 												<?php } ?>
-												<?php if ($getExam['type_id'] == 1) { ?>
+												<?php if ($erow['type_id'] == 1) { ?>
 													<th>Total</th>
-												<?php } elseif($getExam['type_id'] == 2) { ?>
+												<?php } elseif($erow['type_id'] == 2) { ?>
 													<th>Grade</th>
 													<th>Point</th>
-												<?php } elseif ($getExam['type_id'] == 3) { ?>
+												<?php } elseif ($erow['type_id'] == 3) { ?>
 													<th>Total</th>
 													<th>Grade</th>
 													<th>Point</th>
@@ -823,7 +928,7 @@ if (empty($student['previous_details'])) {
 													$obtained = $row['get_abs'] == 'on' ? 'Absent' : $obtained_mark;
 													$total_full_marks += $fullMark;
 													?>
-												<?php if ($getExam['type_id'] == 1 || $getExam['type_id'] == 3){ ?>
+												<?php if ($erow['type_id'] == 1 || $erow['type_id'] == 3){ ?>
 													<td valign="middle">
 														<?php 
 															if ($row['get_abs'] == 'on') {
@@ -833,7 +938,7 @@ if (empty($student['previous_details'])) {
 															}
 														?>
 													</td>
-												<?php } if ($getExam['type_id'] == 2){ ?>
+												<?php } if ($erow['type_id'] == 2){ ?>
 													<td valign="middle">
 														<?php 
 															if ($row['get_abs'] == 'on') {
@@ -851,16 +956,16 @@ if (empty($student['previous_details'])) {
 												$grand_obtain_marks += $total_obtain_marks;
 												$grand_full_marks += $total_full_marks;
 												?>
-												<?php if($getExam['type_id'] == 1 || $getExam['type_id'] == 3) { ?>
+												<?php if($erow['type_id'] == 1 || $erow['type_id'] == 3) { ?>
 													<td valign="middle"><?=$total_obtain_marks . "/" . $total_full_marks?></td>
-												<?php } if($getExam['type_id'] == 2) { 
+												<?php } if($erow['type_id'] == 2) { 
 													$percentage_grade = ($total_obtain_marks * 100) / $total_full_marks;
 													$grade = $this->exam_model->get_grade($percentage_grade, $getExam['branch_id']);
 													$total_grade_point += $grade['grade_point'];
 													?>
 													<td valign="middle"><?=$grade['name']?></td>
 													<td valign="middle"><?=number_format($grade['grade_point'], 2, '.', '')?></td>
-												<?php } if ($getExam['type_id'] == 3) {
+												<?php } if ($erow['type_id'] == 3) {
 													$colspan += 2;
 													$percentage_grade = ($total_obtain_marks * 100) / $total_full_marks;
 													$grade = $this->exam_model->get_grade($percentage_grade, $getExam['branch_id']);
@@ -871,7 +976,7 @@ if (empty($student['previous_details'])) {
 												<?php } ?>
 												</tr>
 											<?php } ?>
-											<?php if ($getExam['type_id'] == 1 || $getExam['type_id'] == 3) { ?>
+											<?php if ($erow['type_id'] == 1 || $erow['type_id'] == 3) { ?>
 												<tr class="text-weight-semibold">
 													<td valign="top" >GRAND TOTAL :</td>
 													<td valign="top" colspan="<?=$colspan?>"><?=$grand_obtain_marks . '/' . $grand_full_marks; ?>, Average : <?php $percentage = ($grand_obtain_marks * 100) / $grand_full_marks; echo number_format($percentage, 2, '.', '')?>%</td>
@@ -885,17 +990,17 @@ if (empty($student['previous_details'])) {
 														?>
 													</td>
 												</tr>
-											<?php } if ($getExam['type_id'] == 2) { ?>
+											<?php } if ($erow['type_id'] == 2) { ?>
 												<tr class="text-weight-semibold">
 													<td valign="top" >GPA :</td>
 													<td valign="top" colspan="<?=$colspan+1?>"><?=number_format(($total_grade_point / count($getMarksList)), 2, '.', '')?></td>
 												</tr>
-											<?php } if ($getExam['type_id'] == 3) { ?>
+											<?php } if ($erow['type_id'] == 3) { ?>
 												<tr class="text-weight-semibold">
 													<td valign="top" >GPA :</td>
 													<td valign="top" colspan="<?=$colspan?>"><?=number_format(($total_grade_point / count($getMarksList)), 2, '.', '')?></td>
 												</tr>
-											<?php } if ($getExam['type_id'] == 1 || $getExam['type_id'] == 3) { ?>
+											<?php } if ($erow['type_id'] == 1 || $erow['type_id'] == 3) { ?>
 												<tr class="text-weight-semibold">
 													<td valign="top" >RESULT :</td>
 													<td valign="top" colspan="<?=$colspan?>"><?=$result_status == 0 ? 'Fail' : 'Pass'; ?></td>
@@ -911,6 +1016,10 @@ if (empty($student['previous_details'])) {
 							    <?php } ?>
 					            </div>
 					        </section>
+						<?php } } else { ?>
+							<div class="alert alert-subl mb-none text-center">
+								<i class="fas fa-exclamation-triangle"></i> <?=translate('no_information_available')?>
+							</div>
 						<?php } ?>
 					</div>
 				</div>
@@ -946,7 +1055,7 @@ if (empty($student['previous_details'])) {
 										<th><?=translate('occupation')?></th>
 										<td><?php echo $getParent['occupation']?></td>
 										<th><?=translate('income')?></th>
-										<td><?php echo $global_config['currency_symbol'] . $getParent['income']?></td>
+										<td><?php echo currencyFormat($getParent['income'])?></td>
 									</tr>
 									<tr>
 										<th><?=translate('education')?></th>
@@ -973,6 +1082,59 @@ if (empty($student['previous_details'])) {
 										<td colspan="3"><img class="img-border" width="100" height="100" src="<?=get_image_url('parent', $getParent['photo'])?>"></td>
 									</tr>
 								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <!-- sibling information Interface -->
+			<div class="panel panel-accordion">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#sibling">
+							<i class="fa-solid fa-people-carry-box"></i> <?=translate('sibling_information')?>
+						</a>
+					</h4>
+				</div>
+				<div id="sibling" class="accordion-body collapse">
+					<div class="panel-body">
+						<div class="table-responsive mt-md mb-md">
+							<table class="table table-bordered table-condensed table-hover">
+								<thead>
+									<tr>
+										<th class="no-sort" width="80"><?=translate('photo')?></th>
+										<th><?=translate('name')?></th>
+										<th><?=translate('register_no')?></th>
+										<th><?=translate('gender')?></th>
+										<th><?=translate('class')?></th>
+										<th><?=translate('section')?></th>
+										<th><?=translate('roll')?></th>
+										<th><?=translate('mobile_no')?></th>
+									</tr>
+									<tbody>
+									<?php 
+									$getSiblingList = $this->student_model->getSiblingList($student['parent_id'], $student['id']);
+									if (count($getSiblingList)) {
+										foreach ($getSiblingList as $key => $row) {
+										?>
+										<tr>
+											<td>
+												<img class="img-border" width="70" height="70" src="<?php echo get_image_url('student', $row->photo) ?>">
+											</td>
+											<td><?php echo $row->fullname; ?></td>
+											<td><?php echo $row->register_no; ?></td>
+											<td><?php echo translate($row->gender) ?></td>
+											<td><?php echo $row->class_name; ?></td>
+											<td><?php echo $row->section_name; ?></td>
+											<td><?php echo $row->roll; ?></td>
+											<td><?php echo $row->mobileno; ?></td>
+										</tr>
+									<?php } } else {
+										echo '<tr><td colspan="8"><h5 class="text-danger text-center">' . translate('no_information_available') . '</td></tr>';
+									} ?>
+									</tbody>
+								</thead>
 							</table>
 						</div>
 					</div>

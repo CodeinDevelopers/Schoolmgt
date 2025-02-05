@@ -45,7 +45,7 @@
 					<?php if ($exam->exam_type == 1) { ?>
 					<tr>
 						<th><?=translate('exam') . " " . translate('fees')  ?> </th>
-						<td><?php echo $global_config['currency_symbol'] . $exam->fee; ?></td>
+						<td><?php echo currencyFormat($exam->fee); ?></td>
 						<th><?=translate('payment_informations')?></th>
 						<td width="270"><?php echo $this->db->select('transaction_id')->where(array('student_id' => get_loggedin_user_id(), 'exam_id' => $exam->id))->get('online_exam_payment')->row()->transaction_id; ?></td>
 					</tr>

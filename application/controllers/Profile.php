@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
+ * @package : Acamedium
  * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Profile.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Profile extends Admin_Controller
@@ -136,7 +136,8 @@ class Profile extends Admin_Controller
                 echo json_encode($array);
                 exit();
             }
-            $this->data['student'] = $this->student_model->getSingleStudent($userID);
+   
+            $this->data['student'] = $this->student_model->getSingleStudent($this->session->userdata('enrollID'), true);
             $this->data['sub_page'] = 'profile/student';
         } else {
             if ($_POST) {

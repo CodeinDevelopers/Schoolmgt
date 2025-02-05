@@ -53,6 +53,7 @@
 								echo form_dropdown("purchase_unit", $unitlist, set_value('purchase_unit', $product['purchase_unit_id']), "class='form-control prounit' data-plugin-selectTwo
 								data-width='100%' data-minimum-results-for-search='Infinity' ");
 							?>
+							<span class="error"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -62,12 +63,14 @@
 								echo form_dropdown("sales_unit", $unitlist, set_value('sales_unit', $product['sales_unit_id']), "class='form-control prounit' data-plugin-selectTwo
 								data-width='100%' data-minimum-results-for-search='Infinity' ");
 							?>
+							<span class="error"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label"><?php echo translate('unit_ratio'); ?> <span class="required">*</span></label>
 						<div class="col-md-6">
 							<input type="number" class="form-control" name="unit_ratio" id="unit_ratio" value="<?php echo html_escape($product['unit_ratio']); ?>" autocomplete="off" />
+							<span class="error"></span>
 						</div>
 					</div>
 					<div class="form-group">

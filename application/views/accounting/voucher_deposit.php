@@ -44,9 +44,14 @@
 								<td><?php echo $row['ref']; ?></td>
 								<td><?php echo $row['description']; ?></td>
 								<td><?php echo $row['via_name']; ?></td>
-								<td><?php echo $currency_symbol . $row['amount']; ?></td>
+								<td><?php echo currencyFormat($row['amount']); ?></td>
 								<td><?php echo _d($row['date']); ?></td>
-								<td class="min-w-xs">
+								<td class="text-nowrap">
+									<?php if (!empty($row['attachments'])) { ?>
+										<a href="<?php echo base_url('accounting/deposit_download/?id=' . $row['id']); ?>" class="btn btn-circle btn-default icon" data-toggle="tooltip" data-original-title="<?php echo translate('download') . " " .  translate('attachments'); ?>"> 
+											<i class="fas fa-download"></i>
+										</a>
+									<?php } ?>
 									<?php if (get_permission('deposit', 'is_edit')): ?>
 										<a href="<?php echo base_url('accounting/voucher_deposit_edit/' . $row['id']); ?>" class="btn btn-circle btn-default icon"
 										data-toggle="tooltip" data-original-title="<?php echo translate('edit'); ?>"> 

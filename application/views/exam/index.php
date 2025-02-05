@@ -23,6 +23,8 @@
 							<th><?=translate('exam_type')?></th>
 							<th><?=translate('term')?></th>
 							<th><?=translate('mark_distribution')?></th>
+							<th><?=translate('publish')?></th>
+							<th><?=translate('publish_result')?></th>
 							<th><?=translate('remarks')?></th>
 							<th><?=translate('action')?></th>
 						</tr>
@@ -53,6 +55,20 @@
 									}
 								}
 							 ?></td>
+							<td>
+								<div class="material-switch ml-xs">
+									<input class="exam-status-switch" id="switchStatus_<?=$row['id']?>" data-id="<?=$row['id']?>" name="evt_switch<?=$row['id']?>" 
+									type="checkbox" <?php echo ($row['status'] == 1 ? 'checked' : ''); ?> />
+									<label for="switchStatus_<?=$row['id']?>" class="label-primary"></label>
+								</div>
+							</td>
+							<td>
+								<div class="material-switch ml-xs">
+									<input class="exam-result-switch" id="switchResult_<?=$row['id']?>" data-id="<?=$row['id']?>" name="evt_switch<?=$row['id']?>" 
+									type="checkbox" <?php echo ($row['publish_result'] == 1 ? 'checked' : ''); ?> />
+									<label for="switchResult_<?=$row['id']?>" class="label-primary"></label>
+								</div>
+							</td>
 							<td><?php echo $row['remark']; ?></td>
 							<td class="min-w-xs">
 							<?php if (get_permission('exam', 'is_edit')): ?>
@@ -90,7 +106,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label"><?=translate('name')?> <span class="required">*</span></label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" />
+								<input type="text" class="form-control" name="name" value="" autocomplete="off" />
 								<span class="error"></span>
 							</div>
 						</div>
@@ -140,8 +156,18 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label"><?=translate('remarks')?></label>
-							<div class="col-md-6 mb-sm">
+							<div class="col-md-6">
 								<textarea rows="2" class="form-control" name="remark"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=translate('publish')?></label>
+							<div class="col-md-6 mb-sm">
+								<div class="material-switch ml-xs">
+									<input id="aswitch_1" name="exam_publish" 
+									type="checkbox" />
+									<label for="aswitch_1" class="label-primary"></label>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -188,6 +214,51 @@
 					$('#mark_distribution').html(data);
 				}
 			});
+		});
+
+
+		// exam status
+		$(".exam-status-switch").on("change", function() {
+			var state = $(this).prop('checked');
+			var id = $(this).data('id');
+			if (state != null) {
+				$.ajax({
+					type: 'POST',
+					url: base_url + "exam/publish_status",
+					data: {
+						id: id,
+						status: state
+					},
+					dataType: "json",
+					success: function (data) {
+						if(data.status == true) {
+							alertMsg(data.msg);
+						}
+					}
+				});
+			}
+		});
+
+		// publish result status
+		$(".exam-result-switch").on("change", function() {
+			var state = $(this).prop('checked');
+			var id = $(this).data('id');
+			if (state != null) {
+				$.ajax({
+					type: 'POST',
+					url: base_url + "exam/publish_result_status",
+					data: {
+						id: id,
+						status: state
+					},
+					dataType: "json",
+					success: function (data) {
+						if(data.status == true) {
+							alertMsg(data.msg);
+						}
+					}
+				});
+			}
 		});
 	});
 </script>

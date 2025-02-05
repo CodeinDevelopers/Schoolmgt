@@ -15,7 +15,7 @@
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' onchange='getClassByBranch(this.value)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSectionByClass(this.value)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 							<?php
 								$arraySection = $this->app_lib->getSections(set_value('class_id'));
 								echo form_dropdown("section_id", $arraySection, set_value('section_id'), "class='form-control' id='section_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 						 foreach($students as $row): ?>
 						<tr>
 							<td><?php echo $count++; ?></td>
-							<td><a target="_blank" href="<?php echo base_url('student/profile/' . $row['id']) ?>"><?php echo $row['fullname'];?></a></td>
+							<td><a target="_blank" class="au-none" href="<?php echo base_url('student/profile/' . $row['id']) ?>"><?php echo $row['fullname'];?></a></td>
 							<td><?php echo ucfirst($row['gender']) ;?></td>
 							<td><?php echo $row['register_no'];?></td>
 							<td><?php echo $row['roll'];?></td>

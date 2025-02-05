@@ -1,5 +1,4 @@
 <?php $widget = (is_superadmin_loggedin() ? 6 : 12); ?>
-<?php $currency_symbol = $global_config['currency_symbol']; ?>
 <div class="row">
 	<div class="col-md-12">
 		<section class="panel">
@@ -82,7 +81,7 @@
 								<td><?php echo $row->register_no;?></td>
 								<td><?php echo _d($row->payment_date);?></td>
 								<td><?php echo _d($row->submit_date);?></td>
-								<td><?php echo $currency_symbol . $row->amount;?></td>
+								<td><?php echo currencyFormat($row->amount);?></td>
 								<td>
 									<?php
 										$labelmode = '';
@@ -101,8 +100,8 @@
 									?>
 								</td>
 								<td>
-								<?php if (get_permission('leave_manage', 'is_add')) { ?>
-									<a href="javascript:void(0);" class="btn btn-circle icon btn-default" onclick="getApprovelOfflinePayments('<?= $row->id ?>')">
+								<?php if (get_permission('offline_payments', 'is_view')) { ?>
+									<a href="javascript:void(0);" class="btn btn-circle icon btn-default" onclick="getApprovelOfflinePayments('<?=$row->id?>')">
 										<i class="fas fa-bars"></i>
 									</a>
 								<?php } ?>

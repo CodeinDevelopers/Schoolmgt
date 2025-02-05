@@ -14,11 +14,11 @@
 					</tr>
 					<tr>
 						<td colspan="2"><strong><?php echo translate('basic') . " " . translate('salary'); ?> :</strong></td>
-						<td class="text-left"><?php echo ($currency_symbol) . number_format($template['basic_salary'], 2, '.', ''); ?></td>
+						<td class="text-left"><?php echo currencyFormat($template['basic_salary']); ?></td>
 					</tr>
 					<tr>
 						<td colspan="2"><strong><?php echo translate('overtime'); ?> :</strong></td>
-						<td class="text-left"><?php echo ($currency_symbol) . number_format($template['overtime_salary'], 2, '.', ''); ?></td>
+						<td class="text-left"><?php echo currencyFormat($template['overtime_salary']); ?></td>
 					</tr>
 				</tbody>
 			</table>
@@ -49,7 +49,7 @@
 						?>
 							<tr>
 								<td><?php echo $allowance['name']; ?></td>
-								<td class="text-right"><?php echo ($currency_symbol) . $allowance['amount']; ?></td>
+								<td class="text-right"><?php echo currencyFormat($allowance['amount']); ?></td>
 							</tr>
 						<?php 
 						endforeach;
@@ -85,7 +85,7 @@
 						?>
 							<tr>
 								<td><?php echo $deduction['name']; ?></td>
-								<td class="text-right"><?php echo ($currency_symbol) . $deduction['amount']; ?></td>
+								<td class="text-right"><?php echo currencyFormat($deduction['amount']); ?></td>
 							</tr>
 						<?php endforeach;
 						} else {
@@ -110,19 +110,19 @@
 						<tr class="b-top-none">
 							<td colspan="2"><strong><?php echo translate('basic') . " " . translate('salary'); ?> :</strong></td>
 							<td class="text-left">
-								<?php echo ($currency_symbol) . number_format($template['basic_salary'], 2, '.', ''); ?>
+								<?php echo currencyFormat($template['basic_salary']); ?>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><strong><?php echo translate('total') . " " . translate('allowance'); ?> :</strong></td>
 							<td class="text-left">
-								<?php echo ($currency_symbol) . number_format($total_allowance, 2, '.', ''); ?>
+								<?php echo currencyFormat($total_allowance); ?>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><strong><?php echo translate('total') . " " . translate('deduction'); ?> :</strong></td>
 							<td class="text-left">
-								<?php echo ($currency_symbol) . number_format($total_deduction, 2, '.', ''); ?>
+								<?php echo currencyFormat($total_deduction); ?>
 							</td>
 						</tr>
 						<tr>
@@ -134,7 +134,7 @@
 								$basic_salary = $template['basic_salary'];
 								$sum = $basic_salary + $total_allowance;
 								$net_salary = $sum - $total_deduction;	
-								echo ($currency_symbol) . number_format($net_salary, 2, '.', '');
+								echo currencyFormat($net_salary);
 								?>
 							</td>
 						</tr>

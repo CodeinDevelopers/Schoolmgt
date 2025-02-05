@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Inventory.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Inventory extends Admin_Controller
@@ -18,6 +18,9 @@ class Inventory extends Admin_Controller
     {
         parent::__construct();
         $this->load->model('inventory_model');
+        if (!moduleIsEnabled('inventory')) {
+            access_denied();
+        }
     }
 
     public function index()
@@ -70,7 +73,7 @@ class Inventory extends Admin_Controller
         $branchID = $this->application_model->get_branch_id();
         $this->data['branch_id'] = $branchID;
         $this->data['productlist'] = $this->inventory_model->get_product_list();
-        $this->data['unitlist'] = $this->app_lib->getSelectByBranch('product_category', $branchID);
+        $this->data['unitlist'] = $this->app_lib->getSelectByBranch('product_unit', $branchID);
         $this->data['title'] = translate('inventory');
         $this->data['sub_page'] = 'inventory/product';
         $this->data['main_menu'] = 'inventory';
@@ -297,9 +300,9 @@ class Inventory extends Admin_Controller
             if (!get_permission('product_unit', 'is_add')) {
                 access_denied();
             }
-        if (is_superadmin_loggedin()) {
-            $this->form_validation->set_rules('branch_id', translate('branch'), 'trim|required');
-        }
+            if (is_superadmin_loggedin()) {
+                $this->form_validation->set_rules('branch_id', translate('branch'), 'trim|required');
+            }
             $this->form_validation->set_rules('unit_name', 'Unit Name', 'trim|required|callback_unique_unit');
             if ($this->form_validation->run() !== false) {
                 $arrayUnit = array(
@@ -311,7 +314,7 @@ class Inventory extends Admin_Controller
                 redirect(base_url('inventory/unit'));
             }
         }
-        $this->data['unitlist'] = $this->inventory_model->get('product_unit');
+        $this->data['unitlist'] = $this->inventory_model->get('product_unit', '', false, true);
         $this->data['title'] = translate('inventory');
         $this->data['sub_page'] = 'inventory/unit';
         $this->data['main_menu'] = 'inventory';
@@ -323,9 +326,9 @@ class Inventory extends Admin_Controller
         if (!get_permission('product_unit', 'is_edit')) {
             access_denied();
         }
-    if (is_superadmin_loggedin()) {
-        $this->form_validation->set_rules('branch_id', translate('branch'), 'trim|required');
-    }
+        if (is_superadmin_loggedin()) {
+            $this->form_validation->set_rules('branch_id', translate('branch'), 'trim|required');
+        }
         $this->form_validation->set_rules('unit_name', 'Unit Name', 'trim|required|callback_unique_unit');
         if ($this->form_validation->run() !== false) {
             $unit_id = $this->input->post('unit_id');
@@ -365,21 +368,18 @@ class Inventory extends Admin_Controller
 
     public function unique_unit($name)
     {
+        $branchID = $this->application_model->get_branch_id();
         $unit_id = $this->input->post('unit_id');
         if (!empty($unit_id)) {
             $this->db->where_not_in('id', $unit_id);
         }
-        $this->db->where('name', $name);
-        $query = $this->db->get('product_unit');
-        if ($query->num_rows() > 0) {
-            if (!empty($unit_id)) {
-                set_alert('error', "The Category name are already used");
-            } else {
-                $this->form_validation->set_message("unique_unit", "The %s name are already used.");
-            }
-            return false;
-        } else {
+        $this->db->where(array('name' => $name, 'branch_id' => $branchID));
+        $uniform_row = $this->db->get('student_category')->num_rows();
+        if ($uniform_row == 0) {
             return true;
+        } else {
+            $this->form_validation->set_message("unique_unit", translate('already_taken'));
+            return false;
         }
     }
 
@@ -844,7 +844,7 @@ class Inventory extends Admin_Controller
 
     public function sales_save()
     {
-        if (!get_permission('product_purchase', 'is_add')) {
+        if (!get_permission('product_sales', 'is_add')) {
             access_denied();
         }
         if ($_POST) {
@@ -901,7 +901,8 @@ class Inventory extends Admin_Controller
     {
         $category_id = $this->input->post('category_id');
         $selected_id = $this->input->post('selected_id');
-        $productlist = $this->db->select('id,name,code')->where('category_id', $category_id)->get('product')->result_array();
+        $branchID = $this->application_model->get_branch_id();
+        $productlist = $this->db->select('id,name,code')->where(['branch_id' => $branchID, 'category_id' => $category_id])->get('product')->result_array();
         $html = "<option value=''>" . translate('select') . "</option>";
         foreach ($productlist as $product) {
             $selected = ($product['id'] == $selected_id ? 'selected' : '');

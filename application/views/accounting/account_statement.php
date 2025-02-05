@@ -104,9 +104,9 @@ $currency_symbol = $global_config['currency_symbol'];
 					<td><?php echo html_escape($row['ref']); ?></td>
 					<td><?php echo html_escape($row['description']); ?></td>
 					<td><?php echo html_escape(_d($row['date'])); ?></td>
-					<td><?php echo html_escape($currency_symbol . number_format($row['dr'], 2, '.', ''));?></td>
-					<td><?php echo html_escape($currency_symbol . number_format($row['cr'], 2, '.', ''));?></td>
-					<td><?php echo (set_value('type') == 'all' ? $currency_symbol . number_format($row['bal'], 2, '.', '') : $currency_symbol . "0.00"); ?>
+					<td><?php echo html_escape(currencyFormat($row['dr']));?></td>
+					<td><?php echo html_escape(currencyFormat($row['cr']));?></td>
+					<td><?php echo (set_value('type') == 'all' ? currencyFormat($row['bal']) : currencyFormat(0)); ?>
 					</td>
 				</tr>
 				<?php endforeach; } ?>
@@ -118,9 +118,9 @@ $currency_symbol = $global_config['currency_symbol'];
 					<th></th>
 					<th></th>
 					<th></th>
-					<th><?php echo html_escape($currency_symbol . number_format($total_dr, 2, '.', '')); ?></th>
-					<th><?php echo html_escape($currency_symbol . number_format($total_cr, 2, '.', '')); ?></th>
-					<th><?php echo html_escape(set_value('type') == 'all' ? $currency_symbol . number_format($total_cr - $total_dr, 2, '.', '') : $currency_symbol . "0.00"); ?></th>
+					<th><?php echo html_escape(currencyFormat($total_dr)); ?></th>
+					<th><?php echo html_escape(currencyFormat($total_cr)); ?></th>
+					<th><?php echo html_escape(set_value('type') == 'all' ? currencyFormat($total_cr - $total_dr) : currencyFormat(0)); ?></th>
 				</tr>
 			</tfoot>
 		</table>

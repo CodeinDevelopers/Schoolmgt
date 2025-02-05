@@ -72,11 +72,64 @@
 		
 		<?php if(!empty($branch_id) && !empty($class_id) && !empty($day)):?>
 		<section class="panel appear-animation" data-appear-animation="<?php echo $global_config['animations']?>" data-appear-animation-delay="100">
-			<?php echo form_open("timetable/class_save", array('class' => 'frm-submit-msg')); ?>
 			<header class="panel-heading">
 				<h4 class="panel-title"><i class="far fa-clock"></i> <?=translate('add') . " " . translate('schedule')?></h4>
 			</header>
-			<div class="panel-body" >
+			<div class="panel-body">
+				<section class="panel pg-fw">
+				    <div class="panel-body">
+				    	<form action="#" method="POST" id="quickSchedule">
+				        <h5 class="chart-title mb-md"><?=translate('set_parameters_to_quickly_create_schedule')?></h5>
+						<div class="table-responsive">
+							<table class="table table-bordered table-condensed">
+								<thead>
+									<th><?=translate('starting_date')?> <span class="required">*</span></th>
+									<th><?=translate('duration')?> (<?=translate('minutes')?>) <span class="required">*</span></th>
+									<th><?=translate('interval')?> (<?=translate('minutes')?>) <span class="required">*</span></th>
+									<th><?=translate('class_room')?> <span class="required">*</span></th>
+								</thead>
+								<tbody>
+									<td class="min-w-sm">
+										<div class="form-group mb-none">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="far fa-clock"></i></span>
+												<input type="text" class='form-control' name="q_starting_time" id="qStartingTime" required data-plugin-timepicker class="form-control" autocomplete="off" data-plugin-options='{ "minuteStep": 5 }' value="">
+											</div>
+										</div>
+									</td>
+									<td class="min-w-sm">
+										<div class="form-group mb-none">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fas fa-stopwatch"></i></span>
+												<input type="number" class='form-control' name="duration" id="qDuration" min="1" required autocomplete="off" value="">
+											</div>
+										</div>
+									</td>
+									<td class="min-w-sm">
+										<div class="form-group mb-none">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fas fa-stopwatch"></i></span>
+												<input type="number" class='form-control' name="interval" id="qInterval" required autocomplete="off" value="0">
+											</div>
+										</div>
+									</td>
+									<td class="min-w-sm">
+										<div class="form-group mb-none">
+											<input type="text" class='form-control' name="class_room" id="qclass_room" autocomplete="off" value="">
+										</div>
+									</td>
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<div class="col-md-offset-10 col-md-2">
+								<button class="btn btn-default btn-block" type="submit"><i class="fas fa-plus-circle"></i> <?=translate('apply')?></button>
+							</div>
+						</div>
+						</form>
+					</div>
+				</section>
+				<?php echo form_open("timetable/class_save", array('id' => 'scheduleForm')); ?>
 				<div class="table-responsive">
 					<table class="table table-bordered table-condensed mt-md">
 						<thead>
@@ -135,7 +188,7 @@
 									<div class="form-group">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="far fa-clock"></i></span>
-											<input type="text" name="timetable[<?php echo $key ?>][time_start]" data-plugin-timepicker data-plugin-options ="{'timeFormat': 'HH:mm:ss'}" class="form-control" value="<?php echo $value['time_start'] ?>" />
+											<input type="text" name="timetable[<?php echo $key ?>][time_start]" data-plugin-timepicker class="form-control starting-time" value="<?php echo $value['time_start'] ?>" />
 										</div>
 										<span class="error"></span>
 									</div>
@@ -144,13 +197,13 @@
 									<div class="form-group">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="far fa-clock"></i></span>
-											<input type="text" name="timetable[<?php echo $key ?>][time_end]" data-plugin-timepicker class="form-control" value="<?php echo $value['time_end'] ?>" />
+											<input type="text" name="timetable[<?php echo $key ?>][time_end]" data-plugin-timepicker class="form-control ending_time" value="<?php echo $value['time_end'] ?>" />
 										</div>
 										<span class="error"></span>
 									</div>
 								</td>
 								<td class="timet-td">
-									<input type="text" class="form-control" name="timetable[<?php echo $key ?>][class_room]" value="<?php echo $value['class_room'] ?>">
+									<input type="text" class="form-control class_room" name="timetable[<?php echo $key ?>][class_room]" value="<?php echo $value['class_room'] ?>">
 									<button type="button" class="btn btn-danger removeTR"><i class="fas fa-times"></i> </button>
 								</td>
 							</tr>
@@ -197,7 +250,7 @@
 									<div class="form-group">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="far fa-clock"></i></span>
-											<input type="text" name="timetable[0][time_start]" data-plugin-timepicker data-plugin-options ="{'timeFormat': 'HH:mm:ss'}" class="form-control" />
+											<input type="text" name="timetable[0][time_start]" data-plugin-timepicker data-plugin-options class="form-control starting-time" />
 										</div>
 										<span class="error"></span>
 									</div>
@@ -206,17 +259,15 @@
 									<div class="form-group">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="far fa-clock"></i></span>
-											<input type="text" name="timetable[0][time_end]" data-plugin-timepicker class="form-control" />
+											<input type="text" name="timetable[0][time_end]" data-plugin-timepicker class="form-control ending_time" />
 										</div>
 										<span class="error"></span>
 									</div>
 								</td>
 								<td>
-									<input type="text" class="form-control" name="timetable[0][class_room]" value="">
+									<input type="text" class="form-control class_room" name="timetable[0][class_room]" value="">
 								</td>
 							</tr>
-
-
 						<?php } ?>
 						</tbody>
 					</table>
@@ -232,7 +283,7 @@
 			<footer class="panel-footer">
 				<div class="row">
 					<div class="col-md-offset-10 col-md-2">
-						 <button type="submit" class="btn btn-default btn-block" data-loading-text="<i class='fas fa-spinner fa-spin'></i> Processing">
+						 <button type="submit" id="scheduleBtn" class="btn btn-default btn-block" data-loading-text="<i class='fas fa-spinner fa-spin'></i> Processing">
 						 	<i class="fas fa-plus-circle"></i> <?=translate('save')?>
 						 </button>
 					</div>
@@ -243,7 +294,6 @@
 		
 		<script type="text/javascript">
 			var lenght_div = <?php echo (empty($exist_data)) ? 1 : count($exist_data); ?>;
-			
 			$(document).on('change', "#timetable_entry_append input[type='checkbox']", function() {
 				$(this).closest('tr').find('select').prop('disabled', this.checked);
 			})
@@ -287,15 +337,15 @@
 				row += '<td><div class="form-group">';
 				row += '<div class="input-group">';
 				row += '<span class="input-group-addon"><i class="far fa-clock"></i></span>';
-				row += '<input type="text" name="timetable[' + value + '][time_start]" class="form-control timepicker" >';
+				row += '<input type="text" name="timetable[' + value + '][time_start]" class="form-control timepicker starting-time" >';
 				row += '</div><span class="error"></span></div></td>';
 				row += '<td><div class="form-group">';
 				row += '<div class="input-group">';
 				row += '<span class="input-group-addon"><i class="far fa-clock"></i></span>';
-				row += '<input type="text" name="timetable[' + value + '][time_end]" class="form-control timepicker" >';
+				row += '<input type="text" name="timetable[' + value + '][time_end]" class="form-control timepicker ending_time" >';
 				row += '</div><span class="error"></span></div></td>';
 				row += '<td class="timet-td">';
-				row += '<input type="text" class="form-control" name="timetable[' + value + '][class_room]" value="">';
+				row += '<input type="text" class="form-control class_room" name="timetable[' + value + '][class_room]" value="">';
 				row += '<button type="button" class="btn btn-danger removeTR"><i class="fas fa-times"></i> </button>';
 				row += '</td>';
 				row += '</tr>';
@@ -311,5 +361,84 @@
 		$("#timetable_entry_append").on('click', '.removeTR', function () {
 			$(this).parent().parent().remove();
 		});
+
+		$("form#quickSchedule").validate({
+			highlight: function( label ) {
+				$(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			success: function( label ) {
+				$(label).closest('.form-group').removeClass('has-error');
+				label.remove();
+			},
+			errorPlacement: function( error, element ) {
+				var placement = element.closest('.input-group');
+				if (!placement.get(0)) {
+					placement = element;
+				}
+				if (error.text() !== '') {
+					if(element.parent('.checkbox, .radio').length || element.parent('.input-group').length) {
+						placement.after(error);
+					} else {
+						var placement = element.closest('div');
+						placement.append(error);
+					}
+				}
+			},
+			submitHandler: function(form) {
+				let start_time= $('#qStartingTime').val();
+				let duration= $('#qDuration').val();
+				let interval= $('#qInterval').val();
+				let class_room= $('#qclass_room').val();
+
+				$('#scheduleForm tbody  > tr').each(function() {
+					var newTime = moment(start_time, "hh:mm A").add(duration, 'minutes').format('hh:mm A');
+					$(this).find(".starting-time").timepicker('setTime', start_time);
+					$(this).find(".ending_time").timepicker('setTime', newTime);
+ 
+					$(this).find(".class_room").val(class_room);    
+					start_time = moment(newTime, "hh:mm A").add(interval, 'minutes').format('hh:mm A');
+				});
+			}
+		});
+
+        $("form#scheduleForm").on('submit', function(e){
+            e.preventDefault();
+            var $this = $(this);
+            var btn = $("#scheduleBtn");
+            $.ajax({
+                url: $(this).attr('action'),
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: function () {
+                    btn.button('loading');
+                },
+                success: function (data) {
+                    $('.error').html("");
+                    if (data.status == "fail") {
+                        $.each(data.error, function (index, value) {
+                            $this.find("[name='" + index + "']").parents('.form-group').find('.error').html(value);
+                        });
+                        btn.button('reset');
+                    } else {
+                        swal({
+                            toast: true,
+                            position: 'top-end',
+                            type: 'success',
+                            title: data.message,
+                            confirmButtonClass: 'btn btn-default',
+                            buttonsStyling: false,
+                            timer: 8000
+                        });
+                    }
+                },
+                complete: function (data) {
+                    btn.button('reset'); 
+                },
+                error: function () {
+                    btn.button('reset');
+                }
+            });
+        });
 	});
 </script>

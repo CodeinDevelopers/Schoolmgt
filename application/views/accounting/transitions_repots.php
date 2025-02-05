@@ -82,9 +82,9 @@ $currency_symbol = $global_config['currency_symbol'];
 					<td><?php echo $row['description']; ?></td>
 					<td><?php echo $row['via_name']; ?></td>
 					<td><?php echo _d($row['date']); ?></td>
-					<td><?php echo $currency_symbol . $row['dr']; ?></td>
-					<td><?php echo $currency_symbol . $row['cr']; ?></td>
-					<td><?php echo $currency_symbol . $row['bal']; ?></td>
+					<td><?php echo currencyFormat($row['dr']); ?></td>
+					<td><?php echo currencyFormat($row['cr']); ?></td>
+					<td><?php echo currencyFormat($row['bal']); ?></td>
 				</tr>
 				<?php endforeach;  ?>
 			</tbody>
@@ -98,9 +98,9 @@ $currency_symbol = $global_config['currency_symbol'];
 					<th></th>
 					<th></th>
 					<th></th>
-					<th><?php echo $currency_symbol . number_format($total_dr, 2, '.', ''); ?></th>
-					<th><?php echo $currency_symbol . number_format($total_cr, 2, '.', ''); ?></th>
-					<th><?php echo $currency_symbol . number_format(($total_cr - $total_dr), 2, '.', ''); ?></th>
+					<th><?php echo currencyFormat($total_dr); ?></th>
+					<th><?php echo currencyFormat($total_cr); ?></th>
+					<th><?php echo currencyFormat(($total_cr - $total_dr)); ?></th>
 				</tr>
 			</tfoot>
 		</table>

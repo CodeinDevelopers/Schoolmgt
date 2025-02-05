@@ -29,7 +29,7 @@ class MY_Model extends CI_Model {
 	            }
 				$return_photo = $this->upload->data('file_name');
 			}
-		}else{
+		} else {
 			if (!empty($old_user_photo)){
 				$return_photo = $old_user_photo;
 			}
@@ -99,7 +99,12 @@ class MY_Model extends CI_Model {
                 }
                 return $this->upload->data('file_name');
             }
+        } else {
+			if (!empty($old_file)){
+				return $old_file;
+			} else {
+				return "";
+			}
         }
-        return null;
     } 
 }

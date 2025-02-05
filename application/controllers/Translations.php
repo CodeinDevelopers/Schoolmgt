@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
+ * @package : Acamedium
  * @version : 5.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Translations.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Translations extends Admin_Controller
@@ -45,6 +45,8 @@ class Translations extends Admin_Controller
     {
         if (is_loggedin()) {
             $this->session->set_userdata('set_lang', $action);
+            $isRTL = $this->app_lib->getRTLStatus($action);
+            $this->session->set_userdata('is_rtl', $isRTL);
             if (!empty($_SERVER['HTTP_REFERER'])) {
                 redirect($_SERVER['HTTP_REFERER']);
             } else {
@@ -196,6 +198,31 @@ class Translations extends Admin_Controller
             }
             $this->db->where('id', $id);
             $this->db->update('language_list', $array_data);
+            echo $message;
+        }
+    }
+
+    /* RTL enable/disable */
+    public function isRTL()
+    {
+        if (is_superadmin_loggedin()) {
+            $id = $this->input->post('lang_id');
+            $status = $this->input->post('status');
+            if ($status == 'true') {
+                $array_data['rtl'] = 1;
+                $message = "RTL is enabled.";
+            } else {
+                $array_data['rtl'] = 0;
+                $message = "RTL is disabled.";
+            }
+            $this->db->where('id', $id);
+            $this->db->update('language_list', $array_data);
+
+            $isRTL = $this->db->select('rtl,lang_field')->where('id', $id)->get('language_list')->row();
+            $lan = $this->session->userdata('set_lang');
+            if ($lan == $isRTL->lang_field) {
+                $this->session->set_userdata('is_rtl', $isRTL->rtl);
+            }
             echo $message;
         }
     }

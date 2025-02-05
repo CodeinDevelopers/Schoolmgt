@@ -4,39 +4,43 @@
 	$("form.frm-submit").each(function(i, el)
 	{
 		var $this = $(el);
-		$this.on('submit', function(e){
-			e.preventDefault();
-			var btn = $this.find('[type="submit"]');
-			$.ajax({
-				url: $(this).attr('action'),
-				type: "POST",
-				data: $(this).serialize(),
-				dataType: 'json',
-				beforeSend: function () {
-					btn.button('loading');
-				},
-				success: function (data) {
-					$('.error').html("");
-					if (data.status == "fail") {
-						$.each(data.error, function (index, value) {
-							$this.find("[name='" + index + "']").parents('.form-group').find('.error').html(value);
-						});
-						btn.button('reset');
-					} else if (data.status == "access_denied") {
-						window.location.href = base_url + "dashboard";
-					} else {
-						if (data.url) {
-							window.location.href = data.url;
-						} else{
-							location.reload(true);
-						}
-					}
-				},
-				error: function () {
-					btn.button('reset');
-				}
-			});
-		});
+        $this.on('submit', function(e){
+            e.preventDefault();
+            var btn = $this.find('[type="submit"]');
+            $.ajax({
+                url: $(this).attr('action'),
+                type: "POST",
+                data: new FormData(this),
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                cache: false,
+                beforeSend: function () {
+                    btn.button('loading');
+                },
+                success: function (data) {
+                    console.log(data.error);
+                    $('.error').html("");
+                    if (data.status == "fail") {
+                        $.each(data.error, function (index, value) {
+                            $this.find("[name='" + index + "']").parents('.form-group').find('.error').html(value);
+                        });
+                        btn.button('reset');
+                    } else {
+                        if (data.url) {
+                            window.location.href = data.url;
+                        } else if (data.status == "access_denied") {
+                            window.location.href = base_url + "dashboard";
+                        } else {
+                            location.reload(true);
+                        }
+                    }
+                },
+                error: function () {
+                    btn.button('reset');
+                }
+            });
+        });
 	});
 }).apply(this, [jQuery]);
 
@@ -65,3 +69,27 @@
         }
     };
 }(jQuery));
+
+// dropify basic configurations
+if (typeof Dropify != 'undefined') {
+	if ($(".dropify").length) {
+		$(".dropify").dropify();
+	}
+} 
+
+// Datepicker
+(function($) {
+	'use strict';
+	if ($.isFunction($.fn['datepicker'])) {
+		$(function() {
+			$('[data-plugin-datepicker]').each(function() {
+				$(this).datepicker({
+					format: "yyyy-mm-dd",
+					orientation: "bottom",
+					autoclose: true,
+					todayHighlight: true
+				});
+			});
+		});
+	}
+}).apply(this, [jQuery]);

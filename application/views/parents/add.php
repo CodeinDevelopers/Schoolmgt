@@ -189,44 +189,7 @@
 					</div>
 				</div>
 				
-				<!-- social links -->
-				<div class="headers-line">
-					<i class="fas fa-globe"></i> <?=translate('social_links')?>
-				</div>
-
-				<div class="row mb-lg">
-					<div class="col-md-4 mb-sm">
-						<div class="form-group">
-							<label class="control-label">Facebook</label>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
-								<input type="url" class="form-control" name="facebook" value="<?=set_value('facebook')?>" placeholder="eg: https://www.facebook.com/username" autocomplete="off" />
-							</div>
-							<?php echo form_error('facebook', '<label class="error">', '</label>'); ?>
-						</div>
-					</div>
-					<div class="col-md-4 mb-sm">
-						<div class="form-group">
-							<label class="control-label">Twitter</label>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fab fa-twitter"></i></span>
-								<input type="url" class="form-control" name="twitter" value="<?=set_value('twitter')?>" placeholder="eg: https://www.twitter.com/username" autocomplete="off" />
-							</div>
-							<?php echo form_error('twitter', '<label class="error">', '</label>'); ?>
-						</div>
-					</div>
-					<div class="col-md-4 mb-sm">
-						<div class="form-group">
-							<label class="control-label">Linkedin</label>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fab fa-linkedin-in"></i></span>
-								<input type="url" class="form-control" name="linkedin" value="<?=set_value('linkedin')?>" placeholder="eg: https://www.linkedin.com/username" autocomplete="off" />
-							</div>
-							<?php echo form_error('linkedin', '<label class="error">', '</label>'); ?>
-						</div>
-					</div>
-				</div>
-			</div>
+				
 			<footer class="panel-footer">
 				<div class="row">
 					<div class="col-md-offset-10 col-md-2">

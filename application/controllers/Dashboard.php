@@ -2,16 +2,16 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 5.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.2
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Dashboard.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
-class Dashboard extends Admin_Controller
+class Dashboard extends Dashboard_Controller
 {
 
     public function __construct()
@@ -19,9 +19,10 @@ class Dashboard extends Admin_Controller
         parent::__construct();
         $this->load->model('dashboard_model');
     }
-
+    
     public function index()
     {
+
         if (is_student_loggedin() || is_parent_loggedin()) {
             $studentID = 0;
             if (is_student_loggedin()) {

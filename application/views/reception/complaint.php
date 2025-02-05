@@ -61,9 +61,7 @@
 										<i class="fas fa-location-crosshairs"></i>
 									</a>
 								<?php } ?>
-									<a onclick="getPostalRecord('<?php echo $row['id'] ?>')" href="javascript:void(0);" class="btn btn-default btn-circle icon">
-										<i class="fas fa-mattress-pillow"></i>
-									</a>
+									<button class="btn btn-circle btn-default icon" data-loading-text="<i class='fas fa-spinner fa-spin'></i>" onclick="getPostalRecord('<?php echo $row['id'] ?>', this)"><i class="fas fa-mattress-pillow"></i></button>
 									<?php if (get_permission('postal_record', 'is_edit')): ?>
 										<!-- update link -->
 										<a href="<?php echo base_url('reception/complaint_edit/' . $row['id']); ?>" class="btn btn-default btn-circle icon">
@@ -277,16 +275,26 @@
 	    });
 	}
 
-	function getPostalRecord(id) {
+	function getPostalRecord(id, elem) {
+		var btn = $(elem);
 		$.ajax({
 			url: base_url + 'reception/getComplaintDetails',
 			type: 'POST',
 			data: {'id': id},
 			dataType: "html",
+            beforeSend: function () {
+                btn.button('loading');
+            },
 			success: function (data) {
 				$('#quick_view').html(data);
 				mfp_modal('#modal');
-			}
+			},
+            error: function (xhr) {
+                btn.button('reset');
+            },
+            complete: function () {
+                btn.button('reset');
+            }
 		});
 	}
 

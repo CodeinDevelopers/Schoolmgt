@@ -19,16 +19,17 @@ class MY_Controller extends CI_Controller
         $get_config = $this->db->get_where('global_settings', array('id' => 1))->row_array();
         $branchID = $this->application_model->get_branch_id();
         if (!empty($branchID)) {
-            $branch = $this->db->select('symbol,currency,timezone')->where('id', $branchID)->get('branch')->row();
+            $branch = $this->db->select('currency_formats,symbol_position,symbol,currency,timezone')->where('id', $branchID)->get('branch')->row();
             $get_config['currency'] = $branch->currency;
             $get_config['currency_symbol'] = $branch->symbol;
+            $get_config['currency_formats'] = $branch->currency_formats;
+            $get_config['symbol_position'] = $branch->symbol_position;
             if (!empty($branch->timezone)) {
                 $get_config['timezone'] = $branch->timezone;
             }
         }
         $this->data['global_config'] = $get_config;
         $this->data['theme_config'] = $this->db->get_where('theme_settings', array('id' => 1))->row_array();
-
         date_default_timezone_set($get_config['timezone']);
     }
 
@@ -112,6 +113,24 @@ class Admin_Controller extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('saas_model');
+        if (!is_loggedin()) {
+            $this->session->set_userdata('redirect_url', current_url());
+            redirect(base_url('login'), 'refresh');
+        }
+
+        if (!$this->saas_model->checkSubscriptionValidity()) {
+            redirect(base_url('dashboard'));
+        }
+    }
+}
+
+class Dashboard_Controller extends MY_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('saas_model');
         if (!is_loggedin()) {
             $this->session->set_userdata('redirect_url', current_url());
             redirect(base_url('authentication'), 'refresh');
@@ -127,6 +146,10 @@ class User_Controller extends MY_Controller
         if (!is_student_loggedin() && !is_parent_loggedin()) {
             $this->session->set_userdata('redirect_url', current_url());
             redirect(base_url('authentication'), 'refresh');
+        }
+        $this->load->model('saas_model');
+        if (!$this->saas_model->checkSubscriptionValidity()) {
+            redirect(base_url('dashboard'));
         }
     }
 }
@@ -146,10 +169,16 @@ class Frontend_Controller extends MY_Controller
     {
         parent::__construct();
         $this->load->model('home_model');
+        $this->load->model('saas_model');
         $branchID = $this->home_model->getDefaultBranch();
         $cms_setting = $this->db->get_where('front_cms_setting', array('branch_id' => $branchID))->row_array();
         if (!$cms_setting['cms_active']) {
-            redirect(site_url('authentication'));
+            redirect(site_url('login'));
+        } else {
+            if (!$this->saas_model->checkSubscriptionValidity($branchID)) {
+                $this->session->set_flashdata('website_expired_msg', '1');
+                redirect(base_url());
+            }
         }
         $this->data['cms_setting'] = $cms_setting;
     }

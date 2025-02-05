@@ -2,6 +2,7 @@
 <html class="fixed sidebar-left-sm <?php echo ($theme_config['dark_skin'] == 'true' ? 'dark' : 'sidebar-light');?>">
 <!-- html header -->
 <?php $this->load->view('layout/header.php');?>
+
 <!-- <body class="loading-overlay-showing" data-loading-overlay> -->
 <?php if ($global_config['preloader_backend'] == 1) { ?>
 <body class="loading-overlay-showing" data-loading-overlay>
@@ -29,7 +30,7 @@
 			<!-- page main content -->
 			<section role="main" class="content-body">
 				<header class="page-header">
-					<a class="page-title-icon" href="<?php echo base_url('dashboard');?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M17 12L10 12M10 12L13 15M10 12L13 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7 16L7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"></path> </g></svg></a>
+					<a class="page-title-icon" href="<?php echo base_url('dashboard');?>"><i class="fas fa-home"></i></a>
 					<h2><?php echo $title;?></h2>
 				</header>
 				<?php $this->load->view($sub_page); ?>
@@ -104,6 +105,54 @@
 			});
 		}
 	</script>
-   
+    <?php 
+    $config = $this->application_model->whatsappChat();
+    if (!empty($config) && $config['backend_enable_chat'] == 1) {
+    ?>
+    <div class="whatsapp-popup">
+        <div class="whatsapp-button">
+            <i class="fab fa-whatsapp i-open"></i>
+            <i class="far fa-times-circle fa-fw i-close"></i>
+        </div>
+        <div class="popup-content">
+            <div class="popup-content-header">
+                <i class="fab fa-whatsapp"></i>
+                <h5><?php echo $config['header_title'] ?><span><?php echo $config['subtitle'] ?></span></h5>
+            </div>
+            <div class="whatsapp-content">
+                <ul>
+                <?php $whatsappAgent = $this->application_model->whatsappAgent(); 
+                    foreach ($whatsappAgent as $key => $value) {
+                        $online = "offline";
+                        if (strtolower($value->weekend) != strtolower(date('l'))) {
+                            $now = time();
+                            $starttime = strtotime($value->start_time);
+                            $endtime = strtotime($value->end_time);
+                            if ($now >= $starttime && $now <= $endtime) {
+                                $online = "online";
+                            }
+                        }
+                ?>
+                    <li class="<?php echo $online ?>">
+                        <a class="whatsapp-agent" href="javascript:void(0)" data-number="<?php echo $value->whataspp_number; ?>">
+                            <div class="whatsapp-img">
+                                <img src="<?php echo get_image_url('whatsapp_agent', $value->agent_image); ?>" class="whatsapp-avatar" width="60" height="60">
+                            </div>
+                            <div>
+                                <span class="whatsapp-text">
+                                    <span class="whatsapp-label"><?php echo $value->agent_designation; ?> - <span class="status"><?php echo ucfirst($online) ?></span></span> <?php echo $value->agent_name; ?>
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                <?php } ?>
+                </ul>
+            </div>
+            <div class="content-footer">
+                <p><?php echo $config['footer_text'] ?></p>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
 </body>
 </html>

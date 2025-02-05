@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Settings.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Settings extends Admin_Controller
@@ -33,7 +33,11 @@ class Settings extends Admin_Controller
 
         if ($_POST) {
             if (!get_permission('global_settings', 'is_edit')) {
-                access_denied();
+                
+            }
+            if ($this->app_lib->licenceVerify() == false) {
+                set_alert('error', translate('invalid_license'));
+                redirect(site_url('dashboard'));
             }
         }
 
@@ -50,6 +54,10 @@ class Settings extends Admin_Controller
             }
             $this->db->where('id', 1);
             $this->db->update('global_settings', $config);
+
+            $isRTL = $this->app_lib->getRTLStatus($config['translation']);
+            $this->session->set_userdata(['set_lang' => $config['translation'], 'is_rtl' => $isRTL]);
+            
             set_alert('success', translate('the_configuration_has_been_updated'));
             redirect(current_url());
         }

@@ -81,7 +81,7 @@ $currency_symbol = $global_config['currency_symbol'];
 					<td><?php echo $row['description']; ?></td>
 					<td><?php echo $row['via_name']; ?></td>
 					<td><?php echo _d($row['date']); ?></td>
-					<td><?php echo $currency_symbol . $row['amount'];?></td>
+					<td><?php echo currencyFormat($row['amount']);?></td>
 				</tr>
 				<?php endforeach; } ?>
 			</tbody>
@@ -95,7 +95,7 @@ $currency_symbol = $global_config['currency_symbol'];
 					<th></th>
 					<th></th>
 					<th></th>
-					<th><?php echo html_escape($currency_symbol . number_format($total_dr, 2, '.', '')); ?></th>
+					<th><?php echo currencyFormat($total_dr); ?></th>
 				</tr>
 			</tfoot>
 		</table>

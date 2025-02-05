@@ -122,7 +122,13 @@
 							$distributions = json_decode($timetable_detail['mark_distribution'], true);
 							foreach ($distributions as $i => $value) {
 								?>
-								<th><?php echo get_type_name_by_id('exam_mark_distribution', $i) . " (" . $value['full_mark'] . ")" ?></th>
+								<th><?php 
+									$data = array(
+										'max_mark_' .  $i => $value['full_mark'],
+									);
+									echo form_hidden($data);
+								echo get_type_name_by_id('exam_mark_distribution', $i) . " (" . $value['full_mark'] . ")" 
+								?></th>
 							<?php } ?>
 							</tr>
 						</thead>

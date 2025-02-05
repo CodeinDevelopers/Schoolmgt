@@ -34,7 +34,7 @@ $row = $this->db->get()->row_array();
 				</tr>
 				<tr>
 					<th><?=translate('amount')?> :</th>
-					<td><?=html_escape($global_config['currency_symbol'] . $row['amount'])?></td>
+					<td><?=html_escape(currencyFormat($row['amount']))?></td>
 				</tr>
 				<tr>
 					<th><?=translate('deduct_month')?> :</th>

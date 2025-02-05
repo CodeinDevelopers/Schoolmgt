@@ -62,7 +62,7 @@
 <!-- Footer Top Bar Starts -->
 <section class="footer-top-bar">
     <div class="container px-md-0 clearfix text-center-sm text-center-xs">
-        <h3 class="float-left">
+        <h3 class="float-left  mb-3">
             <?php $elements = json_decode($page_data['elements'], true); echo $elements['cta_title']; ?>
         </h3>
         <a href="<?php echo $elements['button_url'] ?>" class="btn btn-black text-uppercase float-right">

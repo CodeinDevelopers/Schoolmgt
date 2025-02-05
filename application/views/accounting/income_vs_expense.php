@@ -82,9 +82,9 @@ $currency_symbol = $global_config['currency_symbol'];
 					<td><?php echo $count++; ?></td>
 					<td><?php echo $row['v_head']; ?></td>
 					<td><?php echo ucfirst($row['type']); ?></td>
-					<td><?php echo $currency_symbol . number_format($row['total_dr'], 2, '.', ''); ?></td>
-					<td><?php echo $currency_symbol . number_format($row['total_cr'], 2, '.', ''); ?></td>
-					<td><?php echo $currency_symbol . number_format($balance, 2, '.', ''); ?>
+					<td><?php echo currencyFormat($row['total_dr']); ?></td>
+					<td><?php echo currencyFormat($row['total_cr']); ?></td>
+					<td><?php echo currencyFormat($balance); ?>
 					</td>
 				</tr>
 				<?php endforeach; } ?>
@@ -94,9 +94,9 @@ $currency_symbol = $global_config['currency_symbol'];
 					<th></th>
 					<th></th>
 					<th></th>
-					<th><?php echo ($currency_symbol . number_format($total_dr, 2, '.', '')); ?></th>
-					<th><?php echo ($currency_symbol . number_format($total_cr, 2, '.', '')); ?></th>
-					<th><?php echo ($currency_symbol . number_format($balance, 2, '.', '')); ?></th>
+					<th><?php echo currencyFormat($total_dr); ?></th>
+					<th><?php echo currencyFormat($total_cr); ?></th>
+					<th><?php echo currencyFormat($balance); ?></th>
 				</tr>
 			</tfoot>
 		</table>

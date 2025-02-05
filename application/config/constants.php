@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 define('UPDATE_INFO_URL', 'https://www.ramomcoder.com/purchase/api/update_info');
 define('UPDATE_INSTALL_URL', 'https://www.ramomcoder.com/purchase/api/update_install');
+define('UPDATE_ADDON_INFO_URL', 'https://www.ramomcoder.com/purchase/api/update_addon_info');
+define('UPDATE_INSTALL_ADDON_URL', 'https://www.ramomcoder.com/purchase/api/update_install_addon');
 
 /*
 |--------------------------------------------------------------------------

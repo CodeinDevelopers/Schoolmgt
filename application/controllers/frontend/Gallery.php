@@ -7,6 +7,13 @@ class Gallery extends Admin_Controller
     public function __construct()
     {
         parent::__construct();
+        $config = array(
+            'field' => 'alias',
+            'title' => 'title',
+            'table' => 'front_cms_gallery_content',
+            'id'    => 'id',
+        );
+        $this->load->library('slug', $config);
         $this->load->model('gallery_model');
         $this->data['headerelements'] = array(
             'css' => array(
@@ -74,7 +81,7 @@ class Gallery extends Admin_Controller
                 // save information in the database file
                 $this->gallery_model->save($this->input->post());
                 set_alert('success', translate('information_has_been_updated_successfully'));
-                $url = base_url('frontend/gallery');
+                $url = base_url('frontend/gallery/index');
                 $array = array('status' => 'success', 'url' => $url);
             } else {
                 $error = $this->form_validation->error_array();

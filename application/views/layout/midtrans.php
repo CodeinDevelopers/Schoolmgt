@@ -2,7 +2,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<?php
+if (!empty($midtrans_sandbox) && $midtrans_sandbox == 1) {  ?>
+	<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?php echo $midtrans_client_key ?>"></script>
+<?php } else { ?>
 	<script src="https://app.midtrans.com/snap/snap.js" data-client-key="<?php echo $midtrans_client_key ?>"></script>
+<?php } ?>
 	<script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
 </head>
 <body onload="submitPayuForm()">

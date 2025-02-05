@@ -2,11 +2,11 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom School Management System
- * @version : 5.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Ajax.php
  */
 
@@ -133,7 +133,7 @@ class Ajax extends MY_Controller
         echo $html;
     }
 
-    public function getStudentByClass()
+    public function getStudentByClass($enroll = 0)
     {
         $html = "";
         $class_id = $this->input->post('class_id');
@@ -141,7 +141,7 @@ class Ajax extends MY_Controller
         $branch_id = $this->application_model->get_branch_id();
         $student_id = (isset($_POST['student_id']) ? $_POST['student_id'] : 0);
         if (!empty($class_id)) {
-            $this->db->select('e.student_id,e.roll,CONCAT(s.first_name, " ", s.last_name) as fullname');
+            $this->db->select('e.student_id,e.id,e.roll,CONCAT(s.first_name, " ", s.last_name) as fullname');
             $this->db->from('enroll as e');
             $this->db->join('student as s', 's.id = e.student_id', 'inner');
             $this->db->join('login_credential as l', 'l.user_id = e.student_id and l.role = 7', 'left');
@@ -156,8 +156,13 @@ class Ajax extends MY_Controller
             if (count($result)) {
                 $html .= "<option value=''>" . translate('select') . "</option>";
                 foreach ($result as $row) {
-                    $sel = ($row['student_id']  == $student_id ? 'selected' : '');
-                    $html .= '<option value="' . $row['student_id'] . '"' . $sel . '>' . $row['fullname'] . ' ( Roll : ' . $row['roll'] . ')</option>';
+                    if ($enroll == 0) {
+                        $sel = ($row['student_id']  == $student_id ? 'selected' : '');
+                        $html .= '<option value="' . $row['student_id'] . '"' . $sel . '>' . $row['fullname'] . ' ( Roll : ' . $row['roll'] . ')</option>';
+                    } else {
+                        $sel = ($row['id']  == $student_id ? 'selected' : '');
+                        $html .= '<option value="' . $row['id'] . '"' . $sel . '>' . $row['fullname'] . ' (' . translate('roll') . " : " . $row['roll'] . ')</option>';
+                    }
                 }
             } else {
                 $html .= '<option value="">' . translate('no_information_available') . '</option>';

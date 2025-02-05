@@ -43,10 +43,10 @@
 								<td><?php echo $row['ref']; ?></td>
 								<td><?php echo $row['description']; ?></td>
 								<td><?php echo $row['via_name']; ?></td>
-								<td><?php echo $currency_symbol . $row['amount']; ?></td>
-								<td><?php echo $currency_symbol . $row['dr']; ?></td>
-								<td><?php echo $currency_symbol . $row['cr']; ?></td>
-								<td><?php echo $currency_symbol . $row['bal']; ?></td>
+								<td><?php echo currencyFormat($row['amount']); ?></td>
+								<td><?php echo currencyFormat($row['dr']); ?></td>
+								<td><?php echo currencyFormat($row['cr']); ?></td>
+								<td><?php echo currencyFormat($row['bal']); ?></td>
 								<td><?php echo _d($row['date']); ?></td>
 								<td>
 									<?php if (get_permission('voucher', 'is_edit')): ?>

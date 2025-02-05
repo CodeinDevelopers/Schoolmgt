@@ -1,6 +1,5 @@
 <?php $row = $this->offline_payments_model->getOfflinePaymentsList(array('op.id' => $payments_id), true);
 $groupID = $this->db->select('group_id')->where('id', $row['fees_allocation_id'])->get('fee_allocation')->row();
-$currency_symbol = $global_config['currency_symbol'];
 $disabled = "";
 if ($row['status'] != 1) {
 	$disabled = "disabled";
@@ -104,10 +103,27 @@ echo form_open('offline_payments/approved'); ?>
 									<td><a class="btn btn-default btn-sm" target="_blank" href="<?=base_url('offline_payments/download/' . $row['id'] . '/' . $row['enc_file_name'])?>"><i class="far fa-arrow-alt-circle-down"></i> <?php echo translate('download'); ?></a></td>
 								</tr>
 			<?php } ?>
-								<tr>
-									<th><?php echo translate('paid') . " " . translate('amount'); ?> : </th>
-									<td><b><?php echo $currency_symbol . $row['amount']; ?></b></td>
-								</tr>
+
+
+<?php if ($row['fine'] != 0) { ?>
+							<tr>
+								<th><?php echo translate('fee') . " " . translate('amount'); ?> : </th>
+								<td><b><?php echo currencyFormat($row['amount']); ?></b></td>
+							</tr>
+							<tr>
+								<th><?php echo translate('fine') . " " . translate('amount'); ?> : </th>
+								<td><b><?php echo currencyFormat($row['fine']); ?></b></td>
+							</tr>
+							<tr>
+								<th><?php echo translate('total_paid'); ?> : </th>
+								<td><b><?php echo currencyFormat($row['amount'] + $row['fine']); ?></b></td>
+							</tr>
+<?php } else { ?>
+							<tr>
+								<th><?php echo translate('paid') . " " . translate('amount'); ?> : </th>
+								<td><b><?php echo currencyFormat($row['amount']); ?></b></td>
+							</tr>
+<?php }  ?>
 								<tr>
 					                <th><?php echo translate('status'); ?> : </th>
 									<th>

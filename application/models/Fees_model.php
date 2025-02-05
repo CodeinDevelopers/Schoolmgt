@@ -9,11 +9,11 @@ class Fees_model extends MY_Model
         $this->load->model('sms_model');
     }
 
-    public function getPreviousSessionBalance($student_id = '', $session_id = '', $with_fine = 0)
+    public function getPreviousSessionBalance($enrollID = '', $session_id = '', $with_fine = 0)
     {
         $total_balance = 0;
         $total_fine = 0;
-        $variable = $this->db->where(array('student_id' => $student_id, 'session_id' => $session_id))->get('fee_allocation')->result();
+        $variable = $this->db->where(array('student_id' => $enrollID, 'session_id' => $session_id))->get('fee_allocation')->result();
         foreach ($variable as $key => $allocation) {
             $groupsDetails = $this->db->select('fee_type_id')->where('fee_groups_id', $allocation->group_id)->get('fee_groups_details')->result();
             foreach ($groupsDetails as $k => $type) {
@@ -68,11 +68,7 @@ class Fees_model extends MY_Model
 
     public function getStudentAllocationList($classID = '', $sectionID = '', $groupID = '', $branchID = '')
     {
-        $sql = "SELECT e.*, s.photo, CONCAT_WS(' ',s.first_name, s.last_name) as fullname, s.gender, s.register_no, s.parent_id, s.email, s.mobileno, IFNULL(fa.id, 0) as allocation_id
-        FROM enroll as e INNER JOIN student as s ON e.student_id = s.id LEFT JOIN login_credential as l ON l.user_id = s.id AND l.role = '7' LEFT JOIN
-        fee_allocation as fa ON fa.student_id=e.student_id AND fa.group_id = " . $this->db->escape($groupID) . " AND
-        fa.session_id= " . $this->db->escape(get_session_id()) . " WHERE e.class_id = " . $this->db->escape($classID) .
-        " AND e.branch_id = " . $this->db->escape($branchID) . " AND e.session_id = " . $this->db->escape(get_session_id());
+        $sql = "SELECT e.*, s.photo, CONCAT_WS(' ',s.first_name, s.last_name) as fullname, s.gender, s.register_no, s.parent_id, s.email, s.mobileno, IFNULL(fa.id, 0) as allocation_id FROM enroll as e INNER JOIN student as s ON e.student_id = s.id LEFT JOIN login_credential as l ON l.user_id = s.id AND l.role = '7' LEFT JOIN fee_allocation as fa ON fa.student_id = e.id AND fa.group_id = " . $this->db->escape($groupID) . " AND fa.session_id= " . $this->db->escape(get_session_id()) . " WHERE e.class_id = " . $this->db->escape($classID) . " AND e.branch_id = " . $this->db->escape($branchID) . " AND e.session_id = " . $this->db->escape(get_session_id());
         if ($sectionID != 'all') {
             $sql .= " AND e.section_id =" . $this->db->escape($sectionID);
         }
@@ -80,14 +76,14 @@ class Fees_model extends MY_Model
         return $this->db->query($sql)->result_array();
     }
 
-    public function getInvoiceStatus($studentID = '')
+    public function getInvoiceStatus($enrollID = '')
     {
         $status = "";
-        $sql = "SELECT SUM(`fee_groups_details`.`amount` + `fee_allocation`.`prev_due`) as `total`, min(`fee_allocation`.`id`) as `inv_no` FROM `fee_allocation` LEFT JOIN `fee_groups_details` ON `fee_groups_details`.`fee_groups_id` = `fee_allocation`.`group_id` LEFT JOIN `fees_type` ON `fees_type`.`id` = `fee_groups_details`.`fee_type_id` WHERE `fee_allocation`.`student_id` = " . $this->db->escape($studentID) . " AND `fee_allocation`.`session_id` = " . $this->db->escape(get_session_id());
+        $sql = "SELECT SUM(`fee_groups_details`.`amount` + `fee_allocation`.`prev_due`) as `total`, min(`fee_allocation`.`id`) as `inv_no` FROM `fee_allocation` LEFT JOIN `fee_groups_details` ON `fee_groups_details`.`fee_groups_id` = `fee_allocation`.`group_id` LEFT JOIN `fees_type` ON `fees_type`.`id` = `fee_groups_details`.`fee_type_id` WHERE `fee_allocation`.`student_id` = " . $this->db->escape($enrollID) . " AND `fee_allocation`.`session_id` = " . $this->db->escape(get_session_id());
         $balance = $this->db->query($sql)->row_array();
         $invNo = str_pad($balance['inv_no'], 4, '0', STR_PAD_LEFT);
 
-        $sql = "SELECT IFNULL(SUM(`fee_payment_history`.`amount`), 0) as `amount`, IFNULL(SUM(`fee_payment_history`.`discount`), 0) as `discount`, IFNULL(SUM(`fee_payment_history`.`fine`), 0) as `fine` FROM `fee_payment_history` LEFT JOIN `fee_allocation` ON `fee_payment_history`.`allocation_id` = `fee_allocation`.`id` WHERE `fee_allocation`.`student_id` = " . $this->db->escape($studentID) . " AND `fee_allocation`.`session_id` = " . $this->db->escape(get_session_id());
+        $sql = "SELECT IFNULL(SUM(`fee_payment_history`.`amount`), 0) as `amount`, IFNULL(SUM(`fee_payment_history`.`discount`), 0) as `discount`, IFNULL(SUM(`fee_payment_history`.`fine`), 0) as `fine` FROM `fee_payment_history` LEFT JOIN `fee_allocation` ON `fee_payment_history`.`allocation_id` = `fee_allocation`.`id` WHERE `fee_allocation`.`student_id` = " . $this->db->escape($enrollID) . " AND `fee_allocation`.`session_id` = " . $this->db->escape(get_session_id());
         $paid = $this->db->query($sql)->row_array();
 
         if ($paid['amount'] == 0) {
@@ -100,11 +96,11 @@ class Fees_model extends MY_Model
         return array('status' => $status, 'invoice_no' => $invNo);
     }
 
-    public function getInvoiceDetails($studentID = '')
+    public function getInvoiceDetails($enrollID = '')
     {
         $sql = "SELECT `fee_allocation`.`group_id`,`fee_allocation`.`prev_due`,`fee_allocation`.`id` as `allocation_id`, `fees_type`.`name`, `fees_type`.`system`, `fee_groups_details`.`amount`, `fee_groups_details`.`due_date`, `fee_groups_details`.`fee_type_id` FROM `fee_allocation` LEFT JOIN
         `fee_groups_details` ON `fee_groups_details`.`fee_groups_id` = `fee_allocation`.`group_id` LEFT JOIN `fees_type` ON `fees_type`.`id` = `fee_groups_details`.`fee_type_id` WHERE
-        `fee_allocation`.`student_id` = " . $this->db->escape($studentID) . " AND `fee_allocation`.`session_id` = " . $this->db->escape(get_session_id()) . " ORDER BY `fee_allocation`.`group_id` ASC";
+        `fee_allocation`.`student_id` = " . $this->db->escape($enrollID) . " AND `fee_allocation`.`session_id` = " . $this->db->escape(get_session_id()) . " ORDER BY `fee_allocation`.`group_id` ASC, `fees_type`.`id` ASC";
         $student = array();
         $r = $this->db->query($sql)->result_array();
         foreach ($r as $key => $value) {
@@ -116,17 +112,17 @@ class Fees_model extends MY_Model
         return $student;
     }
 
-    public function getInvoiceBasic($studentID = '')
+    public function getInvoiceBasic($enrollID = '')
     {
         $sessionID = get_session_id();
-        $this->db->select('s.id,s.register_no,e.branch_id,s.first_name,s.last_name,s.email as student_email,s.current_address as student_address,c.name as class_name,b.school_name,b.email as school_email,b.mobileno as school_mobileno,b.address as school_address,p.father_name,se.name as section_name');
+        $this->db->select('s.id,s.register_no,e.branch_id,e.id as enroll_id,s.first_name,s.last_name,s.email as student_email,s.current_address as student_address,c.name as class_name,b.school_name,b.email as school_email,b.mobileno as school_mobileno,b.address as school_address,p.father_name,se.name as section_name');
         $this->db->from('enroll as e');
         $this->db->join('student as s', 's.id = e.student_id', 'inner');
         $this->db->join('class as c', 'c.id = e.class_id', 'left');
         $this->db->join('section as se', 'se.id = e.section_id', 'left');
         $this->db->join('parent as p', 'p.id = s.parent_id', 'left');
         $this->db->join('branch as b', 'b.id = e.branch_id', 'left');
-        $this->db->where('e.student_id', $studentID);
+        $this->db->where('e.id', $enrollID);
         $this->db->where('e.session_id', $sessionID);
         return $this->db->get()->row_array();
     }
@@ -205,9 +201,9 @@ class Fees_model extends MY_Model
 
     public function getInvoiceList($class_id = '', $section_id = '', $branch_id = '')
     {
-        $this->db->select('e.student_id,e.roll,s.first_name,s.last_name,s.register_no,s.mobileno,c.name as class_name,se.name as section_name');
+        $this->db->select('e.id as enroll_id,e.student_id,e.roll,e.id as enroll_id,s.first_name,s.last_name,s.register_no,s.mobileno,c.name as class_name,se.name as section_name');
         $this->db->from('fee_allocation as fa');
-        $this->db->join('enroll as e', 'e.student_id = fa.student_id and e.session_id = fa.session_id', 'inner');
+        $this->db->join('enroll as e', 'e.id = fa.student_id and e.session_id = fa.session_id', 'inner');
         $this->db->join('student as s', 's.id = e.student_id', 'left');
         $this->db->join('class as c', 'c.id = e.class_id', 'left');
         $this->db->join('section as se', 'se.id = e.section_id', 'left');
@@ -221,16 +217,16 @@ class Fees_model extends MY_Model
         $this->db->order_by('e.id', 'asc');
         $result = $this->db->get()->result_array();
         foreach ($result as $key => $value) {
-            $result[$key]['feegroup'] = $this->getfeeGroup($value['student_id']);
+            $result[$key]['feegroup'] = $this->getfeeGroup($value['enroll_id']);
         }
         return $result;
     }
 
     public function getDueInvoiceList($class_id = '', $section_id = '', $feegroup_id = '', $fee_feetype_id = '')
     {
-        $sql = "SELECT IFNULL(SUM(h.amount), '0') as `total_amount`, IFNULL(SUM(h.discount), '0') as `total_discount`, gd.amount as `full_amount`, fa.prev_due as `prev_due`, gd.`due_date`, e.student_id, e.roll, s.first_name, s.last_name, s.register_no, s.mobileno, c.name as `class_name`, se.name as `section_name` FROM fee_allocation as fa LEFT JOIN fee_payment_history as h ON h.allocation_id = fa.id and h.type_id = " .
+        $sql = "SELECT IFNULL(SUM(h.amount), '0') as `total_amount`, IFNULL(SUM(h.discount), '0') as `total_discount`, gd.amount as `full_amount`, fa.prev_due as `prev_due`, gd.`due_date`, e.student_id, e.id as enroll_id,e.roll, s.first_name, s.last_name, s.register_no, s.mobileno, c.name as `class_name`, se.name as `section_name` FROM fee_allocation as fa LEFT JOIN fee_payment_history as h ON h.allocation_id = fa.id and h.type_id = " .
         $this->db->escape($fee_feetype_id) . " INNER JOIN fee_groups_details as gd ON gd.fee_groups_id = fa.group_id and gd.fee_type_id = " . $this->db->escape($fee_feetype_id) . " INNER JOIN
-        enroll as e ON e.student_id = fa.student_id LEFT JOIN student as s ON s.id = e.student_id LEFT JOIN class as c ON c.id = e.class_id LEFT JOIN section as se ON se.id = e.section_id WHERE
+        enroll as e ON e.id = fa.student_id LEFT JOIN student as s ON s.id = e.student_id LEFT JOIN class as c ON c.id = e.class_id LEFT JOIN section as se ON se.id = e.section_id WHERE
         fa.group_id = " . $this->db->escape($feegroup_id) . " AND fa.session_id = " . $this->db->escape(get_session_id()) . " AND e.class_id = " . $this->db->escape($class_id);
 
         if ($section_id != 'all') {
@@ -240,17 +236,17 @@ class Fees_model extends MY_Model
         $result = $this->db->query($sql)->result_array();
 
         foreach ($result as $key => $value) {
-            $result[$key]['feegroup'] = $this->getfeeGroup($value['student_id']);
+            $result[$key]['feegroup'] = $this->getfeeGroup($value['enroll_id']);
         }
         return $result;
     }
 
     public function getDueReport($class_id = '', $section_id = '')
     {
-        $this->db->select('fa.id as allocation_id,sum(gd.amount + fa.prev_due) as total_fees,e.student_id,e.roll,s.first_name,s.last_name,s.register_no,s.mobileno,c.name as class_name,se.name as section_name');
+        $this->db->select('fa.id as allocation_id,sum(gd.amount + fa.prev_due) as total_fees,e.id as enroll_id,e.roll,s.first_name,s.last_name,s.register_no,s.mobileno,c.name as class_name,se.name as section_name');
         $this->db->from('fee_allocation as fa');
         $this->db->join('fee_groups_details as gd', 'gd.fee_groups_id = fa.group_id', 'left');
-        $this->db->join('enroll as e', 'e.student_id = fa.student_id and e.session_id = ' . $this->db->escape(get_session_id()), 'inner');
+        $this->db->join('enroll as e', 'e.id = fa.student_id and e.session_id = ' . $this->db->escape(get_session_id()), 'inner');
         $this->db->join('student as s', 's.id = e.student_id', 'left');
         $this->db->join('class as c', 'c.id = e.class_id', 'left');
         $this->db->join('section as se', 'se.id = e.section_id', 'left');
@@ -263,7 +259,7 @@ class Fees_model extends MY_Model
         $this->db->order_by('e.roll', 'asc');
         $result = $this->db->get()->result_array();
         foreach ($result as $key => $value) {
-            $result[$key]['payment'] = $this->getPaymentDetails($value['student_id']);
+            $result[$key]['payment'] = $this->getPaymentDetails($value['enroll_id']);
         }
         return $result;
     }
@@ -283,8 +279,8 @@ class Fees_model extends MY_Model
         $this->db->from('fee_payment_history as h');
         $this->db->join('fee_allocation as fa', 'fa.id = h.allocation_id', 'inner');
         $this->db->join('fees_type as ft', 'ft.id = h.type_id', 'left');
-        $this->db->join('enroll as e', 'e.student_id = fa.student_id', 'inner');
-        $this->db->join('student as s', 's.id = e.student_id', 'left');
+        $this->db->join('enroll as e', 'e.id = fa.student_id', 'inner');
+        $this->db->join('student as s', 's.id = e.student_id', 'inner');
         $this->db->join('class as c', 'c.id = e.class_id', 'left');
         $this->db->join('section as se', 'se.id = e.section_id', 'left');
         $this->db->join('payment_types as pt', 'pt.id = h.pay_via', 'left');
@@ -314,15 +310,15 @@ class Fees_model extends MY_Model
         return $result;
     }
 
-    public function getStuPaymentReport($classID = '', $sectionID = '', $studentID = '', $typeID = '', $start = '', $end = '', $branchID = '')
+    public function getStuPaymentReport($classID = '', $sectionID = '', $enrollID = '', $typeID = '', $start = '', $end = '', $branchID = '')
     {
         $this->db->select('h.*,gd.due_date,ft.name as type_name,e.student_id,e.roll,s.first_name,s.last_name,s.register_no,pt.name as pay_via');
         $this->db->from('fee_payment_history as h');
         $this->db->join('fee_allocation as fa', 'fa.id = h.allocation_id', 'inner');
         $this->db->join('fees_type as ft', 'ft.id = h.type_id', 'left');
         $this->db->join('fee_groups_details as gd', 'gd.fee_groups_id = fa.group_id and gd.fee_type_id = h.type_id', 'left');
-        $this->db->join('enroll as e', 'e.student_id = fa.student_id and e.session_id =  ' . $this->db->escape(get_session_id()), 'inner');
-        $this->db->join('student as s', 's.id = e.student_id', 'left');
+        $this->db->join('enroll as e', 'e.id = fa.student_id and e.session_id =  ' . $this->db->escape(get_session_id()), 'inner');
+        $this->db->join('student as s', 's.id = e.student_id', 'inner');
         $this->db->join('payment_types as pt', 'pt.id = h.pay_via', 'left');
         $this->db->where('fa.session_id', get_session_id());
         $this->db->where('h.date >=', $start);
@@ -333,8 +329,8 @@ class Fees_model extends MY_Model
             $typeID = explode("|", $typeID);
             $this->db->where('h.type_id', $typeID[1]);
         }
-        if (!empty($studentID)) {
-            $this->db->where('e.student_id', $studentID);
+        if (!empty($enrollID)) {
+            $this->db->where('e.id', $enrollID);
         }
         $this->db->where('e.section_id', $sectionID);
         $this->db->order_by('h.id', 'asc');

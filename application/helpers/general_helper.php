@@ -52,6 +52,79 @@ function moduleIsEnabled($prefix)
     }
 }
 
+function checkSaasLimit($prefix)
+{
+    $ci = &get_instance();
+    $role_id = $ci->session->userdata('loggedin_role_id');
+    $branchID = $ci->session->userdata('loggedin_branch');
+    if ($role_id == 1) {
+        return 1;
+    }
+
+    $ci = &get_instance();
+    $sql = "SELECT `sb`.`expire_date`, `sb`.`school_id`, `student_limit`, `staff_limit`, `teacher_limit`, `parents_limit` FROM `branch` as `b` LEFT JOIN `saas_subscriptions` AS `sb` ON `sb`.`school_id` = `b`.`id` LEFT JOIN `saas_package` as `sp` ON `sp`.`id` = `sb`.`package_id` WHERE `sb`.`school_id` = " . $ci->db->escape($branchID);
+    $row = $ci->db->query($sql)->row();
+    if (empty($row)) {
+        return 1;
+    }
+
+    if ($prefix == 'student') {
+        $ci->db->where('branch_id', $branchID);
+        $ci->db->group_by('student_id');
+        $total_student = $ci->db->count_all_results('enroll');
+        if ($total_student > $row->student_limit) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    if ($prefix == 'staff' || $prefix == 'teacher') {
+        $ci->db->select('IFNULL(COUNT(staff.id), 0) as snumber');
+        $ci->db->from('staff');
+        $ci->db->join('login_credential', 'login_credential.user_id = staff.id', 'inner');
+        if ($prefix == 'teacher') {
+            $ci->db->where('login_credential.role', 3);
+        } else {
+            $ci->db->where_not_in('login_credential.role', array(1, 3, 6, 7));
+        }
+        $ci->db->where('staff.branch_id', $branchID);
+        $total_staff = $ci->db->get()->row()->snumber;
+
+        if ($prefix == 'teacher') {
+            $limit = $row->teacher_limit;
+        } else {
+            $limit = $row->staff_limit;
+        }
+        if ($total_staff > $limit) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    if ($prefix == 'parent') {
+        $ci->db->where('branch_id', $branchID);
+        $total_parents = $ci->db->count_all_results('parent');
+        if ($total_parents > $row->parents_limit) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+}
+
+function isEnabledSubscription($schoolID = '')
+{
+    $ci = &get_instance();
+    $row = $ci->db->select('id')->where('school_id', $schoolID)->get('saas_subscriptions')->row();
+    if (empty($row)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function get_permission($permission, $can = '')
 {
     $ci = &get_instance();
@@ -479,4 +552,88 @@ function delete_dir($dirPath)
         return true;
     }
     return false;
+}
+
+function currencyFormat($amount = 0)
+{
+    $CI = &get_instance();
+    $array              = $CI->data['global_config'];
+    $currency           = $array['currency'];
+    $currency_symbol    = $array['currency_symbol'];
+    $currency_formats   = $array['currency_formats'];
+    $symbol_position    = $array['symbol_position'];
+
+    $amount = empty($amount) ? 0 : $amount;
+    $value = $amount;
+    if ($currency_formats == 1) {
+        $value = number_format($amount, 2, '.', '');
+    } elseif ($currency_formats == 2) {
+        $value = moneyFormatIndia($amount);
+    } elseif ($currency_formats == 3) {
+        $value = number_format($amount, 3, '.', ',');
+    } elseif ($currency_formats == 4) {
+        $value = number_format($amount, 2, ',', '.');
+    } elseif ($currency_formats == 5) {
+        $value = number_format($amount, 2, '.', ',');
+    } elseif ($currency_formats == 6) {
+        $value = number_format($amount, 2, ',', ' ');
+    } elseif ($currency_formats == 7) {
+        $value = number_format($amount, 2, '.', ' ');
+    } elseif ($currency_formats == 8) {
+        $value = $amount;
+    }
+
+    if ($symbol_position == 1) {
+        $value = $currency_symbol . $value; 
+    } elseif ($symbol_position == 2) {
+        $value = $value . $currency_symbol;
+    } elseif ($symbol_position == 3) {
+        $value = $currency_symbol . " " . $value;
+    } elseif ($symbol_position == 4) {
+        $value = $value . " " . $currency_symbol;
+    } elseif ($symbol_position == 5) {
+        $value = $currency . " " . $value;
+    } elseif ($symbol_position == 6) {
+        $value = $value . " " . $currency;
+    }
+    return $value;
+}
+
+function moneyFormatIndia($num)
+{
+    $explrestunits = "" ;
+    $num = preg_replace('/,+/', '', $num);
+    $words = explode(".", $num);
+    $des = "00";
+    if(count($words)<=2){
+        $num=$words[0];
+        if(count($words)>=2){$des=$words[1];}
+        if(strlen($des)<2){$des="$des";}else{$des=substr($des,0,2);}
+    }
+    if(strlen($num)>3){
+        $lastthree = substr($num, strlen($num)-3, strlen($num));
+        $restunits = substr($num, 0, strlen($num)-3); // extracts the last three digits
+        $restunits = (strlen($restunits)%2 == 1)?"0".$restunits:$restunits; // explodes the remaining digits in 2's formats, adds a zero in the beginning to maintain the 2's grouping.
+        $expunit = str_split($restunits, 2);
+        for($i=0; $i<sizeof($expunit); $i++){
+            // creates each of the 2's group and adds a comma to the end
+            if($i==0)
+            {
+                $explrestunits .= (int)$expunit[$i].","; // if is first value , convert into integer
+            }else{
+                $explrestunits .= $expunit[$i].",";
+            }
+        }
+        $thecash = $explrestunits.$lastthree;
+    } else {
+        $thecash = $num;
+    }
+    return "$thecash.$des"; // writes the final format where $currency is the currency symbol.
+}
+
+function getEnrollToStudentID($enroll_id = '')
+{
+    $CI = &get_instance();
+    $get = $CI->db->select('student_id')->from('enroll')->where('id', $enroll_id)->limit(1)->get()->row()->student_id;
+    return $get;
 }

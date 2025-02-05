@@ -91,20 +91,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label  class="col-md-3 control-label"><?=translate('currency')?> <span class="required">*</span></label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="currency" value="<?=$school['currency']?>" />
-                                        <span class="error"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label"><?=translate('currency_symbol')?> <span class="required">*</span></label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="currency_symbol" value="<?=$school['symbol']?>" />
-                                        <span class="error"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-md-3 control-label"><?=translate('city')?></label>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="city" value="<?=$school['city']?>" />
@@ -203,20 +189,85 @@
                         </div>
                     </section>
 
+                    <!-- currency config -->
+                    <section class="panel pg-fw">
+                        <div class="panel-body">
+                            <h5 class="chart-title mb-xs"><?=translate('currency')?></h5>
+                            <div class="mt-lg">
+                                <div class="form-group">
+                                    <label  class="col-md-3 control-label"><?=translate('currency')?> <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="currency" value="<?=$school['currency']?>" />
+                                        <span class="error"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><?=translate('currency_symbol')?> <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="currency_symbol" value="<?=$school['symbol']?>" />
+                                        <span class="error"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><?=translate('currency_formats');?> <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <?php
+                                        $digitArray = array(
+                                            '' => translate('select'), 
+                                            '1' => "12300000.50", 
+                                            '2' => "1,23,000,00.50", 
+                                            '3' => "123,000,00.50", 
+                                            '4' => "123.000.00,50", 
+                                            '5' => "123,000,00.50", 
+                                            '6' => "123 000 00,50", 
+                                            '7' => "123 000 00.50", 
+                                            '8' => "12300000", 
+                                        );
+                                        echo form_dropdown("currency_formats", $digitArray, set_value('currency_formats', $school['currency_formats']), "class='form-control' data-plugin-selectTwo 
+                                        data-width='100%' ");
+                                        ?>
+                                        <span class="error"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><?=translate('symbol_position');?> <span class="required">*</span></label>
+                                    <div class="col-md-6 mb-lg">
+                                        <?php
+                                        $digitArray = array(
+                                            '' => translate('select'), 
+                                            '1' => "$123,000.00", 
+                                            '2' => "123,000.00$", 
+                                            '3' => "$ 123,000.00", 
+                                            '4' => "123,000.00 $",  
+                                            '5' => "USD 123,000.00",  
+                                            '6' => "123,000.00 USD",  
+                                        );
+                                        echo form_dropdown("symbol_position", $digitArray, set_value('symbol_formats', $school['symbol_position']), "class='form-control' data-plugin-selectTwo 
+                                        data-width='100%' ");
+                                        ?>
+                                        <span class="error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <!-- admission register no prefix -->
                     <section class="panel pg-fw">
                         <div class="panel-body">
                             <h5 class="chart-title mb-xs"><?=translate('register_no') . " " . translate('prefix')?></h5>
                             <div class="mt-lg">
-                                 <div class="form-group">
-                                <div class="col-md-offset-3 col-md-6">
-                                    <div class="checkbox-replace">
-                                        <label class="i-checks">
-                                            <input type="checkbox" name="reg_prefix_enable" id="reg_prefix_enable" <?=($school['reg_prefix_enable'] == '1' ? 'checked' : '');?>>
-                                            <i></i> Enable Student Admission Registration No  Prefix Auto.
-                                        </label>
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-6">
+                                        <div class="checkbox-replace">
+                                            <label class="i-checks">
+                                                <input type="checkbox" name="reg_prefix_enable" id="reg_prefix_enable" <?=($school['reg_prefix_enable'] == '1' ? 'checked' : '');?>>
+                                                <i></i> Enable Student Admission Registration No  Prefix Auto.
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label"><?=translate('institution_code')?> (<?=translate('prefix')?>) <span class="required">*</span></label>
@@ -266,6 +317,28 @@
                                             '0' => translate('disabled'), 
                                         );
                                         echo form_dropdown("offline_payments", $offlinePayments, set_value('offline_payments', $school['offline_payments']), "class='form-control' id='offline_payments' 
+                                        data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Fees offline payments setting -->
+                    <section class="panel pg-fw">
+                        <div class="panel-body">
+                            <h5 class="chart-title mb-xs"><?=translate('online_exam'); ?></h5>
+                            <div class="mt-lg">
+                                <div class="form-group mb-md">
+                                    <label class="col-md-3 control-label">Show Only Own Question</label>
+                                    <div class="col-md-6">
+                                        <?php
+                                        $offlinePayments = array(
+                                            '1' => translate('enabled'), 
+                                            '0' => translate('disabled'), 
+                                        );
+                                        echo form_dropdown("show_own_question", $offlinePayments, set_value('show_own_question', $school['show_own_question']), "class='form-control' 
                                         data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
                                         ?>
                                     </div>

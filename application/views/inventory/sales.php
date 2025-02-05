@@ -63,9 +63,9 @@
 								?>
 							</td>
 							<td><?php echo _d($row['date']); ?></td>
-							<td><?php echo ($currency_symbol . number_format($row['total'] - $row['discount'], 2, '.', '')); ?></td>
-							<td><?php echo ($currency_symbol . number_format($row['paid'], 2, '.', '')); ?></td>
-							<td><?php echo ($currency_symbol . number_format($row['due'], 2, '.', '')); ?></td>
+							<td><?php echo currencyFormat($row['total'] - $row['discount']); ?></td>
+							<td><?php echo currencyFormat($row['paid']); ?></td>
+							<td><?php echo currencyFormat($row['due']); ?></td>
 							<td><?php echo $row['remarks']; ?></td>
 							<td>
 								<a href="<?php echo base_url('inventory/sales_invoice/' . $row['id']); ?>" class="btn btn-circle icon btn-default" data-toggle="tooltip" data-original-title="<?php echo translate('bill_view'); ?>"> <i class="fas fa-credit-card"></i></a>
@@ -89,7 +89,7 @@
 								<?php
 									$arrayBranch = $this->app_lib->getSelectList('branch');
 									echo form_dropdown("branch_id", $arrayBranch, "", "class='form-control' id='branchID'
-									data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+									data-plugin-selectTwo data-width='100%'");
 								?>
 								<span class="error"></span>
 							</div>
@@ -112,7 +112,7 @@
 								<?php
 									$arrayClass = $this->app_lib->getClass($branch_id);
 									echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' data-plugin-selectTwo
-									data-width='100%' data-minimum-results-for-search='Infinity' ");
+									data-width='100%' ");
 								?>
 								<span class="error"></span>
 							</div>
@@ -122,8 +122,7 @@
 							<div class="col-md-6">
 								<?php
 									$arrayUser = array("" => translate('select'));
-									echo form_dropdown("sale_to", $arrayUser, set_value('sale_to'), "class='form-control' id='receiverID' data-plugin-selectTwo data-width='100%'
-									data-minimum-results-for-search='Infinity' ");
+									echo form_dropdown("sale_to", $arrayUser, set_value('sale_to'), "class='form-control' id='receiverID' data-plugin-selectTwo data-width='100%' ");
 								?>
 								<span class="error"></span>
 							</div>
@@ -161,7 +160,7 @@
 											<div class="form-group">
 												<?php
 												echo form_dropdown("sales[0][category]", $categorylist, "", "class='form-control' onchange='getProductByCategory(this.value, 0)' data-width='100%' id='category0'
-												data-plugin-selectTwo  data-minimum-results-for-search='Infinity'");
+												data-plugin-selectTwo");
 												?>
 												<span class="error"></span>
 											</div>
@@ -504,6 +503,7 @@ foreach($categorylist as $category):
 	}
 
 	function getProductByCategory(categoryid, rowid) {
+	    var branchID = $('#branchID').val();
 	    var product_id = 0;
 	    $("#product" + rowid).html("<option value=''><?php echo translate('exploring'); ?>...</option>");
 		$("#unit_price" + rowid).val(0);
@@ -516,6 +516,7 @@ foreach($categorylist as $category):
 	        url: "<?php echo base_url('inventory/getProductByCategory'); ?>",
 	        data: {
 	        	"selected_id": product_id,
+	        	"branch_id": branchID,
 	        	"category_id": categoryid
 	        },
 	        dataType: "html",

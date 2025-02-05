@@ -20,7 +20,7 @@
 					<?php if (is_superadmin_loggedin()): ?>
 						<div class="form-group">
 							<label class="control-label col-md-3"><?=translate('branch')?> <span class="required">*</span></label>
-							<div class="col-md-8">
+							<div class="col-md-6">
 								<?php
 									$arrayBranch = $this->app_lib->getSelectList('branch');
 									echo form_dropdown("branch_id", $arrayBranch, $row['branch_id'], "class='form-control' data-width='100%' onchange='getPurposeByBranch(this.value)'

@@ -93,6 +93,46 @@
 						<input type="text" class="form-control" name="currency_symbol" value="<?=set_value('currency_symbol', $global_config['currency_symbol'])?>" />
 					</div>
 				</div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"><?=translate('currency_formats');?> <span class="required">*</span></label>
+                    <div class="col-md-6">
+                        <?php
+                        $digitArray = array(
+                            '' => translate('select'), 
+                            '1' => "12300000.50", 
+                            '2' => "1,23,000,00.50", 
+                            '3' => "123,000,00.50", 
+                            '4' => "123.000.00,50", 
+                            '5' => "123,000,00.50", 
+                            '6' => "123 000 00,50", 
+                            '7' => "123 000 00.50", 
+                            '8' => "12300000", 
+                        );
+                        echo form_dropdown("currency_formats", $digitArray, set_value('currency_formats', $global_config['currency_formats']), "class='form-control' data-plugin-selectTwo 
+                        data-width='100%' ");
+                        ?>
+                        <span class="error"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"><?=translate('symbol_position');?> <span class="required">*</span></label>
+                    <div class="col-md-6">
+                        <?php
+                        $digitArray = array(
+                            '' => translate('select'), 
+                            '1' => "$123,000.00", 
+                            '2' => "123,000.00$", 
+                            '3' => "$ 123,000.00", 
+                            '4' => "123,000.00 $",  
+                            '5' => "USD 123,000.00",  
+                            '6' => "123,000.00 USD",  
+                        );
+                        echo form_dropdown("symbol_position", $digitArray, set_value('symbol_formats', $global_config['symbol_position']), "class='form-control' data-plugin-selectTwo 
+                        data-width='100%' ");
+                        ?>
+                        <span class="error"></span>
+                    </div>
+                </div>
 				<div class="form-group">
 					<label class="col-md-3 control-label"><?=translate('language');?></label>
 					<div class="col-md-6">
@@ -178,32 +218,6 @@
 					<label class="col-md-3 control-label"><?=translate('footer_text');?></label>
 					<div class="col-md-6">
 						<input type="text" class="form-control" name="footer_text" value="<?=set_value('footer_text', $global_config['footer_text'])?>" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 control-label">Facebook URL</label>
-					<div class="col-md-6">
-						<input type="text" class="form-control" name="facebook_url" value="<?=set_value('facebook_url', $global_config['facebook_url'])?>" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="col-md-3 control-label">Twitter URL</label>
-					<div class="col-md-6">
-						<input type="text" class="form-control" name="twitter_url" value="<?=set_value('twitter_url', $global_config['twitter_url'])?>" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 control-label">Linkedin URL</label>
-					<div class="col-md-6">
-						<input type="text" class="form-control" name="linkedin_url" value="<?=set_value('linkedin_url', $global_config['linkedin_url'])?>" />
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="col-md-3 control-label">Youtube URL</label>
-					<div class="col-md-6 mb-md">
-						<input type="text" class="form-control" name="youtube_url" value="<?=set_value('youtube_url', $global_config['youtube_url'])?>" />
 					</div>
 				</div>
 

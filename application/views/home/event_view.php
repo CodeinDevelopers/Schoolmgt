@@ -84,8 +84,8 @@
             <ul class="list-unstyled recent-comments-list">
                 <?php
                 $url_alias = $cms_setting['url_alias'];
-                $start_date = date('Y-m-d', strtotime("+7 day"));
-                $end_date = date('Y-m-d');
+                $start_date = date('Y-m-d', strtotime("+2 day"));
+                $end_date = date('Y-m-d', strtotime("-4 day"));
                 $this->db->limit(6);
                 $this->db->where('start_date >=', $end_date);
                 $this->db->where('start_date <=', $start_date);
@@ -100,7 +100,7 @@
                 ?>
                 <li>
                     <p>
-                        <a href="<?=base_url('home/event_view/'. $value['id'] . "/" . $url_alias)?>">
+                        <a href="<?=base_url( $url_alias . '/event_view/' . $value['id'] )?>">
                             <?php echo $value['title'] ?>
                         </a>
                     </p>

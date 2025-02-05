@@ -115,7 +115,7 @@ $currency_symbol = $global_config['currency_symbol'];
 								} ?></td>
 								<td><?php echo $row['pay_via'];?></td>
 								<td><?php echo $row['type_name'];?></td>
-								<td><?php echo $currency_symbol . $row['fine'];?></td>
+								<td><?php echo currencyFormat($row['fine']);?></td>
 
 						
 							</tr>
@@ -132,7 +132,7 @@ $currency_symbol = $global_config['currency_symbol'];
 								<th></th>
 								<th></th>
 								<th></th>
-								<th><?php echo ($currency_symbol . number_format($totalfine, 2, '.', '')); ?></th>
+								<th><?php echo currencyFormat($totalfine); ?></th>
 
 							</tr>
 						</tfoot>

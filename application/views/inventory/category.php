@@ -47,7 +47,9 @@
 						<thead>
 							<tr>
 								<th><?php echo translate('sl'); ?></th>
+							<?php if (is_superadmin_loggedin()) { ?>
 								<th><?=translate('branch')?></th>
+							<?php } ?>
 								<th><?php echo translate('name'); ?></th>
 								<th><?php echo translate('action'); ?></th>
 							</tr>
@@ -60,7 +62,9 @@
 							?>
 							<tr>
 								<td><?php echo $count++; ?></td>
+							<?php if (is_superadmin_loggedin()) { ?>
 								<td><?php echo $row['branch_name']; ?></td>
+							<?php } ?>
 								<td><?php echo $row['name']; ?></td>
 								<td>
 								<?php if (get_permission('product_category', 'is_edit')): ?>
@@ -128,7 +132,7 @@
 <script type="text/javascript">
 	function getProductCategory(id) {
 	    $.ajax({
-	        url: base_url + 'inventory/getProductCategoryDetails',
+	        url: base_url + 'ajax/getProductCategoryDetails',
 	        type: 'POST',
 	        data: {'id': id},
 	        dataType: "json",

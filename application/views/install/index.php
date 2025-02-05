@@ -53,11 +53,11 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>PHP 5.6+ </td>
+                                            <td>PHP 7.2+ </td>
                                             <td>
                                                 <?php
                                                     $error = false;
-                                                    if (phpversion() < "5.6") {
+                                                    if (phpversion() < "7.2") {
                                                         $error = true;
                                                         echo "<span class='label label-danger'>Your PHP version is " . phpversion() . "</span>";
                                                     } else {
@@ -251,39 +251,27 @@
                                         <?php echo $purchase_error; ?>
                                     </div>
                                 <?php } ?>
-                               <?php elseif ($step == 2) : ?>
-    <div class="tab-pane active">
-        <?php if (isset($purchase_error) && $purchase_error != '') { ?>
-            <div class="alert alert-danger text-left">
-                <?php echo $purchase_error; ?>
-            </div>
-        <?php } ?>
-        
-        <!-- Form to proceed to the next step -->
-        <?php echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal form-bordered validate')); ?>
-            <div class="form-group">
-                <label for="username" class="col-md-3 control-label">Envato Username <span class="required">*</span></label>
-                <div class="col-md-9">
-                    <input placeholder="Enter random value" type="text" class="form-control" name="purchase_username" value="<?= set_value('purchase_username') ?>" autocomplete="off" />
-                    <?php echo form_error('purchase_username', '<label id="purchase_username-error" class="error" for="purchase_username">', '</label>'); ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-md-3 control-label">Purchase Code</label>
-                <div class="col-md-9 mb-ma">
-                    <input placeholder="Enter random value" type="text" class="form-control" name="purchase_code" value="<?= set_value('purchase_code') ?>" autocomplete="off" />
-                    <?php echo form_error('purchase_code', '<label id="purchase_code-error" class="error" for="purchase_code">', '</label>'); ?>
-                </div>
-            </div>
-            <footer class="panel-footer">
-                <div class="text-right">
-                    <button type="submit" class="btn btn-default" name="step" value="3">Next Step</button>
-                </div>
-            </footer>
-        <?php echo form_close(); ?>
-    </div>
-<?php endif; ?>
-
+                                <?php echo form_open($this->uri->uri_string(), array('class' => 'form-horizontal form-bordered validate')); ?>
+                                    <div class="form-group">
+                                        <label for="username" class="col-md-3 control-label">Envato Username <span class="required">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="purchase_username" value="<?=set_value('purchase_username')?>" autocomplete="off" />
+											<?php echo form_error('purchase_username', '<label id="purchase_username-error" class="error" for="purchase_username">', '</label>'); ?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-md-3 control-label"> Purchase Code</label>
+                                        <div class="col-md-9 mb-ma">
+                                            <input type="text" class="form-control" name="purchase_code" value="<?=set_value('purchase_code')?>" autocomplete="off" />
+											<?php echo form_error('purchase_code', '<label id="purchase_code-error" class="error" for="purchase_code">', '</label>'); ?>
+                                        </div>
+                                    </div>
+                                    <footer class="panel-footer">
+                                        <div class="text-right">
+                                            <button type="submit" class="btn btn-default" name="step" value="3"> Next Step</button>
+                                        </div>
+                                    </footer>
+                                <?php echo form_close(); ?>
                             </div>
                         <?php elseif ($step == 3) : ?>
                             <div class="tab-pane active">
@@ -378,7 +366,7 @@
                                 <h4>Congratulations!! The installation was successfull</h4>
                                 <ul class="fi-msg-s">
                                     <li><span>Enter the url for login and follow the instructions :</span></li>
-                                    <li><a href="<?=base_url('login'); ?>" target="_blank"><?=base_url('login'); ?></a> </li>
+                                    <li><a href="<?=base_url('authentication'); ?>" target="_blank"><?=base_url('authentication'); ?></a> </li>
                                 </ul>
                                 <br>
                             </center>
@@ -386,7 +374,7 @@
                     </div>
                 </div>
             </section>
-            <center> 2023 © All Rights Reserved - <a href="about:blank">RamomCoder</a></center>
+            <center> 2024 © All Rights Reserved - <a href="about:blank">RamomCoder</a></center>
 		</div>
 		<script src="<?=base_url('assets/vendor/bootstrap/js/bootstrap.js')?>"></script>
 		<script src="<?php echo base_url('assets/vendor/select2/js/select2.js');?>"></script>

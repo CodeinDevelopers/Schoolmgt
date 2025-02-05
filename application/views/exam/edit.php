@@ -71,6 +71,15 @@
 								<textarea rows="2" class="form-control" name="remark"><?=$exam['remark']?></textarea>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label"><?=translate('publish')?></label>
+							<div class="col-md-6">
+								<div class="material-switch ml-xs">
+									<input id="aswitch_1" name="exam_publish" <?php echo $exam['status'] == 1 ? 'checked' : '' ?> type="checkbox" />
+									<label for="aswitch_1" class="label-primary"></label>
+								</div>
+							</div>
+						</div>
 					</div>
 					<footer class="panel-footer">
 						<div class="row">

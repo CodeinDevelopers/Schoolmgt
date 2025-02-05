@@ -93,9 +93,9 @@ class Userrole_model extends MY_Model
     {
         $sessionID = get_session_id();
         if (is_student_loggedin()) {
-            $studentID = get_loggedin_user_id();
+            $enrollID = $this->session->userdata('enrollID');
         } elseif (is_parent_loggedin()) {
-            $studentID = get_activeChildren_id();
+            $enrollID = $this->session->userdata('enrollID');
         }
         $this->db->select('CONCAT_WS(" ",s.first_name, s.last_name) as fullname,s.email as student_email,s.register_no,e.branch_id,e.id as enroll_id,e.student_id,s.hostel_id,s.room_id,s.route_id,s.vehicle_id,e.class_id,e.section_id,c.name as class_name,se.name as section_name,b.school_name,b.email as school_email,b.mobileno as school_mobileno,b.address as school_address');
         $this->db->from('enroll as e');
@@ -103,12 +103,12 @@ class Userrole_model extends MY_Model
         $this->db->join('branch as b', 'b.id = e.branch_id', 'left');
         $this->db->join('class as c', 'c.id = e.class_id', 'left');
         $this->db->join('section as se', 'se.id = e.section_id', 'left');
-        $this->db->where('s.id', $studentID);
+        $this->db->where('e.id', $enrollID);
         $this->db->where('e.session_id', $sessionID);
         return $this->db->get()->row_array();
     }
 
-    public function getHomeworkList($studentID)
+    public function getHomeworkList($enrollID = '')
     {
         $this->db->select('homework.*,CONCAT_WS(" ",s.first_name, s.last_name) as fullname,s.register_no,e.student_id, e.roll,subject.name as subject_name,class.name as class_name,section.name as section_name,he.id as ev_id,he.status as ev_status,he.remark as ev_remarks,he.rank,hs.message,hs.enc_name,hs.file_name');
         $this->db->from('homework');
@@ -119,7 +119,7 @@ class Userrole_model extends MY_Model
         $this->db->join('homework_submit as hs', 'hs.homework_id = homework.id and hs.student_id = e.student_id', 'left');
         $this->db->join('class', 'class.id = homework.class_id', 'left');
         $this->db->join('section', 'section.id = homework.section_id', 'left');
-        $this->db->where('e.student_id', $studentID);
+        $this->db->where('e.id', $enrollID);
         $this->db->where('homework.status', 0);
         $this->db->where('homework.session_id', get_session_id());
         $this->db->group_by('homework.id');
@@ -162,8 +162,8 @@ class Userrole_model extends MY_Model
             $search_arr[] = " (`online_exam`.`title` like '%".$searchValue."%' OR `online_exam`.`exam_start` like '%".$searchValue."%' OR `online_exam`.`exam_end` like '%".$searchValue."%') ";
         }
 
-        $userID = get_loggedin_user_id();
-        $enroll = $this->db->where(array('student_id' => $userID, 'session_id' => $sessionID))->get('enroll')->row();
+        $enrollID = $this->session->userdata('enrollID');
+        $enroll = $this->db->select('*')->where(array('id' => $enrollID))->get('enroll')->row();
    
         $branch_id = $this->db->escape(get_loggedin_branch_id());
         $search_arr[] = " `online_exam`.`branch_id` = $branch_id AND `online_exam`.`class_id` = " . $this->db->escape($enroll->class_id);
@@ -334,7 +334,4 @@ class Userrole_model extends MY_Model
         $row = $this->db->select('offline_payments')->where('id', $branchID)->get('branch')->row()->offline_payments;
         return $row;
     }
-
-
-
 }

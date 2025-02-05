@@ -1,4 +1,4 @@
-<?php $zoom_version = '2.13.0'; ?>
+<?php $zoom_version = '2.15.0'; ?>
 <!DOCTYPE html>
     <head>
         <title>School Live Class</title>
@@ -80,21 +80,22 @@
 					return false;
 				}
             }
+            ZoomMtg.setZoomJSLib("https://source.zoom.us/<?php echo $zoom_version ?>/lib", "/av");
             ZoomMtg.preLoadWasm();
             ZoomMtg.prepareJssdk();
             var meetConfig = {
-                apiKey: "<?=$config['zoom_api_key']?>",
-                apiSecret: "<?=$config['zoom_api_secret']?>",
+                sdkKey: "<?=$config['zoom_api_key']?>",
+                sdkSecret: "<?=$config['zoom_api_secret']?>",
                 meetingNumber: "<?=$meetingID?>",
                 userName: "<?=$getStudent['first_name'] . ' ' . $getStudent['last_name'] . ' (Roll - ' . $getStudent['roll'] . ')'?>",
                 passWord: "<?=$liveClass['meeting_password']?>",
                 leaveUrl: "<?php echo base_url('userrole/live_class');?>",
                 role: parseInt(0, 10)
             };
-            var signature = ZoomMtg.generateSignature({
+            var signature = ZoomMtg.generateSDKSignature({
                 meetingNumber: meetConfig.meetingNumber,
-                apiKey: meetConfig.apiKey,
-                apiSecret: meetConfig.apiSecret,
+                sdkKey: meetConfig.sdkKey,
+                sdkSecret: meetConfig.sdkSecret,
                 role: meetConfig.role,
                 success: function(res){
                     console.log(res.result);
@@ -105,12 +106,13 @@
                 leaveUrl: meetConfig.leaveUrl,
                 isSupportAV: true,
                 success: function () {
+                    ZoomMtg.i18n.load("en-US");
                     ZoomMtg.join(
                         {
                             meetingNumber: meetConfig.meetingNumber,
                             userName: meetConfig.userName,
                             signature: signature,
-                            apiKey: meetConfig.apiKey,
+                            sdkKey: meetConfig.sdkKey,
                             passWord: meetConfig.passWord,
                             success: function(res){
                                 $('#nav-tool').hide();

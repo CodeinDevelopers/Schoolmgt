@@ -1,4 +1,3 @@
-<script src="https://cdn.tailwindcss.com"></script>
 <?php
 $div = 0;
 if (get_permission('employee_count_widget', 'is_view')) {
@@ -49,247 +48,333 @@ if (get_permission('student_birthday_widget', 'is_view') || get_permission('staf
     </div>
 <?php } ?>
 
-<div class="dashboard-container bg-gray-50 p-6 min-h-screen overflow-auto">
-    <!-- Top Stats Grid -->
-    <?php if ($widget1 > 0) { ?>
-    <div class="stats-grid grid gap-6 mb-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        <?php if (get_permission('employee_count_widget', 'is_view')) { ?>
-        <div class="stat-card bg-white rounded-lg shadow-sm p-6 transition-all hover:shadow-md">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-x1 font-medium text-gray-500"><?php echo translate('employee'); ?></p>
-                    <h2 class="text-4xl font-bold text-gray-900 mt-1">
-                        <?php
-                        $staff = $this->dashboard_model->getstaffcounter('', $school_id);
-                        echo $staff['snumber'];
-                        ?>
-                    </h2>
-                    <p class="text-x1 text-gray-600 mt-2"><?php echo translate('total_strength'); ?></p>
-                </div>
-                <div class="bg-blue-50 p-3 rounded-full">
-                    <i class="fas fa-users text-blue-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
-
-        <?php if (get_permission('student_count_widget', 'is_view')) { ?>
-        <div class="stat-card bg-white rounded-lg shadow-sm p-6 transition-all hover:shadow-md">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-x1 font-medium text-gray-500"><?php echo translate('students'); ?></p>
-                    <h3 class="text-4xl font-bold text-gray-900 mt-1"><?=$get_total_student?></h3>
-                    <p class="text-x1 text-gray-600 mt-2"><?php echo translate('total_strength'); ?></p>
-                </div>
-                <div class="bg-green-50 p-3 rounded-full">
-                    <i class="fas fa-user-graduate text-green-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
-
-        <?php if (get_permission('parent_count_widget', 'is_view')) { ?>
-        <div class="stat-card bg-white rounded-lg shadow-sm p-6 transition-all hover:shadow-md">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-x1 font-medium text-gray-500"><?php echo translate('parents'); ?></p>
-                    <h3 class="text-4xl font-bold text-gray-900 mt-1">
-                        <?php
-                        if (!empty($school_id))
-                            $this->db->where('branch_id', $school_id);
-                        echo $this->db->select('id')->get('parent')->num_rows();
-                        ?>
-                    </h3>
-                    <p class="text-x1 text-gray-600 mt-2"><?php echo translate('total_strength'); ?></p>
-                </div>
-                <div class="bg-purple-50 p-3 rounded-full">
-                    <i class="fas fa-user-tie text-purple-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
-
-        <?php if (get_permission('teacher_count_widget', 'is_view')) { ?>
-        <div class="stat-card bg-white rounded-lg shadow-sm p-6 transition-all hover:shadow-md">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-x1 font-medium text-gray-500"><?php echo translate('teachers'); ?></p>
-                    <h3 class="text-4xl font-bold text-gray-900 mt-1">
-                        <?php
-                        $staff = $this->dashboard_model->getstaffcounter(3, $school_id);
-                        echo $staff['snumber'];
-                        ?>
-                    </h3>
-                    <p class="text-x1 text-gray-600 mt-2"><?php echo translate('total_strength'); ?></p>
-                </div>
-                <div class="bg-yellow-50 p-3 rounded-full">
-                    <i class="fas fa-chalkboard-teacher text-yellow-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
+<?php 
+if (!is_superadmin_loggedin()) {
+	if (!empty($this->saas_model->getSubscriptionsExpiredNotification())) { ?>
+    <div class="alert alert-danger">
+        <?php echo $this->saas_model->getSubscriptionsExpiredNotification(); ?>
     </div>
-    <?php } ?>
+<?php } } ?>
 
-    <!-- Charts Grid -->
-    <div class="charts-grid grid gap-6 mb-6">
-        <?php if (get_permission('monthly_income_vs_expense_chart', 'is_view')) { ?>
-        <div class="chart-card bg-white rounded-lg shadow-sm p-6">
-            <h4 class="text-lg font-medium text-gray-900 mb-4">
-                <?=translate('income_vs_expense_of') . " " . translate(strtolower(date('F')))?>
-            </h4>
-            <div id="cash_book_transaction" class="h-64"></div>
-            <div class="flex items-center justify-center gap-4 mt-4">
-                <div class="flex items-center">
-                    <span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
-                    <span class="text-sm text-gray-600"><?=translate('income')?></span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
-                    <span class="text-sm text-gray-600"><?=translate('expense')?></span>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
-
-        <?php if (get_permission('annual_student_fees_summary_chart', 'is_view')) { ?>
-        <div class="chart-card bg-white rounded-lg shadow-sm p-6">
-            <h4 class="text-lg font-medium text-gray-900 mb-4"><?=translate('annual_fee_summary')?></h4>
-            <div class="h-80">
-                <canvas id="fees_graph"></canvas>
-            </div>
-        </div>
-        <?php } ?>
-    </div>
-
-    <!-- Student Stats and Weekend Attendance -->
-    <div class="grid gap-6 mb-6 grid-cols-1 lg:grid-cols-3">
-        <?php if (get_permission('student_quantity_pie_chart', 'is_view')) { ?>
-        <div class="bg-white rounded-lg shadow-sm p-6">
-            <h4 class="text-lg font-medium text-gray-900 mb-4"><?=translate('student_quantity')?></h4>
-            <div id="student_strength" class="h-64"></div>
-        </div>
-        <?php } ?>
-
-        <?php if (get_permission('weekend_attendance_inspection_chart', 'is_view')) { ?>
-        <div class="lg:col-span-2 bg-white rounded-lg shadow-sm p-6">
-            <h4 class="text-lg font-medium text-gray-900 mb-4"><?=translate('weekend_attendance_inspection')?></h4>
-            <div class="h-64">
-                <canvas id="weekend_attendance"></canvas>
-            </div>
-        </div>
-        <?php } ?>
-    </div>
-
-    <!-- Calendar and Birthdays -->
-    <div class="grid gap-6 grid-cols-1 lg:grid-cols-4">
-        <div class="lg:col-span-3 bg-white rounded-lg shadow-sm p-6">
-            <div id="event_calendar"></div>
-        </div>
-
-        <?php if ($div3 == 9) { ?>
-        <div class="birthday-cards space-y-4">
-            <?php if (get_permission('student_birthday_widget', 'is_view')) { ?>
-            <div class="bg-white rounded-lg shadow-sm p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h5 class="text-sm font-medium text-gray-500"><?=translate('student')?></h5>
-                        <p class="text-xs text-gray-600 mt-1"><?=translate('today_birthday')?></p>
-                    </div>
-                    <a href="<?php echo base_url('birthday/student') ?>" 
-                       class="text-blue-500 hover:text-blue-600" 
-                       data-toggle="tooltip" 
-                       data-original-title="<?=translate('view') . " " . translate('list')?>">
-                        <i class="fas fa-birthday-cake text-xl"></i>
-                    </a>
-                </div>
-                <h3 class="text-2xl font-bold text-gray-900">
-                    <?php
-                    $this->db->select('student.id');
-                    $this->db->from('student');
-                    $this->db->join('enroll', 'enroll.student_id = student.id', 'inner');
-                    $this->db->where("enroll.session_id", get_session_id());
-                    if (!empty($school_id))
-                        $this->db->where('branch_id', $school_id);
-                    $this->db->where("MONTH(student.birthday)", date('m'));
-                    $this->db->where("DAY(student.birthday)", date('d'));
-                    $this->db->group_by('student.id'); 
-                    $stuTodayBirthday = $this->db->get()->result();
-                    echo(count($stuTodayBirthday));
-                    ?>
-                </h3>
-            </div>
-            <?php } ?>
-
-            <?php if (get_permission('staff_birthday_widget', 'is_view')) { ?>
-            <div class="bg-white rounded-lg shadow-sm p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h5 class="text-sm font-medium text-gray-500"><?=translate('employee')?></h5>
-                        <p class="text-xs text-gray-600 mt-1"><?=translate('today_birthday')?></p>
-                    </div>
-                    <a href="<?php echo base_url('birthday/staff') ?>" 
-                       class="text-blue-500 hover:text-blue-600" 
-                       data-toggle="tooltip" 
-                       data-original-title="<?=translate('view') . " " . translate('list')?>">
-                        <i class="fas fa-birthday-cake text-xl"></i>
-                    </a>
-                </div>
-                <h3 class="text-2xl font-bold text-gray-900">
-                    <?php
-                    $this->db->select('id');
-                    if (!empty($school_id))
-                        $this->db->where('branch_id', $school_id);
-                    $this->db->where("MONTH(birthday)", date('m'));
-                    $this->db->where("DAY(birthday)", date('d'));
-                    $emyTodayBirthday = $this->db->get('staff')->result();
-                    echo(count($emyTodayBirthday));
-                    ?>
-                </h3>
-            </div>
-            <?php } ?>
-        </div>
-        <?php } ?>
-    </div>
+<div class="dashboard-page">
+	<div class="row">
+<?php if (get_permission('monthly_income_vs_expense_chart', 'is_view')) { ?>
+		<!-- monthly cash book transaction -->
+		<div class="<?php echo get_permission('annual_student_fees_summary_chart', 'is_view') ? 'col-md-12 col-lg-4 col-xl-3' : 'col-md-12'; ?>">
+			<section class="panel pg-fw">
+				<div class="panel-body">
+					<h4 class="chart-title mb-xs"><?=translate('income_vs_expense_of') . " " . translate(strtolower(date('F')))?></h4>
+					<div id="cash_book_transaction"></div>
+					<div class="round-overlap"><i class="fab fa-sellcast"></i></div>
+					<div class="text-center">
+						<ul class="list-inline">
+							<li>
+								<h6 class="text-muted"><i class="fa fa-circle text-blue"></i> <?=translate('income')?></h6>
+							</li>
+							<li>
+								<h6 class="text-muted"><i class="fa fa-circle text-danger"></i> <?=translate('expense')?></h6>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+<?php } ?>
+<?php if (get_permission('annual_student_fees_summary_chart', 'is_view')) { ?>
+		<!-- student fees summary graph -->
+		<div class="<?php echo get_permission('monthly_income_vs_expense_chart', 'is_view') ? 'col-md-12 col-lg-8 col-xl-9' : 'col-md-12'; ?>">
+			<section class="panel">
+				<div class="panel-body">
+					<h4 class="chart-title mb-md"><?=translate('annual_fee_summary')?></h4>
+					<div class="pe-chart">
+						<canvas id="fees_graph" style="height: 322px;"></canvas>
+					</div>
+				</div>
+			</section>
+		</div>
+<?php } ?>
+	</div>
+<?php if ($widget1 > 0) { ?>
+	<div class="row widget-1">
+		<div class="col-md-12 col-lg-12 col-sm-12">
+			<div class="panel">
+				<div class="row widget-row-in">
+				<?php if (get_permission('employee_count_widget', 'is_view')) { ?>
+					<div class="col-lg-<?php echo $widget1; ?> col-sm-6 ">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-users"></i>
+									<h5><?php echo translate('employee'); ?></h5>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?php
+									$staff = $this->dashboard_model->getstaffcounter('', $school_id);
+									echo $staff['snumber'];
+									?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+										<span class="text-uppercase"><?php echo translate('total_strength'); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<?php if (get_permission('student_count_widget', 'is_view')) { ?>
+					<div class="col-lg-<?php echo $widget1; ?> col-sm-6">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-user-graduate"></i>
+									<h5><?php echo translate('students'); ?></h5> </div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?=$get_total_student?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+											<span class="text-uppercase"><?php echo translate('total_strength'); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<?php if (get_permission('parent_count_widget', 'is_view')) { ?>
+					<div class="col-lg-<?php echo $widget1; ?> col-sm-6 ">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-user-tie" ></i>
+									<h5><?php echo translate('parents'); ?></h5></div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?php
+										if (!empty($school_id))
+											$this->db->where('branch_id', $school_id);
+										echo $this->db->select('id')->get('parent')->num_rows();
+									?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+										<span class="text-uppercase"><?php echo translate('total_strength'); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<?php if (get_permission('teacher_count_widget', 'is_view')) { ?>
+					<div class="col-lg-<?php echo $widget1; ?> col-sm-6 ">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-chalkboard-teacher" ></i>
+									<h5><?php echo translate('teachers'); ?></h5></div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?php
+									$staff = $this->dashboard_model->getstaffcounter(3, $school_id);
+									echo $staff['snumber'];
+									?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+										<span class="text-uppercase"><?=translate('total_strength')?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>
+	<!-- student quantity chart -->
+	<div class="row">
+<?php if (get_permission('student_quantity_pie_chart', 'is_view')) { ?>
+		<div class="<?php echo get_permission('weekend_attendance_inspection_chart', 'is_view') ? 'col-md-12 col-lg-4 col-xl-3' : 'col-md-12'; ?>">
+			<section class="panel pg-fw">
+				<div class="panel-body">
+					<h4 class="chart-title mb-xs"><?=translate('student_quantity')?></h4>
+					<div id="student_strength"></div>
+					<div class="round-overlap"><i class="fas fa-school"></i></div>
+				</div>
+			</section>
+		</div>
+<?php } ?>
+<?php if (get_permission('weekend_attendance_inspection_chart', 'is_view')) { ?>
+		<div class="<?php echo get_permission('student_quantity_pie_chart', 'is_view') ? 'col-md-12 col-lg-8 col-xl-9' : 'col-md-12'; ?>">
+			<section class="panel">
+				<div class="panel-body">
+					<h4 class="chart-title mb-md"><?=translate('weekend_attendance_inspection')?></h4>
+					<div class="pg-fw">
+						<canvas id="weekend_attendance" style="height: 340px;"></canvas>
+					</div>
+				</div>
+			</section>
+		</div>
+<?php } ?>
+	</div>
+<?php if ($widget2 > 0) { ?>
+	<div class="row widget-2">
+		<div class="col-md-12 col-lg-12 col-sm-12">
+			<div class="panel">
+				<div class="row widget-row-in">
+				<?php if (get_permission('admission_count_widget', 'is_view')) { ?>
+					<div class="col-lg-<?php echo $widget2; ?> col-sm-6 ">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <i class="far fa-address-card"></i>
+									<h5><?php echo translate('admission'); ?></h5>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?=$get_monthly_admission;?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+										<span class="text-uppercase"><?php echo translate('interval_month'); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<?php if (get_permission('voucher_count_widget', 'is_view')) { ?>
+					<div class="col-lg-<?php echo $widget2; ?> col-sm-6">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-money-check-alt"></i>
+									<h5><?php echo translate('voucher'); ?></h5> </div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?=$get_voucher?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+											<span class="text-uppercase"><?php echo translate('total_number'); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<?php if (get_permission('transport_count_widget', 'is_view') && moduleIsEnabled('transport')) { ?>
+					<div class="col-lg-<?php echo $widget2; ?> col-sm-6 ">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-road" ></i>
+									<h5><?php echo translate('transport'); ?></h5></div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?=$get_transport_route?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+										<span class="text-uppercase"><?php echo translate('total_route'); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<?php if (get_permission('hostel_count_widget', 'is_view') && moduleIsEnabled('hostel')) { ?>
+					<div class="col-lg-<?php echo $widget2; ?> col-sm-6 ">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-warehouse" ></i>
+									<h5><?php echo translate('hostel'); ?></h5></div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?php
+										if (!empty($school_id))
+											$this->db->where('branch_id', $school_id);
+										$hostel_room = $this->db->select('id')->get('hostel_room')->num_rows();
+										echo $hostel_room;
+										?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+										<span class="text-uppercase"><?=translate('total_room')?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>
+	<div class="row">
+	    <!-- event calendar -->
+		<div class="col-md-<?php echo $div3 ?>">
+			<section class="panel">
+				<div class="panel-body">
+					<div id="event_calendar"></div>
+				</div>
+			</section>
+		</div>
+	<?php if ($div3 == 9) { ?>
+		<div class="col-md-3">
+			<div class="panel">
+				<div class="row widget-row-in">
+				<?php if (get_permission('student_birthday_widget', 'is_view')) { ?>
+					<div class="col-xs-12">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <a href="<?php echo base_url('birthday/student') ?>" data-toggle="tooltip" data-original-title="<?=translate('view') . " " . translate('list')?>"><i class="fas fa-birthday-cake" ></i></a>
+									<h5 class="text-muted"><?=translate('student')?></h5></div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?php
+										$this->db->select('student.id');
+										$this->db->from('student');
+										$this->db->join('enroll', 'enroll.student_id = student.id', 'inner');
+										$this->db->where("enroll.session_id", get_session_id());
+										if (!empty($school_id))
+											$this->db->where('branch_id', $school_id);
+										$this->db->where("MONTH(student.birthday)", date('m'));
+										$this->db->where("DAY(student.birthday)", date('d'));
+										$this->db->group_by('student.id'); 
+										$stuTodayBirthday = $this->db->get()->result();
+										echo(count($stuTodayBirthday));
+										?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+										<span class="text-muted text-uppercase"><?=translate('today_birthday')?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } if (get_permission('staff_birthday_widget', 'is_view')) { ?>
+					<div class="col-xs-12">
+						<div class="panel-body">
+							<div class="widget-col-in row">
+								<div class="col-md-6 col-sm-6 col-xs-6"> <a href="<?php echo base_url('birthday/staff') ?>" data-toggle="tooltip" data-original-title="<?=translate('view') . " " . translate('list')?>"><i class="fas fa-birthday-cake" ></i></a>
+									<h5 class="text-muted"><?=translate('employee')?></h5></div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<h3 class="counter text-right mt-md text-primary"><?php
+										$this->db->select('id');
+										if (!empty($school_id))
+											$this->db->where('branch_id', $school_id);
+										$this->db->where("MONTH(birthday)", date('m'));
+										$this->db->where("DAY(birthday)", date('d'));
+										$emyTodayBirthday = $this->db->get('staff')->result();
+										echo(count($emyTodayBirthday));
+										?></h3>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="box-top-line line-color-primary">
+										<span class="text-muted text-uppercase"><?=translate('today_birthday')?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+	</div>
 </div>
-
-<!-- Required CSS -->
-<style>
-.dashboard-container {
-    height: 100vh;
-    overflow-y: auto;
-}
-
-/* Rest of the styles remain the same */
-.stat-card,
-.chart-card {
-    transition: all 0.2s ease-in-out;
-}
-
-.stat-card:hover,
-.chart-card:hover {
-    transform: translateY(-2px);
-}
-
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #666;
-}
-</style>
 
 <div class="zoom-anim-dialog modal-block modal-block-primary mfp-hide" id="modal">
 	<section class="panel">

@@ -15,7 +15,7 @@
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' onchange='getClassByBranch(this.value)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSectionByClass(this.value,1)'
-								required data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								required data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
 							<?php
 								$arraySection = $this->app_lib->getSections(set_value('class_id'), true);
 								echo form_dropdown("section_id", $arraySection, set_value('section_id'), "class='form-control' id='section_id' required
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 					<tbody>
 						<?php
 						foreach($students as $row):
-							$fee_progress = $this->student_model->getFeeProgress($row['student_id']);
+							$fee_progress = $this->student_model->getFeeProgress($row['id']);
 						?>
 						<tr>
 							<td class="checked-area">
@@ -137,13 +137,11 @@
 							</td>
 							<td class="action">
 								<!-- quick view -->
-								<a href="javascript:void(0);" onclick="studentQuickView('<?=$row['id']?>');" class="btn btn-default btn-circle icon" data-toggle="tooltip"
-								data-original-title="<?=translate('quick_view')?>">
-									<i class="fas fa-qrcode"></i>
-								</a>
+								
+								<button class="btn btn-circle icon btn-default" data-toggle="tooltip" data-original-title="<?=translate('quick_view')?>" data-loading-text="<i class='fas fa-spinner fa-spin'></i>" onclick="studentQuickView('<?=$row['id']?>', this)"><i class="fas fa-qrcode"></i></button>
 							<?php if (get_permission('student', 'is_edit')): ?>
 								<!-- update link -->
-								<a href="<?php echo base_url('student/profile/' . $row['student_id']);?>" class="btn btn-default btn-circle icon" data-toggle="tooltip"
+								<a href="<?php echo base_url('student/profile/' . $row['id']);?>" class="btn btn-default btn-circle icon" data-toggle="tooltip"
 								data-original-title="<?=translate('details')?>">
 									<i class="far fa-arrow-alt-circle-right"></i>
 								</a>

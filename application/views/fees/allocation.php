@@ -96,11 +96,11 @@
 							if (count($studentlist)) {
 								foreach($studentlist as $row):
 								?>
-								<input type="hidden" name="student_ids[]" value="<?php echo $row['student_id']; ?>">
+								<input type="hidden" name="student_ids[]" value="<?php echo $row['id']; ?>">
 							<tr>
 								<td class="checked-area">
 									<div class="checkbox-replace">
-										<label class="i-checks"><input type="checkbox" name="stu_operations[]" <?=($row['allocation_id'] != 0 ? 'checked' : "");?> value="<?=$row['student_id']?>"><i></i></label>
+										<label class="i-checks"><input type="checkbox" name="stu_operations[]" <?=($row['allocation_id'] != 0 ? 'checked' : "");?> value="<?=$row['id']?>"><i></i></label>
 									</div>
 								</td>
 								<td><?php echo $count++; ?></td>

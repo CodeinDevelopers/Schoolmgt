@@ -1185,4 +1185,52 @@ class Section extends Admin_Controller
         $this->data['main_menu']    = 'frontend';
         $this->load->view('layout/index', $this->data);
     }
+
+    public function news()
+    {
+        $branchID = $this->frontend_model->getBranchID();
+        if ($_POST) {
+            if (!get_permission('frontend_section', 'is_add')) {
+                ajax_access_denied();
+            }
+            $this->form_validation->set_rules('page_title', 'Page Title', 'trim|required');
+            $this->form_validation->set_rules('description', 'Description', 'required');
+            $this->form_validation->set_rules('photo', translate('photo'), 'callback_photoHandleUpload[photo]');
+            if (isset($_FILES["photo"]) && empty($_FILES["photo"]['name']) && empty($_POST['old_photo'])) {
+                $this->form_validation->set_rules('photo', translate('photo'), 'required');
+            }
+            if ($this->form_validation->run() == true) {
+                // save information in the database
+                $arrayData = array(
+                    'branch_id' => $branchID,
+                    'page_title' => $this->input->post('page_title'),
+                    'description' => $this->input->post('description', false),
+                    'meta_description' => $this->input->post('meta_description'),
+                    'meta_keyword' => $this->input->post('meta_keyword'),
+                    'banner_image' => $this->uploadImage('news' . $branchID, 'banners'),
+                );
+                $this->db->where('branch_id', $branchID);
+                $get = $this->db->get('front_cms_news');
+                if ($get->num_rows() > 0) {
+                    $this->db->where('id', $get->row()->id);
+                    $this->db->update('front_cms_news', $arrayData);
+                } else {
+                    $this->db->insert('front_cms_news', $arrayData);
+                }
+                set_alert('success', translate('information_has_been_saved_successfully'));
+                $array = array('status' => 'success');
+            } else {
+                $error = $this->form_validation->error_array();
+                $array = array('status' => 'fail', 'error' => $error); 
+            }
+            echo json_encode($array);
+            exit();
+        }
+        $this->data['branch_id']    = $branchID;
+        $this->data['admitcard']    = $this->frontend_model->get('front_cms_news', array('branch_id' => $branchID), true);
+        $this->data['title']        = translate('website_page');
+        $this->data['sub_page']     = 'frontend/section_news';
+        $this->data['main_menu']    = 'frontend';
+        $this->load->view('layout/index', $this->data);
+    }
 }

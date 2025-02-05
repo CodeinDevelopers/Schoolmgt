@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @package : Ramom Diagnostic Management System
  * @version : 5.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Role.php
  */
 

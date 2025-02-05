@@ -18,7 +18,7 @@ $branch = $this->db->where('id',$branch_id)->get('branch')->row_array();
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' id='branch_id' required
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -33,7 +33,7 @@ $branch = $this->db->where('id',$branch_id)->get('branch')->row_array();
 									$arrayYear[$year->id] = $year->school_year;
 								}
 								echo form_dropdown("session_id", $arrayYear, set_value('session_id', get_session_id()), "class='form-control' required
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -52,7 +52,7 @@ $branch = $this->db->where('id',$branch_id)->get('branch')->row_array();
 									$arrayExam = array("" => translate('select_branch_first'));
 								}
 								echo form_dropdown("exam_id", $arrayExam, set_value('exam_id'), "class='form-control' id='exam_id' required
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -63,7 +63,7 @@ $branch = $this->db->where('id',$branch_id)->get('branch')->row_array();
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSectionByClass(this.value,0)'
-								required data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								required data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -74,7 +74,7 @@ $branch = $this->db->where('id',$branch_id)->get('branch')->row_array();
 							<?php
 								$arraySection = $this->app_lib->getSections(set_value('class_id'));
 								echo form_dropdown("section_id", $arraySection, set_value('section_id'), "class='form-control' id='section_id' required
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 						</div>
 					</div>
@@ -145,15 +145,19 @@ $branch = $this->db->where('id',$branch_id)->get('branch')->row_array();
 									'branch_id' 	=> $branch_id,
 								))->result_array();
 								$studentArrayList = array();
-								if(count($enrolls)) {
-									foreach($enrolls as $enroll) {
+								if(count($students_list)) {
+									foreach($students_list as $enroll) {
 										$studentArray = array();
-										$stu = $this->db->select('CONCAT(first_name, " ", last_name) as fullname,register_no')
-										->where('id', $enroll['student_id'])
-										->get('student')->row_array();
-										$studentArray['student_name'] = $stu['fullname'];
-										$studentArray['register_no'] = $stu['register_no'];
-										$studentArray['roll'] = $enroll['roll'];
+										$studentArray['rank'] = empty($enroll->rank) ? translate("not_generated") : $enroll->rank;
+										$studentArray['enrollID'] = $enroll->id;
+										$studentArray['class_name'] = $enroll->class_name;
+										$studentArray['section_name'] = $enroll->section_name;
+										$studentArray['student_name'] = $enroll->fullname;
+										$studentArray['register_no'] = $enroll->register_no;
+										$studentArray['principal_comments'] = $enroll->principal_comments;
+										$studentArray['teacher_comments'] = $enroll->teacher_comments;
+										$studentArray['roll'] = $enroll->roll;
+
 										$totalMarks 		= 0;
 										$totalFullmarks 	= 0;
 										$totalGradePoint 	= 0;
@@ -167,7 +171,7 @@ $branch = $this->db->where('id',$branch_id)->get('branch')->row_array();
 												'class_id' 	 => set_value('class_id'),
 												'exam_id'	 => set_value('exam_id'),
 												'subject_id' => $subject['subject_id'],
-												'student_id' => $enroll['student_id'],
+												'student_id' => $enroll->student_id,
 												'session_id' => set_value('session_id')
 											));
 											$getMark = $this->db->get('mark')->row_array();
@@ -221,12 +225,11 @@ $branch = $this->db->where('id',$branch_id)->get('branch')->row_array();
 										$studentArrayList[] = $studentArray;
 									}
 								}
-								array_multisort( array_column($studentArrayList, 'totalMarks'), SORT_DESC, array_column($studentArrayList, 'totalGradePoint'), SORT_DESC, $studentArrayList);
 								if (!empty($studentArrayList)) {
 								foreach ($studentArrayList as $row1):
 							?>
 								<tr>
-									<td><?php echo $count++; ?></td>
+									<td><?php echo $row1['rank']; ?></td>
 									<td><?php echo $row1['student_name']; ?></td>
 									<td><?php echo $row1['register_no']; ?></td>
 									<td><?php echo $row1['roll']; ?></td>

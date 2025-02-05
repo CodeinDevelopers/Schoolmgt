@@ -1,6 +1,6 @@
 <input type="hidden" name="exam_id" id="examID" value="<?php echo $exam->id ?>">
 <div class="form-group text-center col-md-12">
-	<h4><?php echo translate('payment_amount')?>: <strong><?php echo $global_config['currency_symbol'] . $exam->fee ?></strong></h4>
+	<h4><?php echo translate('payment_amount')?>: <strong><?php echo currencyFormat($exam->fee) ?></strong></h4>
 </div>
 <div class="form-group mt-md">
 	<div class="col-md-12">

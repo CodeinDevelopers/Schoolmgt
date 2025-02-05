@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Feespayment.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Feespayment extends Admin_Controller
@@ -1051,9 +1051,46 @@ class Feespayment extends Admin_Controller
 
     public function toyyibpay_success()
     {
-        if ($_GET['status_id'] == 1) {
-            set_alert('success', translate('payment_successfull'));
-            redirect(base_url('userrole/invoice'));
+        if ($_GET['status_id'] == 1 && !empty($_GET['billcode'])) {
+            $some_data = array(
+                'billCode' => $_GET['billcode'],
+                'billpaymentStatus' => '1'
+            );  
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_URL, 'https://toyyibpay.com/index.php/api/getBillTransactions');  
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $some_data);
+
+            $result = curl_exec($curl);
+            $info = curl_getinfo($curl);  
+            curl_close($curl);
+            $result = json_decode($result);
+            if (!empty($result[0]->billpaymentStatus) && $result[0]->billpaymentStatus == 1) {
+                $refno = $_GET['transaction_id'];
+                $params = $this->session->userdata('params');
+                $this->session->set_userdata("params", "");
+                $arrayFees = array(
+                    'allocation_id' => $params['allocation_id'],
+                    'type_id' => $params['type_id'],
+                    'amount' => $params['amount'],
+                    'fine' => $params['fine'],
+                    'collect_by' => "",
+                    'discount' => 0,
+                    'pay_via' => 16,
+                    'collect_by' => 'online',
+                    'remarks' => "Fees deposits online via toyyibPay TXREF: " . $refno,
+                    'date' => date("Y-m-d"),
+                );
+                $this->savePaymentData($arrayFees);
+                set_alert('success', translate('payment_successfull'));
+                redirect(base_url('userrole/invoice'));
+            } else {
+                set_alert('error', "Transaction Failed");
+                redirect(base_url('userrole/invoice'));
+            }
         } else {
             set_alert('error', "Transaction Failed");
             redirect(base_url('userrole/invoice'));
@@ -1062,24 +1099,8 @@ class Feespayment extends Admin_Controller
 
     public function toyyibpay_callbackurl()
     {
-        if (!empty($_POST['status']) && $_POST['status'] == 1) {
-            $refno = $_POST['refno'];
-            $params = $this->session->userdata('params');
-            $this->session->set_userdata("params", "");
-            $arrayFees = array(
-                'allocation_id' => $params['allocation_id'],
-                'type_id' => $params['type_id'],
-                'amount' => $params['amount'],
-                'fine' => $params['fine'],
-                'collect_by' => "",
-                'discount' => 0,
-                'pay_via' => 16,
-                'collect_by' => 'online',
-                'remarks' => "Fees deposits online via toyyibPay TXREF: " . $refno,
-                'date' => date("Y-m-d"),
-            );
-            $this->savePaymentData($arrayFees);
-        }
+        //some code here
+
     }
 
     // payhere payment gateway script start

@@ -278,6 +278,52 @@
 										</div>
 									</div>
 								</div>
+
+								<!-- social links -->
+								<div class="headers-line">
+									<i class="fas fa-globe"></i> <?=translate('social_links')?>
+								</div>
+
+								<div class="row mb-md">
+									<div class="col-md-4 mb-sm">
+										<div class="form-group">
+											<label class="control-label">Facebook</label>
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
+												<input type="text" class="form-control" name="facebook" value="<?=set_value('facebook', $staff['facebook_url'])?>" />
+											</div>
+											<span class="error"><?php echo form_error('facebook'); ?></span>
+										</div>
+									</div>
+									<div class="col-md-4 mb-sm">
+										<div class="form-group">
+											<label class="control-label">Twitter</label>
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fab fa-twitter"></i></span>
+												<input type="text" class="form-control" name="twitter" value="<?=set_value('twitter', $staff['twitter_url'])?>" />
+											</div>
+											<span class="error"><?php echo form_error('twitter'); ?></span>
+										</div>
+									</div>
+									<div class="col-md-4 mb-sm">
+										<div class="form-group">
+											<label class="control-label">Linkedin</label>
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fab fa-linkedin-in"></i></span>
+												<input type="text" class="form-control" name="linkedin" value="<?=set_value('linkedin', $staff['linkedin_url'])?>" />
+											</div>
+											<span class="error"><?php echo form_error('linkedin'); ?></span>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-md-offset-9 col-md-3">
+									<button type="submit" name="submit" value="update" class="btn btn-default btn-block"><?=translate('update')?></button>
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -318,10 +364,10 @@
                                     <tr>
                                         <td><?php echo $count++;?></td>
                                         <td><?php echo $this->app_lib->getMonthslist($row['month']) . " / " . $row['year']; ?></td>
-                                        <td><?php echo $global_config['currency_symbol'] . $row['basic_salary']; ?></td>
-                                        <td><?php echo $global_config['currency_symbol'] . $row['total_allowance']; ?></td>
-                                        <td><?php echo $global_config['currency_symbol'] . $row['total_deduction']; ?></td>
-                                        <td><?php echo $global_config['currency_symbol'] . $row['net_salary']; ?></td>
+                                        <td><?php echo currencyFormat($row['basic_salary']); ?></td>
+                                        <td><?php echo currencyFormat($row['total_allowance']); ?></td>
+                                        <td><?php echo currencyFormat($row['total_deduction']); ?></td>
+                                        <td><?php echo currencyFormat($row['net_salary']); ?></td>
                                         <td><?php echo get_type_name_by_id('payment_types', $row['pay_via']); ?></td>
                                         <td><?php echo _d($row['created_at']);?></td>
                                         <td class="min-w-c hidden-print">

@@ -47,7 +47,7 @@
                             </tr>
                             <tr>
                                 <th><?=translate('cost_per_bed')?></th>
-                                <td align="right"><?=$global_config['currency_symbol'] . $route_info->bed_fee?></td>
+                                <td align="right"><?=currencyFormat($route_info->bed_fee)?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,7 +87,7 @@
 							<td><?php echo get_type_name_by_id('hostel', $room->hostel_id);?></td>
 							<td><?php echo get_type_name_by_id('hostel_category', $room->category_id);?></td>
 							<td><?php echo $room->no_beds;?></td>
-							<td><?php echo $global_config['currency_symbol'].$room->bed_fee;?></td>
+							<td><?php echo currencyFormat($room->bed_fee);?></td>
 							<td><?php echo $room->remarks;?></td>
 						</tr>
 						<?php endforeach;?>

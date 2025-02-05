@@ -89,7 +89,7 @@ $basic = $this->fees_model->getInvoiceBasic($studentID);
 					<tr>
 						<td><?php echo $count++;?></td>
 						<td class="text-weight-semibold text-dark"><?php echo $row->name ?></td>
-						<td><?php echo $currency_symbol . $paid;?></td>
+						<td><?php echo currencyFormat($paid);?></td>
 					</tr>
 					<?php } ?>
 				</tbody>
@@ -99,15 +99,15 @@ $basic = $this->fees_model->getInvoiceBasic($studentID);
 			<div class="row">
 				<div class="col-lg-8">
 					<ul class="amounts">
-						<li><strong><?=translate('sub_total')?> :</strong> <?=$currency_symbol . number_format($total_paid + $total_discount, 2, '.', ''); ?></li>
-						<li><strong><?=translate('discount')?> :</strong> <?=$currency_symbol . number_format($total_discount, 2, '.', ''); ?></li>
-						<li><strong><?=translate('paid')?> :</strong> <?=$currency_symbol . number_format($total_paid, 2, '.', ''); ?></li>
-						<li><strong><?=translate('fine')?> :</strong> <?=$currency_symbol . number_format($total_fine, 2, '.', ''); ?></li>
+						<li><strong><?=translate('sub_total')?> :</strong> <?=currencyFormat($total_paid + $total_discount); ?></li>
+						<li><strong><?=translate('discount')?> :</strong> <?=currencyFormat($total_discount); ?></li>
+						<li><strong><?=translate('paid')?> :</strong> <?=currencyFormat($total_paid); ?></li>
+						<li><strong><?=translate('fine')?> :</strong> <?=currencyFormat($total_fine); ?></li>
 						<li>
 							<strong><?=translate('total_paid')?> (<?=translate('with_fine')?>) : </strong> 
 							<?php
-							$grand_paid = number_format($total_paid + $total_fine, 2, '.', '');
-							echo $currency_symbol . $grand_paid ;
+							$grand_paid = currencyFormat($total_paid + $total_fine);
+							echo $grand_paid;
 							?>
 						</li>
 					</ul>

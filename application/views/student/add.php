@@ -13,7 +13,7 @@
 					<?php
 						$arrayBranch = $this->app_lib->getSelectList('branch');
 						echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control'
-						data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+						data-plugin-selectTwo data-width='100%'");
 					?>
 				</div>
 			</div>
@@ -67,7 +67,7 @@ endif;
 									$arrayYear[$year->id] = $year->school_year;
 								}
 								echo form_dropdown("year_id", $arrayYear, set_value('year_id', $academic_year), "class='form-control' id='academic_year_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 							<span class="error"></span>
 						</div>
@@ -117,7 +117,7 @@ endif;
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSectionByClass(this.value,0)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'");
 							?>
 							<span class="error"></span>
 						</div>
@@ -128,7 +128,7 @@ endif;
 							<?php
 								$arraySection = $this->app_lib->getSections(set_value('class_id'), false);
 								echo form_dropdown("section_id", $arraySection, set_value('section_id'), "class='form-control' id='section_id' 
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 							<span class="error"></span>
 						</div>
@@ -179,7 +179,6 @@ endif;
 							</div>
 							<span class="error"></span>
 						</div>
-						<span class="error"><?=form_error('last_name')?></span>
 					</div>
 					<?php } if ($gender['status']) { ?>
 					<div class="col-md-<?php echo $div ?> mb-sm">
@@ -644,7 +643,7 @@ endif;
 							<?php
 								$arrayRoute = $this->app_lib->getSelectByBranch('transport_route', $branch_id);
 								echo form_dropdown("route_id", $arrayRoute, set_value('route_id'), "class='form-control' id='route_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 						</div>
 					</div>
@@ -654,7 +653,7 @@ endif;
 							<?php
 								$arrayVehicle = $this->app_lib->getVehicleByRoute(set_value('route_id'));
 								echo form_dropdown("vehicle_id", $arrayVehicle, set_value('vehicle_id'), "class='form-control' id='vehicle_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 						</div>
 					</div>
@@ -673,7 +672,7 @@ endif;
 							<?php
 								$arrayHostel = $this->app_lib->getSelectByBranch('hostel', $branch_id);
 								echo form_dropdown("hostel_id", $arrayHostel, set_value('hostel_id'), "class='form-control' id='hostel_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 						</div>
 					</div>
@@ -683,7 +682,7 @@ endif;
 							<?php
 								$arrayRoom = $this->app_lib->getRoomByHostel(set_value('hostel_id'));
 								echo form_dropdown("room_id", $arrayRoom, set_value('room_id'), "class='form-control' id='room_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 						</div>
 					</div>

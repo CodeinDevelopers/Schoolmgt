@@ -45,7 +45,7 @@
 							<?php if ($exam->exam_type == 1) { ?>
 							<tr>
 								<th><?=translate('exam') . " " . translate('fees')  ?> </th>
-								<td colspan="3"><?php echo $global_config['currency_symbol'] . $exam->fee; ?></td>
+								<td colspan="3"><?php echo currencyFormat($exam->fee); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>

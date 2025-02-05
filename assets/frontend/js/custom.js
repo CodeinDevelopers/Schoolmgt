@@ -256,6 +256,18 @@
             });
         });
     });
+
+    // marquee new
+    const $marquee = $('[data-marquee]');
+    if ($marquee.length) {
+        $marquee.marquee({
+            direction: 'left',
+            delayBeforeStart: 0,
+            duration: 20000,
+            pauseOnHover: true,
+            startVisible: true,
+        });
+    }
 })(window.jQuery);
 
 // Datepicker

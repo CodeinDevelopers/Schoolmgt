@@ -30,8 +30,8 @@ class Smscountry
         $ch = curl_init();
         $ret = curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "User=$this->username&passwd=$this->password&mobilenumber=$to&message=$message&sid=$this->senderId&mtype=$mtype&DR=$dr");
         $ret = curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $curlresponse = curl_exec($ch);

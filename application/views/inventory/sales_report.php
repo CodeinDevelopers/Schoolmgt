@@ -113,9 +113,9 @@
 						?>
 					</td>
 					<td><?php echo _d($row['date']); ?></td>
-					<td><?php echo html_escape($currency_symbol . number_format($row['net_payable'], 2, '.', '')); ?></td>
-					<td><?php echo html_escape($currency_symbol . number_format($row['paid'], 2, '.', '')); ?></td>
-					<td><?php echo html_escape($currency_symbol . number_format($row['due'], 2, '.', '')); ?></td>
+					<td><?php echo currencyFormat($row['net_payable']); ?></td>
+					<td><?php echo currencyFormat($row['paid']); ?></td>
+					<td><?php echo currencyFormat($row['due']); ?></td>
 				</tr>
 				<?php endforeach; }?>
 			</tbody>
@@ -128,9 +128,9 @@
 					<th></th>
 					<th></th>
 					<th></th>
-					<td><?php echo html_escape($currency_symbol . number_format($total_amount, 2, '.', '')); ?></td>
-					<td><?php echo html_escape($currency_symbol . number_format($total_paid, 2, '.', '')); ?></td>
-					<td><?php echo html_escape($currency_symbol . number_format($total_due, 2, '.', '')); ?></td>
+					<td><?php echo currencyFormat($total_amount); ?></td>
+					<td><?php echo currencyFormat($total_paid); ?></td>
+					<td><?php echo currencyFormat($total_due); ?></td>
 				</tr>
 			</tfoot>
 		</table>

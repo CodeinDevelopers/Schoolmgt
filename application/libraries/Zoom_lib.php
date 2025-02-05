@@ -1,12 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use \Firebase\JWT\JWT;
-
 require_once APPPATH . 'third_party/omnipay/vendor/autoload.php';
-
 class Zoom_lib {
-
     public $CI;
     private $zoom_api_key = "";
     private $zoom_api_secret = "";
@@ -19,18 +15,32 @@ class Zoom_lib {
         }
     }
 
-	//function to generate JWT
-    private function generateJWTKey() {
-        $key = $this->zoom_api_key;
-        $secret = $this->zoom_api_secret;
-        $token = array(
-            "iss" => $key,
-            "exp" => time() + 3600 //60 seconds as suggested
-        );
-        return JWT::encode( $token, $secret );
+    function get_access_token($code)
+    {
+        try {
+            $redirect_uri = base_url('live_class/zoom_OAuth');
+            $key = $this->zoom_api_key;
+            $secret = $this->zoom_api_secret;
+
+            $client   = new GuzzleHttp\Client(['verify' => false, 'base_uri' => 'https://zoom.us']);
+            $response = $client->request('POST', '/oauth/token', [
+                "headers"     => [
+                    "Authorization" => "Basic " . base64_encode($key . ':' . $secret),
+                ],
+                'form_params' => [
+                    "grant_type"   => "authorization_code",
+                    "code"         => $code,
+                    "redirect_uri" => $redirect_uri,
+                ],
+            ]);
+            $token = json_decode($response->getBody()->getContents(), true);
+            return $token;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
-    public function createMeeting($data = array())
+    public function createMeeting($data = array(), $access_token = '')
     {
         $post_time = $data['date'] . ' ' . $data['start_time'];
         $start_time = gmdate("Y-m-d\TH:i:s", strtotime($post_time));
@@ -55,7 +65,7 @@ class Zoom_lib {
 
         $request_url = 'https://api.zoom.us/v2/users/me/meetings';
         $headers = array(
-            'authorization: Bearer ' . $this->generateJWTKey(),
+            'authorization: Bearer ' . $access_token,
             'content-type: application/json',
         );
         $postFields = json_encode($createAMeetingArray);
@@ -74,11 +84,11 @@ class Zoom_lib {
         return json_decode($response);
     }
 
-    public function deleteMeeting($meeting_id)
+    public function deleteMeeting($meeting_id, $access_token = '')
     {
         $request_url = 'https://api.zoom.us/v2/meetings/' . $meeting_id;
         $headers = array(
-            'authorization: Bearer ' . $this->generateJWTKey(),
+            'authorization: Bearer ' . $access_token,
             'content-type: application/json',
         );
         $get_param = array('meetingId' => $meeting_id);

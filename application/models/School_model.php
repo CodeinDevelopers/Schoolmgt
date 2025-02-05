@@ -49,11 +49,18 @@ class School_model extends MY_Model
             'due_with_fine' => $calWithFine,
             'offline_payments' => $data['offline_payments'],
             'unique_roll' => $data['unique_roll'],
+            'currency_formats' => $data['currency_formats'],
+            'symbol_position' => $data['symbol_position'],
+            'show_own_question' => $data['show_own_question'],
         );
         $this->db->where('id', $data['brance_id']);
         $this->db->update('branch', $arrayBranch);
         if (!empty($data['translation'])) {
-            $this->session->set_userdata(['set_lang' => $data['translation']]);
+            if (!is_superadmin_loggedin()) {
+                $isRTL = $this->app_lib->getRTLStatus($data['translation']);
+                $this->session->set_userdata(['set_lang' => $data['translation']]);
+                $this->session->set_userdata(['is_rtl' => $isRTL]);
+            }
         }
     }
 

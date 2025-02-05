@@ -3,10 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * @package : Ramom SSchool Management System
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @version : 6.2
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Accounting.php
  */
 
@@ -554,6 +554,40 @@ class Accounting extends Admin_Controller
             return false;
         } else {
             return true;
+        }
+    }
+
+    public function deposit_download()
+    {
+        if (get_permission('deposit', 'is_view')) {
+            $this->load->helper('download');
+            $encrypt_name = html_escape(urldecode($this->input->get('id')));
+            if (!empty($encrypt_name)) {
+                if (!is_superadmin_loggedin()) {
+                    $this->db->where('branch_id', get_loggedin_branch_id());
+                }
+                $file_name = $this->db->select('attachments')->where(['id' => $encrypt_name, 'type' => 'deposit'])->get('transactions')->row()->attachments;
+                if (!empty($file_name)) {
+                    force_download($file_name, file_get_contents('uploads/attachments/voucher/' . $file_name));
+                }
+            }
+        }
+    }
+
+    public function expense_download()
+    {
+        if (get_permission('expense', 'is_view')) {
+            $this->load->helper('download');
+            $encrypt_name = html_escape(urldecode($this->input->get('id')));
+            if (!empty($encrypt_name)) {
+                if (!is_superadmin_loggedin()) {
+                    $this->db->where('branch_id', get_loggedin_branch_id());
+                }
+                $file_name = $this->db->select('attachments')->where(['id' => $encrypt_name, 'type' => 'expense'])->get('transactions')->row()->attachments;
+                if (!empty($file_name)) {
+                    force_download($file_name, file_get_contents('uploads/attachments/voucher/' . $file_name));
+                }
+            }
         }
     }
 }

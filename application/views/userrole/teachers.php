@@ -12,8 +12,11 @@
 						<th><?php echo translate('staff_id'); ?></th>
 						<th><?php echo translate('designation'); ?></th>
 						<th><?php echo translate('department'); ?></th>
+					<?php if ($getSchoolConfig->teacher_email_visible == 1) { ?>
 						<th><?php echo translate('email'); ?></th>
+					<?php } if ($getSchoolConfig->teacher_mobile_visible == 1) { ?>
 						<th><?php echo translate('mobile_no'); ?></th>
+					<?php } ?>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,8 +35,11 @@
 						<td><?php echo $row->staff_id; ?></td>
 						<td><?php echo $row->designation_name; ?></td>
 						<td><?php echo $row->department_name; ?></td>
+					<?php if ($getSchoolConfig->teacher_email_visible == 1) { ?>
 						<td><?php echo $row->email; ?></td>
+					<?php } if ($getSchoolConfig->teacher_mobile_visible == 1) { ?>
 						<td><?php echo $row->mobileno; ?></td>
+					<?php } ?>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>

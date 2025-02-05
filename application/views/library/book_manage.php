@@ -101,7 +101,7 @@
 							<?php
 								$arrayBranch = $this->app_lib->getSelectList('branch');
 								echo form_dropdown("branch_id", $arrayBranch, "", "class='form-control' id='branch_id'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity'");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 							<span class="error"></span>
 						</div>
@@ -113,7 +113,7 @@
 							<?php
 								$arrayCategory = $this->app_lib->getSelectByBranch('book_category', $branch_id);
 								echo form_dropdown("category_id", $arrayCategory, set_value('category_id'), "class='form-control' id='category_id' 
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'  ");
 							?>
 							<span class="error"></span>
 						</div>
@@ -132,7 +132,7 @@
 									$arrayBook = array("" => translate('select_category_first'));
 								}
 								echo form_dropdown("book_id", $arrayBook, set_value('book_id'), "class='form-control' id='book_id' 
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%'  ");
 							?>
 							<span class="error"></span>
 						</div>
@@ -143,7 +143,7 @@
 			                <?php
 			                    $role_list = $this->app_lib->getRoles([1,6]);
 			                    echo form_dropdown("role_id", $role_list, set_value('role_id'), "class='form-control' id='role_id'
-			                    onchange='getStafflistRole()' data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+			                    onchange='getStafflistRole()' data-plugin-selectTwo data-width='100%'  ");
 			                ?>
 			                <span class="error"></span>
 						</div>

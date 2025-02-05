@@ -457,6 +457,7 @@ h6 {
 .news-post-box {
     padding: 10px;
     border: 1px solid #ebebeb;
+    box-shadow: 0 6px 15px rgba(64,79,104,.05);
 }
 .news-post-box:hover {
     border-color: #d6d6d6;
@@ -2917,17 +2918,14 @@ ul#doctors-grid.grid > li > .bio-box {
 .box2 {
     padding: 30px;
     border: 1px solid #cdcdcd;
-    border-radius: 10px !important;
 }
 
 .form-box {
     margin-top: 30px;
-    border-radius: 9px;
 }
 
 .form-box .form-group {
     margin-bottom: 20px;
-    border-radius: 9px;
 }
 
 .form-box label {
@@ -2942,12 +2940,10 @@ ul#doctors-grid.grid > li > .bio-box {
     line-height: normal;
     height: 40px;
     border-color: #d4d6d7;
-    border-radius:7px;
 }
 
 .form-box textarea.form-control {
     padding: 15px;
-    border-radius: 10px;
 }
 
 .form-box .checkbox input[type=checkbox] {
@@ -2963,7 +2959,6 @@ ul#doctors-grid.grid > li > .bio-box {
     padding: 6px 30px;
     font-size: 18px;
     text-transform: uppercase;
-    border-radius: 10px !important;
 }
 
 
@@ -3844,7 +3839,6 @@ ul#doctors-grid.grid > li > .bio-box {
     width: 100%;
     height: calc(1.5em + .75rem + 2px);
     margin-bottom: 0;
-    border-radius: 8px;
 }
 
 .custom-file-input.selected:lang(en)::after {
@@ -3963,6 +3957,7 @@ ul#doctors-grid.grid > li > .bio-box {
 .gallery-album .gallery-album-text,
 .footer-area .address-list li i,
 .custom-file label,
+.news-post-box,
 .no-border-radius {
     -webkit-border-radius: var(--thm-radius);
     -moz-border-radius: var(--thm-radius);
@@ -4144,7 +4139,6 @@ ul#doctors-grid.grid > li > .bio-box {
     border-radius: var(--thm-radius);
     height: 40px !important;
     line-height: 40px !important;
-    border-radius: 10px;
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field,
@@ -4184,7 +4178,6 @@ span.select2-selection.select2-selection--single {
     -webkit-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
     opacity: 0;
-    border-radius: 15px;
 }
 
 .back-to-top:hover {
@@ -4797,4 +4790,121 @@ ul#doctors-grid.grid > li > .bio-box {
     left:auto;
     width:999em;
     margin:0 0 0 12px;
+}
+
+.form-box .admission-status-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 0;
+    text-transform: initial;
+    padding: 4px 15px;
+    font-size: inherit;
+    border-top-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* latest news */
+.latest-title,
+.current-date {
+    background-color: var(--thm-primary);
+    padding: 8px 14px;
+}
+
+.latest-title i {
+    padding-right: 5px;
+}
+
+.latest--news {
+    font-size: 13px;
+    background-color: #0c1a50 !important;
+}
+
+.news-updates-list li:not(:last-child) {
+    margin-right: 20px;
+}
+
+.latest--news .date-text {
+    color: #2ced03;
+}
+/* pagination start */
+.pagination {
+    padding: 10px 0
+}
+
+.pagination>li:first-child>a,
+.pagination>li:first-child>span {
+    border-bottom-left-radius: var(--thm-radius);
+    border-top-left-radius: var(--thm-radius);
+    margin-left: 0
+}
+
+.pagination>li:last-child>a,
+.pagination>li:last-child>span {
+    border-bottom-right-radius: var(--thm-radius);
+    border-top-right-radius: var(--thm-radius);
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    background-color: #fff;
+    border: 1px solid #efefef;
+    color: #767676;
+    padding: 8px 14px;
+    font-weight: 400;
+    font-family: montserrat;
+    font-size: 14px
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+    border-color: transparent;
+    color: #fff
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    border-color: transparent
+}
+
+.pagination>.next>a,
+.pagination>.previous>a {
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 500
+}
+
+.pagination-bx .pagination {
+    width: 100%
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover,
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+    background-color: var(--thm-primary);
+    color: #fff;
+}
+
+@media only screen and (max-width:991px) {
+    .pagination-bx {
+        margin-bottom: 30px
+    }
+}
+/* pagination end */
+
+.img-fluid {
+    max-height: 300px;
 }

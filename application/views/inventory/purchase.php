@@ -68,9 +68,9 @@
 								?>
 							</td>
 							<td><?php echo _d($row['date']); ?></td>
-							<td><?php echo $currency_symbol . number_format($row['total'] - $row['discount'], 2, '.', ''); ?></td>
-							<td><?php echo $currency_symbol . number_format($row['paid'], 2, '.', ''); ?></td>
-							<td><?php echo $currency_symbol . number_format($row['due'], 2, '.', ''); ?></td>
+							<td><?php echo currencyFormat($row['total'] - $row['discount']); ?></td>
+							<td><?php echo currencyFormat($row['paid']); ?></td>
+							<td><?php echo currencyFormat($row['due']); ?></td>
 							<td><?php echo html_escape($row['remarks']); ?></td>
 							<td class="min-w-c">
 							<?php if (get_permission('purchase_payment', 'is_add')): ?>

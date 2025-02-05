@@ -12,7 +12,8 @@
 	
 	<!-- Web Fonts  -->
 	<link href="<?php echo is_secure('fonts.googleapis.com/css?family=Signika:300,400,600,700');?>" rel="stylesheet"> 
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<?php echo base_url('assets/vendor/bootstrap/css/bootstrap.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/vendor/font-awesome/css/all.min.css'); ?>">
 	<script src="<?php echo base_url('assets/vendor/jquery/jquery.js');?>"></script>
 	
 	<!-- sweetalert js/css -->
@@ -24,89 +25,85 @@
 		var base_url = '<?php echo base_url() ?>';
 	</script>
 </head>
-<div class="min-h-screen bg-gray-50">
-    <div class="container mx-auto h-screen">
-        <div class="flex h-full items-center justify-center">
-            <!-- Left Section - Image and Information -->
-            <div class="hidden md:block w-1/3 px-8">
-                <div class="bg-white rounded-lg p-8 shadow-lg">
-                    <div class="text-center">
-                        <h2 class="text-2xl font-bold mb-6"><?php echo translate('welcome_to');?></h2>
-                        
-                        <div class="mb-6">
-                            <img src="<?php echo base_url('uploads/app_image/logo.png');?>" 
-                                 class="h-16 mx-auto" 
-                                 alt="School Logo">
-                        </div>
-                        
-                        <div class="text-gray-600">
-                            <p><?php echo $global_config['address'];?></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Section - Reset Form -->
-            <div class="w-full md:w-1/2 px-4">
-                <div class="bg-white rounded-lg p-8 shadow-lg">
-                    <div class="text-center mb-8">
-                        <img src="<?php echo base_url('uploads/app_image/logo.png');?>" 
-                             class="h-14 mx-auto mb-4" 
-                             alt="">
-                        <h2 class="text-2xl font-bold"><?php echo $global_config['institute_name'];?></h2>
-                    </div>
-
-                    <?php echo form_open($this->uri->uri_string()); ?>
-                    <?php echo $this->app_lib->generateCSRF(); ?>
-                    
-                    <div class="space-y-6">
-                        <div class="<?php if (form_error('password')) echo 'has-error'; ?>">
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-key text-gray-400"></i>
-                                </div>
-                                <input type="password" 
-                                       name="password" 
-                                       class="w-full pl-10 px-4 py-2 rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                                       placeholder="New Password">
+	<body>
+		<div class="auth-main">
+			<div class="container">
+				<div class="slideIn">
+					<!-- image and information -->
+                    <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-12 col-xs-12 no-padding fitxt-center">
+                        <div class="image-area">
+                        <div class="content">
+                            <div class="image-hader">
+                                <h2><?php echo translate('welcome_to');?></h2>
                             </div>
-                            <?php if (form_error('password')): ?>
-                                <p class="mt-1 text-sm text-red-600"><?php echo form_error('password'); ?></p>
-                            <?php endif; ?>
-                        </div>
-
-                        <div class="<?php if (form_error('c_password')) echo 'has-error'; ?>">
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-key text-gray-400"></i>
-                                </div>
-                                <input type="password" 
-                                       name="c_password" 
-                                       class="w-full pl-10 px-4 py-2 rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                                       placeholder="Confirm New Password">
+                            <div class="center img-hol-p">
+                                <img src="<?php echo base_url('uploads/app_image/logo.png');?>" height="60" alt="RamomCoder School">
                             </div>
-                            <?php if (form_error('c_password')): ?>
-                                <p class="mt-1 text-sm text-red-600"><?php echo form_error('c_password'); ?></p>
-                            <?php endif; ?>
+                            <div class="address">
+                                <p><?php echo $global_config['address'];?></p>
+                            </div>			
+                            <div class="f-social-links center">
+                                <a href="<?php echo $global_config['facebook_url'];?>" target="_blank">
+                                    <span class="fab fa-facebook-f"></span>
+                                </a>
+                                <a href="<?php echo $global_config['twitter_url'];?>" target="_blank">
+                                    <span class="fab fa-twitter"></span>
+                                </a>
+                                <a href="<?php echo $global_config['linkedin_url'];?>" target="_blank">
+                                    <span class="fab fa-linkedin-in"></span>
+                                </a>
+                                <a href="<?php echo $global_config['youtube_url'];?>" target="_blank">
+                                    <span class="fab fa-youtube"></span>
+                                </a>
+                            </div>
                         </div>
-
-                        <button type="submit" 
-                                id="btn_submit" 
-                                class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center">
-                            <i class="far fa-check-circle mr-2"></i> Confirm
-                        </button>
+                        </div>
                     </div>
 
-                    <div class="text-center mt-6 text-gray-600 text-sm">
-                        <p><?php echo $global_config['footer_text'];?></p>
-                    </div>
-                    
-                    <?php echo form_close();?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+					<!-- Login -->
+					<div class="col-lg-6 col-lg-offset-right-1 col-md-6 col-md-offset-right-1 col-sm-12 col-xs-12 no-padding">
+						<div class="sign-area">
+							<div class="sign-hader">
+								<img src="<?php echo base_url('uploads/app_image/logo.png');?>" height="54" alt="">
+								<h2><?php echo $global_config['institute_name'];?></h2>
+							</div>
+							<form class="form-horizontal" method="post" accept-charset="utf-8">
+								<?php echo $this->app_lib->generateCSRF(); ?>
+								<div class="form-group <?php if (form_error('password')) echo 'has-error'; ?>">
+									<div class="input-group input-group-icon">
+										<span class="input-group-addon">
+											<span class="icon">
+												<i class="fas fa-key"></i>
+											</span>
+										</span>
+										<input type="password" class="form-control" name="password" value="" placeholder="New Password" />
+									</div>
+									<span class="error"><?php echo form_error('password'); ?></span>
+								</div>
+								<div class="form-group <?php if (form_error('password')) echo 'has-error'; ?>">
+									<div class="input-group input-group-icon">
+										<span class="input-group-addon">
+											<span class="icon"><i class="fas fa-key"></i></span>
+										</span>
+										<input type="password" class="form-control input-rounded" name="c_password" value="" placeholder="Confirm New Password" />
+									</div>
+									<span class="error"><?php echo form_error('c_password'); ?></span>
+								</div>
+
+								<div class="form-group">
+									<button type="submit" id="btn_submit" class="btn btn-block btn-round">
+										<i class="far fa-check-circle"></i> Confirm
+									</button>
+								</div>
+								<div class="sign-footer">
+									<p><?php echo $global_config['footer_text'];?></p>
+								</div>
+							<?php echo form_close(); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.js');?>"></script>
 		<script src="<?php echo base_url('assets/vendor/jquery-placeholder/jquery-placeholder.js');?>"></script>
 		<!-- backstretch js -->

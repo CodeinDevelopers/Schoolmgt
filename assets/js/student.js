@@ -134,12 +134,17 @@
 	});
 })(jQuery);
 
-function studentQuickView(id) {
+function studentQuickView(id, elem) {
+	var btn = $(elem);
+
     $.ajax({
         url: base_url + 'student/quickDetails',
         type: 'POST',
         data: {student_id: id},
         dataType: 'json',
+        beforeSend: function () {
+            btn.button('loading');
+        },
         success: function (res) {
             $("#quick_image").attr("src", res.photo);
             $('#quick_full_name').html(res.full_name);
@@ -155,6 +160,14 @@ function studentQuickView(id) {
             $('#quick_state').html(res.state);
             $('#quick_address').html(res.address);
             mfp_modal('#quickView');
+            btn.tooltip("hide");
+        },
+        error: function (xhr) {
+            btn.button('reset');
+        },
+        complete: function () {
+            btn.button('reset');
+
         }
     });
 }

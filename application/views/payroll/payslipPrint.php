@@ -84,7 +84,7 @@ if (count($payslip_array)) {
 									?>
 									<tr>
 										<td><?php echo $allowance['name']; ?></td>
-										<td class="text-right"><?php echo $currency_symbol . $allowance['amount']; ?></td>
+										<td class="text-right"><?php echo currencyFormat($allowance['amount']); ?></td>
 									</tr>
 									<?php endforeach; } else {
 										echo '<tr> <td colspan="2"> <h5 class="text-danger text-center">' . translate('no_information_available') . '</h5> </td></tr>';
@@ -117,7 +117,7 @@ if (count($payslip_array)) {
 									?>
 									<tr>
 										<td><?php echo html_escape($deduction['name']); ?></td>
-										<td class="text-right"><?php echo $currency_symbol . $deduction['amount']; ?></td>
+										<td class="text-right"><?php echo currencyFormat($deduction['amount']); ?></td>
 									</tr>
 									<?php 
 											endforeach; 
@@ -137,14 +137,14 @@ if (count($payslip_array)) {
 			<div class="row">
 				<div class="col-lg-5 pull-right">
 					<ul class="amounts">
-						<li><strong><?php echo translate('basic_salary'); ?> :</strong> <?php echo $currency_symbol . $salary['basic_salary']; ?></li>
-						<li><strong><?php echo translate('total') . " " . translate('allowance'); ?> :</strong> <?php echo $currency_symbol . $salary['total_allowance']; ?></li>
-						<li><strong><?php echo translate('total') . " " . translate('deduction'); ?> :</strong> <?php echo $currency_symbol . $salary['total_deduction']; ?></li>
+						<li><strong><?php echo translate('basic_salary'); ?> :</strong> <?php echo currencyFormat($salary['basic_salary']); ?></li>
+						<li><strong><?php echo translate('total') . " " . translate('allowance'); ?> :</strong> <?php echo currencyFormat($salary['total_allowance']); ?></li>
+						<li><strong><?php echo translate('total') . " " . translate('deduction'); ?> :</strong> <?php echo currencyFormat($salary['total_deduction']); ?></li>
 						<li>
 							<strong><?php echo translate('net') . " " . translate('salary'); ?> :</strong> 
 							<?php
 							$f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-							echo $currency_symbol . $salary['net_salary'] . ' </br>(' . strtoupper($f->format($salary['net_salary'])) . ')' ;
+							echo currencyFormat($salary['net_salary']) . ' </br>(' . strtoupper($f->format($salary['net_salary'])) . ')' ;
 							?>
 						</li>
 					</ul>

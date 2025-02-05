@@ -966,7 +966,7 @@ class CI_Email {
 		return 'plain';
 	}
 
-		// --------------------------------------------------------------------
+	// --------------------------------------------------------------------
 
 	/**
 	 * Set RFC 822 Date
@@ -1721,7 +1721,7 @@ class CI_Email {
 
 		$result = $this->_spool_email();
 
-	if ($result && $auto_clear)
+		if ($result && $auto_clear)
 		{
 			$this->clear();
 		}

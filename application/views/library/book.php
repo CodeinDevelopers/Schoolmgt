@@ -46,7 +46,7 @@
 							<td><?php echo get_type_name_by_id('book_category', $row['category_id']);?></td>
 							<td><?php echo $row['description']; ?></td>
 							<td><?php echo _d($row['purchase_date']);?></td>
-							<td><?php echo $global_config['currency_symbol'] . ' ' . $row['price']; ?></td>
+							<td><?php echo currencyFormat($row['price']); ?></td>
 							<td><?php 
 								if($row['total_stock'] == 0){
 									echo '<span class="label label-danger">' . translate('unavailable') . '</span>';

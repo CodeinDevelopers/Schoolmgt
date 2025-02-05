@@ -15,7 +15,6 @@ class Gallery_model extends MY_Model
         $insertGallery = array(
             'branch_id'     => $this->application_model->get_branch_id(),
             'title'         => $data['gallery_title'],
-            'alias'         => $alias,
             'description'   => $data['description'],
             'date'          => date("Y-m-d"),
             'category_id'   =>  $data['category_id'],
@@ -25,12 +24,15 @@ class Gallery_model extends MY_Model
             'created_at'    =>  date("Y-m-d"),
             'thumb_image'   => $this->upload_image(),
         );
+        
 
         if (isset($data['gallery_id']) && !empty($data['gallery_id'])) {
             unset($insertGallery['elements']);
+            $insertGallery['alias'] = $this->slug->create_uri($insertGallery, $data['gallery_id']);
             $this->db->where('id', $data['gallery_id']);
             $this->db->update('front_cms_gallery_content', $insertGallery);
         } else {
+            $insertGallery['alias'] = $this->slug->create_uri($insertGallery);
             $this->db->insert('front_cms_gallery_content', $insertGallery);
         }
     }

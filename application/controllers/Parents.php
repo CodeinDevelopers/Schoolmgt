@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Parents.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Parents extends Admin_Controller
@@ -87,11 +87,13 @@ class Parents extends Admin_Controller
         if ($this->input->post('submit') == 'save') {
 
             // check saas parents add limit
-            if (!checkSaasLimit('parent')) {
-                set_alert('error', translate('update_your_package'));
-                redirect(site_url('dashboard'));
+            if ($this->app_lib->isExistingAddon('saas')) {
+                if (!checkSaasLimit('parent')) {
+                    set_alert('error', translate('update_your_package'));
+                    redirect(site_url('dashboard'));
+                }
             }
-            
+
             $this->parent_validation();
             if ($this->form_validation->run() == true) {
                 $post = $this->input->post();
@@ -273,9 +275,16 @@ class Parents extends Admin_Controller
     public function select_child($id = '')
     {
         if (is_parent_loggedin()) {
-            $query = $this->db->select('id')->where(array('id' => $id, 'parent_id' => get_loggedin_user_id()))->get('student');
-            if ($query->num_rows() == 1) {
-                $this->session->set_userdata('myChildren_id', $id);
+            $this->db->select('e.student_id,e.id');
+            $this->db->from('enroll as e');
+            $this->db->join('student as s', 's.id = e.student_id', 'inner');
+            $this->db->where('s.parent_id', get_loggedin_user_id());
+            $this->db->where('e.id', $id);
+            $this->db->where('e.session_id', get_session_id());
+            $r = $this->db->get()->row();
+            if (!empty($r)) {
+                $this->session->set_userdata('myChildren_id', $r->student_id);
+                $this->session->set_userdata('enrollID', $r->id);
             }
             redirect($_SERVER['HTTP_REFERER']);
         } else {

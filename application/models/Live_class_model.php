@@ -133,5 +133,4 @@ class Live_class_model extends MY_Model
         );
         $this->save($arrayLive); 
     }
-
 }

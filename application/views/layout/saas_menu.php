@@ -1,5 +1,5 @@
 <?php if (is_superadmin_loggedin()) { ?>
-<li class="nav-parent <?php if ($main_menu == 'saas' || $main_menu == 'saas_setting' || $main_menu == 'custom_domain') echo 'nav-expanded nav-active';?>">
+<li class="nav-parent <?php if ($main_menu == 'saas' || $main_menu == 'saas_setting' || $main_menu == 'custom_domain' || $main_menu == 'saas_offline_payments') echo 'nav-expanded nav-active';?>">
     <a>
         <i class="fas fa-sitemap"></i><span><?=translate('school_subscription')?></span>
     </a>
@@ -29,9 +29,14 @@
                 <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('settings')?></span>
             </a>
         </li>
-        <li class="<?php if ($main_menu == 'saas') echo 'nav-active';?>">
+        <li class="<?php if ($sub_page == 'saas/transactions' || $sub_page == 'saas/school_details') echo 'nav-active';?>">
             <a href="<?=base_url('saas/transactions')?>">
                 <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('transactions')?></span>
+            </a>
+        </li>
+        <li class="<?php if ($sub_page == 'saas_offline_payments/type' || $sub_page == 'offline_payments/type_edit') echo 'nav-active';?>">
+            <a href="<?=base_url('saas_offline_payments/type')?>">
+                <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('offline_payments') . " " . translate('type')?></span>
             </a>
         </li>
     </ul>

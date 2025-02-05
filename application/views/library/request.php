@@ -59,7 +59,7 @@
 								echo _d($row['return_date']);
 							}
 							?></td>
-							<td><?php echo $global_config['currency_symbol'] . $row['fine_amount']; ?></td>
+							<td><?php echo currencyFormat($row['fine_amount']); ?></td>
 							<td>
 								<?php
 								$status = $row['status'];

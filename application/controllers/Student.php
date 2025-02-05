@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
+ * @package : Acamedium
  * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Student.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Student extends Admin_Controller
@@ -241,9 +241,13 @@ class Student extends Admin_Controller
                 }
 
                 if ($getBranch['grd_generate'] == 0) {
-                    $this->form_validation->set_rules('grd_username', translate('username'), 'trim|required|callback_get_valid_guardian_username');
-                    $this->form_validation->set_rules('grd_password', translate('password'), 'trim|required');
-                    $this->form_validation->set_rules('grd_retype_password', translate('retype_password'), 'trim|required|matches[grd_password]');
+                    if (isset($validArr['grd_username'])) {
+                        $this->form_validation->set_rules('grd_username', translate('username'), 'trim|required|callback_get_valid_guardian_username');
+                    }
+                    if (isset($validArr['grd_password'])) {
+                        $this->form_validation->set_rules('grd_password', translate('password'), 'trim|required');
+                        $this->form_validation->set_rules('grd_retype_password', translate('retype_password'), 'trim|required|matches[grd_password]');
+                    }
                 }
             } else {
                 $this->form_validation->set_rules('parent_id', translate('guardian'), 'required');
@@ -537,7 +541,7 @@ class Student extends Admin_Controller
         }
         $this->load->model('fees_model');
         $this->load->model('exam_model');
-        $getStudent = $this->student_model->getSingleStudent($id);
+        $getStudent = $this->student_model->getSingleStudent($id, true);
         if (isset($_POST['update'])) {
             $this->session->set_flashdata('profile_tab', 1);
             $this->data['branch_id'] = $this->application_model->get_branch_id();
@@ -845,7 +849,7 @@ class Student extends Admin_Controller
         if ($unique_roll == 2) {
             $this->db->where('section_id', $sectionID);
         }
-        $this->db->where(array('roll' => $roll, 'class_id' => $classID, 'branch_id' => $branchID));
+        $this->db->where(array('roll' => $roll, 'class_id' => $classID, 'branch_id' => $branchID, 'session_id' => get_session_id()));
         $q = $this->db->get('enroll')->num_rows();
         if ($q == 0) {
             return true;
@@ -1097,7 +1101,6 @@ class Student extends Admin_Controller
         $this->load->view('layout/index', $this->data);
     }
 
-
     // add new student deactivate reason
     public function disable_reason()
     {
@@ -1178,6 +1181,33 @@ class Student extends Admin_Controller
             $result = $query->row_array();
             echo json_encode($result);
         }
+    }
+
+    public function sibling_report()
+    {
+        // check access permission
+        if (!get_permission('student', 'is_view')) {
+            access_denied();
+        }
+        $branchID = $this->application_model->get_branch_id();
+        if (isset($_POST['search'])) {
+            $classID = $this->input->post('class_id');
+            $sectionID = $this->input->post('section_id');
+            $getParentsList = $this->student_model->getParentList($classID, $sectionID, $branchID);
+            $list = array();
+            foreach ($getParentsList as $key => $parent) {
+                if (intval($parent['child']) > 1) {
+                    $getParentsList[$key]['student'] = $this->student_model->getSiblingListByClass($parent['parent_id'], $classID, $sectionID);
+                    $list[] = $getParentsList[$key];
+                }
+            }
+            $this->data['students'] = $list;
+        }
+        $this->data['branch_id'] = $branchID;
+        $this->data['title'] = translate('sibling_report');
+        $this->data['main_menu'] = 'student_repots';
+        $this->data['sub_page'] = 'student/sibling_report';
+        $this->load->view('layout/index', $this->data);
     }
 
 }

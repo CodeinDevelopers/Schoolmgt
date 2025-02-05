@@ -55,7 +55,7 @@
 								</div>
 							<?php } ?>
 							</td>
-							<td class="min-w-xs">
+							<td class="action">
 								<a href="<?php echo base_url('frontend/gallery/album/' . $row['id']); ?>" class="btn btn-default btn-circle icon" data-toggle="tooltip" data-original-title="Add Photos / Videos"> 
 									<i class="fas fa-photo-video"></i>
 								</a>

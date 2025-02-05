@@ -23,6 +23,7 @@
                 <!-- Gallery Image #1 Starts -->
                 <?php 
                 $elem = $gallery['elements'];
+                if (!empty($elem)) {
                 $elem = json_decode($elem, TRUE);
                 foreach ($elem as $key => $row) {
                     $url = "";
@@ -46,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                <?php } } ?>
                 </div>                
             </div>
 </div>

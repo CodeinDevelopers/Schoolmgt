@@ -5,6 +5,12 @@
  */
 namespace Omnipay\Stripe\Message;
 
+use Money\Formatter\DecimalMoneyFormatter;
+use Omnipay\Common\Exception\InvalidRequestException;
+use Omnipay\Common\ItemBag;
+use Omnipay\Stripe\StripeItem;
+use Omnipay\Stripe\StripeItemBag;
+
 /**
  * Stripe Authorize Request.
  *
@@ -148,20 +154,39 @@ class AuthorizeRequest extends AbstractRequest
         return $this->setParameter('onBehalfOf', $value);
     }
 
+
     /**
-     * @return float
+     * @return string
+     * @throws InvalidRequestException
      */
     public function getApplicationFee()
     {
-        return $this->getParameter('applicationFee');
+        $money = $this->getMoney('applicationFee');
+
+        if ($money !== null) {
+            $moneyFormatter = new DecimalMoneyFormatter($this->getCurrencies());
+
+            return $moneyFormatter->format($money);
+        }
+
+        return '';
     }
 
     /**
-     * @return int
+     * Get the payment amount as an integer.
+     *
+     * @return integer
+     * @throws InvalidRequestException
      */
     public function getApplicationFeeInteger()
     {
-        return (int) round($this->getApplicationFee() * pow(10, $this->getCurrencyDecimalPlaces()));
+        $money = $this->getMoney('applicationFee');
+
+        if ($money !== null) {
+            return (integer) $money->getAmount();
+        }
+
+        return 0;
     }
 
     /**
@@ -205,6 +230,31 @@ class AuthorizeRequest extends AbstractRequest
         return $this;
     }
 
+    /**
+     * A list of items in this order
+     *
+     * @return StripeItemBag|StripeItem[]|null A bag containing items in this order
+     */
+    public function getItems()
+    {
+        return $this->getParameter('items');
+    }
+
+    /**
+     * Set the items in this order
+     *
+     * @param array $items An array of items in this order
+     * @return AuthorizeRequest
+     */
+    public function setItems($items)
+    {
+        if ($items && !$items instanceof ItemBag) {
+            $items = new StripeItemBag($items);
+        }
+
+        return $this->setParameter('items', $items);
+    }
+
     public function getData()
     {
         $this->validate('amount', 'currency');
@@ -216,6 +266,43 @@ class AuthorizeRequest extends AbstractRequest
         $data['description'] = $this->getDescription();
         $data['metadata'] = $this->getMetadata();
         $data['capture'] = 'false';
+
+        if ($items = $this->getItems()) {
+            if (empty($this->getDescription())) {
+                $itemDescriptions = [];
+                foreach ($items as $n => $item) {
+                    $itemDescriptions[] = $item->getDescription();
+                }
+                $data['description'] = implode(" + ", $itemDescriptions);
+            }
+
+            if ($this->validateLineItemsForLevel3($items)) {
+                $lineItems = [];
+                foreach ($items as $item) {
+                    $lineItem = [
+                        'product_code' => substr($item->getName(), 0, 12),
+                        'product_description' => substr($item->getDescription(), 0, 26)
+                    ];
+                    if ($item->getPrice()) {
+                        $lineItem['unit_cost'] = $this->getAmountWithCurrencyPrecision($item->getPrice());
+                    }
+                    if ($item->getQuantity()) {
+                        $lineItem['quantity'] = $item->getQuantity();
+                    }
+                    if ($item->getTaxes()) {
+                        $lineItem['tax_amount'] = $this->getAmountWithCurrencyPrecision($item->getTaxes());
+                    }
+                    if ($item->getDiscount()) {
+                        $lineItem['discount_amount'] = $this->getAmountWithCurrencyPrecision($item->getDiscount());
+                    }
+                    $lineItems[] = $lineItem;
+                }
+                $data['level3'] = [
+                    'merchant_reference' => $this->getTransactionId(),
+                    'line_items' => $lineItems
+                ];
+            }
+        }
 
         if ($this->getStatementDescriptor()) {
             $data['statement_descriptor'] = $this->getStatementDescriptor();
@@ -264,8 +351,29 @@ class AuthorizeRequest extends AbstractRequest
         return $data;
     }
 
+    private function getAmountWithCurrencyPrecision($amount)
+    {
+        return (int)round($amount * pow(10, $this->getCurrencyDecimalPlaces()));
+    }
+
+    /**
+     * For Stripe to accept Level 3 data, the sum of all the line items should equal the request's `amount`. This
+     * method validates that the summation adds up as expected.
+     *
+     * @param StripeItemBag $items
+     * @return bool
+     */
+    private function validateLineItemsForLevel3(StripeItemBag $items)
+    {
+        $actualAmount = 0;
+        foreach ($items as $item) {
+            $actualAmount += $item->getQuantity() * $item->getPrice() + $item->getTaxes() - $item->getDiscount();
+        }
+        return (string)$actualAmount == (string)$this->getAmount();
+    }
+
     public function getEndpoint()
     {
-        return $this->endpoint.'/charges';
+        return $this->endpoint . '/charges';
     }
 }

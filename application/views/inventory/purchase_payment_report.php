@@ -68,7 +68,7 @@
 					<td><?php echo html_escape($row['supplier_name']); ?></td>
 					<td><?php echo html_escape($row['paidvia']); ?></td>
 					<td><?php echo html_escape(_d($row['paid_on'])); ?></td>
-					<td><?php echo html_escape($currency_symbol . number_format($row['amount'], 2, '.', '')); ?></td>
+					<td><?php echo html_escape(currencyFormat($row['amount'])); ?></td>
 					<td>
 <?php if (get_permission('product_purchase', 'is_view')) { ?>
 						<!-- invoice view -->
@@ -85,7 +85,7 @@
 					<th></th>
 					<th></th>
 					<th></th>
-					<th><?php echo html_escape($currency_symbol . number_format($total_amount, 2, '.', '')); ?></th>
+					<th><?php echo html_escape(currencyFormat($total_amount)); ?></th>
 					<th></th>
 				</tr>
 			</tfoot>

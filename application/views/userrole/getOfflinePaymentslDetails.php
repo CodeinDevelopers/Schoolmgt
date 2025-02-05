@@ -64,16 +64,31 @@ $currency_symbol = $global_config['currency_symbol'];
 								<th><?php echo translate('user') . " " . translate('note'); ?> : </th>
 								<td><?php echo (empty($row['note']) ? 'N/A' : $row['note']); ?></td>
 							</tr>
-		<?php if (!empty($row['enc_file_name'])) { ?>
+<?php if (!empty($row['enc_file_name'])) { ?>
 							<tr>
 								<th><?php echo translate('proof_of_payment'); ?> : </th>
 								<td><a class="btn btn-default btn-sm" target="_blank" href="<?=base_url('offline_payments/download/' . $row['id'] . '/' . $row['enc_file_name'])?>"><i class="far fa-arrow-alt-circle-down"></i> <?php echo translate('download'); ?></a></td>
 							</tr>
-		<?php } ?>
+<?php } ?>
+<?php if ($row['fine'] != 0) { ?>
+							<tr>
+								<th><?php echo translate('fee') . " " . translate('amount'); ?> : </th>
+								<td><b><?php echo currencyFormat($row['amount']); ?></b></td>
+							</tr>
+							<tr>
+								<th><?php echo translate('fine') . " " . translate('amount'); ?> : </th>
+								<td><b><?php echo currencyFormat($row['fine']); ?></b></td>
+							</tr>
+							<tr>
+								<th><?php echo translate('total_paid'); ?> : </th>
+								<td><b><?php echo currencyFormat($row['amount'] + $row['fine']); ?></b></td>
+							</tr>
+<?php } else { ?>
 							<tr>
 								<th><?php echo translate('paid') . " " . translate('amount'); ?> : </th>
-								<td><b><?php echo $currency_symbol . $row['amount']; ?></b></td>
+								<td><b><?php echo currencyFormat($row['amount']); ?></b></td>
 							</tr>
+<?php }  ?>
 							<tr>
 				                <th><?php echo translate('status'); ?> : </th>
 								<th>

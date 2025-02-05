@@ -51,11 +51,11 @@
                                             </tr>
                                             <tr>
                                                 <th><?=translate('basic_salary')?> :</td>
-                                                <td><?=$currency_symbol . $staff['basic_salary']?></td>
+                                                <td><?=currencyFormat($staff['basic_salary'])?></td>
                                             </tr>
                                             <tr>
                                                 <th><?=translate('overtime')?> :</td>
-                                                <td><?=$currency_symbol . $staff['overtime_salary']?></td>
+                                                <td><?=currencyFormat($staff['overtime_salary'])?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -87,7 +87,7 @@
                                                         ?>
                                                             <tr>
                                                                 <td><?=$allowance['name']; ?></td>
-                                                                <td class="text-right"><?=$currency_symbol . $allowance['amount']; ?></td>
+                                                                <td class="text-right"><?=currencyFormat($allowance['amount']); ?></td>
                                                             </tr>
                                                     <?php endforeach; } else {
                                                         echo '<tr> <td colspan="2"> <h5 class="text-danger text-center">' . translate('no_information_available') .  '</h5> </td></tr>';
@@ -123,12 +123,12 @@
                                                     ?>
                                                         <tr>
                                                             <td><?=$deduction['name']?></td>
-                                                            <td class="text-right"><?=$currency_symbol . $deduction['amount']?></td>
+                                                            <td class="text-right"><?=currencyFormat($deduction['amount'])?></td>
                                                         </tr>
                                                 <?php endforeach; } 
                                                     if(!empty($advance_salary)){
                                                         $total_deduction += $advance_salary;
-                                                        echo '<tr><td>Advance Salary</td><td class="text-right">' . $global_config['currency_symbol'] . $advance_salary . '</td</tr>';
+                                                        echo '<tr><td>Advance Salary</td><td class="text-right">' . currencyFormat($advance_salary) . '</td</tr>';
                                                     }
                                                      if(empty($advance_salary) && !count($deductions))
                                                         echo '<tr> <td colspan="2"> <h5 class="text-danger text-center">' . translate('no_information_available') .  '</h5> </td></tr>';

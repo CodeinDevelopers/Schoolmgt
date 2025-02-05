@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.5
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Home.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Home extends Frontend_Controller
@@ -67,6 +67,48 @@ class Home extends Frontend_Controller
     public function events()
     {
         $branchID = $this->home_model->getDefaultBranch();
+        $url_alias = $this->data['cms_setting']['url_alias'];
+        $getLatestEventList = $this->home_model->getLatestEventList($branchID);
+        $page = html_escape(urldecode($this->input->get('page')));
+        if (is_numeric($page)) {
+            $page = !empty($page) ? $page : 0;
+        } else {
+            $page = 0;
+        }
+        if (!empty($getLatestEventList)) {
+            $total_records = count($getLatestEventList);
+        } else {
+            $total_records = 0;
+        }
+        $config = array();
+        $config['page_query_string'] = TRUE;
+        $config['query_string_segment'] = 'page';
+        $config["base_url"] = base_url() . $url_alias . '/events';
+        $config["total_rows"] = $total_records;
+        $config["per_page"] = 12;
+        $config['full_tag_open'] = '<ul class="pagination justify-content-center">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = '<i class="fas fa-angle-double-left"></i>';
+        $config['first_tag_open'] = '<li class="previous">';
+        $config['first_tag_close'] = '</li>';
+        $config['last_link'] = '<i class="fas fa-angle-double-right"></i>';
+        $config['last_tag_open'] = '<li class="next">';
+        $config['last_tag_close'] = '</li>';
+        $config['next_link'] = '<i class="fas fa-angle-right"></i>';
+        $config['next_tag_open'] = '<li class="next">';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_link'] = '<i class="fas fa-angle-left"></i>';
+        $config['prev_tag_open'] = '<li class="previous">';
+        $config['prev_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><span>';
+        $config['cur_tag_close'] = '</span></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</il>';
+        $this->pagination->initialize($config);
+        $conditions['limit'] = $config["per_page"];
+        $conditions['start'] = $page;
+        $this->data["links"] = $this->pagination->create_links();
+        $this->data["results"] = $this->home_model->getLatestEventList($branchID, $conditions);
         $this->data['branchID'] = $branchID;
         $this->data['page_data'] = $this->home_model->get('front_cms_events', array('branch_id' => $branchID), true);
         $this->data['main_contents'] = $this->load->view('home/events', $this->data, true);
@@ -83,6 +125,19 @@ class Home extends Frontend_Controller
         }
         $this->data['page_data'] = $this->home_model->get('front_cms_events', array('branch_id' => $branchID), true);
         $this->data['main_contents'] = $this->load->view('home/event_view', $this->data, true);
+        $this->load->view('home/layout/index', $this->data);
+    }
+
+    public function news_view($alias = '')
+    {
+        $branchID = $this->home_model->getDefaultBranch();
+        $this->data['branchID'] = $branchID;
+        $this->data['event'] = $this->home_model->get('front_cms_news_list', array('alias' => $alias, 'branch_id' => $branchID, 'show_web' => 1), true);
+        if (empty($this->data['event']['id'])) {
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        $this->data['page_data'] = $this->home_model->get('front_cms_news', array('branch_id' => $branchID), true);
+        $this->data['main_contents'] = $this->load->view('home/news_view', $this->data, true);
         $this->load->view('home/layout/index', $this->data);
     }
 
@@ -105,7 +160,7 @@ class Home extends Frontend_Controller
         $branchID = $this->home_model->getDefaultBranch();
         $captcha = $this->data['cms_setting']['captcha_status'];
         if ($captcha == 'enable') {
-            $this->load->library('recaptcha');
+            $this->load->library('recaptcha', array('site_key' => $this->data['cms_setting']['recaptcha_site_key'], 'secret_key' => $this->data['cms_setting']['recaptcha_secret_key']));
             $this->data['recaptcha'] = array(
                 'widget' => $this->recaptcha->getWidget(),
                 'script' => $this->recaptcha->getScriptTag(),
@@ -167,7 +222,13 @@ class Home extends Frontend_Controller
                     $previous_details = "";
                 }
 
+                do {
+                    $reference_no = mt_rand(0000001, 99999999);
+                    $refence_status = $this->home_model->checkAdmissionReferenceNo($reference_no);
+                } while ($refence_status);
+
                 $arrayData = array(
+                    'reference_no' => $reference_no,
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
                     'gender' => $this->input->post('gender'),
@@ -218,22 +279,21 @@ class Home extends Frontend_Controller
                 }
                 // check out admission payment status
                 $this->load->model('admissionpayment_model');
-                $getStudent = $this->admissionpayment_model->getStudentDetails($studentID);
+                $getStudent = $this->admissionpayment_model->getStudentDetails($reference_no);
                 if ($getStudent['fee_elements']['status'] == 0) {
-                    $url = base_url("home/admission_confirmation/" . $studentID);
-                   
-                   if (empty($arrayData['section_id'])) {
+                    $url = base_url("home/admission_confirmation/" . $reference_no);
+                    if (empty($arrayData['section_id'])) {
                        $section_name = "N/A";
-                   } else {
+                    } else {
                        $section_name = get_type_name_by_id('section', $arrayData['section_id']);
-                   }
-                   // applicant email send 
+                    }
+                    // applicant email send 
                     $arrayData['institute_name'] = get_type_name_by_id('branch', $arrayData['branch_id']);
-                    $arrayData['admission_id'] = $studentID;
+                    $arrayData['reference_no'] = $reference_no;
                     $arrayData['student_name'] = $arrayData['first_name'] . " " . $arrayData['last_name'];
                     $arrayData['class_name'] = get_type_name_by_id('class', $arrayData['class_id']);
                     $arrayData['section_name'] = $section_name;
-                    $arrayData['payment_url'] = "";
+                    $arrayData['payment_url'] = base_url("admissionpayment/index/" . $reference_no);
                     $arrayData['admission_copy_url'] = $url;
                     $arrayData['paid_amount'] = 0;
                     $this->email_model->onlineAdmission($arrayData);
@@ -241,7 +301,7 @@ class Home extends Frontend_Controller
                     $success = "Thank you for submitting the online registration form. Please you can print this copy.";
                     $this->session->set_flashdata('success', $success);
                 } else {
-                    $url = base_url("admissionpayment/index/" . $studentID);
+                    $url = base_url("admissionpayment/index/" . $reference_no);
                 }
                 $array = array('status' => 'success', 'url' => $url);
             } else {
@@ -256,6 +316,36 @@ class Home extends Frontend_Controller
         $this->data['page_data'] = $this->home_model->get('front_cms_admission', array('branch_id' => $branchID), true);
         $this->data['main_contents'] = $this->load->view('home/admission', $this->data, true);
         $this->load->view('home/layout/index', $this->data);
+    }
+
+    public function checkAdmissionStatus()
+    {
+        if ($_POST) {
+            $this->form_validation->set_rules("refno", "Enter Your Reference Number", "trim|required|callback_admissionstatus");
+            if ($this->form_validation->run() == true) {
+                $reference_no = $this->input->post("refno");
+                $url = base_url("home/admission_confirmation/" . $reference_no);
+                $array = array('status' => 'success', 'url' => $url);
+            } else {
+                $error = $this->form_validation->error_array();
+                $array = array('status' => 'fail', 'error' => $error);   
+            }
+            echo json_encode($array);
+            exit(); 
+        }
+    }
+
+    public function admissionstatus($reference_no)
+    {
+        if (!empty($reference_no)) {
+            $this->db->where('reference_no', $reference_no);
+            $query = $this->db->get('online_admission')->num_rows();
+            if ($query < 1) {
+                $this->form_validation->set_message('admissionstatus', "Invalid Reference Number.");
+                return false;
+            }
+        }
+        return true;
     }
 
     public function handle_upload($str, $fields)
@@ -297,15 +387,16 @@ class Home extends Frontend_Controller
         return $return_photo;
     }
 
-    public function admission_confirmation($studentID = '')
+    public function admission_confirmation($referenceNo = '')
     {
         $this->load->model('admissionpayment_model');
-        $getStudent = $this->admissionpayment_model->getStudentDetails($studentID);
+        $getStudent = $this->admissionpayment_model->getStudentDetails($referenceNo);
         if (empty($getStudent['id'])) {
             set_alert('error', "This application was not found.");
             redirect($_SERVER['HTTP_REFERER']);
         }
         $this->data['student'] = $getStudent;
+        $this->data['branchID'] = $this->data['student']['branch_id'];
         $this->data['page_data'] = $this->home_model->get('front_cms_admission', array('branch_id' => $this->data['student']['branch_id']), true);
         $this->data['main_contents'] = $this->load->view('home/admission_confirmation', $this->data, true);
         $this->load->view('home/layout/index', $this->data);
@@ -316,7 +407,7 @@ class Home extends Frontend_Controller
         $branchID = $this->home_model->getDefaultBranch();
         $captcha = $this->data['cms_setting']['captcha_status'];
         if ($captcha == 'enable') {
-            $this->load->library('recaptcha');
+            $this->load->library('recaptcha', array('site_key' => $this->data['cms_setting']['recaptcha_site_key'], 'secret_key' => $this->data['cms_setting']['recaptcha_secret_key']));
             $this->data['recaptcha'] = array(
                 'widget' => $this->recaptcha->getWidget(),
                 'script' => $this->recaptcha->getScriptTag(),
@@ -598,5 +689,56 @@ class Home extends Frontend_Controller
             $school = $this->uri->segment(3);
         }
         echo json_encode(array('url_alias' => base_url($url['url_alias'])));
+    }
+
+    public function news()
+    {
+        $branchID = $this->home_model->getDefaultBranch();
+        $url_alias = $this->data['cms_setting']['url_alias'];
+        $getLatestNewsList = $this->home_model->getLatestNewsList($branchID);
+        $page = html_escape(urldecode($this->input->get('page')));
+        if (is_numeric($page)) {
+            $page = !empty($page) ? $page : 0;
+        } else {
+            $page = 0;
+        }
+        if (!empty($getLatestNewsList)) {
+            $total_records = count($getLatestNewsList);
+        } else {
+            $total_records = 0;
+        }
+        $config = array();
+        $config['page_query_string'] = TRUE;
+        $config['query_string_segment'] = 'page';
+        $config["base_url"] = base_url() . $url_alias . '/news';
+        $config["total_rows"] = $total_records;
+        $config["per_page"] = 12;
+        $config['full_tag_open'] = '<ul class="pagination justify-content-center">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = '<i class="fas fa-angle-double-left"></i>';
+        $config['first_tag_open'] = '<li class="previous">';
+        $config['first_tag_close'] = '</li>';
+        $config['last_link'] = '<i class="fas fa-angle-double-right"></i>';
+        $config['last_tag_open'] = '<li class="next">';
+        $config['last_tag_close'] = '</li>';
+        $config['next_link'] = '<i class="fas fa-angle-right"></i>';
+        $config['next_tag_open'] = '<li class="next">';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_link'] = '<i class="fas fa-angle-left"></i>';
+        $config['prev_tag_open'] = '<li class="previous">';
+        $config['prev_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><span>';
+        $config['cur_tag_close'] = '</span></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</il>';
+        $this->pagination->initialize($config);
+        $conditions['limit'] = $config["per_page"];
+        $conditions['start'] = $page;
+        $this->data["links"] = $this->pagination->create_links();
+        $this->data["results"] = $this->home_model->getLatestNewsList($branchID, $conditions);
+        $this->data['branchID'] = $branchID;
+        $this->data['page_data'] = $this->home_model->get('front_cms_news', array('branch_id' => $branchID), true);
+        $this->data['main_contents'] = $this->load->view('home/news', $this->data, true);
+        $this->load->view('home/layout/index', $this->data);
     }
 }

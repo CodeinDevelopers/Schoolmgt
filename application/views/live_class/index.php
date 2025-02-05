@@ -93,10 +93,7 @@ endif;
 							<td><?php echo _d($row['created_at']);?></td>
 							<td class="min-w-c">
 								<!-- host link -->
-								<a href="javascript:void(0);" class="btn btn-circle btn-default icon" data-toggle="tooltip" data-original-title="<?=translate('host')?>" 
-								onclick="getHostModal('<?=$row['meeting_id'] . "|" . $row['id'] ?>');">
-									<i class="fas fa-network-wired"></i>
-								</a>
+								<button class="btn btn-circle btn-default icon" data-toggle="tooltip" data-original-title="<?=translate('host')?>" data-loading-text="<i class='fas fa-spinner fa-spin'></i>" onclick="getHostModal('<?=$row['meeting_id'] . "|" . $row['id'] ?>', this);"><i class="fas fa-network-wired"></i></button>
 							<?php  if (get_permission('live_class', 'is_delete')) { ?>
 								<!-- deletion link -->
 								<?php echo btn_delete('live_class/delete/'.$row['id']);?>
@@ -109,7 +106,12 @@ endif;
 			</div>
 <?php if (get_permission('live_class', 'is_add')): ?>
 			<div class="tab-pane" id="add">
-					<?php echo form_open($this->uri->uri_string(), array('class' => 'form-bordered form-horizontal frm-submit'));?>
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<button id="access_token" class="btn btn-info mb-lg pull-right">Zoom Get Access Token</button>
+					</div>
+				</div>
+				<?php echo form_open($this->uri->uri_string(), array('class' => 'form-bordered form-horizontal frm-submit'));?>
                     <!-- hidden input -->
 					<input type="hidden" name="zoom_password" value="<?=substr(md5(mt_rand()), 0, 6)?>">
 					<input type="hidden" name="attendee_password" value="<?=substr(md5(mt_rand()), 0, 6)?>">
@@ -121,8 +123,8 @@ endif;
 							<div class="col-md-6">
 								<?php
 									$arrayBranch = $this->app_lib->getSelectList('branch');
-									echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' data-width='100%' onchange='getClassByBranch(this.value)'
-									data-plugin-selectTwo  data-minimum-results-for-search='Infinity'");
+									echo form_dropdown("branch_id", $arrayBranch, set_value('branch_id'), "class='form-control' data-width='100%' onchange='getClassByBranch(this.value)' id='branch_id'
+									data-plugin-selectTwo ");
 								?>
 								<span class="error"></span>
 							</div>
@@ -143,7 +145,7 @@ endif;
 							<?php
 								$arrayClass = $this->app_lib->getClass($branch_id);
 								echo form_dropdown("class_id", $arrayClass, set_value('class_id'), "class='form-control' id='class_id' onchange='getSectionByClass(this.value,0,1)'
-								data-plugin-selectTwo data-width='100%' data-minimum-results-for-search='Infinity' ");
+								data-plugin-selectTwo data-width='100%' ");
 							?>
 							<span class="error"></span>
 						</div>
@@ -278,7 +280,6 @@ endif;
 							
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label class="col-md-3 control-label"><?php echo translate('duration'); ?> <span class="required">*</span></label>
 						<div class="col-md-6">
@@ -316,8 +317,30 @@ if (!is_superadmin_loggedin()):
 		$getData = $this->live_class_model->get('zoom_own_api', array('user_type' => 1, 'user_id' => get_loggedin_user_id()), true);
 	?>
 			<div class="tab-pane" id="api_credential">
+                <div class="row">
+	                <div class="col-md-offset-3 col-md-6">
+		                <section class="panel pg-fw">
+		                    <div class="panel-body">
+		                        <h5 class="chart-title mb-xs">OAuth</h5>
+		                        <div class="mt-md">
+		                            <p class="mb-xs"><?php echo translate('set_zoom_redirect_url') ?>:</p>
+		                            <div class="form-group mb-lg">
+		                                <div class="input-group">
+		                                    <input type="text" class="form-control" id="redirectLink" name="affiliate_link" autocomplete="off" readonly="" value="<?php echo base_url('live_class/zoom_OAuth') ?>">
+		                                    <span class="input-group-addon">
+		                                        <span class="input-group-text">
+		                                            <a style="text-decoration: none;" href="javascript:void(0);" id="textCopy"><i class="fas fa-copy"></i></a>
+		                                        </span>
+		                                    </span>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </section>
+	            	</div>
+            	</div>
 				<?php echo form_open('live_class/zoom_own_api', array('class' => 'form-bordered form-horizontal frm-submit'));?>
-				<input type="hidden" name="api_id" value="<?=$getData['id']?>" >
+					<input type="hidden" name="api_id" value="<?=$getData['id']?>" >
 					<div class="form-group">
 						<label class="col-md-3 control-label">Zoom API Key <span class="required">*</span></label>
 						<div class="col-md-6">
@@ -332,7 +355,7 @@ if (!is_superadmin_loggedin()):
 							<span class="error"></span>
 						</div>
 					</div>
-				
+
 					<footer class="panel-footer">
 						<div class="row">
 							<div class="col-md-offset-3 col-md-2">
@@ -380,19 +403,50 @@ endif;
 				$(this).parents('.form-group').find('select').val(null).trigger('change');
 			}
 		});
+
+		$('#access_token').on('click', function() {
+			var branchID = "";
+			if ($('#branch_id').length ) {
+				branchID = $('#branch_id').val();
+			}
+		    $.ajax({
+		        url: base_url + 'live_class/getTokenURL',
+		        type: 'POST',
+		        data: {'branch_id': branchID},
+		        dataType: "json",
+		        success: function (data) {
+		        	if (data.status == true) {
+		        		window.open(data.url, '_blank');
+		        	} else {
+		        		popupMsg(data.message, "error");
+		        	}
+		        }
+		    });
+		});
 	});
 
 	// get details
-	function getHostModal(id) {
+	function getHostModal(id, elem) {
+		var btn = $(elem);
 	    $.ajax({
 	        url: base_url + 'live_class/hostModal',
 	        type: 'POST',
 	        data: {'meeting_id': id},
 	        dataType: "html",
+            beforeSend: function () {
+                btn.button('loading');
+            },
 	        success: function (data) {
 	            $('#quick_view').html(data);
 	            mfp_modal('#modal');
-	        }
+	        },
+            error: function (xhr) {
+                btn.button('reset');
+            },
+            complete: function () {
+                btn.button('reset');
+                btn.tooltip('hide');
+            } 
 	    });
 	}
 
@@ -404,4 +458,21 @@ endif;
 		var resultInMinutes = Math.abs(difference / 60000);
 		$("#duration").val(parseInt(resultInMinutes));
 	}
+
+    $("#textCopy").on("click", function() {
+        var copyText = document.getElementById("redirectLink");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+
+        swal({
+            toast: true,
+            position: 'top-end',
+            type: 'success',
+            title: 'Link Copied.',
+            confirmButtonClass: 'btn btn-default',
+            buttonsStyling: false,
+            timer: 8000
+        });
+    });
 </script>

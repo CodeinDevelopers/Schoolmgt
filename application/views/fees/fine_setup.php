@@ -43,7 +43,7 @@
 								<td><?php echo $row['fine_type'] == 1 ? translate('fixed_amount') : translate('percentage'); ?></td>
 								<td><?php
 								if ($row['fine_type'] == 1) {
-									echo $currency_symbol . $row['fine_value'];
+									echo currencyFormat($row['fine_value']);
 								} else {
 									echo $row['fine_value'] . "%";
 								} ?></td>

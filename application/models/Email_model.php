@@ -26,7 +26,7 @@ class Email_model extends CI_Model
             $msgData['recipient'] = $data['email'];
             $msgData['subject'] = $emailTemplate['subject'];
             $msgData['message'] = $message;
-            $this->sendEmail($msgData);
+            return $this->sendEmail($msgData);
         }
     }
 
@@ -43,7 +43,7 @@ class Email_model extends CI_Model
             $msgData['recipient'] = $data['recipient'];
             $msgData['subject'] = $emailTemplate['subject'];
             $msgData['message'] = $message;
-            $this->sendEmail($msgData);
+            return $this->sendEmail($msgData);
         }
     }
 
@@ -74,7 +74,7 @@ class Email_model extends CI_Model
             $msgData['recipient'] = $data['email'];
             $msgData['subject'] = $emailTemplate['subject'];
             $msgData['message'] = $message;
-            $this->sendEmail($msgData);
+            return $this->sendEmail($msgData);
         }
     }
 
@@ -104,7 +104,7 @@ class Email_model extends CI_Model
             $msgData['recipient'] = $data['email'];
             $msgData['subject'] = $emailTemplate['subject'];
             $msgData['message'] = $message;
-            $this->sendEmail($msgData);
+            return $this->sendEmail($msgData);
         }
     }
 
@@ -124,7 +124,7 @@ class Email_model extends CI_Model
                 $msgData['recipient'] = $userdata['email'];
                 $msgData['subject'] = $emailTemplate['subject'];
                 $msgData['message'] = $message;
-                $this->sendEmail($msgData);
+                return $this->sendEmail($msgData);
             }
         }
     }
@@ -152,7 +152,7 @@ class Email_model extends CI_Model
                 $msgData['subject'] = $emailTemplate['subject'];
                 $msgData['message'] = $message;
                 $msgData['branch_id'] = $data['branch_id'];
-                $this->sendEmail($msgData);
+                return $this->sendEmail($msgData);
             }
         }
     }
@@ -165,7 +165,7 @@ class Email_model extends CI_Model
                 $message = $emailTemplate['template_body'];
                 $message = str_replace("{institute_name}", $data['institute_name'], $message);
                 $message = str_replace("{applicant_name}", $data['student_name'], $message);
-                $message = str_replace("{admission_id}", $data['admission_id'], $message);
+                $message = str_replace("{reference_no}", $data['reference_no'], $message);
                 $message = str_replace("{applicant_mobile}", $data['mobile_no'], $message);
                 $message = str_replace("{class}", $data['class_name'], $message);
                 $message = str_replace("{section}", $data['section_name'], $message);
@@ -177,7 +177,7 @@ class Email_model extends CI_Model
                 $msgData['subject'] = $emailTemplate['subject'];
                 $msgData['message'] = $message;
                 $msgData['branch_id'] = $data['branch_id'];
-                $this->sendEmail($msgData);
+                return $this->sendEmail($msgData);
             }
         }
     }
@@ -206,7 +206,7 @@ class Email_model extends CI_Model
                 $msgData['subject'] = $emailTemplate['subject'];
                 $msgData['message'] = $message;
                 $msgData['branch_id'] = $data['branch_id'];
-                $this->sendEmail($msgData);
+                return $this->sendEmail($msgData);
             }
         }
     }
@@ -226,7 +226,7 @@ class Email_model extends CI_Model
                 $msgData['subject'] = $emailTemplate['subject'];
                 $msgData['message'] = $message;
                 $msgData['branch_id'] = $data['branch_id'];
-                $this->sendEmail($msgData);
+                return $this->sendEmail($msgData);
             }
         }
     }
@@ -245,7 +245,63 @@ class Email_model extends CI_Model
             $msgData['recipient'] = $data['email'];
             $msgData['subject'] = $emailTemplate['subject'];
             $msgData['message'] = $message;
-            $this->sendEmail($msgData);
+            return $this->sendEmail($msgData);
+        }
+    }
+
+    public function emailPDFexam_marksheet($data)
+    {
+        $emailTemplate = $this->getEmailTemplates(13);
+        if ($emailTemplate['notified'] == 1) {
+            $student = $this->application_model->getStudentDetails($data['enroll_id'] , true);
+            if (!empty($student['email'])) {
+                $message = $emailTemplate['template_body'];
+                $student_name = $student['first_name'] . " " . $student['last_name'];
+                $message = str_replace("{institute_name}", get_type_name_by_id('branch', $student['branch_id']), $message);
+                $message = str_replace("{academic_year}", get_type_name_by_id('schoolyear', $student['session_id'], 'school_year'), $message);
+                $message = str_replace("{admission_date}", $student['admission_date'], $message);
+                $message = str_replace("{admission_no}", $student['register_no'], $message);
+                $message = str_replace("{roll}", $student['roll'], $message);
+                $message = str_replace("{exam_name}", $data['exam_name'], $message);
+                $message = str_replace("{student_name}",$student_name, $message);
+                $message = str_replace("{class}", $student['class_name'], $message);
+                $message = str_replace("{section}", $student['section_name'], $message);
+                $msgData['recipient'] = $student['email'];
+                $msgData['subject'] = $emailTemplate['subject'];
+                $msgData['file'] = $data['file'];
+                $msgData['file_name'] = $student_name . "_" . $student['register_no'] . "_" . $data['exam_name'] . ".pdf";
+                $msgData['message'] = $message;
+                return $this->sendEmail($msgData);
+            }
+        }
+    }
+
+    public function emailPDF_Fee_invoice($data)
+    {
+        $emailTemplate = $this->getEmailTemplates(14);
+        if ($emailTemplate['notified'] == 1) {
+            $student = $this->application_model->getStudentDetails($data['enroll_id'] , true);
+
+            if (!empty($student['email'])) {
+                $message = $emailTemplate['template_body'];
+                $student_name = $student['first_name'] . " " . $student['last_name'];
+                $message = str_replace("{institute_name}", get_type_name_by_id('branch', $student['branch_id']), $message);
+                $message = str_replace("{academic_year}", get_type_name_by_id('schoolyear', $student['session_id'], 'school_year'), $message);
+                $message = str_replace("{admission_date}", $student['admission_date'], $message);
+                $message = str_replace("{admission_no}", $student['register_no'], $message);
+                $message = str_replace("{roll}", $student['roll'], $message);
+                $message = str_replace("{today_date}", _d(date("Y-m-d")), $message);
+                $message = str_replace("{student_name}",$student_name, $message);
+                $message = str_replace("{class}", $student['class_name'], $message);
+                $message = str_replace("{section}", $student['section_name'], $message);
+                $msgData['recipient'] = $student['email'];
+                $msgData['branch_id'] = $student['branch_id'];
+                $msgData['subject'] = $emailTemplate['subject'];
+                $msgData['file'] = $data['file'];
+                $msgData['file_name'] = $student_name . "_" . $student['register_no'] . $student['class_name'] . " (" . $student['section_name']  . ")_Fee_Invoice.pdf";
+                $msgData['message'] = $message;
+                return $this->sendEmail($msgData);
+            }
         }
     }
 

@@ -11,6 +11,32 @@ class Exam_model extends CI_Model
         parent::__construct();
     }
 
+    public function getExamByID($id = null)
+    {
+        $sql = "SELECT `e`.*, `exam_term`.`name` as `term_name`, `b`.`name` as `branch_name` FROM `exam` as `e` INNER JOIN `branch` as `b` ON `b`.`id` = `e`.`branch_id` LEFT JOIN `exam_term` ON `exam_term`.`id` = `e`.`term_id` WHERE `e`.`id` = {$this->db->escape($id)}";
+        return $this->db->query($sql)->row();
+    }
+
+    public function searchExamStudentsByRank($class_ID = '', $section_ID = '', $session_ID = '', $exam_ID = '', $branch_id = '')
+    {
+        $this->db->select('e.*,CONCAT_WS(" ",first_name, last_name) as fullname,register_no,c.name as class_name,se.name as section_name,exam_rank.rank,exam_rank.principal_comments,exam_rank.teacher_comments');
+        $this->db->from('enroll as e');
+        $this->db->join('student as s', 'e.student_id = s.id', 'inner');
+        $this->db->join('login_credential as l', 'l.user_id = s.id and l.role = 7', 'inner');
+        $this->db->join('class as c', 'e.class_id = c.id', 'left');
+        $this->db->join('section as se', 'e.section_id=se.id', 'left');
+        $this->db->join('exam_rank', 'exam_rank.enroll_id=e.id and exam_rank.exam_id = ' . $this->db->escape($exam_ID), 'left');
+        $this->db->where('e.class_id', $class_ID);
+        if (!empty($section_ID)) {
+            $this->db->where('e.section_id', $section_ID);
+        }
+        $this->db->where('e.branch_id', $branch_id);
+        $this->db->where('e.session_id', $session_ID);
+        $this->db->order_by('exam_rank.rank', 'ASC');
+        $this->db->where('l.active', 1);
+        return $this->db->get()->result();
+    }
+
     public function getExamList()
     {
         $this->db->select('e.*,b.name as branch_name');
@@ -23,7 +49,7 @@ class Exam_model extends CI_Model
         $this->db->order_by('e.id', 'asc');
         return $this->db->get()->result_array();
     }
-    
+
     public function exam_save($data)
     {
         $arrayExam = array(
@@ -34,6 +60,8 @@ class Exam_model extends CI_Model
             'mark_distribution' => json_encode($data['mark_distribution']),
             'remark' => $data['remark'],
             'session_id' => get_session_id(),
+            'status' => (isset($_POST['exam_publish']) ? 1 : 0),
+            'publish_result' => 0,
         );
         if (!isset($data['exam_id'])) {
             $this->db->insert('exam', $arrayExam);
@@ -139,7 +167,6 @@ class Exam_model extends CI_Model
         return $this->db->get('timetable_exam')->row_array();
     }
 
-
     public function getMarkAndStudent($branchID, $classID, $sectionID, $examID, $subjectID)
     {
         $this->db->select('en.*,st.first_name,st.last_name,st.register_no,st.category_id,m.mark as get_mark,IFNULL(m.absent, 0) as get_abs,subject.name as subject_name');
@@ -155,26 +182,39 @@ class Exam_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function getStudentReportCard($studentID, $examID, $sessionID)
+    public function getStudentReportCard($studentID, $examID, $sessionID, $classID = '', $sectionID = '')
     {
         $result = array();
-        $this->db->select('enroll.roll,enroll.id as enrollID,student.*,c.name as class_name,se.name as section_name,IFNULL(parent.father_name,"N/A") as father_name,IFNULL(parent.mother_name,"N/A") as mother_name');
-        $this->db->from('enroll');
-        $this->db->join('student', 'student.id = enroll.student_id', 'inner');
-        $this->db->join('class as c', 'c.id = enroll.class_id', 'left');
-        $this->db->join('section as se', 'se.id = enroll.section_id', 'left');
-        $this->db->join('parent', 'parent.id = student.parent_id', 'left');
-        $this->db->where('enroll.student_id', $studentID);
-        $this->db->where('enroll.session_id', $sessionID);
+
+        $this->db->select('s.*,CONCAT_WS(" ",s.first_name, s.last_name) as name,e.id as enrollID,e.roll,e.branch_id,e.session_id,e.class_id,e.section_id,c.name as class,se.name as section,sc.name as category,IFNULL(p.father_name,"N/A") as father_name,IFNULL(p.mother_name,"N/A") as mother_name,br.name as institute_name,br.email as institute_email,br.address as institute_address,br.mobileno as institute_mobile_no');
+        $this->db->from('enroll as e');
+        $this->db->join('student as s', 'e.student_id = s.id', 'inner');
+        $this->db->join('class as c', 'e.class_id = c.id', 'left');
+        $this->db->join('section as se', 'e.section_id = se.id', 'left');
+        $this->db->join('student_category as sc', 's.category_id=sc.id', 'left');
+        $this->db->join('parent as p', 'p.id=s.parent_id', 'left');
+        $this->db->join('branch as br', 'br.id = e.branch_id', 'left');
+        $this->db->where('e.student_id', $studentID);
+        $this->db->where('e.session_id', $sessionID);
+        if (!empty($classID))
+            $this->db->where('e.class_id', $classID);
+        if (!empty($sectionID))
+            $this->db->where('e.section_id', $sectionID);
         $result['student'] = $this->db->get()->row_array();
 
-        $this->db->select('m.mark as get_mark,IFNULL(m.absent, 0) as get_abs,subject.name as subject_name, te.mark_distribution');
+        $this->db->select('m.mark as get_mark,IFNULL(m.absent, 0) as get_abs,subject.name as subject_name, te.mark_distribution, m.subject_id');
         $this->db->from('mark as m');
         $this->db->join('subject', 'subject.id = m.subject_id', 'left');
         $this->db->join('timetable_exam as te', 'te.exam_id = m.exam_id and te.class_id = m.class_id and te.section_id = m.section_id and te.subject_id = m.subject_id', 'left');
         $this->db->where('m.exam_id', $examID);
         $this->db->where('m.student_id', $studentID);
         $this->db->where('m.session_id', $sessionID);
+        if (!empty($classID))
+            $this->db->where('m.class_id', $classID);
+        if (!empty($sectionID))
+            $this->db->where('m.section_id', $sectionID);
+        $this->db->group_by('m.subject_id');
+        $this->db->order_by('subject.id', 'ASC');
         $result['exam'] = $this->db->get()->result_array();
         return $result;
     }

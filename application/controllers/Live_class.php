@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 6.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.2
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Live_class.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Live_class extends Admin_Controller
@@ -105,7 +105,16 @@ class Live_class extends Admin_Controller
                             )
                         );
 
-                        $response = $this->zoom_lib->createMeeting($arrayZoom);
+                        $access_token = $this->session->userdata("zoom_access_token");
+                        if (empty($access_token)) {
+                            set_alert('error', "Access Token not generated");
+                            $array  = array('status' => 'success');
+                            echo json_encode($array);
+                            exit();
+                        }
+                        
+                        $response = $this->zoom_lib->createMeeting($arrayZoom, $access_token);
+                        $this->session->set_userdata("zoom_access_token", "");
                         if (!empty($response->code)) {
                             set_alert('error', "The Token Signature resulted invalid when verified using the algorithm");
                             $array  = array('status' => 'success');
@@ -228,16 +237,15 @@ class Live_class extends Admin_Controller
                     );
                 }
                 $this->load->library('zoom_lib', $api_keys);
-                $response = $this->zoom_lib->deleteMeeting($get['meeting_id']);
-                if (empty($response)) {
-                    if (!is_superadmin_loggedin()) {
-                        $this->db->where('branch_id', get_loggedin_branch_id());
-                    }
-                    $this->db->where('id', $id);
-                    $this->db->delete('live_class');
-                } else {
-                    set_alert('error', "Meeting does not exist.");
+                $access_token = $this->session->userdata("zoom_access_token");
+                $response = $this->zoom_lib->deleteMeeting($get['meeting_id'], $access_token);
+                
+                if (!is_superadmin_loggedin()) {
+                    $this->db->where('branch_id', get_loggedin_branch_id());
                 }
+                $this->db->where('id', $id);
+                $this->db->delete('live_class');
+                
             } else {
                 $this->db->where('id', $id);
                 $this->db->delete('live_class');
@@ -402,6 +410,67 @@ class Live_class extends Admin_Controller
             return false;
         }
         return true;
+    }
+
+    public function getTokenURL()
+    {
+        if (get_permission('live_class', 'is_add')) {
+            if ($_POST) {
+                $branchID = $this->application_model->get_branch_id();
+                if (empty($branchID)) {
+                    echo json_encode(['status' => false, 'message' => translate('select_branch_first')]);
+                    exit;
+                }
+                $getConfig = $this->live_class_model->get('live_class_config', array('branch_id' => $branchID), true);
+                if (is_superadmin_loggedin()) {
+                    $api_keys = array(
+                        'zoom_api_key' => $getConfig['zoom_api_key'],
+                        'zoom_api_secret' => $getConfig['zoom_api_secret'],
+                    );
+                } else {
+                    $getSelfAPI = $this->live_class_model->get('zoom_own_api', array('user_type' => 1, 'user_id' => get_loggedin_user_id()), true);
+                    if ($getSelfAPI['zoom_api_key'] == '' || $getSelfAPI['zoom_api_secret'] == '' ||  $getConfig['staff_api_credential'] == 0) {
+                        $api_keys = array(
+                            'zoom_api_key' => $getConfig['zoom_api_key'],
+                            'zoom_api_secret' => $getConfig['zoom_api_secret'],
+                        );
+                    } else {
+                        $api_keys = array(
+                            'zoom_api_key' => $getSelfAPI['zoom_api_key'],
+                            'zoom_api_secret' => $getSelfAPI['zoom_api_secret'],
+                        );
+                    }
+                }
+                if (empty($api_keys['zoom_api_key'])) {
+                    echo json_encode(['status' => false,'message' => translate('zoom_configuration_not_found')]);
+                } else {
+                    $url = "https://zoom.us/oauth/authorize?response_type=code&client_id=" . $api_keys['zoom_api_key'] . "&redirect_uri=" . base_url('live_class/zoom_OAuth');
+                    $this->session->set_userdata("zoomAPI", $api_keys);
+                    echo json_encode(['status' => true,'url' => $url]);
+                }
+            }
+        }
+    }
+
+    public function zoom_OAuth()
+    {
+        if (!isset($_GET['code'])) {
+            echo "Invalid Access token";
+        } else {
+            $zoomAPI = $this->session->userdata("zoomAPI");
+            $this->session->set_userdata("zoomAPI", "");
+            if (!empty($zoomAPI)) {
+                $this->load->library('zoom_lib', $zoomAPI);
+                $response = $this->zoom_lib->get_access_token($_GET['code']);
+                if (!empty($response)) {
+                    $this->session->set_userdata("zoom_access_token", $response['access_token']);
+                    set_alert('success', translate('access_token_generated_successfully'));
+                    redirect(base_url('live_class'));
+                }
+            } else {
+               echo "Redirection was successful."; 
+            }
+        }
     }
 
 }

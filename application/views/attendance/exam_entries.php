@@ -74,7 +74,7 @@
 									$subjects = $query->result_array();
 									foreach ($subjects as $row){
 										$subjectID = $row['subject_id'];
-										$arraySubject[$subjectID] = $row['subjectname'];
+										$arraySubject[$subjectID] = $row['subjectname'] . " (" . $row['subject_code'] . ")";
 									}
 								} else {
 									$arraySubject = array("" => translate('select_class_first'));

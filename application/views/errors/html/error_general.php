@@ -1,64 +1,119 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+<?php $base_url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+$return = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+ ?>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Error</title>
-<style type="text/css">
+    <!-- Basic -->
+    <meta charset="UTF-8">
+    <title>404 Page Not Found</title>
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Signika:wght@300..700&display=swap" rel="stylesheet"> 
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="<?php echo $base_url; ?>assets/vendor/bootstrap/css/bootstrap.css" />
+    <script src="<?php echo $base_url; ?>assets/vendor/jquery/jquery.min.js"></script>
+    <style>
+        html,
+        body {
+            min-height: 100%;
+        }
+        body {
+            line-height: 1.7;
+            color: #777777;
+            font-size: 14px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            background-color: #fff;
+            background-attachment: fixed;
+        }
+        .display-table {
+            display: table;
+            height: 100%;
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+        .display-table-cell {
+            display: table-cell;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .text-theme-colored {
+            color: #00a3c8 !important;
+            font-size: 130px !important;
+            font-weight: 800 !important;
+        }
+        .mb-5 {
+            margin-bottom: 5px !important;
+        }
+        .fullscreen {
+            height: 100vh;
+        }
+        .btn-primary {
+            padding: 10px 25px;
+            background-color: #0091cd;
+            border-color: #0091cd;
+        }
+        .btn-primary:hover {
+            background-color: #005a80;
+        }
+        .back-404 {
+            background-color: #fff;
+            max-width: 400px;
+            padding-bottom: 40px;
+            position: relative;
+            margin: auto;
+        }
 
-::selection { background-color: #E13300; color: white; }
-::-moz-selection { background-color: #E13300; color: white; }
-
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
-
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
-
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
-
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
-
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	box-shadow: 0 0 8px #D0D0D0;
-}
-
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
+        .back-404 h4, .back-404 h3 {
+            font-size: 28px !important;
+        }
+        .back-404:before {
+            content: "";
+            left: 125px;
+            bottom: -18px;
+            position: absolute;
+            border: 5px solid #0091cd;
+            transform: rotate(35deg);
+            z-index: -1;
+            width: 390px;
+            height: 390px;
+        }
+        @media (max-width: 991px) {
+            .back-404:before {
+                display: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
-	</div>
+    <div id="wrapper" class="clearfix">
+        <!-- Start main-content -->
+        <div class="main-content">
+            <!-- Section: home -->
+            <section id="home" class="fullscreen bg-lightest">
+                <div class="display-table text-center">
+                    <div class="display-table-cell">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="back-404">
+                                    <h1 class="text-theme-colored">404</h1>
+                                    <h3 class="mb-5"><?php echo $heading; ?></h3>
+                                    <p><?php echo $message; ?></p>
+                                    <a class="btn btn-primary" href="<?php echo $return ?>">Back Home</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="<?php echo $base_url; ?>assets/vendor/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

@@ -23,6 +23,7 @@
 					$stu = $this->userrole_model->getStudentDetails();
 					$this->db->where('class_id', $stu['class_id'])->or_where('class_id', 'unfiltered');
 					$this->db->where('session_id', get_session_id());
+					$this->db->where('branch_id', $stu['branch_id']);
 					$this->db->order_by('id', 'desc');
 					$query = $this->db->get('attachments');
 					$attachmentss = $query->result();

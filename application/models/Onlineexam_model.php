@@ -349,6 +349,13 @@ class Onlineexam_model extends MY_Model
             $search_arr[] = " (`questions`.`question` like '%" . $searchValue . "%' OR `question_group`.`name` like '%" . $searchValue . "%') ";
         }
 
+        if (!is_superadmin_loggedin()) {
+            $showOwnquestion = $this->app_lib->getSchoolConfig($postData['branch_id'], 'show_own_question');
+            if (!empty($showOwnquestion->show_own_question) && $showOwnquestion->show_own_question == 1) {
+                $search_arr[] = " `questions`.`created_by` = " . $this->db->escape(get_loggedin_user_id());
+            } 
+        }
+
         $questionGroup = $postData['questionGroup'];
         if ($questionGroup != '') {
             $questionGroup = $this->db->escape($questionGroup);
@@ -390,6 +397,11 @@ class Onlineexam_model extends MY_Model
         // Total number of records without filtering
         $userID = $this->db->escape(get_loggedin_user_id());
         $sql = "SELECT `questions`.`id` FROM `questions` WHERE `questions`.`branch_id` = $branchID";
+        if (!is_superadmin_loggedin()) {
+            if (!empty($showOwnquestion->show_own_question) && $showOwnquestion->show_own_question == 1) {
+                $sql .= " AND `questions`.`created_by` = " . $this->db->escape(get_loggedin_user_id());
+            }
+        }
         $records = $this->db->query($sql)->result();
         $totalRecords = count($records);
 
@@ -473,8 +485,12 @@ class Onlineexam_model extends MY_Model
         }
 
         if (!is_superadmin_loggedin()) {
+            $showOwnquestion = $this->app_lib->getSchoolConfig('', 'show_own_question');
             $branch_id = $this->db->escape(get_loggedin_branch_id());
             $search_arr[] = " `questions`.`branch_id` = $branch_id ";
+            if (!empty($showOwnquestion->show_own_question) && $showOwnquestion->show_own_question == 1) {
+                $search_arr[] = " `questions`.`created_by` = " . $this->db->escape(get_loggedin_user_id());
+            } 
         } else {
             $column_order[] = '`questions`.`branch_id`';
         }
@@ -497,6 +513,9 @@ class Onlineexam_model extends MY_Model
         } else {
             $branchID = $this->db->escape(get_loggedin_branch_id());
             $sql = "SELECT `questions`.`id` FROM `questions` WHERE `questions`.`branch_id` = $branchID";
+            if (!empty($showOwnquestion->show_own_question) && $showOwnquestion->show_own_question == 1) {
+                $sql .= " AND `questions`.`created_by` = " . $this->db->escape(get_loggedin_user_id());
+            } 
         }
         $records = $this->db->query($sql)->result();
         $totalRecords = count($records);
@@ -510,7 +529,7 @@ class Onlineexam_model extends MY_Model
         $totalRecordwithFilter = count($records);
 
         // Fetch records
-        $sql = "SELECT `questions`.*, `branch`.`name`, `subject`.`name` as `subject_name`, `class`.`name` as `class_name`, `section`.`name` as `section_name`, `question_group`.`name` as `group_name` FROM `questions` INNER JOIN `branch` ON `branch`.`id` = `questions`.`branch_id` LEFT JOIN `class` ON `class`.`id` = `questions`.`class_id` LEFT JOIN `section` ON `section`.`id` = `questions`.`section_id` LEFT JOIN `subject` ON `subject`.`id` = `questions`.`subject_id` LEFT JOIN `question_group` ON `question_group`.`id` = `questions`.`group_id`";
+        $sql = "SELECT `questions`.`id`, `questions`.`question`, `questions`.`type`, `questions`.`level`, `branch`.`name`, `subject`.`name` as `subject_name`, `class`.`name` as `class_name`, `section`.`name` as `section_name`, `question_group`.`name` as `group_name` FROM `questions` INNER JOIN `branch` ON `branch`.`id` = `questions`.`branch_id` LEFT JOIN `class` ON `class`.`id` = `questions`.`class_id` LEFT JOIN `section` ON `section`.`id` = `questions`.`section_id` LEFT JOIN `subject` ON `subject`.`id` = `questions`.`subject_id` LEFT JOIN `question_group` ON `question_group`.`id` = `questions`.`group_id`";
         if (!empty($searchQuery)) {
             $sql .= " WHERE " . $searchQuery;
         }
@@ -524,7 +543,7 @@ class Onlineexam_model extends MY_Model
         foreach ($records as $record) {
             $row = array();
             $action = "";
-            $action .= '<a href="javascript:void(0);" class="btn btn-circle btn-default icon" data-toggle="tooltip" data-original-title="' . translate('view') . '" onclick="getQuestion(' . $this->db->escape($record->id) . ');"><i class="fas fa-bars"></i></a>';
+            $action .= '<button data-loading-text="<i class=' . "'fas fa-spinner fa-spin'" . '></i>" class="btn btn-circle btn-default icon" data-toggle="tooltip" data-original-title="' . translate('view') . '" onclick="getQuestion(' . $this->db->escape($record->id) . ', this);"><i class="fas fa-bars"></i></button>';
             $action .= '<a href="' . base_url('onlineexam/question_edit/' . $record->id) . '" class="btn btn-circle btn-default icon" data-toggle="tooltip" data-original-title="' . translate('edit') . '"><i class="fas fa-pen-nib"></i></a>';
             $action .= btn_delete('onlineexam/question_delete/' . $record->id);
 

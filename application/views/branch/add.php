@@ -45,10 +45,12 @@
 								<td><?php echo $row->state;?></td>
 								<td><?php echo $row->address;?></td>
 								<td class="min-w-c">
-
-								<?php if (!isEnabledSubscription($row->id)) { ?>
+								<?php 
+								if ($this->app_lib->isExistingAddon('saas')) {
+								if (!isEnabledSubscription($row->id)) {
+									?>
 									<a href="<?=base_url('saas/enabled_school/'.$row->id)?>" class="btn btn-default btn-circle icon" data-toggle="tooltip" data-original-title="<?php echo translate('enable_subscription'); ?>"><i class="fas fa-sitemap"></i></a>
-								<?php } ?>
+								<?php } } ?>
 									<!--update link-->
 									<a href="<?=base_url('branch/edit/'.$row->id)?>" class="btn btn-default btn-circle icon">
 										<i class="fas fa-pen-nib"></i>

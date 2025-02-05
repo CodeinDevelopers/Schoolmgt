@@ -7,7 +7,6 @@ class Html2pdf
     public function __construct()
     {
        $this->mpdf = new \Mpdf\Mpdf([
-         'default_font' => 'dejavusans',
          'mode' => 'utf-8',
          'margin_left' => 2,
          'margin_right' => 2,

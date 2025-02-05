@@ -5,7 +5,6 @@ if (!defined('BASEPATH')) {
 
 class Attendance_model extends MY_Model
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -13,7 +12,7 @@ class Attendance_model extends MY_Model
 
     public function getStudentAttendence($classID, $sectionID, $date, $branchID)
     {
-        $sql = "SELECT `enroll`.`id` as `enroll_id`,`enroll`.`roll`,`student`.`first_name`,`student`.`last_name`,`student`.`id` as `student_id`,`student`.`register_no`,`student_attendance`.`id` as `att_id`,`student_attendance`.`status` as `att_status`,`student_attendance`.`remark` as `att_remark` FROM `enroll` LEFT JOIN `student` ON `student`.`id` = `enroll`.`student_id` LEFT JOIN `student_attendance` ON `student_attendance`.`enroll_id` = `enroll`.`id` AND `student_attendance`.`date` = " . $this->db->escape($date) . " WHERE `enroll`.`class_id` = " . $this->db->escape($classID) . " AND `enroll`.`section_id` = " . $this->db->escape($sectionID) . " AND `enroll`.`branch_id` = " . $this->db->escape($branchID) . " AND `enroll`.`session_id` = " . $this->db->escape(get_session_id());
+        $sql = "SELECT `enroll`.`id` as `enroll_id`,`enroll`.`roll`,`student`.`first_name`,`student`.`last_name`,`student`.`id` as `student_id`,`student`.`register_no`,`student_attendance`.`id` as `att_id`,`student_attendance`.`status` as `att_status`,`student_attendance`.`remark` as `att_remark` FROM `enroll` INNER JOIN `student` ON `student`.`id` = `enroll`.`student_id` LEFT JOIN `student_attendance` ON `student_attendance`.`enroll_id` = `enroll`.`id` AND `student_attendance`.`date` = " . $this->db->escape($date) . " WHERE `enroll`.`class_id` = " . $this->db->escape($classID) . " AND `enroll`.`section_id` = " . $this->db->escape($sectionID) . " AND `enroll`.`branch_id` = " . $this->db->escape($branchID) . " AND `enroll`.`session_id` = " . $this->db->escape(get_session_id());
         return $this->db->query($sql)->result_array();
     }
 
@@ -25,12 +24,7 @@ class Attendance_model extends MY_Model
 
     public function getExamAttendence($classID, $sectionID, $examID, $subjectID, $branchID)
     {
-        $sql = "SELECT enroll.student_id,enroll.roll,student.first_name,student.last_name,student.register_no,exam_attendance.id as `atten_id`,
-        exam_attendance.status as `att_status`,exam_attendance.remark as `att_remark` FROM `enroll` LEFT JOIN student ON
-        student.id = enroll.student_id LEFT JOIN exam_attendance ON exam_attendance.student_id = student.id AND exam_attendance.exam_id = " .
-        $this->db->escape($examID) . " AND exam_attendance.subject_id = " . $this->db->escape($subjectID) .
-        " WHERE enroll.class_id = " . $this->db->escape($classID) . " AND enroll.section_id = " . $this->db->escape($sectionID) .
-        " AND enroll.branch_id = " . $this->db->escape($branchID) . " AND enroll.session_id = " . $this->db->escape(get_session_id());
+        $sql = "SELECT enroll.student_id,enroll.roll,student.first_name,student.last_name,student.register_no,exam_attendance.id as `atten_id`, exam_attendance.status as `att_status`,exam_attendance.remark as `att_remark` FROM `enroll` LEFT JOIN student ON student.id = enroll.student_id LEFT JOIN exam_attendance ON exam_attendance.student_id = student.id AND exam_attendance.exam_id = " . $this->db->escape($examID) . " AND exam_attendance.subject_id = " . $this->db->escape($subjectID) . " WHERE enroll.class_id = " . $this->db->escape($classID) . " AND enroll.section_id = " . $this->db->escape($sectionID) . " AND enroll.branch_id = " . $this->db->escape($branchID) . " AND enroll.session_id = " . $this->db->escape(get_session_id());
         return $this->db->query($sql)->result_array();
     }
 
@@ -38,10 +32,12 @@ class Attendance_model extends MY_Model
     {
         $this->db->select('e.id as enroll_id,e.roll,s.first_name,s.last_name,s.register_no');
         $this->db->from('enroll as e');
-        $this->db->join('student as s', 's.id = e.student_id', 'left');
+        $this->db->join('student as s', 's.id = e.student_id', 'inner');
+        $this->db->join('login_credential', 'login_credential.user_id = s.id and login_credential.role = "7"', 'inner');
         $this->db->where('e.class_id', $class_id);
         $this->db->where('e.section_id', $section_id);
         $this->db->where('e.branch_id', $branch_id);
+        $this->db->where('login_credential.active', 1);
         $this->db->where('e.session_id', get_session_id());
         return $this->db->get()->result_array();
     }
@@ -64,7 +60,7 @@ class Attendance_model extends MY_Model
 
     public function getExamReport($data)
     {
-        $sql = "SELECT ea.*, s.first_name, s.last_name, s.register_no, s.category_id, e.roll, sb.name as subject_name FROM exam_attendance as ea LEFT JOIN enroll as e ON e.student_id = ea.student_id LEFT JOIN student as s ON s.id = ea.student_id LEFT JOIN subject as sb ON sb.id = ea.subject_id WHERE ea.exam_id = " . $this->db->escape($data['exam_id']) . " AND ea.subject_id = " . $this->db->escape($data['subject_id']) . " AND ea.branch_id = " . $this->db->escape($data['branch_id']) . " AND e.class_id = " . $this->db->escape($data['class_id']) . " AND e.section_id = " . $this->db->escape($data['section_id']) . " AND e.session_id = " . $this->db->escape(get_session_id());
+        $sql = "SELECT `ea`.*, `s`.`first_name`, `s`.`last_name`, `s`.`register_no`, `s`.`category_id`, `e`.`roll`, `sb`.`name` as `subject_name` FROM `exam_attendance` as `ea` LEFT JOIN `enroll` as `e` ON `e`.`student_id` = `ea`.`student_id` LEFT JOIN `student` as `s` ON `s`.`id` = `ea`.`student_id` LEFT JOIN `subject` as `sb` ON `sb`.`id` = `ea`.`subject_id` WHERE `ea`.`exam_id` = " . $this->db->escape($data['exam_id']) . " AND `ea`.`subject_id` = " . $this->db->escape($data['subject_id']) . " AND `ea`.`branch_id` = " . $this->db->escape($data['branch_id']) . " AND `e`.`class_id` = " . $this->db->escape($data['class_id']) . " AND `e`.`section_id` = " . $this->db->escape($data['section_id']) . " AND `e`.`session_id` = " . $this->db->escape(get_session_id());
         return $this->db->query($sql)->result_array();
     }
 
@@ -140,5 +136,11 @@ class Attendance_model extends MY_Model
         $query = $this->db->query($sql);
         $count_studentattendance = $query->result();
         return $count_studentattendance;
+    }
+
+    public function stuAttendanceCount_by_date($enroll_id = '', $start = '', $end = '', $type = '')
+    {
+        $sql = "SELECT count(`student_attendance`.`id`) as `status_count` FROM `student_attendance` WHERE `enroll_id` = " . $this->db->escape($enroll_id) . " AND DATE(`date`) >= " . $this->db->escape($start) . " AND DATE(`date`) <= " . $this->db->escape($end) . " AND `status` = " . $this->db->escape($type);
+        return $this->db->query($sql)->row()->status_count;
     }
 }

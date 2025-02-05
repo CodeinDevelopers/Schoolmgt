@@ -14,6 +14,9 @@ class Recaptcha
      *
      */
     private $_ci;
+    private $_siteKey;
+    private $_secretKey;
+    private $_language;
 
     /**
      * reCAPTCHA site up, verify and api url.
@@ -28,14 +31,14 @@ class Recaptcha
      *
      * @param string $config
      */
-    public function __construct()
+    public function __construct($api_keys = array())
     {
         $this->_ci = & get_instance();
-		$getSetting = $this->_ci->db->select('recaptcha_site_key,recaptcha_secret_key')->where('id',1)->get('front_cms_setting')->row();
-        $this->_siteKey = $getSetting->recaptcha_site_key;
-        $this->_secretKey = $getSetting->recaptcha_secret_key;
+        if (!empty($api_keys)) {
+            $this->_siteKey = $api_keys['site_key'];
+            $this->_secretKey = $api_keys['secret_key'];
+        }
         $this->_language = 'en';
-
         if (empty($this->_siteKey) or empty($this->_secretKey)) {
             die("To use reCAPTCHA you must get an API key from <a href='"
                 .self::sign_up_url."'>".self::sign_up_url."</a>");

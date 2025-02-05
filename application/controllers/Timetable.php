@@ -2,13 +2,13 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom school management system
- * @version : 5.0
- * @developed by : RamomCoder
- * @support : ramomcoder@yahoo.com
- * @author url : http://codecanyon.net/user/RamomCoder
+ * @package : Acamedium
+ * @version : 6.2
+ * @developed by : Codeindevelopers
+ * @support : support@codeindevelopers.com.ng
+ * @author url : https://codeindevelopers.com.ng
  * @filename : Timetable.php
- * @copyright : Reserved RamomCoder Team
+ * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Timetable extends Admin_Controller
@@ -112,6 +112,7 @@ class Timetable extends Admin_Controller
             ),
             'js' => array(
                 'vendor/bootstrap-timepicker/bootstrap-timepicker.js',
+                'vendor/moment/moment.js',
             ),
         );
         $this->load->view('layout/index', $this->data);
@@ -231,6 +232,7 @@ class Timetable extends Admin_Controller
             ),
             'js' => array(
                 'vendor/bootstrap-timepicker/bootstrap-timepicker.js',
+                'vendor/moment/moment.js',
             ),
         );
         $this->load->view('layout/index', $this->data);
