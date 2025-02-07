@@ -93,7 +93,7 @@ html.dark .header .menu-icon-grid > a {
 }
 
 .header .menu-icon-grid > a:hover {
-    background: #58a3fe;
+    background: #2c39fd;
     color: #fff;
 }
 
@@ -3414,7 +3414,7 @@ html.dark ul.nav-main li a {
 }
 
 ul.nav-main li a i {
-	color: #58a3fe;
+	color: #2c39fd;
 }
 
 html.dark ul.nav-main li a i {
@@ -5152,7 +5152,7 @@ html.dark .checkbox-replace .i-checks > i {
 	left: 4px;
 	width: 10px;
 	height: 10px;
-	background-color: #58a3fe;
+	background-color: #2c39fd;
 	-webkit-transform: scale(0);
 	-moz-transform: scale(0);
 	-ms-transform: scale(0);
@@ -5162,7 +5162,7 @@ html.dark .checkbox-replace .i-checks > i {
 }
 
 .checkbox-replace .i-checks input:checked + i {
-	border-color: #58a3fe;
+	border-color: #2c39fd;
 }
 
 html.dark .checkbox-replace .i-checks input:checked + i{
@@ -6576,7 +6576,7 @@ html.dark .header-menu .header-menubox {
 }
 
 .header-menu .open .hbox ul li a:hover {
-	background: #58a3fe;
+	background: #2c39fd;
 	color: #FFF;
 }
 
@@ -7054,7 +7054,7 @@ html.ie11 .scroll-to-top {
 }
 
 .panel {
-	background-color: #fdfdfd;
+	background-color: #ffffff;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	border-color: #D1D1D1;
@@ -7062,10 +7062,10 @@ html.ie11 .scroll-to-top {
 }
 
 .panel-heading {
-	background: #f6f6f6;
+	background: #ffffff;
 	border-radius: 5px 5px 0 0;
 	position: relative;
-    border-bottom: 2px solid #58a3fe;
+    border-bottom: 2px solid #2c39fd;
 }
 
 .panel-actions {
@@ -7113,7 +7113,7 @@ html.ie11 .scroll-to-top {
 }
 
 .panel-body {
-	background: #fdfdfd;
+	background: #fffff;
 	-webkit-box-shadow: none;
 	border-radius: 5px;
 }
@@ -7129,7 +7129,7 @@ html.ie11 .scroll-to-top {
 .panel-footer {
 	border-radius: 0 0 5px 5px;
 	margin-top: -5px;
-	border-top-color: #ddd;
+	border-top-color: #ffffff;
 }
 
 .panel-footer-btn-group {
@@ -7684,7 +7684,7 @@ html.dark .tab-content {
 
 .tabs-custom .nav-tabs > li > a:after {
 	content: '';
-	background: #58a3fe;
+	background: #2c39fd;
 	height: 2px;
 	position: absolute;
 	width: 100%;
@@ -7711,7 +7711,7 @@ html.dark .tabs-custom .nav-tabs > li > a:after {
 	border-radius: 0 0 8px 8px;
 	-webkit-transform: translateX(-50%);
 	transform: translateX(-50%);
-	background: #58a3fe;
+	background: #2c39fd;
 }
 
 html.dark .tabs-custom .nav-tabs > li.active > a:before {
@@ -7953,7 +7953,7 @@ html.dark .progress {
 }
 
 .panel-group .panel-accordion .panel .panel-heading {
-	border-bottom: 2px solid #58a3fe;
+	border-bottom: 2px solid #2c39fd;
 	margin-bottom: 0;
 	padding: 9px;
 }
@@ -11891,7 +11891,7 @@ html.dark .dropzone:hover .dz-default span {
 	position: relative;
 }
 .form-group-invisible.focus .control-label-invisible {
-	color: #58a3fe;
+	color: #2c39fd;
 }
 .form-group-invisible .control-label-invisible {
 	bottom: 0;
@@ -13061,7 +13061,7 @@ html.dark .on_answer_box > li a.que_btn {
 }
 
 .on_answer_box > li a.que_btn.active {
-	background-color:  #58a3fe;
+	background-color:  #2c39fd;
 }
 
 html.dark .on_answer_box > li a.que_btn.active {
