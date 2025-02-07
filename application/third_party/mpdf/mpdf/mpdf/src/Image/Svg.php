@@ -3569,7 +3569,7 @@ class Svg
 				return;
 			}
 
-			$color = '#58a3fe';
+			$color = '#2c39fd';
 			if (isset($attribs['style']) and preg_match('/stop-color:\s*([^;]*)/i', $attribs['style'], $m)) {
 				$color = trim($m[1]);
 			} elseif (isset($attribs['stop-color']) && $attribs['stop-color']) {
@@ -3578,7 +3578,7 @@ class Svg
 
 			$col = $this->colorConverter->convert($color, $this->mpdf->PDFAXwarnings);
 			if (!$col) {
-				$col = $this->colorConverter->convert('#58a3fe', $this->mpdf->PDFAXwarnings);
+				$col = $this->colorConverter->convert('#2c39fd', $this->mpdf->PDFAXwarnings);
 			} // In case "transparent" or "inherit" returned
 
 			if ($col[0] == 3 || $col[0] == 5) { // RGB

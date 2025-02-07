@@ -55,12 +55,9 @@ a:active {
 	top: 0;
 	z-index: 99;
 	min-width: 200px !important;
-	background: linear-gradient(to right, #063944 0%, #313131 100%);
 }
 
-html.sidebar-light:not(.dark) .header .logo-env {
-	background: linear-gradient(to right, rgb(130, 225, 234) 0%, #fff 100%);
-}
+
 
 /* Layout Base - Shortcut Menu */
 .header .menu-icon-grid {
@@ -7129,7 +7126,7 @@ html.ie11 .scroll-to-top {
 .panel-footer {
 	border-radius: 0 0 5px 5px;
 	margin-top: -5px;
-	border-top-color: #ffffff;
+	border-top-color: #ddd;
 }
 
 .panel-footer-btn-group {
@@ -7139,7 +7136,7 @@ html.ie11 .scroll-to-top {
 }
 
 .panel-footer-btn-group a {
-	background-color: #f5f5f5;
+	background-color: #fffff;
 	display: table-cell;
 	width: 1%;
 	border-left: 1px solid #ddd;

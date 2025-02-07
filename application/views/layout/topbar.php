@@ -1,6 +1,6 @@
 <header class="header">
 	<div class="logo-env">
-		<a href="<?php echo base_url('dashboard');?>" class="logo">
+		<a href="<?php echo base_url('#');?>" class="logo">
 			<img src="<?=$this->application_model->getBranchImage(get_loggedin_branch_id(), 'logo-small')?>" height="40">
 		</a>
 

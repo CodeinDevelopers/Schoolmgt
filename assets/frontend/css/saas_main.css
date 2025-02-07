@@ -476,8 +476,8 @@ ol {
 .button .btn:hover {
     color: #fff;
     background-color: #081828;
-    -webkit-box-shadow: 0px 4px 4px #58a3fe0f;
-    box-shadow: 0px 4px 4px #58a3fe0f;
+    -webkit-box-shadow: 0px 4px 4px #2c39fd0f;
+    box-shadow: 0px 4px 4px #2c39fd0f;
 }
 
 .button .btn-alt {
@@ -1096,8 +1096,8 @@ ol {
     padding: 30px;
     min-width: 240px;
     background: #fff;
-    -webkit-box-shadow: 0px 5px 20px #58a3fe1a;
-    box-shadow: 0px 5px 20px #58a3fe1a;
+    -webkit-box-shadow: 0px 5px 20px #2c39fd1a;
+    box-shadow: 0px 5px 20px #2c39fd1a;
     position: absolute;
     top: 110% !important;
     left: 0;
@@ -1262,7 +1262,7 @@ ol {
     font-weight: 800;
     line-height: 50px;
     color: #fff;
-    text-shadow: 0px 3px 8px #58a3fe17;
+    text-shadow: 0px 3px 8px #2c39fd17;
     text-transform: capitalize;
 }
 
@@ -1498,8 +1498,8 @@ ol {
     color: #fff;
     font-size: 30px;
     border-radius: 0 50% 50%;
-    -webkit-box-shadow: 0px 4px 6px #58a3fe2a;
-    box-shadow: 0px 4px 6px #58a3fe2a;
+    -webkit-box-shadow: 0px 4px 6px #2c39fd2a;
+    box-shadow: 0px 4px 6px #2c39fd2a;
     margin-bottom: 30px;
 }
 
@@ -1636,7 +1636,7 @@ ol {
 }
 
 .pricing-feature-list li i {
-    color: #58a3fe;
+    color: #2c39fd;
     font-size: 16px;
     padding-right: 4px;
 }
@@ -1976,7 +1976,7 @@ ol {
     background-color: var(--thm-footer-bg);
     text-align: center;
     border-radius: var(--thm-radius);
-    box-shadow: 0px 4px 6px #58a3fe2a;
+    box-shadow: 0px 4px 6px #2c39fd2a;
 }
 
 .contact-title {
@@ -2056,7 +2056,7 @@ ol {
     border-radius: 0 50% 50%;
     background: var(--thm-footer-bg);
     color: var(--thm-primary);
-    box-shadow: 0px 4px 6px #58a3fe2a;
+    box-shadow: 0px 4px 6px #2c39fd2a;
 }
 
 .contact-item .contact-content {
@@ -2643,7 +2643,7 @@ ul.sp-summary li span {
     left: 4px;
     width: 10px;
     height: 10px;
-    background-color: #58a3fe;
+    background-color: #2c39fd;
     -webkit-transform: scale(0);
     -moz-transform: scale(0);
     -ms-transform: scale(0);
@@ -2653,7 +2653,7 @@ ul.sp-summary li span {
 }
 
 .checkbox-replace .i-checks input:checked + i {
-    border-color: #58a3fe;
+    border-color: #2c39fd;
 }
 
 .checkbox-replace .i-checks input:checked + i:before {

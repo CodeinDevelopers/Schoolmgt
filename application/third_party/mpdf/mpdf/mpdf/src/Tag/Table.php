@@ -450,7 +450,7 @@ class Table extends Tag
 
 		if (isset($attr['BORDER']) && $attr['BORDER'] == '1') {
 			$this->mpdf->table_border_attr_set = 1;
-			$bord = $this->mpdf->border_details('#58a3fe 1px solid');
+			$bord = $this->mpdf->border_details('#2c39fd 1px solid');
 			if ($bord['s']) {
 				$table['border'] = Border::ALL;
 				$table['border_details']['R'] = $bord;

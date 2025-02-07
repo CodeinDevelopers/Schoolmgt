@@ -427,7 +427,7 @@ class DirectWrite
 		}
 	}
 
-	function Shaded_box($text, $font = '', $fontstyle = 'B', $szfont = '', $width = '70%', $style = 'DF', $radius = 2.5, $fill = '#FFFFFF', $color = '#58a3fe', $pad = 2)
+	function Shaded_box($text, $font = '', $fontstyle = 'B', $szfont = '', $width = '70%', $style = 'DF', $radius = 2.5, $fill = '#FFFFFF', $color = '#2c39fd', $pad = 2)
 	{
 		// F (shading - no line),S (line, no shading),DF (both)
 		if (!$font) {
