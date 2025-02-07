@@ -1,10 +1,10 @@
 {
-    "name": "Ramom School",
-    "short_name": "Ramom School",
+    "name": "Acamedium",
+    "short_name": "Acamedium",
     "scope": "/",
     "start_url": "/",
     "display": "standalone",
-    "theme_color": "#6e8fd4",
+    "theme_color": "#2c39fd",
     "background_color": "#ffffff",
     "orientation": "portrait",
     "status_bar": "black",
