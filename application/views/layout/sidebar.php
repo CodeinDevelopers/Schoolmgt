@@ -135,266 +135,74 @@
                             include "qr_code_menu.php";
 
                          } } ?>
-                    <?php if (moduleIsEnabled('inventory')) { 
-                        if (get_permission('product', 'is_view') ||
-                            get_permission('product_category', 'is_view') ||
-                            get_permission('product_store', 'is_view') ||
-                            get_permission('product_supplier', 'is_view') ||
-                            get_permission('product_unit', 'is_view') ||
-                            get_permission('product_purchase', 'is_view') ||
-                            get_permission('product_sales', 'is_view') ||
-                            get_permission('product_issue', 'is_view')) {
-                        ?>
-                    <!-- Inventory -->
-                    <li class="nav-parent <?php if ($main_menu == 'inventory' || $main_menu == 'inventory_report') echo 'nav-expanded nav-active'; ?>">
-                        <a><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.95526 2.25C3.97013 2.25001 3.98505 2.25001 4.00001 2.25001L20.0448 2.25C20.4776 2.24995 20.8744 2.24991 21.1972 2.29331C21.5527 2.3411 21.9284 2.45355 22.2374 2.76257C22.5465 3.07159 22.6589 3.44732 22.7067 3.8028C22.7501 4.12561 22.7501 4.52245 22.75 4.95526V5.04475C22.7501 5.47757 22.7501 5.8744 22.7067 6.19721C22.6589 6.55269 22.5465 6.92842 22.2374 7.23744C21.9437 7.53121 21.5896 7.64733 21.25 7.69914V13.0564C21.25 14.8942 21.25 16.3498 21.0969 17.489C20.9392 18.6615 20.6071 19.6104 19.8588 20.3588C19.1104 21.1071 18.1615 21.4392 16.989 21.5969C15.8498 21.75 14.3942 21.75 12.5564 21.75H11.4436C9.60583 21.75 8.1502 21.75 7.01098 21.5969C5.83856 21.4392 4.88961 21.1071 4.14125 20.3588C3.39289 19.6104 3.06077 18.6615 2.90314 17.489C2.74998 16.3498 2.74999 14.8942 2.75001 13.0564L2.75001 7.69914C2.41038 7.64733 2.05634 7.53121 1.76257 7.23744C1.45355 6.92842 1.3411 6.55269 1.29331 6.19721C1.24991 5.8744 1.24995 5.47757 1.25 5.04476C1.25001 5.02988 1.25001 5.01496 1.25001 5.00001C1.25001 4.98505 1.25001 4.97013 1.25 4.95526C1.24995 4.52244 1.24991 4.12561 1.29331 3.8028C1.3411 3.44732 1.45355 3.07159 1.76257 2.76257C2.07159 2.45355 2.44732 2.3411 2.8028 2.29331C3.12561 2.24991 3.52244 2.24995 3.95526 2.25ZM4.25001 7.75001V13C4.25001 14.9068 4.2516 16.2615 4.38977 17.2892C4.52503 18.2952 4.7787 18.8749 5.20191 19.2981C5.62512 19.7213 6.20477 19.975 7.21086 20.1102C8.23852 20.2484 9.59319 20.25 11.5 20.25H12.5C14.4068 20.25 15.7615 20.2484 16.7892 20.1102C17.7952 19.975 18.3749 19.7213 18.7981 19.2981C19.2213 18.8749 19.475 18.2952 19.6102 17.2892C19.7484 16.2615 19.75 14.9068 19.75 13V7.75001H4.25001ZM2.82324 3.82324L2.82568 3.82187C2.82761 3.82086 2.83093 3.81924 2.83597 3.81717C2.85775 3.80821 2.90611 3.79291 3.00267 3.77993C3.21339 3.7516 3.5074 3.75001 4.00001 3.75001H20C20.4926 3.75001 20.7866 3.7516 20.9973 3.77993C21.0939 3.79291 21.1423 3.80821 21.164 3.81717C21.1691 3.81924 21.1724 3.82086 21.1743 3.82187L21.1768 3.82323L21.1781 3.82568C21.1792 3.82761 21.1808 3.83093 21.1828 3.83597C21.1918 3.85775 21.2071 3.90611 21.2201 4.00267C21.2484 4.21339 21.25 4.5074 21.25 5.00001C21.25 5.49261 21.2484 5.78662 21.2201 5.99734C21.2071 6.0939 21.1918 6.14226 21.1828 6.16404C21.1808 6.16909 21.1792 6.1724 21.1781 6.17434L21.1768 6.17678L21.1743 6.17815C21.1724 6.17916 21.1691 6.18077 21.164 6.18285C21.1423 6.19181 21.0939 6.2071 20.9973 6.22008C20.7866 6.24841 20.4926 6.25001 20 6.25001H4.00001C3.5074 6.25001 3.21339 6.24841 3.00267 6.22008C2.90611 6.2071 2.85775 6.19181 2.83597 6.18285C2.83093 6.18077 2.82761 6.17916 2.82568 6.17815L2.82324 6.17677L2.82187 6.17434C2.82086 6.1724 2.81924 6.16909 2.81717 6.16404C2.80821 6.14226 2.79291 6.0939 2.77993 5.99734C2.7516 5.78662 2.75001 5.49261 2.75001 5.00001C2.75001 4.5074 2.7516 4.21339 2.77993 4.00267C2.79291 3.90611 2.80821 3.85775 2.81717 3.83597C2.81924 3.83093 2.82086 3.82761 2.82187 3.82568L2.82324 3.82324ZM2.82324 6.17677C2.82284 6.17636 2.82297 6.17644 2.82324 6.17677V6.17677ZM10.4782 9.75001H13.5218C13.736 9.74999 13.9329 9.74998 14.0982 9.76126C14.2759 9.77338 14.4712 9.80099 14.6697 9.88322C15.0985 10.0608 15.4392 10.4015 15.6168 10.8303C15.699 11.0288 15.7266 11.2242 15.7388 11.4018C15.75 11.5671 15.75 11.764 15.75 11.9782V12.0218C15.75 12.236 15.75 12.4329 15.7388 12.5982C15.7266 12.7759 15.699 12.9712 15.6168 13.1697C15.4392 13.5985 15.0985 13.9392 14.6697 14.1168C14.4712 14.199 14.2759 14.2266 14.0982 14.2388C13.9329 14.25 13.736 14.25 13.5218 14.25H10.4782C10.264 14.25 10.0671 14.25 9.9018 14.2388C9.72416 14.2266 9.52881 14.199 9.33031 14.1168C8.90151 13.9392 8.56083 13.5985 8.38322 13.1697C8.30099 12.9712 8.27338 12.7759 8.26126 12.5982C8.24998 12.4329 8.24999 12.236 8.25001 12.0218V11.9782C8.24999 11.764 8.24998 11.5671 8.26126 11.4018C8.27338 11.2242 8.30099 11.0288 8.38322 10.8303C8.56083 10.4015 8.90151 10.0608 9.33031 9.88322C9.52881 9.80099 9.72416 9.77338 9.9018 9.76126C10.0671 9.74998 10.264 9.74999 10.4782 9.75001ZM9.90131 11.2703C9.84248 11.2956 9.79559 11.3425 9.77031 11.4013C9.76844 11.4087 9.76234 11.4371 9.75778 11.5039C9.75041 11.6119 9.75001 11.7568 9.75001 12C9.75001 12.2432 9.75041 12.3881 9.75778 12.4961C9.76234 12.5629 9.76844 12.5913 9.77031 12.5987C9.79559 12.6575 9.84248 12.7044 9.90131 12.7297C9.90867 12.7316 9.93707 12.7377 10.0039 12.7422C10.1119 12.7496 10.2568 12.75 10.5 12.75H13.5C13.7432 12.75 13.8881 12.7496 13.9961 12.7422C14.0629 12.7377 14.0913 12.7316 14.0987 12.7297C14.1575 12.7044 14.2044 12.6575 14.2297 12.5987C14.2316 12.5913 14.2377 12.5629 14.2422 12.4961C14.2496 12.3881 14.25 12.2432 14.25 12C14.25 11.7568 14.2496 11.6119 14.2422 11.5039C14.2377 11.4371 14.2316 11.4087 14.2297 11.4013C14.2044 11.3425 14.1575 11.2956 14.0987 11.2703C14.0913 11.2684 14.0629 11.2623 13.9961 11.2578C13.8881 11.2504 13.7432 11.25 13.5 11.25H10.5C10.2568 11.25 10.1119 11.2504 10.0039 11.2578C9.93707 11.2623 9.90866 11.2684 9.90131 11.2703Z" fill="currentColor"></path> </g></svg> <span><?php echo translate('inventory'); ?></span></a>
+
+
+                    <?php
+                    if (get_permission('student', 'is_view') ||
+                    get_permission('student_disable_authentication', 'is_view')) {
+                    ?>
+                    <!-- student details -->
+                    <li class="nav-parent <?php if ($main_menu == 'student') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5"></circle>
+                                        <path d="M20 17.5C20 19.9853 20 22 12 22C4 22 4 19.9853 4 17.5C4 15.0147 7.58172 13 12 13C16.4183 13 20 15.0147 20 17.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    </g>
+                                </svg> <span><?=translate('student_details')?></span>
+                        </a>
                         <ul class="nav nav-children">
-                        <?php if(get_permission('product', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'inventory/product' || $sub_page == 'inventory/product_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('inventory/product'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('product'); ?></span>
+                        <?php if(get_permission('student', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'student/view' || $sub_page == 'student/profile') echo 'nav-active';?>">
+                                <a href="<?=base_url('student/view')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('student_list')?></span>
                                 </a>
                             </li>
-                        <?php } if(get_permission('product_category', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'inventory/category') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('inventory/category'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('category'); ?></span>
+                        <?php } if(get_permission('student_disable_authentication', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'student/disable_authentication') echo 'nav-active';?>">
+                                <a href="<?=base_url('student/disable_authentication')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('login_deactivate')?></span>
                                 </a>
                             </li>
-                        <?php } if(get_permission('product_store', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'inventory/store' || $sub_page == 'inventory/store_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('inventory/store'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('store'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('product_supplier', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'inventory/supplier' || $sub_page == 'inventory/supplier_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('inventory/supplier'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('supplier'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('product_unit', 'is_view')){  ?>
-                            <li class="<?php if ($sub_page == 'inventory/unit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('inventory/unit'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('unit'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('product_purchase', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'inventory/purchase' || $sub_page == 'inventory/purchase_edit' || $sub_page == 'inventory/purchase_bill') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('inventory/purchase'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('purchase'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('product_sales', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'inventory/sales' || $sub_page == 'inventory/sales_invoice') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('inventory/sales'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('sales'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('product_issue', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'inventory/issue') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('inventory/issue'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('issue'); ?></span>
+                        <?php } if(get_permission('disable_reason', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'student/disable_reason') echo 'nav-active';?>">
+                                <a href="<?=base_url('student/disable_reason')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('deactivate_reason')?></span>
                                 </a>
                             </li>
                         <?php } ?>
                         </ul>
                     </li>
-                    <?php } } ?>
-                    <?php 
-                    if (is_superadmin_loggedin()) : ?>
-                    <!-- branch -->
-                    <li class="<?php if ($main_menu == 'branch') echo 'nav-active';?>">
-                        <a href="<?=base_url('branch')?>">
-                        <svg viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true><g id=" SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="Development" transform="translate(-768.000000, 0.000000)">
-                                                <g id="group_line" transform="translate(768.000000, 0.000000)">
-                                                    <path d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z" id="MingCute" fill-rule="nonzero"> </path>
-                                                    <path d="M15,6 C15,7.30622 14.1652,8.41746 13,8.82929 L13,11 L16,11 C17.6569,11 19,12.3431 19,14 L19,15.1707 C20.1652,15.5825 21,16.6938 21,18 C21,19.6569 19.6569,21 18,21 C16.3431,21 15,19.6569 15,18 C15,16.6938 15.8348,15.5825 17,15.1707 L17,14 C17,13.4477 16.5523,13 16,13 L8,13 C7.44772,13 7,13.4477 7,14 L7,15.1707 C8.16519,15.5825 9,16.6938 9,18 C9,19.6569 7.65685,21 6,21 C4.34315,21 3,19.6569 3,18 C3,16.6938 3.83481,15.5825 5,15.1707 L5,14 C5,12.3431 6.34315,11 8,11 L11,11 L11,8.82929 C9.83481,8.41746 9,7.30622 9,6 C9,4.34315 10.3431,3 12,3 C13.6569,3 15,4.34315 15,6 Z M12,5 C11.4477,5 11,5.44772 11,6 C11,6.55228 11.4477,7 12,7 C12.5523,7 13,6.55228 13,6 C13,5.44772 12.5523,5 12,5 Z M6,17 C5.44772,17 5,17.4477 5,18 C5,18.5523 5.44772,19 6,19 C6.55228,19 7,18.5523 7,18 C7,17.4477 6.55228,17 6,17 Z M18,17 C17.4477,17 17,17.4477 17,18 C17,18.5523 17.4477,19 18,19 C18.5523,19 19,18.5523 19,18 C19,17.4477 18.5523,17 18,17 Z" id="形状" fill="currentColor"> </path>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg> <span><?=translate('branch')?></span>
-                        </a>
-                    </li>
-                    <?php endif; 
-                    $saasExisting = $this->app_lib->isExistingAddon('saas');
-                    if ($saasExisting): ?>
-                    <!-- school subscription (SaaS)  -->
-                        <?php include "saas_menu.php"; ?>
-                    <?php endif; ?>
+                    <?php } ?>
                     <?php
-                    if (moduleIsEnabled('website')) {
-                        if (get_permission('frontend_setting', 'is_view') ||
-                            get_permission('frontend_menu', 'is_view') ||
-                            get_permission('frontend_section', 'is_view') ||
-                            get_permission('manage_page', 'is_view') ||
-                            get_permission('frontend_slider', 'is_view') ||
-                            get_permission('frontend_features', 'is_view') ||
-                            get_permission('frontend_testimonial', 'is_view') ||
-                            get_permission('frontend_services', 'is_view') ||
-                            get_permission('frontend_gallery', 'is_view') ||
-                            get_permission('frontend_gallery_category', 'is_view') ||
-                            get_permission('frontend_news', 'is_view') ||
-                            get_permission('frontend_faq', 'is_view')) {
-                            ?>
-                    <!-- Patient Details -->
-                    <li class="nav-parent <?php if ($main_menu == 'frontend') echo 'nav-expanded nav-active'; ?>">
-                        <a><svg fill="currentColor" viewBox="-1 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16.417 9.57a7.917 7.917 0 1 1-8.144-7.908 1.758 1.758 0 0 1 .451 0 7.913 7.913 0 0 1 7.693 7.907zM5.85 15.838q.254.107.515.193a11.772 11.772 0 0 1-1.572-5.92h-3.08a6.816 6.816 0 0 0 4.137 5.727zM2.226 6.922a6.727 6.727 0 0 0-.511 2.082h3.078a11.83 11.83 0 0 1 1.55-5.89q-.249.083-.493.186a6.834 6.834 0 0 0-3.624 3.622zm8.87 2.082a14.405 14.405 0 0 0-.261-2.31 9.847 9.847 0 0 0-.713-2.26c-.447-.952-1.009-1.573-1.497-1.667a8.468 8.468 0 0 0-.253 0c-.488.094-1.05.715-1.497 1.668a9.847 9.847 0 0 0-.712 2.26 14.404 14.404 0 0 0-.261 2.309zm-.974 5.676a9.844 9.844 0 0 0 .713-2.26 14.413 14.413 0 0 0 .26-2.309H5.903a14.412 14.412 0 0 0 .261 2.31 9.844 9.844 0 0 0 .712 2.259c.487 1.036 1.109 1.68 1.624 1.68s1.137-.644 1.623-1.68zm4.652-2.462a6.737 6.737 0 0 0 .513-2.107h-3.082a11.77 11.77 0 0 1-1.572 5.922q.261-.086.517-.194a6.834 6.834 0 0 0 3.624-3.621zM11.15 3.3a6.82 6.82 0 0 0-.496-.187 11.828 11.828 0 0 1 1.55 5.89h3.081A6.815 6.815 0 0 0 11.15 3.3z"></path></g></svg> <?php echo translate('frontend'); ?></span></a>
-                        <ul class="nav nav-children">
-                        <?php if(get_permission('frontend_setting', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/setting') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/setting'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('setting'); ?></span>
-                                </a>
-                            </li>
-                       <?php } if(get_permission('frontend_menu', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/menu' || $sub_page == 'frontend/menu_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/menu'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('menu'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('frontend_section', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/section_home' ||
-                                            $sub_page == 'frontend/section_doctors' ||
-                                                $sub_page == 'frontend/section_appointment' ||
-                                                    $sub_page == 'frontend/section_faq' ||
-                                                        $sub_page == 'frontend/section_contact' ||
-                                                            $sub_page == 'frontend/section_about' ||
-                                                                $sub_page == 'frontend/section_services') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/section/index'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('page') . " " . translate('section'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('manage_page', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'frontend/content' || $sub_page == 'frontend/content_edit') echo 'nav-active'; ?>">
-                                        <a href="<?php echo base_url('frontend/content/index'); ?>">
-                                            <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('manage') . " " . translate('page'); ?></span>
-                                        </a>
-                                    </li>
-                            <?php } if(get_permission('frontend_slider', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/slider' || $sub_page == 'frontend/slider_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/slider'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('slider'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_features', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/features' || $sub_page == 'frontend/features_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/features'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('features'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_testimonial', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/testimonial' || $sub_page == 'frontend/testimonial_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/testimonial'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('testimonial'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_services', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/services' || $sub_page == 'frontend/services_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/services'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('service'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_faq', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/faq' || $sub_page == 'frontend/faq_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/faq/index'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('faq'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_gallery_category', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/gallery_category') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/gallery/category'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('gallery') . " " . translate('category'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_gallery', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/gallery' || $sub_page == 'frontend/gallery_edit' || $sub_page == 'frontend/gallery_album') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/gallery/index'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('gallery'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_news', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/news' || $sub_page == 'frontend/news_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/news/index'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('news'); ?></span>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
-
-                    <?php
-                    if (moduleIsEnabled('reception')) {
-                        if (get_permission('postal_record', 'is_view') ||
-                        get_permission('call_log', 'is_view') ||
-                        get_permission('visitor_log', 'is_view') ||
-                        get_permission('complaint', 'is_view') ||
-                        get_permission('enquiry', 'is_view') ||
-                        get_permission('follow_up', 'is_view') ||
-                        get_permission('config_reception', 'is_view')) { 
-                        ?>
-                    <!-- reception -->
-                    <li class="nav-parent <?php if ($main_menu == 'reception') echo 'nav-expanded nav-active';?>">
+                    if (moduleIsEnabled('homework')) {
+                        if(get_permission('homework', 'is_view') ||
+                        get_permission('evaluation_report', 'is_view')) {
+                    ?>
+                    <!-- attachments upload -->
+                    <li class="nav-parent <?php if ($main_menu == 'homework') echo 'nav-expanded nav-active';?>">
                         <a>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M6 15.5C6 14.9477 6.44772 14.5 7 14.5H17C17.5523 14.5 18 14.9477 18 15.5C18 16.6046 17.1046 17.5 16 17.5H8C6.89543 17.5 6 16.6046 6 15.5Z" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M6.62825 6.76581C6.86962 4.75442 6.9903 3.74872 7.57198 3.06161C7.75659 2.84355 7.97139 2.65298 8.2099 2.49567C8.96141 2 9.97432 2 12.0001 2C14.026 2 15.0389 2 15.7904 2.49567C16.0289 2.65298 16.2437 2.84355 16.4283 3.06161C17.01 3.74872 17.1307 4.75442 17.372 6.76581L17.463 7.52342C17.7134 9.61087 17.8387 10.6546 17.2419 11.3273C16.6451 12 15.5939 12 13.4914 12H10.5088C8.40642 12 7.35521 12 6.7584 11.3273C6.1616 10.6546 6.28684 9.61087 6.53734 7.52342L6.62825 6.76581Z" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M12 12V14" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M12 22V20M12 20V17.5M12 20L12.4661 20.1165C13.4214 20.3554 14.1886 21.0658 14.5 22M12 20L11.5339 20.1165C10.5786 20.3554 9.81142 21.0658 9.5 22M6 16L5.13484 13.4045C5.06173 13.1852 5.02518 13.0755 4.95424 12.9225C4.8833 12.7695 4.85413 12.7215 4.79579 12.6256C4.33942 11.8752 3.7325 11.5 2 11.5M18 16L18.8652 13.4045C18.9383 13.1852 18.9748 13.0755 19.0458 12.9225C19.1167 12.7695 19.1459 12.7215 19.2042 12.6256C19.6606 11.8752 20.2675 11.5 22 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        </g>
-                                    </svg> <span><?=translate('reception')?></span>
+                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.025 8C8.025 8.41421 8.36079 8.75 8.775 8.75C9.18922 8.75 9.525 8.41421 9.525 8H8.025ZM13.875 8C13.875 8.41421 14.2108 8.75 14.625 8.75C15.0392 8.75 15.375 8.41421 15.375 8H13.875ZM8.80427 8.74943C9.21817 8.73326 9.5406 8.38463 9.52443 7.97073C9.50826 7.55683 9.15963 7.23441 8.74573 7.25057L8.80427 8.74943ZM4.16474 11.3809C4.09897 11.7899 4.37718 12.1747 4.78613 12.2405C5.19509 12.3063 5.57994 12.0281 5.64571 11.6191L4.16474 11.3809ZM8.775 7.25C8.36079 7.25 8.025 7.58579 8.025 8C8.025 8.41421 8.36079 8.75 8.775 8.75V7.25ZM14.625 8.75C15.0392 8.75 15.375 8.41421 15.375 8C15.375 7.58579 15.0392 7.25 14.625 7.25V8.75ZM9.66 13.6046C10.0712 13.6543 10.4449 13.3612 10.4946 12.95C10.5443 12.5388 10.2512 12.1651 9.84 12.1154L9.66 13.6046ZM5.21442 10.8207C4.83705 10.6499 4.39269 10.8174 4.22193 11.1948C4.05116 11.5722 4.21866 12.0165 4.59603 12.1873L5.21442 10.8207ZM10.5 12.86C10.5 12.4458 10.1642 12.11 9.75 12.11C9.33579 12.11 9 12.4458 9 12.86H10.5ZM9 14.99C9 15.4042 9.33579 15.74 9.75 15.74C10.1642 15.74 10.5 15.4042 10.5 14.99H9ZM9.84273 12.1158C9.4317 12.0645 9.05697 12.3562 9.00576 12.7673C8.95454 13.1783 9.24623 13.553 9.65727 13.6042L9.84273 12.1158ZM11.7 12.99L11.6931 13.7401L11.7065 13.74L11.7 12.99ZM13.7424 13.6053C14.1534 13.5543 14.4453 13.1797 14.3943 12.7687C14.3433 12.3576 13.9687 12.0657 13.5577 12.1167L13.7424 13.6053ZM4.59141 12.1852C4.96762 12.3585 5.4131 12.194 5.58642 11.8178C5.75973 11.4416 5.59525 10.9961 5.21904 10.8228L4.59141 12.1852ZM4.27005 10.3376C3.90976 10.1333 3.45202 10.2597 3.24765 10.62C3.04328 10.9802 3.16967 11.438 3.52996 11.6424L4.27005 10.3376ZM5.64934 11.5978C5.70114 11.1868 5.40999 10.8117 4.99902 10.7599C4.58806 10.7081 4.21292 10.9992 4.16112 11.4102L5.64934 11.5978ZM4.875 11.99L5.625 11.99L5.625 11.9891L4.875 11.99ZM4.875 15.99H4.125C4.125 15.9993 4.12518 16.0087 4.12552 16.018L4.875 15.99ZM9.0753 19.99V19.24C9.06612 19.24 9.05693 19.2402 9.04775 19.2405L9.0753 19.99ZM14.3257 19.99L14.353 19.2405C14.3439 19.2402 14.3348 19.24 14.3257 19.24L14.3257 19.99ZM18.525 15.99L19.2745 16.018C19.2748 16.0087 19.275 15.9993 19.275 15.99L18.525 15.99ZM18.525 11.99L17.775 11.9891V11.99H18.525ZM19.2389 11.4102C19.1871 10.9992 18.8119 10.7081 18.401 10.7599C17.99 10.8117 17.6989 11.1868 17.7507 11.5978L19.2389 11.4102ZM14.6543 7.25057C14.2404 7.23441 13.8917 7.55683 13.8756 7.97073C13.8594 8.38463 14.1818 8.73326 14.5957 8.74943L14.6543 7.25057ZM17.7543 11.6191C17.8201 12.0281 18.2049 12.3063 18.6139 12.2405C19.0228 12.1747 19.301 11.7899 19.2353 11.3809L17.7543 11.6191ZM13.56 12.1154C13.1488 12.1651 12.8557 12.5388 12.9054 12.95C12.9551 13.3612 13.3288 13.6543 13.74 13.6046L13.56 12.1154ZM18.804 12.1873C19.1813 12.0165 19.3488 11.5722 19.1781 11.1948C19.0073 10.8174 18.563 10.6499 18.1856 10.8207L18.804 12.1873ZM14.4 12.86C14.4 12.4458 14.0642 12.11 13.65 12.11C13.2358 12.11 12.9 12.4458 12.9 12.86H14.4ZM12.9 14.99C12.9 15.4042 13.2358 15.74 13.65 15.74C14.0642 15.74 14.4 15.4042 14.4 14.99H12.9ZM18.181 10.8228C17.8048 10.9961 17.6403 11.4416 17.8136 11.8178C17.9869 12.194 18.4324 12.3585 18.8086 12.1852L18.181 10.8228ZM19.87 11.6424C20.2303 11.438 20.3567 10.9802 20.1524 10.62C19.948 10.2597 19.4902 10.1333 19.13 10.3376L19.87 11.6424ZM9.525 8C9.525 6.73935 10.5166 5.75 11.7 5.75V4.25C9.65257 4.25 8.025 5.94695 8.025 8H9.525ZM11.7 5.75C12.8834 5.75 13.875 6.73935 13.875 8H15.375C15.375 5.94695 13.7474 4.25 11.7 4.25V5.75ZM8.74573 7.25057C6.43906 7.34066 4.53484 9.07978 4.16474 11.3809L5.64571 11.6191C5.90653 9.99741 7.23733 8.81063 8.80427 8.74943L8.74573 7.25057ZM8.775 8.75H14.625V7.25H8.775V8.75ZM9.84 12.1154C8.24431 11.9225 6.68526 11.4863 5.21442 10.8207L4.59603 12.1873C6.20537 12.9155 7.9122 13.3933 9.66 13.6046L9.84 12.1154ZM9 12.86V14.99H10.5V12.86H9ZM9.65727 13.6042C10.3329 13.6884 11.0126 13.7337 11.6931 13.74L11.7069 12.24C11.0837 12.2343 10.4614 12.1928 9.84273 12.1158L9.65727 13.6042ZM11.7065 13.74C12.387 13.7341 13.0667 13.6891 13.7424 13.6053L13.5577 12.1167C12.939 12.1935 12.3166 12.2346 11.6935 12.24L11.7065 13.74ZM5.21904 10.8228C4.88545 10.6691 4.56921 10.5073 4.27005 10.3376L3.52996 11.6424C3.8678 11.834 4.22171 12.0149 4.59141 12.1852L5.21904 10.8228ZM4.16112 11.4102C4.13684 11.6028 4.12478 11.7967 4.125 11.9909L5.625 11.9891C5.62485 11.8583 5.63298 11.7275 5.64934 11.5978L4.16112 11.4102ZM4.125 11.99V15.99H5.625V11.99H4.125ZM4.12552 16.018C4.22595 18.7067 6.43559 20.8375 9.10285 20.7395L9.04775 19.2405C7.24343 19.3068 5.69534 17.8591 5.62448 15.962L4.12552 16.018ZM9.0753 20.74H14.3257V19.24H9.0753V20.74ZM14.2983 20.7395C16.9651 20.8369 19.174 18.7063 19.2745 16.018L17.7755 15.962C17.7047 17.8588 16.1571 19.3064 14.353 19.2405L14.2983 20.7395ZM19.275 15.99V11.99H17.775V15.99H19.275ZM19.275 11.9909C19.2752 11.7967 19.2632 11.6028 19.2389 11.4102L17.7507 11.5978C17.767 11.7276 17.7752 11.8583 17.775 11.9891L19.275 11.9909ZM14.5957 8.74943C16.1627 8.81063 17.4935 9.99741 17.7543 11.6191L19.2353 11.3809C18.8652 9.07978 16.9609 7.34066 14.6543 7.25057L14.5957 8.74943ZM13.74 13.6046C15.4878 13.3933 17.1946 12.9155 18.804 12.1873L18.1856 10.8207C16.7147 11.4863 15.1557 11.9225 13.56 12.1154L13.74 13.6046ZM12.9 12.86V14.99H14.4V12.86H12.9ZM18.8086 12.1852C19.1783 12.0149 19.5322 11.834 19.87 11.6424L19.13 10.3376C18.8308 10.5073 18.5146 10.6691 18.181 10.8228L18.8086 12.1852Z" fill="currentColor"></path> </g></svg> <span><?=translate('homework')?></span>
                         </a>
                         <ul class="nav nav-children">
-                            <?php if(get_permission('enquiry', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'reception/enquiry' || $sub_page =='reception/enquiry_edit' || $sub_page =='reception/enquiry_details') echo 'nav-active';?>">
-                                <a href="<?=base_url('reception/enquiry')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('admission_enquiry')?></span>
+                            <?php if(get_permission('homework', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'homework/index' || $sub_page == 'homework/add' || $sub_page == 'homework/evaluate_list' || $sub_page == 'homework/edit') echo 'nav-active';?>">
+                                <a href="<?=base_url('homework')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('homework')?></span>
                                 </a>
                             </li>
-                            <?php } if(get_permission('postal_record', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'reception/postal' || $sub_page =='reception/postal_edit') echo 'nav-active';?>">
-                                <a href="<?=base_url('reception/postal')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('postal_record')?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('call_log', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'reception/call_log' || $sub_page =='reception/call_log_edit') echo 'nav-active';?>">
-                                <a href="<?=base_url('reception/call_log')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('call_log')?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('visitor_log', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'reception/visitor' || $sub_page =='reception/visitor_edit') echo 'nav-active';?>">
-                                <a href="<?=base_url('reception/visitor_log')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('visitor_log')?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('complaint', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'reception/complaint' || $sub_page == 'reception/complaint_edit') echo 'nav-active';?>">
-                                <a href="<?=base_url('reception/complaint')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('complaint')?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('config_reception', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'reception_config/reference' || $sub_page == 'reception_config/response' || $sub_page == 'reception_config/calling_purpose' || $sub_page == 'reception_config/visiting_purpose' || $sub_page == 'reception_config/complaint_type') echo 'nav-active';?>">
-                                <a href="<?=base_url('reception_config/reference')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i> Config Reception</span>
+                            <?php } if(get_permission('evaluation_report', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'homework/report') echo 'nav-active';?>">
+                                <a href="<?=base_url('homework/report')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('evaluation_report')?></span>
                                 </a>
                             </li>
                             <?php } ?>
                         </ul>
                     </li>
                     <?php }} ?>
-
                     <?php
                     if (get_permission('student', 'is_add') ||
                         get_permission('multiple_import', 'is_add') ||
@@ -455,394 +263,6 @@
                     </li>
                     <?php } ?>
 
-                    <?php
-                    if (get_permission('student', 'is_view') ||
-                    get_permission('student_disable_authentication', 'is_view')) {
-                    ?>
-                    <!-- student details -->
-                    <li class="nav-parent <?php if ($main_menu == 'student') echo 'nav-expanded nav-active';?>">
-                        <a>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5"></circle>
-                                        <path d="M20 17.5C20 19.9853 20 22 12 22C4 22 4 19.9853 4 17.5C4 15.0147 7.58172 13 12 13C16.4183 13 20 15.0147 20 17.5Z" stroke="currentColor" stroke-width="1.5"></path>
-                                    </g>
-                                </svg> <span><?=translate('student_details')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                        <?php if(get_permission('student', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'student/view' || $sub_page == 'student/profile') echo 'nav-active';?>">
-                                <a href="<?=base_url('student/view')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('student_list')?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('student_disable_authentication', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'student/disable_authentication') echo 'nav-active';?>">
-                                <a href="<?=base_url('student/disable_authentication')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('login_deactivate')?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('disable_reason', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'student/disable_reason') echo 'nav-active';?>">
-                                <a href="<?=base_url('student/disable_reason')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('deactivate_reason')?></span>
-                                </a>
-                            </li>
-                        <?php } ?>
-                        </ul>
-                    </li>
-                    <?php } ?>
-                    <?php
-                    if (get_permission('parent', 'is_view') ||
-                    get_permission('parent', 'is_add') ||
-                    get_permission('parent_disable_authentication', 'is_view')) {
-                    ?>
-                    <!-- parents -->
-                    <li class="nav-parent <?php if ($main_menu == 'parents') echo 'nav-expanded nav-active';?>">
-                        <a>
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <defs>
-                                            <style>
-                                                .cls-1,
-                                                .cls-2 {
-                                                    fill: none;
-                                                    stroke: currentColor;
-                                                    stroke-linecap: round;
-                                                    stroke-width: 1.5px;
-                                                }
-
-                                                .cls-1 {
-                                                    stroke-linejoin: round;
-                                                }
-
-                                                .cls-2 {
-                                                    stroke-linejoin: bevel;
-                                                }
-                                            </style>
-                                        </defs>
-                                        <g id="ic-users-more">
-                                            <path class="cls-1" d="M3,21l.79-2.88C5.1,13.39,8.55,11,12,11"></path>
-                                            <circle class="cls-2" cx="12" cy="5.98" r="5"></circle>
-                                            <circle class="cls-1" cx="17" cy="18" r="5"></circle>
-                                            <circle class="cls-1" cx="17" cy="18" r="0.21"></circle>
-                                            <circle class="cls-1" cx="14.35" cy="18" r="0.21"></circle>
-                                            <circle class="cls-1" cx="19.48" cy="18" r="0.21"></circle>
-                                        </g>
-                                    </g>
-                                </svg> <span><?=translate('parents')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                        <?php if(get_permission('parent', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'parents/view' || $sub_page == 'parents/profile') echo 'nav-active';?>">
-                                <a href="<?=base_url('parents/view')?>">
-                                    <span><i class="fas fa-caret-right"></i><?=translate('parents_list')?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('parent', 'is_add')){ ?>
-                            <li class="<?php if ($sub_page == 'parents/add') echo 'nav-active';?>">
-                                <a href="<?=base_url('parents/add')?>">
-                                    <span><i class="fas fa-caret-right"></i><?=translate('add_parent')?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('parent_disable_authentication', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'parents/disable_authentication') echo 'nav-active';?>">
-                                <a href="<?=base_url('parents/disable_authentication')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('login_deactivate')?></span>
-                                </a>
-                            </li>
-                        <?php } ?>
-                        </ul>
-                    </li>
-                    <?php } ?>
-                    <?php
-                    if(get_permission('employee', 'is_view') ||
-                    get_permission('employee', 'is_add') ||
-                    get_permission('designation', 'is_view') ||
-                    get_permission('designation', 'is_add') ||
-                    get_permission('department', 'is_view') ||
-                    get_permission('employee_disable_authentication', 'is_view')) {
-                    ?>
-                    <!-- Employees -->
-                    <li class="nav-parent <?php if ($main_menu == 'employee') echo 'nav-expanded nav-active'; ?>">
-                        <a><svg fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 299.97 299.97" xml:space="preserve" width="27px" height="27px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <g>
-                                            <g>
-                                                <g>
-                                                    <path d="M149.985,126.898c34.986,0,63.449-28.463,63.449-63.449C213.435,28.463,184.971,0,149.985,0S86.536,28.463,86.536,63.449 C86.536,98.436,114.999,126.898,149.985,126.898z M149.985,15.15c26.633,0,48.299,21.667,48.299,48.299 s-21.667,48.299-48.299,48.299s-48.299-21.667-48.299-48.299S123.353,15.15,149.985,15.15z"></path>
-                                                    <path d="M255.957,271.919l-20.807-86.313c-2.469-10.244-11.553-17.399-22.093-17.399c-13.216,0-114.332,0-126.145,0 c-10.538,0-19.623,7.155-22.093,17.399l-20.807,86.313c-3.444,14.289,7.377,28.051,22.093,28.051h167.76 C248.563,299.97,259.407,286.229,255.957,271.919z M66.105,284.82c-4.898,0-8.513-4.581-7.364-9.35l20.807-86.314 c0.823-3.415,3.851-5.799,7.365-5.799H121.4l-9.553,67.577c-0.283,2,0.244,4.029,1.464,5.637l21.422,28.249H66.105z M127.291,249.932l9.411-66.574h26.567l9.411,66.574l-22.695,29.927L127.291,249.932z M233.865,284.82h-68.628l21.421-28.248 c1.22-1.609,1.747-3.638,1.464-5.637l-9.553-67.577h34.487c3.513,0,6.542,2.385,7.365,5.8l20.807,86.313 C242.377,280.235,238.769,284.82,233.865,284.82z"></path>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg> <span><?php echo translate('employee'); ?></span></a>
-                        <ul class="nav nav-children">
-                        <?php if(get_permission('employee', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'employee/view' ||  $sub_page == 'employee/profile' ) echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('employee/view'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('employee_list'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('department', 'is_view') || get_permission('department', 'is_add')){ ?>
-                            <li class="<?php if ($sub_page == 'employee/department') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('employee/department'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('add_department'); ?></span>
-                                </a>
-                            </li>
-                        <?php }  if(get_permission('designation', 'is_view') || get_permission('designation', 'is_add')){ ?>
-                            <li class="<?php if ($sub_page == 'employee/designation') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('employee/designation'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('add_designation'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('employee', 'is_add')){ ?>
-                            <li class="<?php if ($sub_page == 'employee/add') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('employee/add'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('add_employee'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('employee_disable_authentication', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'employee/disable_authentication') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('employee/disable_authentication'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('login_deactivate'); ?></span>
-                                </a>
-                            </li>
-                        <?php } ?>
-                        </ul>
-                    </li>
-                    <?php } ?>
-
-                    <?php
-                    if (moduleIsEnabled('card_management')) {
-                        if(get_permission('id_card_templete', 'is_view') ||
-                        get_permission('generate_student_idcard', 'is_view') ||
-                        get_permission('admit_card_templete', 'is_view') ||
-                        get_permission('generate_admit_card', 'is_view') ||
-                        get_permission('generate_employee_idcard', 'is_view')) {
-                        ?>
-                    <li class="nav-parent <?php if ($main_menu == 'card_manage') echo 'nav-expanded nav-active';?>">
-                        <a>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M17 11V10C17 8.11438 17 7.17157 16.4142 6.58579C15.8284 6 14.8856 6 13 6H11C9.11438 6 8.17157 6 7.58579 6.58579C7 7.17157 7 8.11438 7 10V11" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M5 11H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M8 16H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        </g>
-                                    </svg> <span><?=translate('card_management')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <?php if(get_permission('id_card_templete', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'card_manage/id_card_templete' || $sub_page == 'card_manage/id_card_templete_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('card_manage/id_card_templete'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('id_card') . " " .  translate('templete'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('generate_student_idcard', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'card_manage/generate_student_idcard') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('card_manage/generate_student_idcard'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('student') . " " .  translate('id_card'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('generate_employee_idcard', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'card_manage/generate_employee_idcard') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('card_manage/generate_employee_idcard'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('employee') . " " .  translate('id_card'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('admit_card_templete', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'card_manage/admit_card_templete' || $sub_page == 'card_manage/admit_card_templete_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('card_manage/admit_card_templete'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('admit_card') . " " .  translate('templete'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('generate_admit_card', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'card_manage/generate_student_admitcard') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('card_manage/generate_student_admitcard'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('generate') . " " .  translate('admit_card'); ?></span>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
-                    
-                    <?php
-                    if (moduleIsEnabled('certificate')) {
-                        if(get_permission('certificate_templete', 'is_view') ||
-                        get_permission('generate_student_certificate', 'is_view') ||
-                        get_permission('generate_employee_certificate', 'is_view')) {
-                        ?>
-                    <li class="nav-parent <?php if ($main_menu == 'certificate') echo 'nav-expanded nav-active';?>">
-                        <a>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M15.3929 4.05365L14.8912 4.61112L15.3929 4.05365ZM19.3517 7.61654L18.85 8.17402L19.3517 7.61654ZM21.654 10.1541L20.9689 10.4592V10.4592L21.654 10.1541ZM3.17157 20.8284L3.7019 20.2981H3.7019L3.17157 20.8284ZM20.8284 20.8284L20.2981 20.2981L20.2981 20.2981L20.8284 20.8284ZM14 21.25H10V22.75H14V21.25ZM2.75 14V10H1.25V14H2.75ZM21.25 13.5629V14H22.75V13.5629H21.25ZM14.8912 4.61112L18.85 8.17402L19.8534 7.05907L15.8947 3.49618L14.8912 4.61112ZM22.75 13.5629C22.75 11.8745 22.7651 10.8055 22.3391 9.84897L20.9689 10.4592C21.2349 11.0565 21.25 11.742 21.25 13.5629H22.75ZM18.85 8.17402C20.2034 9.3921 20.7029 9.86199 20.9689 10.4592L22.3391 9.84897C21.9131 8.89241 21.1084 8.18853 19.8534 7.05907L18.85 8.17402ZM10.0298 2.75C11.6116 2.75 12.2085 2.76158 12.7405 2.96573L13.2779 1.5653C12.4261 1.23842 11.498 1.25 10.0298 1.25V2.75ZM15.8947 3.49618C14.8087 2.51878 14.1297 1.89214 13.2779 1.5653L12.7405 2.96573C13.2727 3.16993 13.7215 3.55836 14.8912 4.61112L15.8947 3.49618ZM10 21.25C8.09318 21.25 6.73851 21.2484 5.71085 21.1102C4.70476 20.975 4.12511 20.7213 3.7019 20.2981L2.64124 21.3588C3.38961 22.1071 4.33855 22.4392 5.51098 22.5969C6.66182 22.7516 8.13558 22.75 10 22.75V21.25ZM1.25 14C1.25 15.8644 1.24841 17.3382 1.40313 18.489C1.56076 19.6614 1.89288 20.6104 2.64124 21.3588L3.7019 20.2981C3.27869 19.8749 3.02502 19.2952 2.88976 18.2892C2.75159 17.2615 2.75 15.9068 2.75 14H1.25ZM14 22.75C15.8644 22.75 17.3382 22.7516 18.489 22.5969C19.6614 22.4392 20.6104 22.1071 21.3588 21.3588L20.2981 20.2981C19.8749 20.7213 19.2952 20.975 18.2892 21.1102C17.2615 21.2484 15.9068 21.25 14 21.25V22.75ZM21.25 14C21.25 15.9068 21.2484 17.2615 21.1102 18.2892C20.975 19.2952 20.7213 19.8749 20.2981 20.2981L21.3588 21.3588C22.1071 20.6104 22.4392 19.6614 22.5969 18.489C22.7516 17.3382 22.75 15.8644 22.75 14H21.25ZM2.75 10C2.75 8.09318 2.75159 6.73851 2.88976 5.71085C3.02502 4.70476 3.27869 4.12511 3.7019 3.7019L2.64124 2.64124C1.89288 3.38961 1.56076 4.33855 1.40313 5.51098C1.24841 6.66182 1.25 8.13558 1.25 10H2.75ZM10.0298 1.25C8.15538 1.25 6.67442 1.24842 5.51887 1.40307C4.34232 1.56054 3.39019 1.8923 2.64124 2.64124L3.7019 3.7019C4.12453 3.27928 4.70596 3.02525 5.71785 2.88982C6.75075 2.75158 8.11311 2.75 10.0298 2.75V1.25Z" fill="currentColor"></path>
-                                            <path d="M13 2.5V5C13 7.35702 13 8.53553 13.7322 9.26777C14.4645 10 15.643 10 18 10H22" stroke="currentColor" stroke-width="1.5"></path>
-                                        </g>
-                                    </svg> <span><?=translate('certificate')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <?php if(get_permission('certificate_templete', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'certificate/index' || $sub_page == 'certificate/edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('certificate'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('certificate') . " " .  translate('templete'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('generate_student_certificate', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'certificate/generate_student') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('certificate/generate_student'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('generate') . " " .  translate('student'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('generate_employee_certificate', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'certificate/generate_employee') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('certificate/generate_employee'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('generate') . " " .  translate('employee'); ?></span>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
-                    <?php
-                    if (moduleIsEnabled('human_resource')) {
-                        if(get_permission('salary_template', 'is_view') ||
-                        get_permission('salary_assign', 'is_view') ||
-                        get_permission('salary_payment', 'is_view') ||
-                        get_permission('advance_salary_manage', 'is_view') ||
-                        get_permission('advance_salary_request', 'is_view') ||
-                        get_permission('leave_category', 'is_view') ||
-                        get_permission('leave_category', 'is_add') ||
-                        get_permission('leave_request', 'is_view') ||
-                        get_permission('leave_manage', 'is_view') ||
-                        get_permission('award', 'is_view')) {
-                    ?>
-                    <!-- human resource -->
-                    <li class="nav-parent <?php if ($main_menu == 'payroll' || $main_menu == 'advance_salary' || $main_menu == 'leave' || $main_menu == 'award') echo 'nav-expanded nav-active';?>">
-                        <a>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="27px" height="27px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 18.2C14.2091 18.2 16 16.4091 16 14.2C16 11.9908 14.2091 10.2 12 10.2C9.79086 10.2 8 11.9908 8 14.2C8 16.4091 9.79086 18.2 12 18.2Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10.4399 14.2999L11.0899 14.9499C11.2799 15.1399 11.5899 15.1399 11.7799 14.9599L13.5599 13.3199" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7.99995 22H15.9999C20.0199 22 20.7399 20.39 20.9499 18.43L21.6999 10.43C21.9699 7.99 21.2699 6 16.9999 6H6.99995C2.72995 6 2.02995 7.99 2.29995 10.43L3.04995 18.43C3.25995 20.39 3.97995 22 7.99995 22Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8 6V5.2C8 3.43 8 2 11.2 2H12.8C16 2 16 3.43 16 5.2V6" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M21.65 11C19.92 12.26 18 13.14 16.01 13.64" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2.62 11.27C4.29 12.41 6.11 13.22 8 13.68" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <?=translate('hrm')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <?php
-                            if(get_permission('salary_template', 'is_view') ||
-                            get_permission('salary_assign', 'is_view') ||
-                            get_permission('salary_payment', 'is_view')) {
-                            ?>
-                            <!-- payroll -->
-                            <li class="nav-parent <?php if($main_menu == 'payroll') echo 'nav-expanded nav-active';?>">
-                                <a>
-                                    <i class="far fa-address-card" aria-hidden="true"></i>
-                                    <span><?=translate('payroll')?></span>
-                                </a>
-                                <ul class="nav nav-children">
-                                    <?php if(get_permission('salary_template', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'payroll/salary_templete' || $sub_page == 'payroll/salary_templete_edit') echo 'nav-active';?>">
-                                        <a href="<?=base_url('payroll/salary_template')?>">
-                                            <span><?=translate('salary_template')?></span>
-                                        </a>
-                                    </li>
-                                    <?php } if(get_permission('salary_assign', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'payroll/salary_assign') echo 'nav-active';?>">
-                                        <a href="<?=base_url('payroll/salary_assign')?>">
-                                            <span><?=translate('salary_assign')?></span>
-                                        </a>
-                                    </li>
-                                    <?php } if(get_permission('salary_payment', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'payroll/salary_payment' || $sub_page == 'payroll/create' || $sub_page == 'payroll/invoice') echo 'nav-active';?>">
-                                        <a href="<?=base_url('payroll')?>">
-                                            <span><?=translate('salary_payment')?></span>
-                                        </a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
-                            <?php } ?>
-                            <?php
-                            if(get_permission('advance_salary_manage', 'is_view') ||
-                            get_permission('advance_salary_request', 'is_view')) {
-                            ?>
-                            <!-- advance salary managements -->
-                            <li class="nav-parent <?php
-                            if ($main_menu == 'advance_salary') echo 'nav-expanded nav-active';?>">
-                                <a>
-                                    <i class="fas fa-funnel-dollar" aria-hidden="true"></i>
-                                    <span><?=translate('advance_salary')?></span>
-                                </a>
-                                <ul class="nav nav-children">
-                                    <?php if(get_permission('advance_salary_request', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'advance_salary/request') echo 'nav-active';?>">
-                                        <a href="<?=base_url('advance_salary/request')?>">
-                                            <span><?=translate('my_application')?></span>
-                                        </a>
-                                    </li>
-                                    <?php } if(get_permission('advance_salary_manage', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'advance_salary/index') echo 'nav-active';?>">
-                                        <a href="<?=base_url('advance_salary')?>">
-                                            <span><?=translate('manage_application')?></span>
-                                        </a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
-                            <?php } ?>
-                            <?php
-                            if(get_permission('leave_category', 'is_view') ||
-                            get_permission('leave_manage', 'is_view') ||
-                            get_permission('leave_request', 'is_view')) {
-                            ?>
-                            <!-- leave managements -->
-                            <li class="nav-parent <?php
-                            if ($main_menu == 'leave') echo 'nav-expanded nav-active';?>">
-                                <a>
-                                    <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
-                                    <span><?=translate('leave')?></span>
-                                </a>
-                                <ul class="nav nav-children">
-                                <?php if(get_permission('leave_category', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'leave/category') echo 'nav-active';?>">
-                                        <a href="<?=base_url('leave/category')?>">
-                                            <span><?=translate('category')?></span>
-                                        </a>
-                                    </li>
-                                <?php } if(get_permission('leave_request', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'leave/request') echo 'nav-active';?>">
-                                        <a href="<?=base_url('leave/request')?>">
-                                            <span><?=translate('my_application')?></span>
-                                        </a>
-                                    </li>
-                                <?php } if(get_permission('leave_manage', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'leave/index') echo 'nav-active';?>">
-                                        <a href="<?=base_url('leave')?>">
-                                            <span><?=translate('manage_application')?></span>
-                                        </a>
-                                    </li>
-                                <?php } ?>
-                                </ul>
-                            </li>
-                            <?php } ?>
-                            <?php if(get_permission('award', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'award/index' || $sub_page == 'award/edit') echo 'nav-active';?>">
-                                 <a href="<?=base_url('award')?>">
-                                     <i class="fas fa-crown"></i>
-                                     <span><?=translate('award')?></span>
-                                 </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
                     <?php
                     if(get_permission('classes', 'is_view') ||
                     get_permission('section', 'is_view') ||
@@ -959,82 +379,7 @@
                         </ul>
                     </li>
                     <?php } ?>
-                    <?php 
-                    if (moduleIsEnabled('live_class')) {
-                        if(get_permission('live_class', 'is_view')) { ?>
-                    <li class="nav-parent <?php if ($main_menu == 'live_class') echo 'nav-expanded nav-active';?>">
-                        <a>
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0" ></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19.0011 4.25C19.4153 4.25 19.7511 3.91421 19.7511 3.5C19.7511 3.08579 19.4153 2.75 19.0011 2.75V4.25ZM5.00105 2.75C4.58684 2.75 4.25105 3.08579 4.25105 3.5C4.25105 3.91421 4.58684 4.25 5.00105 4.25V2.75ZM15.4756 22.0351C15.7711 22.3253 16.246 22.321 16.5362 22.0255C16.8264 21.7299 16.8221 21.2551 16.5265 20.9649L15.4756 22.0351ZM12.5265 17.0369C12.231 16.7467 11.7562 16.751 11.4659 17.0465C11.1757 17.342 11.18 17.8169 11.4756 18.1071L12.5265 17.0369ZM7.47549 20.9649C7.17999 21.2552 7.17574 21.7301 7.466 22.0256C7.75626 22.3211 8.23111 22.3253 8.52661 22.0351L7.47549 20.9649ZM12.5266 18.1061C12.8221 17.8158 12.8264 17.3409 12.5361 17.0454C12.2459 16.7499 11.771 16.7457 11.4755 17.0359L12.5266 18.1061ZM12.0011 17.571L12.0013 16.821H12.0011V17.571ZM8.25805 17.571L8.23833 18.3207C8.2449 18.3209 8.25148 18.321 8.25805 18.321V17.571ZM5.00105 14.144L5.75083 14.1624C5.75098 14.1563 5.75105 14.1501 5.75105 14.144H5.00105ZM5.00105 9H5.75105C5.75105 8.99379 5.75098 8.98757 5.75082 8.98136L5.00105 9ZM8.25805 5.572V4.822C8.25148 4.822 8.24491 4.82209 8.23834 4.82226L8.25805 5.572ZM15.7431 5.572L15.7625 4.82225C15.7561 4.82208 15.7496 4.822 15.7431 4.822V5.572ZM19.0011 9L18.2513 8.98137C18.2511 8.98758 18.2511 8.99379 18.2511 9H19.0011ZM19.0011 14.143H18.2511C18.2511 14.1493 18.2511 14.1556 18.2513 14.1619L19.0011 14.143ZM15.7441 17.572L15.7439 18.322C15.7505 18.322 15.7571 18.3219 15.7638 18.3217L15.7441 17.572ZM19.0011 2.75H5.00105V4.25H19.0011V2.75ZM16.5265 20.9649L12.5265 17.0369L11.4756 18.1071L15.4756 22.0351L16.5265 20.9649ZM8.52661 22.0351L12.5266 18.1061L11.4755 17.0359L7.47549 20.9649L8.52661 22.0351ZM12.0011 16.821H8.25805V18.321H12.0011V16.821ZM8.27778 16.8213C6.84631 16.7836 5.71567 15.5939 5.75083 14.1624L4.25128 14.1256C4.1958 16.3843 5.97974 18.2613 8.23833 18.3207L8.27778 16.8213ZM5.75105 14.144V9H4.25105V14.144H5.75105ZM5.75082 8.98136C5.71523 7.54953 6.84599 6.3594 8.27777 6.32174L8.23834 4.82226C5.97926 4.88167 4.19512 6.75948 4.25129 9.01864L5.75082 8.98136ZM8.25805 6.322H15.7431V4.822H8.25805V6.322ZM15.7236 6.32175C17.1556 6.35898 18.2869 7.54924 18.2513 8.98137L19.7508 9.01863C19.807 6.75901 18.0221 4.881 15.7625 4.82225L15.7236 6.32175ZM18.2511 9V14.143H19.7511V9H18.2511ZM18.2513 14.1619C18.2873 15.594 17.1564 16.7846 15.7243 16.8223L15.7638 18.3217C18.0233 18.2623 19.8077 16.3838 19.7508 14.1241L18.2513 14.1619ZM15.7443 16.822L12.0013 16.821L12.0009 18.321L15.7439 18.322L15.7443 16.822Z" fill="currentColor"></path> </g></svg> <span><?=translate('live_class_rooms')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <li class="<?php if ($sub_page == 'live_class/index') echo 'nav-active';?>">
-                                <a href="<?=base_url('live_class')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i> <?=translate('live_class_rooms')?></span>
-                                </a>
-                            </li>
-                            <li class="<?php if ($sub_page == 'live_class/reports') echo 'nav-active';?>">
-                                <a href="<?=base_url('live_class/reports')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i> <?=translate(' live_class_reports')?></span>
-                                </a>
-                            </li>
-                         
-                        </ul>
-                    </li>
-                    <?php }} ?>
-                    <?php
-                    if (moduleIsEnabled('attachments_book')) {
-                        if(get_permission('attachments', 'is_view') ||
-                        get_permission('attachment_type', 'is_view')) {
-                        ?>
-                    <!-- attachments upload -->
-                    <li class="nav-parent <?php if ($main_menu == 'attachments') echo 'nav-expanded nav-active';?>">
-                        <a>
-                        <svg fill="currentColor" viewBox="0 0 24 24" id="paper-clip-top-right-2" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color"width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M7.05,20.56a5,5,0,0,1-3.57-8.62L9.91,5.51a7.08,7.08,0,0,1,10,10l-4,3.95a1,1,0,1,1-1.41-1.41l4-3.95a5.08,5.08,0,0,0-7.19-7.19L4.89,13.35a3.05,3.05,0,0,0,4.32,4.32L16,10.93a1,1,0,0,0,.3-.72,1,1,0,0,0-.3-.73,1,1,0,0,0-1.45,0l-7,7.05a1,1,0,0,1-1.41,0,1,1,0,0,1,0-1.42l7-7a3,3,0,0,1,4.29,0,3,3,0,0,1,0,4.28l-6.74,6.74A5.06,5.06,0,0,1,7.05,20.56Z" style="fill: currentColor;"></path></g></svg> <span><?=translate('attachments_book')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <?php if(get_permission('attachments', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'attachments/index') echo 'nav-active';?>">
-                                <a href="<?=base_url('attachments')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('upload_content')?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('attachment_type', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'attachments/type') echo 'nav-active';?>">
-                                <a href="<?=base_url('attachments/type')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('attachment_type')?></span>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
-                    <?php
-                    if (moduleIsEnabled('homework')) {
-                        if(get_permission('homework', 'is_view') ||
-                        get_permission('evaluation_report', 'is_view')) {
-                    ?>
-                    <!-- attachments upload -->
-                    <li class="nav-parent <?php if ($main_menu == 'homework') echo 'nav-expanded nav-active';?>">
-                        <a>
-                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.025 8C8.025 8.41421 8.36079 8.75 8.775 8.75C9.18922 8.75 9.525 8.41421 9.525 8H8.025ZM13.875 8C13.875 8.41421 14.2108 8.75 14.625 8.75C15.0392 8.75 15.375 8.41421 15.375 8H13.875ZM8.80427 8.74943C9.21817 8.73326 9.5406 8.38463 9.52443 7.97073C9.50826 7.55683 9.15963 7.23441 8.74573 7.25057L8.80427 8.74943ZM4.16474 11.3809C4.09897 11.7899 4.37718 12.1747 4.78613 12.2405C5.19509 12.3063 5.57994 12.0281 5.64571 11.6191L4.16474 11.3809ZM8.775 7.25C8.36079 7.25 8.025 7.58579 8.025 8C8.025 8.41421 8.36079 8.75 8.775 8.75V7.25ZM14.625 8.75C15.0392 8.75 15.375 8.41421 15.375 8C15.375 7.58579 15.0392 7.25 14.625 7.25V8.75ZM9.66 13.6046C10.0712 13.6543 10.4449 13.3612 10.4946 12.95C10.5443 12.5388 10.2512 12.1651 9.84 12.1154L9.66 13.6046ZM5.21442 10.8207C4.83705 10.6499 4.39269 10.8174 4.22193 11.1948C4.05116 11.5722 4.21866 12.0165 4.59603 12.1873L5.21442 10.8207ZM10.5 12.86C10.5 12.4458 10.1642 12.11 9.75 12.11C9.33579 12.11 9 12.4458 9 12.86H10.5ZM9 14.99C9 15.4042 9.33579 15.74 9.75 15.74C10.1642 15.74 10.5 15.4042 10.5 14.99H9ZM9.84273 12.1158C9.4317 12.0645 9.05697 12.3562 9.00576 12.7673C8.95454 13.1783 9.24623 13.553 9.65727 13.6042L9.84273 12.1158ZM11.7 12.99L11.6931 13.7401L11.7065 13.74L11.7 12.99ZM13.7424 13.6053C14.1534 13.5543 14.4453 13.1797 14.3943 12.7687C14.3433 12.3576 13.9687 12.0657 13.5577 12.1167L13.7424 13.6053ZM4.59141 12.1852C4.96762 12.3585 5.4131 12.194 5.58642 11.8178C5.75973 11.4416 5.59525 10.9961 5.21904 10.8228L4.59141 12.1852ZM4.27005 10.3376C3.90976 10.1333 3.45202 10.2597 3.24765 10.62C3.04328 10.9802 3.16967 11.438 3.52996 11.6424L4.27005 10.3376ZM5.64934 11.5978C5.70114 11.1868 5.40999 10.8117 4.99902 10.7599C4.58806 10.7081 4.21292 10.9992 4.16112 11.4102L5.64934 11.5978ZM4.875 11.99L5.625 11.99L5.625 11.9891L4.875 11.99ZM4.875 15.99H4.125C4.125 15.9993 4.12518 16.0087 4.12552 16.018L4.875 15.99ZM9.0753 19.99V19.24C9.06612 19.24 9.05693 19.2402 9.04775 19.2405L9.0753 19.99ZM14.3257 19.99L14.353 19.2405C14.3439 19.2402 14.3348 19.24 14.3257 19.24L14.3257 19.99ZM18.525 15.99L19.2745 16.018C19.2748 16.0087 19.275 15.9993 19.275 15.99L18.525 15.99ZM18.525 11.99L17.775 11.9891V11.99H18.525ZM19.2389 11.4102C19.1871 10.9992 18.8119 10.7081 18.401 10.7599C17.99 10.8117 17.6989 11.1868 17.7507 11.5978L19.2389 11.4102ZM14.6543 7.25057C14.2404 7.23441 13.8917 7.55683 13.8756 7.97073C13.8594 8.38463 14.1818 8.73326 14.5957 8.74943L14.6543 7.25057ZM17.7543 11.6191C17.8201 12.0281 18.2049 12.3063 18.6139 12.2405C19.0228 12.1747 19.301 11.7899 19.2353 11.3809L17.7543 11.6191ZM13.56 12.1154C13.1488 12.1651 12.8557 12.5388 12.9054 12.95C12.9551 13.3612 13.3288 13.6543 13.74 13.6046L13.56 12.1154ZM18.804 12.1873C19.1813 12.0165 19.3488 11.5722 19.1781 11.1948C19.0073 10.8174 18.563 10.6499 18.1856 10.8207L18.804 12.1873ZM14.4 12.86C14.4 12.4458 14.0642 12.11 13.65 12.11C13.2358 12.11 12.9 12.4458 12.9 12.86H14.4ZM12.9 14.99C12.9 15.4042 13.2358 15.74 13.65 15.74C14.0642 15.74 14.4 15.4042 14.4 14.99H12.9ZM18.181 10.8228C17.8048 10.9961 17.6403 11.4416 17.8136 11.8178C17.9869 12.194 18.4324 12.3585 18.8086 12.1852L18.181 10.8228ZM19.87 11.6424C20.2303 11.438 20.3567 10.9802 20.1524 10.62C19.948 10.2597 19.4902 10.1333 19.13 10.3376L19.87 11.6424ZM9.525 8C9.525 6.73935 10.5166 5.75 11.7 5.75V4.25C9.65257 4.25 8.025 5.94695 8.025 8H9.525ZM11.7 5.75C12.8834 5.75 13.875 6.73935 13.875 8H15.375C15.375 5.94695 13.7474 4.25 11.7 4.25V5.75ZM8.74573 7.25057C6.43906 7.34066 4.53484 9.07978 4.16474 11.3809L5.64571 11.6191C5.90653 9.99741 7.23733 8.81063 8.80427 8.74943L8.74573 7.25057ZM8.775 8.75H14.625V7.25H8.775V8.75ZM9.84 12.1154C8.24431 11.9225 6.68526 11.4863 5.21442 10.8207L4.59603 12.1873C6.20537 12.9155 7.9122 13.3933 9.66 13.6046L9.84 12.1154ZM9 12.86V14.99H10.5V12.86H9ZM9.65727 13.6042C10.3329 13.6884 11.0126 13.7337 11.6931 13.74L11.7069 12.24C11.0837 12.2343 10.4614 12.1928 9.84273 12.1158L9.65727 13.6042ZM11.7065 13.74C12.387 13.7341 13.0667 13.6891 13.7424 13.6053L13.5577 12.1167C12.939 12.1935 12.3166 12.2346 11.6935 12.24L11.7065 13.74ZM5.21904 10.8228C4.88545 10.6691 4.56921 10.5073 4.27005 10.3376L3.52996 11.6424C3.8678 11.834 4.22171 12.0149 4.59141 12.1852L5.21904 10.8228ZM4.16112 11.4102C4.13684 11.6028 4.12478 11.7967 4.125 11.9909L5.625 11.9891C5.62485 11.8583 5.63298 11.7275 5.64934 11.5978L4.16112 11.4102ZM4.125 11.99V15.99H5.625V11.99H4.125ZM4.12552 16.018C4.22595 18.7067 6.43559 20.8375 9.10285 20.7395L9.04775 19.2405C7.24343 19.3068 5.69534 17.8591 5.62448 15.962L4.12552 16.018ZM9.0753 20.74H14.3257V19.24H9.0753V20.74ZM14.2983 20.7395C16.9651 20.8369 19.174 18.7063 19.2745 16.018L17.7755 15.962C17.7047 17.8588 16.1571 19.3064 14.353 19.2405L14.2983 20.7395ZM19.275 15.99V11.99H17.775V15.99H19.275ZM19.275 11.9909C19.2752 11.7967 19.2632 11.6028 19.2389 11.4102L17.7507 11.5978C17.767 11.7276 17.7752 11.8583 17.775 11.9891L19.275 11.9909ZM14.5957 8.74943C16.1627 8.81063 17.4935 9.99741 17.7543 11.6191L19.2353 11.3809C18.8652 9.07978 16.9609 7.34066 14.6543 7.25057L14.5957 8.74943ZM13.74 13.6046C15.4878 13.3933 17.1946 12.9155 18.804 12.1873L18.1856 10.8207C16.7147 11.4863 15.1557 11.9225 13.56 12.1154L13.74 13.6046ZM12.9 12.86V14.99H14.4V12.86H12.9ZM18.8086 12.1852C19.1783 12.0149 19.5322 11.834 19.87 11.6424L19.13 10.3376C18.8308 10.5073 18.5146 10.6691 18.181 10.8228L18.8086 12.1852Z" fill="currentColor"></path> </g></svg> <span><?=translate('homework')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <?php if(get_permission('homework', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'homework/index' || $sub_page == 'homework/add' || $sub_page == 'homework/evaluate_list' || $sub_page == 'homework/edit') echo 'nav-active';?>">
-                                <a href="<?=base_url('homework')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('homework')?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('evaluation_report', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'homework/report') echo 'nav-active';?>">
-                                <a href="<?=base_url('homework/report')?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('evaluation_report')?></span>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
+
                     <?php
                     if(get_permission('exam', 'is_view') ||
                     get_permission('exam_term', 'is_view') ||
@@ -1219,6 +564,550 @@
                     </li>
                     <?php }} ?>
 
+<!--------------------------------------------------------------------------------------------------->
+                  
+                    <?php
+                    if (get_permission('parent', 'is_view') ||
+                    get_permission('parent', 'is_add') ||
+                    get_permission('parent_disable_authentication', 'is_view')) {
+                    ?>
+                    <!-- parents -->
+                    <li class="nav-parent <?php if ($main_menu == 'parents') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <defs>
+                                            <style>
+                                                .cls-1,
+                                                .cls-2 {
+                                                    fill: none;
+                                                    stroke: currentColor;
+                                                    stroke-linecap: round;
+                                                    stroke-width: 1.5px;
+                                                }
+
+                                                .cls-1 {
+                                                    stroke-linejoin: round;
+                                                }
+
+                                                .cls-2 {
+                                                    stroke-linejoin: bevel;
+                                                }
+                                            </style>
+                                        </defs>
+                                        <g id="ic-users-more">
+                                            <path class="cls-1" d="M3,21l.79-2.88C5.1,13.39,8.55,11,12,11"></path>
+                                            <circle class="cls-2" cx="12" cy="5.98" r="5"></circle>
+                                            <circle class="cls-1" cx="17" cy="18" r="5"></circle>
+                                            <circle class="cls-1" cx="17" cy="18" r="0.21"></circle>
+                                            <circle class="cls-1" cx="14.35" cy="18" r="0.21"></circle>
+                                            <circle class="cls-1" cx="19.48" cy="18" r="0.21"></circle>
+                                        </g>
+                                    </g>
+                                </svg> <span><?=translate('parents')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                        <?php if(get_permission('parent', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'parents/view' || $sub_page == 'parents/profile') echo 'nav-active';?>">
+                                <a href="<?=base_url('parents/view')?>">
+                                    <span><i class="fas fa-caret-right"></i><?=translate('parents_list')?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('parent', 'is_add')){ ?>
+                            <li class="<?php if ($sub_page == 'parents/add') echo 'nav-active';?>">
+                                <a href="<?=base_url('parents/add')?>">
+                                    <span><i class="fas fa-caret-right"></i><?=translate('add_parent')?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('parent_disable_authentication', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'parents/disable_authentication') echo 'nav-active';?>">
+                                <a href="<?=base_url('parents/disable_authentication')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('login_deactivate')?></span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                        </ul>
+                    </li>
+                    <?php } ?>
+                    <?php
+                    if(get_permission('employee', 'is_view') ||
+                    get_permission('employee', 'is_add') ||
+                    get_permission('designation', 'is_view') ||
+                    get_permission('designation', 'is_add') ||
+                    get_permission('department', 'is_view') ||
+                    get_permission('employee_disable_authentication', 'is_view')) {
+                    ?>
+                    <!-- Employees -->
+                    <li class="nav-parent <?php if ($main_menu == 'employee') echo 'nav-expanded nav-active'; ?>">
+                        <a><svg fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 299.97 299.97" xml:space="preserve" width="27px" height="27px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <g>
+                                            <g>
+                                                <g>
+                                                    <path d="M149.985,126.898c34.986,0,63.449-28.463,63.449-63.449C213.435,28.463,184.971,0,149.985,0S86.536,28.463,86.536,63.449 C86.536,98.436,114.999,126.898,149.985,126.898z M149.985,15.15c26.633,0,48.299,21.667,48.299,48.299 s-21.667,48.299-48.299,48.299s-48.299-21.667-48.299-48.299S123.353,15.15,149.985,15.15z"></path>
+                                                    <path d="M255.957,271.919l-20.807-86.313c-2.469-10.244-11.553-17.399-22.093-17.399c-13.216,0-114.332,0-126.145,0 c-10.538,0-19.623,7.155-22.093,17.399l-20.807,86.313c-3.444,14.289,7.377,28.051,22.093,28.051h167.76 C248.563,299.97,259.407,286.229,255.957,271.919z M66.105,284.82c-4.898,0-8.513-4.581-7.364-9.35l20.807-86.314 c0.823-3.415,3.851-5.799,7.365-5.799H121.4l-9.553,67.577c-0.283,2,0.244,4.029,1.464,5.637l21.422,28.249H66.105z M127.291,249.932l9.411-66.574h26.567l9.411,66.574l-22.695,29.927L127.291,249.932z M233.865,284.82h-68.628l21.421-28.248 c1.22-1.609,1.747-3.638,1.464-5.637l-9.553-67.577h34.487c3.513,0,6.542,2.385,7.365,5.8l20.807,86.313 C242.377,280.235,238.769,284.82,233.865,284.82z"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg> <span><?php echo translate('employee'); ?></span></a>
+                        <ul class="nav nav-children">
+                        <?php if(get_permission('employee', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'employee/view' ||  $sub_page == 'employee/profile' ) echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('employee/view'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('employee_list'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('department', 'is_view') || get_permission('department', 'is_add')){ ?>
+                            <li class="<?php if ($sub_page == 'employee/department') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('employee/department'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('add_department'); ?></span>
+                                </a>
+                            </li>
+                        <?php }  if(get_permission('designation', 'is_view') || get_permission('designation', 'is_add')){ ?>
+                            <li class="<?php if ($sub_page == 'employee/designation') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('employee/designation'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('add_designation'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('employee', 'is_add')){ ?>
+                            <li class="<?php if ($sub_page == 'employee/add') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('employee/add'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('add_employee'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('employee_disable_authentication', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'employee/disable_authentication') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('employee/disable_authentication'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('login_deactivate'); ?></span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                        </ul>
+                    </li>
+                    <?php } ?>
+                    <?php
+                    if (moduleIsEnabled('human_resource')) {
+                        if(get_permission('salary_template', 'is_view') ||
+                        get_permission('salary_assign', 'is_view') ||
+                        get_permission('salary_payment', 'is_view') ||
+                        get_permission('advance_salary_manage', 'is_view') ||
+                        get_permission('advance_salary_request', 'is_view') ||
+                        get_permission('leave_category', 'is_view') ||
+                        get_permission('leave_category', 'is_add') ||
+                        get_permission('leave_request', 'is_view') ||
+                        get_permission('leave_manage', 'is_view') ||
+                        get_permission('award', 'is_view')) {
+                    ?>
+                    <!-- human resource -->
+                    <li class="nav-parent <?php if ($main_menu == 'payroll' || $main_menu == 'advance_salary' || $main_menu == 'leave' || $main_menu == 'award') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="27px" height="27px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 18.2C14.2091 18.2 16 16.4091 16 14.2C16 11.9908 14.2091 10.2 12 10.2C9.79086 10.2 8 11.9908 8 14.2C8 16.4091 9.79086 18.2 12 18.2Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10.4399 14.2999L11.0899 14.9499C11.2799 15.1399 11.5899 15.1399 11.7799 14.9599L13.5599 13.3199" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7.99995 22H15.9999C20.0199 22 20.7399 20.39 20.9499 18.43L21.6999 10.43C21.9699 7.99 21.2699 6 16.9999 6H6.99995C2.72995 6 2.02995 7.99 2.29995 10.43L3.04995 18.43C3.25995 20.39 3.97995 22 7.99995 22Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8 6V5.2C8 3.43 8 2 11.2 2H12.8C16 2 16 3.43 16 5.2V6" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M21.65 11C19.92 12.26 18 13.14 16.01 13.64" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2.62 11.27C4.29 12.41 6.11 13.22 8 13.68" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <?=translate('hrm')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <?php
+                            if(get_permission('salary_template', 'is_view') ||
+                            get_permission('salary_assign', 'is_view') ||
+                            get_permission('salary_payment', 'is_view')) {
+                            ?>
+                            <!-- payroll -->
+                            <li class="nav-parent <?php if($main_menu == 'payroll') echo 'nav-expanded nav-active';?>">
+                                <a>
+                                    <i class="far fa-address-card" aria-hidden="true"></i>
+                                    <span><?=translate('payroll')?></span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <?php if(get_permission('salary_template', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'payroll/salary_templete' || $sub_page == 'payroll/salary_templete_edit') echo 'nav-active';?>">
+                                        <a href="<?=base_url('payroll/salary_template')?>">
+                                            <span><?=translate('salary_template')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } if(get_permission('salary_assign', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'payroll/salary_assign') echo 'nav-active';?>">
+                                        <a href="<?=base_url('payroll/salary_assign')?>">
+                                            <span><?=translate('salary_assign')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } if(get_permission('salary_payment', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'payroll/salary_payment' || $sub_page == 'payroll/create' || $sub_page == 'payroll/invoice') echo 'nav-active';?>">
+                                        <a href="<?=base_url('payroll')?>">
+                                            <span><?=translate('salary_payment')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
+                            <?php } ?>
+                            <?php
+                            if(get_permission('advance_salary_manage', 'is_view') ||
+                            get_permission('advance_salary_request', 'is_view')) {
+                            ?>
+                            <!-- advance salary managements -->
+                            <li class="nav-parent <?php
+                            if ($main_menu == 'advance_salary') echo 'nav-expanded nav-active';?>">
+                                <a>
+                                    <i class="fas fa-funnel-dollar" aria-hidden="true"></i>
+                                    <span><?=translate('advance_salary')?></span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <?php if(get_permission('advance_salary_request', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'advance_salary/request') echo 'nav-active';?>">
+                                        <a href="<?=base_url('advance_salary/request')?>">
+                                            <span><?=translate('my_application')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } if(get_permission('advance_salary_manage', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'advance_salary/index') echo 'nav-active';?>">
+                                        <a href="<?=base_url('advance_salary')?>">
+                                            <span><?=translate('manage_application')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
+                            <?php } ?>
+                            <?php
+                            if(get_permission('leave_category', 'is_view') ||
+                            get_permission('leave_manage', 'is_view') ||
+                            get_permission('leave_request', 'is_view')) {
+                            ?>
+                            <!-- leave managements -->
+                            <li class="nav-parent <?php
+                            if ($main_menu == 'leave') echo 'nav-expanded nav-active';?>">
+                                <a>
+                                    <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
+                                    <span><?=translate('leave')?></span>
+                                </a>
+                                <ul class="nav nav-children">
+                                <?php if(get_permission('leave_category', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'leave/category') echo 'nav-active';?>">
+                                        <a href="<?=base_url('leave/category')?>">
+                                            <span><?=translate('category')?></span>
+                                        </a>
+                                    </li>
+                                <?php } if(get_permission('leave_request', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'leave/request') echo 'nav-active';?>">
+                                        <a href="<?=base_url('leave/request')?>">
+                                            <span><?=translate('my_application')?></span>
+                                        </a>
+                                    </li>
+                                <?php } if(get_permission('leave_manage', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'leave/index') echo 'nav-active';?>">
+                                        <a href="<?=base_url('leave')?>">
+                                            <span><?=translate('manage_application')?></span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                                </ul>
+                            </li>
+                            <?php } ?>
+                            <?php if(get_permission('award', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'award/index' || $sub_page == 'award/edit') echo 'nav-active';?>">
+                                 <a href="<?=base_url('award')?>">
+                                     <i class="fas fa-crown"></i>
+                                     <span><?=translate('award')?></span>
+                                 </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
+                    <?php
+                    if (moduleIsEnabled('student_accounting')) {
+                        if(get_permission('fees_type', 'is_view') ||
+                        get_permission('fees_group', 'is_view') ||
+                        get_permission('fees_fine_setup', 'is_view') ||
+                        get_permission('fees_allocation', 'is_view') ||
+                        get_permission('invoice', 'is_view') ||
+                        get_permission('due_invoice', 'is_view') ||
+                        get_permission('offline_payments', 'is_view') ||
+                        get_permission('offline_payments_type', 'is_view') ||
+                        get_permission('fees_reminder', 'is_view')) {
+                            $getOfflinePaymentsTotal = $this->application_model->getOfflinePaymentsTotal();
+                        ?>
+                    <!-- student accounting -->
+                    <li class="nav-parent <?php if ($main_menu == 'fees' || $main_menu == 'offline_payments') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M17.4142 10.4142C18 9.82843 18 8.88562 18 7C18 5.11438 18 4.17157 17.4142 3.58579M17.4142 10.4142C16.8284 11 15.8856 11 14 11H10C8.11438 11 7.17157 11 6.58579 10.4142M17.4142 10.4142C17.4142 10.4142 17.4142 10.4142 17.4142 10.4142ZM17.4142 3.58579C16.8284 3 15.8856 3 14 3L10 3C8.11438 3 7.17157 3 6.58579 3.58579M17.4142 3.58579C17.4142 3.58579 17.4142 3.58579 17.4142 3.58579ZM6.58579 3.58579C6 4.17157 6 5.11438 6 7C6 8.88562 6 9.82843 6.58579 10.4142M6.58579 3.58579C6.58579 3.58579 6.58579 3.58579 6.58579 3.58579ZM6.58579 10.4142C6.58579 10.4142 6.58579 10.4142 6.58579 10.4142Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M13 7C13 7.55228 12.5523 8 12 8C11.4477 8 11 7.55228 11 7C11 6.44772 11.4477 6 12 6C12.5523 6 13 6.44772 13 7Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M18 6C16.3431 6 15 4.65685 15 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M18 8C16.3431 8 15 9.34315 15 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M6 6C7.65685 6 9 4.65685 9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M6 8C7.65685 8 9 9.34315 9 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M5 20.3884H7.25993C8.27079 20.3884 9.29253 20.4937 10.2763 20.6964C12.0166 21.0549 13.8488 21.0983 15.6069 20.8138C16.4738 20.6734 17.326 20.4589 18.0975 20.0865C18.7939 19.7504 19.6469 19.2766 20.2199 18.7459C20.7921 18.216 21.388 17.3487 21.8109 16.6707C22.1736 16.0894 21.9982 15.3762 21.4245 14.943C20.7873 14.4619 19.8417 14.462 19.2046 14.9433L17.3974 16.3084C16.697 16.8375 15.932 17.3245 15.0206 17.4699C14.911 17.4874 14.7962 17.5033 14.6764 17.5172M14.6764 17.5172C14.6403 17.5214 14.6038 17.5254 14.5668 17.5292M14.6764 17.5172C14.8222 17.486 14.9669 17.396 15.1028 17.2775C15.746 16.7161 15.7866 15.77 15.2285 15.1431C15.0991 14.9977 14.9475 14.8764 14.7791 14.7759C11.9817 13.1074 7.62942 14.3782 5 16.2429M14.6764 17.5172C14.6399 17.525 14.6033 17.5292 14.5668 17.5292M14.5668 17.5292C14.0434 17.5829 13.4312 17.5968 12.7518 17.5326" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <rect x="2" y="14" width="3" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"></rect>
+                                        </g>
+                                    </svg> <span><?=translate('student_accounting') .$getOfflinePaymentsTotal; ?></span>
+                        </a>
+                        <ul class="nav nav-children">
+
+                            <?php if(get_permission('offline_payments', 'is_view') || get_permission('offline_payments_type', 'is_view')) { ?>
+                            <li class="nav-parent <?php if ($main_menu == 'offline_payments') echo 'nav-expanded nav-active';?>">
+                                <a>
+                                    <i class="fas fa-store-alt"></i><span><?=translate('offline_payments')?> <?php echo $getOfflinePaymentsTotal ?></span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <?php  if(get_permission('offline_payments_type', 'is_view')) { ?>
+                                    <li class="<?php if ($sub_page == 'offline_payments/type' || $sub_page == 'offline_payments/type_edit') echo 'nav-active';?>">
+                                        <a href="<?=base_url('offline_payments/type')?>">
+                                            <span><?=translate('payments') . " " . translate('type')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } if(get_permission('offline_payments', 'is_view')) { ?>
+                                    <li class="<?php if ($sub_page == 'offline_payments/history') echo 'nav-active';?>">
+                                        <a href="<?=base_url('offline_payments/payments')?>">
+                                            <span><?=translate(' offline_payments') . $getOfflinePaymentsTotal?></span>
+                                        </a>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
+                            <?php } if(get_permission('fees_type', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'fees/type') echo 'nav-active';?>">
+                                <a href="<?=base_url('fees/type')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_type')?></span></a>
+                            </li>
+                            <?php } if(get_permission('fees_group', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'fees/group') echo 'nav-active';?>">
+                                <a href="<?=base_url('fees/group')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_group')?></span></a>
+                            </li>
+                            <?php } if(get_permission('fees_fine_setup', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'fees/fine_setup') echo 'nav-active';?>">
+                                <a href="<?=base_url('fees/fine_setup')?>"><span><i class="fas fa-caret-right"></i><?=translate('fine_setup')?></span></a>
+                            </li>
+                            <?php } if(get_permission('fees_allocation', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'fees/allocation') echo 'nav-active';?>">
+                                <a href="<?=base_url('fees/allocation')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_allocation')?></span></a>
+                            </li>
+                            <?php } if(get_permission('invoice', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'fees/invoice_list' || $sub_page == 'fees/collect') echo 'nav-active';?>">
+                                <a href="<?=base_url('fees/invoice_list')?>"><span><i class="fas fa-caret-right"></i><?=translate('payments_history')?></span></a>
+                            </li>
+                            <?php } if(get_permission('due_invoice', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'fees/due_invoice') echo 'nav-active';?>">
+                                <a href="<?=base_url('fees/due_invoice')?>"><span><i class="fas fa-caret-right"></i><?=translate('due_fees_invoice')?></span></a>
+                            </li>
+                            <?php } if(get_permission('fees_reminder', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'fees/reminder') echo 'nav-active';?>">
+                                <a href="<?=base_url('fees/reminder')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_reminder')?></span></a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
+                    <?php
+                    if (moduleIsEnabled('office_accounting')) {
+                        if(get_permission('account', 'is_view') ||
+                        get_permission('voucher_head', 'is_view') ||
+                        get_permission('deposit', 'is_view') ||
+                        get_permission('expense', 'is_view') ||
+                        get_permission('all_transactions', 'is_view')) {
+                        ?>
+                    <!-- office accounting -->
+                    <li class="nav-parent <?php if ($main_menu == 'accounting') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M3 12C3 15.7712 3 19.6569 4.31802 20.8284C5.63604 22 7.75736 22 12 22C16.2426 22 18.364 22 19.682 20.8284C21 19.6569 21 15.7712 21 12" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M14.6603 14.2019L20.6676 12.3997C21.2631 12.2211 21.5609 12.1317 21.7498 11.9176C21.7866 11.8759 21.8199 11.8312 21.8492 11.784C22 11.5415 22 11.2307 22 10.6089C22 8.15877 22 6.9337 21.327 6.10659C21.1977 5.94763 21.0524 5.80233 20.8934 5.67298C20.0663 5 18.8412 5 16.3911 5H7.60893C5.15877 5 3.9337 5 3.10659 5.67298C2.94763 5.80233 2.80233 5.94763 2.67298 6.10659C2 6.9337 2 8.15877 2 10.6089C2 11.2307 2 11.5415 2.15078 11.784C2.18015 11.8312 2.21341 11.8759 2.25021 11.9176C2.43915 12.1317 2.7369 12.2211 3.3324 12.3997L9.33968 14.2019" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M6.5 5C7.32344 4.97913 8.15925 4.45491 8.43944 3.68032C8.44806 3.65649 8.4569 3.62999 8.47457 3.57697L8.50023 3.5C8.54241 3.37344 8.56351 3.31014 8.58608 3.254C8.87427 2.53712 9.54961 2.05037 10.3208 2.00366C10.3812 2 10.4479 2 10.5814 2H13.4191C13.5525 2 13.6192 2 13.6796 2.00366C14.4508 2.05037 15.1262 2.53712 15.4144 3.254C15.4369 3.31014 15.458 3.37343 15.5002 3.5L15.5259 3.57697C15.5435 3.62968 15.5524 3.65656 15.561 3.68032C15.8412 4.45491 16.6766 4.97913 17.5 5" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M14 12.5H10C9.72386 12.5 9.5 12.7239 9.5 13V15.1615C9.5 15.3659 9.62448 15.5498 9.8143 15.6257L10.5144 15.9058C11.4681 16.2872 12.5319 16.2872 13.4856 15.9058L14.1857 15.6257C14.3755 15.5498 14.5 15.3659 14.5 15.1615V13C14.5 12.7239 14.2761 12.5 14 12.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                        </g>
+                                    </svg> <span><?=translate('office_accounting')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <?php if(get_permission('account', 'is_view')){ ?>
+                                <li class="<?php if ($sub_page == 'accounting/index' || $sub_page == 'accounting/edit') echo 'nav-active'; ?>">
+                                    <a href="<?php echo base_url('accounting'); ?>">
+                                        <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('account'); ?></span>
+                                    </a>
+                                </li>
+                            <?php } if(get_permission('deposit', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'accounting/voucher_deposit' || $sub_page == 'accounting/voucher_deposit_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('accounting/voucher_deposit'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('new_deposit'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('expense', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'accounting/voucher_expense' || $sub_page == 'accounting/voucher_expense_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('accounting/voucher_expense'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('new_expense'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('all_transactions', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'accounting/all_transactions') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('accounting/all_transactions'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('all_transactions'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('voucher_head', 'is_view') || get_permission('voucher_head', 'is_add')){ ?>
+                            <li class="<?php if ($sub_page == 'accounting/voucher_head') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('accounting/voucher_head'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('voucher') . " " . translate('head'); ?></span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
+                    <?php
+                    if (moduleIsEnabled('card_management')) {
+                        if(get_permission('id_card_templete', 'is_view') ||
+                        get_permission('generate_student_idcard', 'is_view') ||
+                        get_permission('admit_card_templete', 'is_view') ||
+                        get_permission('generate_admit_card', 'is_view') ||
+                        get_permission('generate_employee_idcard', 'is_view')) {
+                        ?>
+                    <li class="nav-parent <?php if ($main_menu == 'card_manage') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M17 11V10C17 8.11438 17 7.17157 16.4142 6.58579C15.8284 6 14.8856 6 13 6H11C9.11438 6 8.17157 6 7.58579 6.58579C7 7.17157 7 8.11438 7 10V11" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M5 11H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M8 16H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                        </g>
+                                    </svg> <span><?=translate('card_management')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <?php if(get_permission('id_card_templete', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'card_manage/id_card_templete' || $sub_page == 'card_manage/id_card_templete_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('card_manage/id_card_templete'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('id_card') . " " .  translate('templete'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('generate_student_idcard', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'card_manage/generate_student_idcard') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('card_manage/generate_student_idcard'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('student') . " " .  translate('id_card'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('generate_employee_idcard', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'card_manage/generate_employee_idcard') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('card_manage/generate_employee_idcard'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('employee') . " " .  translate('id_card'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('admit_card_templete', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'card_manage/admit_card_templete' || $sub_page == 'card_manage/admit_card_templete_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('card_manage/admit_card_templete'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('admit_card') . " " .  translate('templete'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('generate_admit_card', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'card_manage/generate_student_admitcard') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('card_manage/generate_student_admitcard'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('generate') . " " .  translate('admit_card'); ?></span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
+                    
+                    <?php
+                    if (moduleIsEnabled('certificate')) {
+                        if(get_permission('certificate_templete', 'is_view') ||
+                        get_permission('generate_student_certificate', 'is_view') ||
+                        get_permission('generate_employee_certificate', 'is_view')) {
+                        ?>
+                    <li class="nav-parent <?php if ($main_menu == 'certificate') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M15.3929 4.05365L14.8912 4.61112L15.3929 4.05365ZM19.3517 7.61654L18.85 8.17402L19.3517 7.61654ZM21.654 10.1541L20.9689 10.4592V10.4592L21.654 10.1541ZM3.17157 20.8284L3.7019 20.2981H3.7019L3.17157 20.8284ZM20.8284 20.8284L20.2981 20.2981L20.2981 20.2981L20.8284 20.8284ZM14 21.25H10V22.75H14V21.25ZM2.75 14V10H1.25V14H2.75ZM21.25 13.5629V14H22.75V13.5629H21.25ZM14.8912 4.61112L18.85 8.17402L19.8534 7.05907L15.8947 3.49618L14.8912 4.61112ZM22.75 13.5629C22.75 11.8745 22.7651 10.8055 22.3391 9.84897L20.9689 10.4592C21.2349 11.0565 21.25 11.742 21.25 13.5629H22.75ZM18.85 8.17402C20.2034 9.3921 20.7029 9.86199 20.9689 10.4592L22.3391 9.84897C21.9131 8.89241 21.1084 8.18853 19.8534 7.05907L18.85 8.17402ZM10.0298 2.75C11.6116 2.75 12.2085 2.76158 12.7405 2.96573L13.2779 1.5653C12.4261 1.23842 11.498 1.25 10.0298 1.25V2.75ZM15.8947 3.49618C14.8087 2.51878 14.1297 1.89214 13.2779 1.5653L12.7405 2.96573C13.2727 3.16993 13.7215 3.55836 14.8912 4.61112L15.8947 3.49618ZM10 21.25C8.09318 21.25 6.73851 21.2484 5.71085 21.1102C4.70476 20.975 4.12511 20.7213 3.7019 20.2981L2.64124 21.3588C3.38961 22.1071 4.33855 22.4392 5.51098 22.5969C6.66182 22.7516 8.13558 22.75 10 22.75V21.25ZM1.25 14C1.25 15.8644 1.24841 17.3382 1.40313 18.489C1.56076 19.6614 1.89288 20.6104 2.64124 21.3588L3.7019 20.2981C3.27869 19.8749 3.02502 19.2952 2.88976 18.2892C2.75159 17.2615 2.75 15.9068 2.75 14H1.25ZM14 22.75C15.8644 22.75 17.3382 22.7516 18.489 22.5969C19.6614 22.4392 20.6104 22.1071 21.3588 21.3588L20.2981 20.2981C19.8749 20.7213 19.2952 20.975 18.2892 21.1102C17.2615 21.2484 15.9068 21.25 14 21.25V22.75ZM21.25 14C21.25 15.9068 21.2484 17.2615 21.1102 18.2892C20.975 19.2952 20.7213 19.8749 20.2981 20.2981L21.3588 21.3588C22.1071 20.6104 22.4392 19.6614 22.5969 18.489C22.7516 17.3382 22.75 15.8644 22.75 14H21.25ZM2.75 10C2.75 8.09318 2.75159 6.73851 2.88976 5.71085C3.02502 4.70476 3.27869 4.12511 3.7019 3.7019L2.64124 2.64124C1.89288 3.38961 1.56076 4.33855 1.40313 5.51098C1.24841 6.66182 1.25 8.13558 1.25 10H2.75ZM10.0298 1.25C8.15538 1.25 6.67442 1.24842 5.51887 1.40307C4.34232 1.56054 3.39019 1.8923 2.64124 2.64124L3.7019 3.7019C4.12453 3.27928 4.70596 3.02525 5.71785 2.88982C6.75075 2.75158 8.11311 2.75 10.0298 2.75V1.25Z" fill="currentColor"></path>
+                                            <path d="M13 2.5V5C13 7.35702 13 8.53553 13.7322 9.26777C14.4645 10 15.643 10 18 10H22" stroke="currentColor" stroke-width="1.5"></path>
+                                        </g>
+                                    </svg> <span><?=translate('certificate')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <?php if(get_permission('certificate_templete', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'certificate/index' || $sub_page == 'certificate/edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('certificate'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('certificate') . " " .  translate('templete'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('generate_student_certificate', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'certificate/generate_student') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('certificate/generate_student'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('generate') . " " .  translate('student'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('generate_employee_certificate', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'certificate/generate_employee') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('certificate/generate_employee'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('generate') . " " .  translate('employee'); ?></span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
+                  
+                    <?php 
+                    if (moduleIsEnabled('live_class')) {
+                        if(get_permission('live_class', 'is_view')) { ?>
+                    <li class="nav-parent <?php if ($main_menu == 'live_class') echo 'nav-expanded nav-active';?>">
+                        <a>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0" ></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19.0011 4.25C19.4153 4.25 19.7511 3.91421 19.7511 3.5C19.7511 3.08579 19.4153 2.75 19.0011 2.75V4.25ZM5.00105 2.75C4.58684 2.75 4.25105 3.08579 4.25105 3.5C4.25105 3.91421 4.58684 4.25 5.00105 4.25V2.75ZM15.4756 22.0351C15.7711 22.3253 16.246 22.321 16.5362 22.0255C16.8264 21.7299 16.8221 21.2551 16.5265 20.9649L15.4756 22.0351ZM12.5265 17.0369C12.231 16.7467 11.7562 16.751 11.4659 17.0465C11.1757 17.342 11.18 17.8169 11.4756 18.1071L12.5265 17.0369ZM7.47549 20.9649C7.17999 21.2552 7.17574 21.7301 7.466 22.0256C7.75626 22.3211 8.23111 22.3253 8.52661 22.0351L7.47549 20.9649ZM12.5266 18.1061C12.8221 17.8158 12.8264 17.3409 12.5361 17.0454C12.2459 16.7499 11.771 16.7457 11.4755 17.0359L12.5266 18.1061ZM12.0011 17.571L12.0013 16.821H12.0011V17.571ZM8.25805 17.571L8.23833 18.3207C8.2449 18.3209 8.25148 18.321 8.25805 18.321V17.571ZM5.00105 14.144L5.75083 14.1624C5.75098 14.1563 5.75105 14.1501 5.75105 14.144H5.00105ZM5.00105 9H5.75105C5.75105 8.99379 5.75098 8.98757 5.75082 8.98136L5.00105 9ZM8.25805 5.572V4.822C8.25148 4.822 8.24491 4.82209 8.23834 4.82226L8.25805 5.572ZM15.7431 5.572L15.7625 4.82225C15.7561 4.82208 15.7496 4.822 15.7431 4.822V5.572ZM19.0011 9L18.2513 8.98137C18.2511 8.98758 18.2511 8.99379 18.2511 9H19.0011ZM19.0011 14.143H18.2511C18.2511 14.1493 18.2511 14.1556 18.2513 14.1619L19.0011 14.143ZM15.7441 17.572L15.7439 18.322C15.7505 18.322 15.7571 18.3219 15.7638 18.3217L15.7441 17.572ZM19.0011 2.75H5.00105V4.25H19.0011V2.75ZM16.5265 20.9649L12.5265 17.0369L11.4756 18.1071L15.4756 22.0351L16.5265 20.9649ZM8.52661 22.0351L12.5266 18.1061L11.4755 17.0359L7.47549 20.9649L8.52661 22.0351ZM12.0011 16.821H8.25805V18.321H12.0011V16.821ZM8.27778 16.8213C6.84631 16.7836 5.71567 15.5939 5.75083 14.1624L4.25128 14.1256C4.1958 16.3843 5.97974 18.2613 8.23833 18.3207L8.27778 16.8213ZM5.75105 14.144V9H4.25105V14.144H5.75105ZM5.75082 8.98136C5.71523 7.54953 6.84599 6.3594 8.27777 6.32174L8.23834 4.82226C5.97926 4.88167 4.19512 6.75948 4.25129 9.01864L5.75082 8.98136ZM8.25805 6.322H15.7431V4.822H8.25805V6.322ZM15.7236 6.32175C17.1556 6.35898 18.2869 7.54924 18.2513 8.98137L19.7508 9.01863C19.807 6.75901 18.0221 4.881 15.7625 4.82225L15.7236 6.32175ZM18.2511 9V14.143H19.7511V9H18.2511ZM18.2513 14.1619C18.2873 15.594 17.1564 16.7846 15.7243 16.8223L15.7638 18.3217C18.0233 18.2623 19.8077 16.3838 19.7508 14.1241L18.2513 14.1619ZM15.7443 16.822L12.0013 16.821L12.0009 18.321L15.7439 18.322L15.7443 16.822Z" fill="currentColor"></path> </g></svg> <span><?=translate('live_class_rooms')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li class="<?php if ($sub_page == 'live_class/index') echo 'nav-active';?>">
+                                <a href="<?=base_url('live_class')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i> <?=translate('live_class_rooms')?></span>
+                                </a>
+                            </li>
+                            <li class="<?php if ($sub_page == 'live_class/reports') echo 'nav-active';?>">
+                                <a href="<?=base_url('live_class/reports')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i> <?=translate(' live_class_reports')?></span>
+                                </a>
+                            </li>
+                         
+                        </ul>
+                    </li>
+                    <?php }} ?>
+                    <?php
+                    if (moduleIsEnabled('attachments_book')) {
+                        if(get_permission('attachments', 'is_view') ||
+                        get_permission('attachment_type', 'is_view')) {
+                        ?>
+                    <!-- attachments upload -->
+                    <li class="nav-parent <?php if ($main_menu == 'attachments') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg fill="currentColor" viewBox="0 0 24 24" id="paper-clip-top-right-2" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color"width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M7.05,20.56a5,5,0,0,1-3.57-8.62L9.91,5.51a7.08,7.08,0,0,1,10,10l-4,3.95a1,1,0,1,1-1.41-1.41l4-3.95a5.08,5.08,0,0,0-7.19-7.19L4.89,13.35a3.05,3.05,0,0,0,4.32,4.32L16,10.93a1,1,0,0,0,.3-.72,1,1,0,0,0-.3-.73,1,1,0,0,0-1.45,0l-7,7.05a1,1,0,0,1-1.41,0,1,1,0,0,1,0-1.42l7-7a3,3,0,0,1,4.29,0,3,3,0,0,1,0,4.28l-6.74,6.74A5.06,5.06,0,0,1,7.05,20.56Z" style="fill: currentColor;"></path></g></svg> <span><?=translate('attachments_book')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <?php if(get_permission('attachments', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'attachments/index') echo 'nav-active';?>">
+                                <a href="<?=base_url('attachments')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('upload_content')?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('attachment_type', 'is_view')) { ?>
+                            <li class="<?php if ($sub_page == 'attachments/type') echo 'nav-active';?>">
+                                <a href="<?=base_url('attachments/type')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('attachment_type')?></span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
+                
                
                     <?php
                     if (moduleIsEnabled('hostel') || moduleIsEnabled('transport')) {
@@ -1459,149 +1348,7 @@
                         </ul>
                     </li>
                     <?php }} ?>
-                    <?php
-                    if (moduleIsEnabled('student_accounting')) {
-                        if(get_permission('fees_type', 'is_view') ||
-                        get_permission('fees_group', 'is_view') ||
-                        get_permission('fees_fine_setup', 'is_view') ||
-                        get_permission('fees_allocation', 'is_view') ||
-                        get_permission('invoice', 'is_view') ||
-                        get_permission('due_invoice', 'is_view') ||
-                        get_permission('offline_payments', 'is_view') ||
-                        get_permission('offline_payments_type', 'is_view') ||
-                        get_permission('fees_reminder', 'is_view')) {
-                            $getOfflinePaymentsTotal = $this->application_model->getOfflinePaymentsTotal();
-                        ?>
-                    <!-- student accounting -->
-                    <li class="nav-parent <?php if ($main_menu == 'fees' || $main_menu == 'offline_payments') echo 'nav-expanded nav-active';?>">
-                        <a>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M17.4142 10.4142C18 9.82843 18 8.88562 18 7C18 5.11438 18 4.17157 17.4142 3.58579M17.4142 10.4142C16.8284 11 15.8856 11 14 11H10C8.11438 11 7.17157 11 6.58579 10.4142M17.4142 10.4142C17.4142 10.4142 17.4142 10.4142 17.4142 10.4142ZM17.4142 3.58579C16.8284 3 15.8856 3 14 3L10 3C8.11438 3 7.17157 3 6.58579 3.58579M17.4142 3.58579C17.4142 3.58579 17.4142 3.58579 17.4142 3.58579ZM6.58579 3.58579C6 4.17157 6 5.11438 6 7C6 8.88562 6 9.82843 6.58579 10.4142M6.58579 3.58579C6.58579 3.58579 6.58579 3.58579 6.58579 3.58579ZM6.58579 10.4142C6.58579 10.4142 6.58579 10.4142 6.58579 10.4142Z" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M13 7C13 7.55228 12.5523 8 12 8C11.4477 8 11 7.55228 11 7C11 6.44772 11.4477 6 12 6C12.5523 6 13 6.44772 13 7Z" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M18 6C16.3431 6 15 4.65685 15 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M18 8C16.3431 8 15 9.34315 15 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M6 6C7.65685 6 9 4.65685 9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M6 8C7.65685 8 9 9.34315 9 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M5 20.3884H7.25993C8.27079 20.3884 9.29253 20.4937 10.2763 20.6964C12.0166 21.0549 13.8488 21.0983 15.6069 20.8138C16.4738 20.6734 17.326 20.4589 18.0975 20.0865C18.7939 19.7504 19.6469 19.2766 20.2199 18.7459C20.7921 18.216 21.388 17.3487 21.8109 16.6707C22.1736 16.0894 21.9982 15.3762 21.4245 14.943C20.7873 14.4619 19.8417 14.462 19.2046 14.9433L17.3974 16.3084C16.697 16.8375 15.932 17.3245 15.0206 17.4699C14.911 17.4874 14.7962 17.5033 14.6764 17.5172M14.6764 17.5172C14.6403 17.5214 14.6038 17.5254 14.5668 17.5292M14.6764 17.5172C14.8222 17.486 14.9669 17.396 15.1028 17.2775C15.746 16.7161 15.7866 15.77 15.2285 15.1431C15.0991 14.9977 14.9475 14.8764 14.7791 14.7759C11.9817 13.1074 7.62942 14.3782 5 16.2429M14.6764 17.5172C14.6399 17.525 14.6033 17.5292 14.5668 17.5292M14.5668 17.5292C14.0434 17.5829 13.4312 17.5968 12.7518 17.5326" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <rect x="2" y="14" width="3" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"></rect>
-                                        </g>
-                                    </svg> <span><?=translate('student_accounting') .$getOfflinePaymentsTotal; ?></span>
-                        </a>
-                        <ul class="nav nav-children">
-
-                            <?php if(get_permission('offline_payments', 'is_view') || get_permission('offline_payments_type', 'is_view')) { ?>
-                            <li class="nav-parent <?php if ($main_menu == 'offline_payments') echo 'nav-expanded nav-active';?>">
-                                <a>
-                                    <i class="fas fa-store-alt"></i><span><?=translate('offline_payments')?> <?php echo $getOfflinePaymentsTotal ?></span>
-                                </a>
-                                <ul class="nav nav-children">
-                                    <?php  if(get_permission('offline_payments_type', 'is_view')) { ?>
-                                    <li class="<?php if ($sub_page == 'offline_payments/type' || $sub_page == 'offline_payments/type_edit') echo 'nav-active';?>">
-                                        <a href="<?=base_url('offline_payments/type')?>">
-                                            <span><?=translate('payments') . " " . translate('type')?></span>
-                                        </a>
-                                    </li>
-                                    <?php } if(get_permission('offline_payments', 'is_view')) { ?>
-                                    <li class="<?php if ($sub_page == 'offline_payments/history') echo 'nav-active';?>">
-                                        <a href="<?=base_url('offline_payments/payments')?>">
-                                            <span><?=translate(' offline_payments') . $getOfflinePaymentsTotal?></span>
-                                        </a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
-                            <?php } if(get_permission('fees_type', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'fees/type') echo 'nav-active';?>">
-                                <a href="<?=base_url('fees/type')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_type')?></span></a>
-                            </li>
-                            <?php } if(get_permission('fees_group', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'fees/group') echo 'nav-active';?>">
-                                <a href="<?=base_url('fees/group')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_group')?></span></a>
-                            </li>
-                            <?php } if(get_permission('fees_fine_setup', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'fees/fine_setup') echo 'nav-active';?>">
-                                <a href="<?=base_url('fees/fine_setup')?>"><span><i class="fas fa-caret-right"></i><?=translate('fine_setup')?></span></a>
-                            </li>
-                            <?php } if(get_permission('fees_allocation', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'fees/allocation') echo 'nav-active';?>">
-                                <a href="<?=base_url('fees/allocation')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_allocation')?></span></a>
-                            </li>
-                            <?php } if(get_permission('invoice', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'fees/invoice_list' || $sub_page == 'fees/collect') echo 'nav-active';?>">
-                                <a href="<?=base_url('fees/invoice_list')?>"><span><i class="fas fa-caret-right"></i><?=translate('payments_history')?></span></a>
-                            </li>
-                            <?php } if(get_permission('due_invoice', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'fees/due_invoice') echo 'nav-active';?>">
-                                <a href="<?=base_url('fees/due_invoice')?>"><span><i class="fas fa-caret-right"></i><?=translate('due_fees_invoice')?></span></a>
-                            </li>
-                            <?php } if(get_permission('fees_reminder', 'is_view')) { ?>
-                            <li class="<?php if ($sub_page == 'fees/reminder') echo 'nav-active';?>">
-                                <a href="<?=base_url('fees/reminder')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_reminder')?></span></a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
-                    <?php
-                    if (moduleIsEnabled('office_accounting')) {
-                        if(get_permission('account', 'is_view') ||
-                        get_permission('voucher_head', 'is_view') ||
-                        get_permission('deposit', 'is_view') ||
-                        get_permission('expense', 'is_view') ||
-                        get_permission('all_transactions', 'is_view')) {
-                        ?>
-                    <!-- office accounting -->
-                    <li class="nav-parent <?php if ($main_menu == 'accounting') echo 'nav-expanded nav-active';?>">
-                        <a>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M3 12C3 15.7712 3 19.6569 4.31802 20.8284C5.63604 22 7.75736 22 12 22C16.2426 22 18.364 22 19.682 20.8284C21 19.6569 21 15.7712 21 12" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M14.6603 14.2019L20.6676 12.3997C21.2631 12.2211 21.5609 12.1317 21.7498 11.9176C21.7866 11.8759 21.8199 11.8312 21.8492 11.784C22 11.5415 22 11.2307 22 10.6089C22 8.15877 22 6.9337 21.327 6.10659C21.1977 5.94763 21.0524 5.80233 20.8934 5.67298C20.0663 5 18.8412 5 16.3911 5H7.60893C5.15877 5 3.9337 5 3.10659 5.67298C2.94763 5.80233 2.80233 5.94763 2.67298 6.10659C2 6.9337 2 8.15877 2 10.6089C2 11.2307 2 11.5415 2.15078 11.784C2.18015 11.8312 2.21341 11.8759 2.25021 11.9176C2.43915 12.1317 2.7369 12.2211 3.3324 12.3997L9.33968 14.2019" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M6.5 5C7.32344 4.97913 8.15925 4.45491 8.43944 3.68032C8.44806 3.65649 8.4569 3.62999 8.47457 3.57697L8.50023 3.5C8.54241 3.37344 8.56351 3.31014 8.58608 3.254C8.87427 2.53712 9.54961 2.05037 10.3208 2.00366C10.3812 2 10.4479 2 10.5814 2H13.4191C13.5525 2 13.6192 2 13.6796 2.00366C14.4508 2.05037 15.1262 2.53712 15.4144 3.254C15.4369 3.31014 15.458 3.37343 15.5002 3.5L15.5259 3.57697C15.5435 3.62968 15.5524 3.65656 15.561 3.68032C15.8412 4.45491 16.6766 4.97913 17.5 5" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M14 12.5H10C9.72386 12.5 9.5 12.7239 9.5 13V15.1615C9.5 15.3659 9.62448 15.5498 9.8143 15.6257L10.5144 15.9058C11.4681 16.2872 12.5319 16.2872 13.4856 15.9058L14.1857 15.6257C14.3755 15.5498 14.5 15.3659 14.5 15.1615V13C14.5 12.7239 14.2761 12.5 14 12.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        </g>
-                                    </svg> <span><?=translate('office_accounting')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <?php if(get_permission('account', 'is_view')){ ?>
-                                <li class="<?php if ($sub_page == 'accounting/index' || $sub_page == 'accounting/edit') echo 'nav-active'; ?>">
-                                    <a href="<?php echo base_url('accounting'); ?>">
-                                        <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('account'); ?></span>
-                                    </a>
-                                </li>
-                            <?php } if(get_permission('deposit', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'accounting/voucher_deposit' || $sub_page == 'accounting/voucher_deposit_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('accounting/voucher_deposit'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('new_deposit'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('expense', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'accounting/voucher_expense' || $sub_page == 'accounting/voucher_expense_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('accounting/voucher_expense'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('new_expense'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('all_transactions', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'accounting/all_transactions') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('accounting/all_transactions'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('all_transactions'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('voucher_head', 'is_view') || get_permission('voucher_head', 'is_add')){ ?>
-                            <li class="<?php if ($sub_page == 'accounting/voucher_head') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('accounting/voucher_head'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('voucher') . " " . translate('head'); ?></span>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
+                  
                     <!-- message -->
                     <li class="<?php if ($main_menu == 'message') echo 'nav-active';?>">
                         <a href="<?=base_url('communication/mailbox/inbox')?>">
@@ -1925,6 +1672,266 @@
                         </ul>
                     </li>
                     <?php } } ?>
+                    
+                    <?php if (moduleIsEnabled('inventory')) { 
+                        if (get_permission('product', 'is_view') ||
+                            get_permission('product_category', 'is_view') ||
+                            get_permission('product_store', 'is_view') ||
+                            get_permission('product_supplier', 'is_view') ||
+                            get_permission('product_unit', 'is_view') ||
+                            get_permission('product_purchase', 'is_view') ||
+                            get_permission('product_sales', 'is_view') ||
+                            get_permission('product_issue', 'is_view')) {
+                        ?>
+                    <!-- Inventory -->
+                    <li class="nav-parent <?php if ($main_menu == 'inventory' || $main_menu == 'inventory_report') echo 'nav-expanded nav-active'; ?>">
+                        <a><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.95526 2.25C3.97013 2.25001 3.98505 2.25001 4.00001 2.25001L20.0448 2.25C20.4776 2.24995 20.8744 2.24991 21.1972 2.29331C21.5527 2.3411 21.9284 2.45355 22.2374 2.76257C22.5465 3.07159 22.6589 3.44732 22.7067 3.8028C22.7501 4.12561 22.7501 4.52245 22.75 4.95526V5.04475C22.7501 5.47757 22.7501 5.8744 22.7067 6.19721C22.6589 6.55269 22.5465 6.92842 22.2374 7.23744C21.9437 7.53121 21.5896 7.64733 21.25 7.69914V13.0564C21.25 14.8942 21.25 16.3498 21.0969 17.489C20.9392 18.6615 20.6071 19.6104 19.8588 20.3588C19.1104 21.1071 18.1615 21.4392 16.989 21.5969C15.8498 21.75 14.3942 21.75 12.5564 21.75H11.4436C9.60583 21.75 8.1502 21.75 7.01098 21.5969C5.83856 21.4392 4.88961 21.1071 4.14125 20.3588C3.39289 19.6104 3.06077 18.6615 2.90314 17.489C2.74998 16.3498 2.74999 14.8942 2.75001 13.0564L2.75001 7.69914C2.41038 7.64733 2.05634 7.53121 1.76257 7.23744C1.45355 6.92842 1.3411 6.55269 1.29331 6.19721C1.24991 5.8744 1.24995 5.47757 1.25 5.04476C1.25001 5.02988 1.25001 5.01496 1.25001 5.00001C1.25001 4.98505 1.25001 4.97013 1.25 4.95526C1.24995 4.52244 1.24991 4.12561 1.29331 3.8028C1.3411 3.44732 1.45355 3.07159 1.76257 2.76257C2.07159 2.45355 2.44732 2.3411 2.8028 2.29331C3.12561 2.24991 3.52244 2.24995 3.95526 2.25ZM4.25001 7.75001V13C4.25001 14.9068 4.2516 16.2615 4.38977 17.2892C4.52503 18.2952 4.7787 18.8749 5.20191 19.2981C5.62512 19.7213 6.20477 19.975 7.21086 20.1102C8.23852 20.2484 9.59319 20.25 11.5 20.25H12.5C14.4068 20.25 15.7615 20.2484 16.7892 20.1102C17.7952 19.975 18.3749 19.7213 18.7981 19.2981C19.2213 18.8749 19.475 18.2952 19.6102 17.2892C19.7484 16.2615 19.75 14.9068 19.75 13V7.75001H4.25001ZM2.82324 3.82324L2.82568 3.82187C2.82761 3.82086 2.83093 3.81924 2.83597 3.81717C2.85775 3.80821 2.90611 3.79291 3.00267 3.77993C3.21339 3.7516 3.5074 3.75001 4.00001 3.75001H20C20.4926 3.75001 20.7866 3.7516 20.9973 3.77993C21.0939 3.79291 21.1423 3.80821 21.164 3.81717C21.1691 3.81924 21.1724 3.82086 21.1743 3.82187L21.1768 3.82323L21.1781 3.82568C21.1792 3.82761 21.1808 3.83093 21.1828 3.83597C21.1918 3.85775 21.2071 3.90611 21.2201 4.00267C21.2484 4.21339 21.25 4.5074 21.25 5.00001C21.25 5.49261 21.2484 5.78662 21.2201 5.99734C21.2071 6.0939 21.1918 6.14226 21.1828 6.16404C21.1808 6.16909 21.1792 6.1724 21.1781 6.17434L21.1768 6.17678L21.1743 6.17815C21.1724 6.17916 21.1691 6.18077 21.164 6.18285C21.1423 6.19181 21.0939 6.2071 20.9973 6.22008C20.7866 6.24841 20.4926 6.25001 20 6.25001H4.00001C3.5074 6.25001 3.21339 6.24841 3.00267 6.22008C2.90611 6.2071 2.85775 6.19181 2.83597 6.18285C2.83093 6.18077 2.82761 6.17916 2.82568 6.17815L2.82324 6.17677L2.82187 6.17434C2.82086 6.1724 2.81924 6.16909 2.81717 6.16404C2.80821 6.14226 2.79291 6.0939 2.77993 5.99734C2.7516 5.78662 2.75001 5.49261 2.75001 5.00001C2.75001 4.5074 2.7516 4.21339 2.77993 4.00267C2.79291 3.90611 2.80821 3.85775 2.81717 3.83597C2.81924 3.83093 2.82086 3.82761 2.82187 3.82568L2.82324 3.82324ZM2.82324 6.17677C2.82284 6.17636 2.82297 6.17644 2.82324 6.17677V6.17677ZM10.4782 9.75001H13.5218C13.736 9.74999 13.9329 9.74998 14.0982 9.76126C14.2759 9.77338 14.4712 9.80099 14.6697 9.88322C15.0985 10.0608 15.4392 10.4015 15.6168 10.8303C15.699 11.0288 15.7266 11.2242 15.7388 11.4018C15.75 11.5671 15.75 11.764 15.75 11.9782V12.0218C15.75 12.236 15.75 12.4329 15.7388 12.5982C15.7266 12.7759 15.699 12.9712 15.6168 13.1697C15.4392 13.5985 15.0985 13.9392 14.6697 14.1168C14.4712 14.199 14.2759 14.2266 14.0982 14.2388C13.9329 14.25 13.736 14.25 13.5218 14.25H10.4782C10.264 14.25 10.0671 14.25 9.9018 14.2388C9.72416 14.2266 9.52881 14.199 9.33031 14.1168C8.90151 13.9392 8.56083 13.5985 8.38322 13.1697C8.30099 12.9712 8.27338 12.7759 8.26126 12.5982C8.24998 12.4329 8.24999 12.236 8.25001 12.0218V11.9782C8.24999 11.764 8.24998 11.5671 8.26126 11.4018C8.27338 11.2242 8.30099 11.0288 8.38322 10.8303C8.56083 10.4015 8.90151 10.0608 9.33031 9.88322C9.52881 9.80099 9.72416 9.77338 9.9018 9.76126C10.0671 9.74998 10.264 9.74999 10.4782 9.75001ZM9.90131 11.2703C9.84248 11.2956 9.79559 11.3425 9.77031 11.4013C9.76844 11.4087 9.76234 11.4371 9.75778 11.5039C9.75041 11.6119 9.75001 11.7568 9.75001 12C9.75001 12.2432 9.75041 12.3881 9.75778 12.4961C9.76234 12.5629 9.76844 12.5913 9.77031 12.5987C9.79559 12.6575 9.84248 12.7044 9.90131 12.7297C9.90867 12.7316 9.93707 12.7377 10.0039 12.7422C10.1119 12.7496 10.2568 12.75 10.5 12.75H13.5C13.7432 12.75 13.8881 12.7496 13.9961 12.7422C14.0629 12.7377 14.0913 12.7316 14.0987 12.7297C14.1575 12.7044 14.2044 12.6575 14.2297 12.5987C14.2316 12.5913 14.2377 12.5629 14.2422 12.4961C14.2496 12.3881 14.25 12.2432 14.25 12C14.25 11.7568 14.2496 11.6119 14.2422 11.5039C14.2377 11.4371 14.2316 11.4087 14.2297 11.4013C14.2044 11.3425 14.1575 11.2956 14.0987 11.2703C14.0913 11.2684 14.0629 11.2623 13.9961 11.2578C13.8881 11.2504 13.7432 11.25 13.5 11.25H10.5C10.2568 11.25 10.1119 11.2504 10.0039 11.2578C9.93707 11.2623 9.90866 11.2684 9.90131 11.2703Z" fill="currentColor"></path> </g></svg> <span><?php echo translate('inventory'); ?></span></a>
+                        <ul class="nav nav-children">
+                        <?php if(get_permission('product', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'inventory/product' || $sub_page == 'inventory/product_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('inventory/product'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('product'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('product_category', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'inventory/category') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('inventory/category'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('category'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('product_store', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'inventory/store' || $sub_page == 'inventory/store_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('inventory/store'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('store'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('product_supplier', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'inventory/supplier' || $sub_page == 'inventory/supplier_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('inventory/supplier'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('supplier'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('product_unit', 'is_view')){  ?>
+                            <li class="<?php if ($sub_page == 'inventory/unit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('inventory/unit'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('unit'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('product_purchase', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'inventory/purchase' || $sub_page == 'inventory/purchase_edit' || $sub_page == 'inventory/purchase_bill') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('inventory/purchase'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('purchase'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('product_sales', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'inventory/sales' || $sub_page == 'inventory/sales_invoice') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('inventory/sales'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('sales'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('product_issue', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'inventory/issue') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('inventory/issue'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('issue'); ?></span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                        </ul>
+                    </li>
+                    <?php } } ?>
+                    <?php 
+                    if (is_superadmin_loggedin()) : ?>
+                    <!-- branch -->
+                    <li class="<?php if ($main_menu == 'branch') echo 'nav-active';?>">
+                        <a href="<?=base_url('branch')?>">
+                        <svg viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true><g id=" SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="Development" transform="translate(-768.000000, 0.000000)">
+                                                <g id="group_line" transform="translate(768.000000, 0.000000)">
+                                                    <path d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z" id="MingCute" fill-rule="nonzero"> </path>
+                                                    <path d="M15,6 C15,7.30622 14.1652,8.41746 13,8.82929 L13,11 L16,11 C17.6569,11 19,12.3431 19,14 L19,15.1707 C20.1652,15.5825 21,16.6938 21,18 C21,19.6569 19.6569,21 18,21 C16.3431,21 15,19.6569 15,18 C15,16.6938 15.8348,15.5825 17,15.1707 L17,14 C17,13.4477 16.5523,13 16,13 L8,13 C7.44772,13 7,13.4477 7,14 L7,15.1707 C8.16519,15.5825 9,16.6938 9,18 C9,19.6569 7.65685,21 6,21 C4.34315,21 3,19.6569 3,18 C3,16.6938 3.83481,15.5825 5,15.1707 L5,14 C5,12.3431 6.34315,11 8,11 L11,11 L11,8.82929 C9.83481,8.41746 9,7.30622 9,6 C9,4.34315 10.3431,3 12,3 C13.6569,3 15,4.34315 15,6 Z M12,5 C11.4477,5 11,5.44772 11,6 C11,6.55228 11.4477,7 12,7 C12.5523,7 13,6.55228 13,6 C13,5.44772 12.5523,5 12,5 Z M6,17 C5.44772,17 5,17.4477 5,18 C5,18.5523 5.44772,19 6,19 C6.55228,19 7,18.5523 7,18 C7,17.4477 6.55228,17 6,17 Z M18,17 C17.4477,17 17,17.4477 17,18 C17,18.5523 17.4477,19 18,19 C18.5523,19 19,18.5523 19,18 C19,17.4477 18.5523,17 18,17 Z" id="形状" fill="currentColor"> </path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg> <span><?=translate('branch')?></span>
+                        </a>
+                    </li>
+                    <?php endif; 
+                    $saasExisting = $this->app_lib->isExistingAddon('saas');
+                    if ($saasExisting): ?>
+                    <!-- school subscription (SaaS)  -->
+                        <?php include "saas_menu.php"; ?>
+                    <?php endif; ?>
+                    <?php
+                    if (moduleIsEnabled('website')) {
+                        if (get_permission('frontend_setting', 'is_view') ||
+                            get_permission('frontend_menu', 'is_view') ||
+                            get_permission('frontend_section', 'is_view') ||
+                            get_permission('manage_page', 'is_view') ||
+                            get_permission('frontend_slider', 'is_view') ||
+                            get_permission('frontend_features', 'is_view') ||
+                            get_permission('frontend_testimonial', 'is_view') ||
+                            get_permission('frontend_services', 'is_view') ||
+                            get_permission('frontend_gallery', 'is_view') ||
+                            get_permission('frontend_gallery_category', 'is_view') ||
+                            get_permission('frontend_news', 'is_view') ||
+                            get_permission('frontend_faq', 'is_view')) {
+                            ?>
+                    <!-- Patient Details -->
+                    <li class="nav-parent <?php if ($main_menu == 'frontend') echo 'nav-expanded nav-active'; ?>">
+                        <a><svg fill="currentColor" viewBox="-1 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16.417 9.57a7.917 7.917 0 1 1-8.144-7.908 1.758 1.758 0 0 1 .451 0 7.913 7.913 0 0 1 7.693 7.907zM5.85 15.838q.254.107.515.193a11.772 11.772 0 0 1-1.572-5.92h-3.08a6.816 6.816 0 0 0 4.137 5.727zM2.226 6.922a6.727 6.727 0 0 0-.511 2.082h3.078a11.83 11.83 0 0 1 1.55-5.89q-.249.083-.493.186a6.834 6.834 0 0 0-3.624 3.622zm8.87 2.082a14.405 14.405 0 0 0-.261-2.31 9.847 9.847 0 0 0-.713-2.26c-.447-.952-1.009-1.573-1.497-1.667a8.468 8.468 0 0 0-.253 0c-.488.094-1.05.715-1.497 1.668a9.847 9.847 0 0 0-.712 2.26 14.404 14.404 0 0 0-.261 2.309zm-.974 5.676a9.844 9.844 0 0 0 .713-2.26 14.413 14.413 0 0 0 .26-2.309H5.903a14.412 14.412 0 0 0 .261 2.31 9.844 9.844 0 0 0 .712 2.259c.487 1.036 1.109 1.68 1.624 1.68s1.137-.644 1.623-1.68zm4.652-2.462a6.737 6.737 0 0 0 .513-2.107h-3.082a11.77 11.77 0 0 1-1.572 5.922q.261-.086.517-.194a6.834 6.834 0 0 0 3.624-3.621zM11.15 3.3a6.82 6.82 0 0 0-.496-.187 11.828 11.828 0 0 1 1.55 5.89h3.081A6.815 6.815 0 0 0 11.15 3.3z"></path></g></svg> <?php echo translate('frontend'); ?></span></a>
+                        <ul class="nav nav-children">
+                        <?php if(get_permission('frontend_setting', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/setting') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/setting'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('setting'); ?></span>
+                                </a>
+                            </li>
+                       <?php } if(get_permission('frontend_menu', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/menu' || $sub_page == 'frontend/menu_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/menu'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('menu'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('frontend_section', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/section_home' ||
+                                            $sub_page == 'frontend/section_doctors' ||
+                                                $sub_page == 'frontend/section_appointment' ||
+                                                    $sub_page == 'frontend/section_faq' ||
+                                                        $sub_page == 'frontend/section_contact' ||
+                                                            $sub_page == 'frontend/section_about' ||
+                                                                $sub_page == 'frontend/section_services') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/section/index'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('page') . " " . translate('section'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('manage_page', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'frontend/content' || $sub_page == 'frontend/content_edit') echo 'nav-active'; ?>">
+                                        <a href="<?php echo base_url('frontend/content/index'); ?>">
+                                            <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('manage') . " " . translate('page'); ?></span>
+                                        </a>
+                                    </li>
+                            <?php } if(get_permission('frontend_slider', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/slider' || $sub_page == 'frontend/slider_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/slider'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('slider'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_features', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/features' || $sub_page == 'frontend/features_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/features'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('features'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_testimonial', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/testimonial' || $sub_page == 'frontend/testimonial_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/testimonial'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('testimonial'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_services', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/services' || $sub_page == 'frontend/services_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/services'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('service'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_faq', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/faq' || $sub_page == 'frontend/faq_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/faq/index'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('faq'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_gallery_category', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/gallery_category') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/gallery/category'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('gallery') . " " . translate('category'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_gallery', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/gallery' || $sub_page == 'frontend/gallery_edit' || $sub_page == 'frontend/gallery_album') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/gallery/index'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('gallery'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_news', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/news' || $sub_page == 'frontend/news_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/news/index'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('news'); ?></span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
+
+                    <?php
+                    if (moduleIsEnabled('reception')) {
+                        if (get_permission('postal_record', 'is_view') ||
+                        get_permission('call_log', 'is_view') ||
+                        get_permission('visitor_log', 'is_view') ||
+                        get_permission('complaint', 'is_view') ||
+                        get_permission('enquiry', 'is_view') ||
+                        get_permission('follow_up', 'is_view') ||
+                        get_permission('config_reception', 'is_view')) { 
+                        ?>
+                    <!-- reception -->
+                    <li class="nav-parent <?php if ($main_menu == 'reception') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M6 15.5C6 14.9477 6.44772 14.5 7 14.5H17C17.5523 14.5 18 14.9477 18 15.5C18 16.6046 17.1046 17.5 16 17.5H8C6.89543 17.5 6 16.6046 6 15.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M6.62825 6.76581C6.86962 4.75442 6.9903 3.74872 7.57198 3.06161C7.75659 2.84355 7.97139 2.65298 8.2099 2.49567C8.96141 2 9.97432 2 12.0001 2C14.026 2 15.0389 2 15.7904 2.49567C16.0289 2.65298 16.2437 2.84355 16.4283 3.06161C17.01 3.74872 17.1307 4.75442 17.372 6.76581L17.463 7.52342C17.7134 9.61087 17.8387 10.6546 17.2419 11.3273C16.6451 12 15.5939 12 13.4914 12H10.5088C8.40642 12 7.35521 12 6.7584 11.3273C6.1616 10.6546 6.28684 9.61087 6.53734 7.52342L6.62825 6.76581Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M12 12V14" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M12 22V20M12 20V17.5M12 20L12.4661 20.1165C13.4214 20.3554 14.1886 21.0658 14.5 22M12 20L11.5339 20.1165C10.5786 20.3554 9.81142 21.0658 9.5 22M6 16L5.13484 13.4045C5.06173 13.1852 5.02518 13.0755 4.95424 12.9225C4.8833 12.7695 4.85413 12.7215 4.79579 12.6256C4.33942 11.8752 3.7325 11.5 2 11.5M18 16L18.8652 13.4045C18.9383 13.1852 18.9748 13.0755 19.0458 12.9225C19.1167 12.7695 19.1459 12.7215 19.2042 12.6256C19.6606 11.8752 20.2675 11.5 22 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                        </g>
+                                    </svg> <span><?=translate('reception')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <?php if(get_permission('enquiry', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'reception/enquiry' || $sub_page =='reception/enquiry_edit' || $sub_page =='reception/enquiry_details') echo 'nav-active';?>">
+                                <a href="<?=base_url('reception/enquiry')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('admission_enquiry')?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('postal_record', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'reception/postal' || $sub_page =='reception/postal_edit') echo 'nav-active';?>">
+                                <a href="<?=base_url('reception/postal')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('postal_record')?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('call_log', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'reception/call_log' || $sub_page =='reception/call_log_edit') echo 'nav-active';?>">
+                                <a href="<?=base_url('reception/call_log')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('call_log')?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('visitor_log', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'reception/visitor' || $sub_page =='reception/visitor_edit') echo 'nav-active';?>">
+                                <a href="<?=base_url('reception/visitor_log')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('visitor_log')?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('complaint', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'reception/complaint' || $sub_page == 'reception/complaint_edit') echo 'nav-active';?>">
+                                <a href="<?=base_url('reception/complaint')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?=translate('complaint')?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('config_reception', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'reception_config/reference' || $sub_page == 'reception_config/response' || $sub_page == 'reception_config/calling_purpose' || $sub_page == 'reception_config/visiting_purpose' || $sub_page == 'reception_config/complaint_type') echo 'nav-active';?>">
+                                <a href="<?=base_url('reception_config/reference')?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i> Config Reception</span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
                     <!-- addon manager -->
                     <?php 
                     if (is_superadmin_loggedin()) { ?>
