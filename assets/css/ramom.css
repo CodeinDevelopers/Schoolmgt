@@ -47,7 +47,7 @@
 }
 
 .box-top-line.line-color-primary {
-	border-color: #ffbd2e;
+	border-color: #58a3fe;
 }
 
 html.dark .box-top-line.line-color-primary {
@@ -159,7 +159,7 @@ html.dark .tab-content .panel .panel-footer-custom {
     height: 2px;
     left: 0;
     top: -16px;
-    background: #ffbd2e;
+    background: #58a3fe;
 }
 
 html.dark .chart-title:before {
@@ -176,12 +176,12 @@ html.dark .chart-title:before {
 	border-radius: 0.25rem;
 	width: 28px;
 	height: 28px;
-	border: 1px solid #ffbd2e;
+	
 	font-size: 15px;
 	float: left;
 	justify-content: center;
 	transition: .3s;
-	box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.13);
+	
 }
 
 html.dark .page-header .page-title-icon {
@@ -240,7 +240,7 @@ html.dark .thememenu-sy .theme-box .theme-img {
 
 .thememenu-sy .theme-box .theme-img:hover {
 	box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.15);
-	border-color: #ffbd2e;
+	border-color: #58a3fe;
 }
 
 html.dark .thememenu-sy .theme-box .theme-img:hover {
@@ -271,7 +271,7 @@ html.dark .thememenu-sy .theme-box .theme-img:hover {
 }
 
 .thememenu-sy .theme-box input:checked + .theme-img {
-	border-color: #ffbd2e;
+	border-color: #58a3fe;
 }
 html.dark .thememenu-sy .theme-box input:checked + .theme-img {
 	border-color: #ff685c;
@@ -292,7 +292,7 @@ html.dark .thememenu-sy .theme-box input:checked + .theme-img {
 .mailbox .nav-pills > li > a:hover,
 .mailbox .nav-pills > li > a:focus {
 	background: #f2f7f8;
-	border-left-color: #ffbd2e;
+	border-left-color: #58a3fe;
 	color: #747d8a;
 }
 
@@ -300,7 +300,7 @@ html.dark .thememenu-sy .theme-box input:checked + .theme-img {
 .mailbox .nav-pills > li.active > a:hover,
 .mailbox .nav-pills > li.active > a:focus {
 	background: #e7eaea;
-	border-left: 3px solid #ffbd2e;
+	border-left: 3px solid #58a3fe;
 	color: #747d8a;
 }
 
@@ -324,7 +324,7 @@ html.dark .mailbox .nav-pills > li.active > a:focus {
 	font-size: 1.1rem;
 	padding: .3em .7em .4em;
 	margin: .2em .3em 0 0;
-	background: #ffbd2e;
+	background: #58a3fe;
 }
 
 html.dark .mailbox .nav-pills a .label {
@@ -447,7 +447,7 @@ input[type="number"] {
     display: block;
     height: 27px;
     width: 27px;
-    background: #ffbd2e;
+    background: #58a3fe;
     border-radius: 3px;
     transform: rotate(45deg);
     content: "";
@@ -669,7 +669,7 @@ html.dark.datepicker table tr td span.focused {
 .datepicker table tr td span.active:active,
 .datepicker table tr td span.active:hover.active,
 .datepicker table tr td span.active:hover:active {
-	background-color: #ffbd2e;
+	background-color: #58a3fe;
 }
 
 .datepicker table tr td span.active.active.focus,
@@ -695,11 +695,11 @@ html.dark .daterangepicker {
 }
 
 .daterangepicker .ranges li.active {
-	background-color: #ffbd2e;
+	background-color: #58a3fe;
 }
 
 .daterangepicker td.active, .daterangepicker td.active:hover {
-	background-color: #ffbd2e;
+	background-color: #58a3fe;
 }
 
 html.dark .daterangepicker:before {
@@ -821,7 +821,7 @@ html.dark .session-top-hig {
     margin: 0 0 14px;
     line-height: 27px;
     padding: 0;
-    color: #ffbd2e;
+    color: #58a3fe;
     font-size: 18px;
     position: relative;
     overflow: hidden;
@@ -897,7 +897,7 @@ html.dark .thumbnail {
 }
 
 .subl-heading {
-	border-bottom: 3px solid #ffbd2e;
+	border-bottom: 3px solid #58a3fe;
 }
 
 /* custom progress bar css*/
@@ -931,8 +931,8 @@ html.dark .prog-subl {
 }
 
 .label-primary-custom {
-	border: #ffbd2e 1px solid;
-	color:#ffbd2e;
+	border: #58a3fe 1px solid;
+	color:#58a3fe;
 }
 
 .label-warning-custom {
@@ -962,7 +962,7 @@ html.dark .popover.top > .arrow:after {
 .quick_image .user-img-circle {
 	background: #fefefe;
 	position: inherit;
-	border: 2px solid #ffbd2e;
+	border: 2px solid #58a3fe;
 	padding: 2px;
 	box-shadow: 5px 3px 8px 0 rgba(33, 33, 33, 0.17);
 	border-radius: 15px;

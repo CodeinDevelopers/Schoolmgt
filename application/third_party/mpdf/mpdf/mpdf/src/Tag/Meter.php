@@ -357,7 +357,7 @@ class Meter extends InlineTag
 				$cy = $h / 2;
 				$rx = $h / 3.5;
 				$ry = $h / 2.2;
-				$svg .= '<ellipse fill="' . $col . '" stroke="#000000" stroke-width="0.5px" cx="' . $cx . '" cy="' . $cy . '" rx="' . $rx . '" ry="' . $ry . '"/>';
+				$svg .= '<ellipse fill="' . $col . '" stroke="#58a3fe" stroke-width="0.5px" cx="' . $cx . '" cy="' . $cy . '" rx="' . $rx . '" ry="' . $ry . '"/>';
 			}
 
 			// BoRDER
@@ -418,7 +418,7 @@ class Meter extends InlineTag
 				$cy = $h / 2;
 				$rx = $h / 2.2;
 				$ry = $h / 2.2;
-				$svg .= '<ellipse fill="' . $col . '" stroke="#000000" stroke-width="0.5px" cx="' . $cx . '" cy="' . $cy . '" rx="' . $rx . '" ry="' . $ry . '"/>';
+				$svg .= '<ellipse fill="' . $col . '" stroke="#58a3fe" stroke-width="0.5px" cx="' . $cx . '" cy="' . $cy . '" rx="' . $rx . '" ry="' . $ry . '"/>';
 			}
 
 			// BoRDER

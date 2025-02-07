@@ -20,7 +20,7 @@ if ($div == 0) {
 
 $div2 = 0;
 if (get_permission('admission_count_widget', 'is_view')) {
-	$div2++;	
+	$div2++;	                                                              
 }
 if (get_permission('voucher_count_widget', 'is_view')) {
 	$div2++;	

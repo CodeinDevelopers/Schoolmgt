@@ -375,7 +375,7 @@ html.dark .checkbox-replace .i-checks > i {
 	left: 4px;
 	width: 10px;
 	height: 10px;
-	background-color: #ffbd2e;
+	background-color: #58a3fe;
 	-webkit-transform: scale(0);
 	-moz-transform: scale(0);
 	-ms-transform: scale(0);
@@ -385,7 +385,7 @@ html.dark .checkbox-replace .i-checks > i {
 }
 
 .checkbox-replace .i-checks input:checked + i {
-	border-color: #ffbd2e;
+	border-color: #58a3fe;
 }
 
 html.dark .checkbox-replace .i-checks input:checked + i{

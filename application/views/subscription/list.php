@@ -106,7 +106,7 @@ html.dark .pricing-feature-list li span {
 }
 
 .pricing-feature-list li i {
-    color: #ffbd2e;
+    color: #58a3fe;
     font-size: 16px;
 }
 
@@ -116,7 +116,7 @@ html.dark .pricing-feature-list li span {
 
 .single-pricing-pack:hover {
     box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.2);
-    border-color: #ffbd2e;
+    border-color: #58a3fe;
 }
 
 .pricing-header .discount {

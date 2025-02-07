@@ -65,6 +65,76 @@
                                 </a>
                             </li>
                     <?php } ?>
+                    <!--attendance--->
+                    <?php
+                     
+                    if (moduleIsEnabled('attendance')) {
+                        if(get_permission('student_attendance', 'is_add') ||
+                        get_permission('employee_attendance', 'is_add') ||
+                        get_permission('exam_attendance', 'is_add')) {
+                        ?>
+                 
+                  
+             
+                            <!-- attendance control -->
+                            <li class="nav-parent <?php if ($main_menu == 'attendance') echo 'nav-expanded nav-active'; ?>">
+                                <a>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M16 4.00195C18.175 4.01406 19.3529 4.11051 20.1213 4.87889C21 5.75757 21 7.17179 21 10.0002V16.0002C21 18.8286 21 20.2429 20.1213 21.1215C19.2426 22.0002 17.8284 22.0002 15 22.0002H9C6.17157 22.0002 4.75736 22.0002 3.87868 21.1215C3 20.2429 3 18.8286 3 16.0002V10.0002C3 7.17179 3 5.75757 3.87868 4.87889C4.64706 4.11051 5.82497 4.01406 8 4.00195" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M10.5 14L17 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M7 14H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M7 10.5H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M7 17.5H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M10.5 10.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M10.5 17.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                                        </g>
+                                    </svg> <span><?=translate('attendance')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <?php if(get_permission('student_attendance', 'is_add')) { 
+                                $getAttendanceType = $this->app_lib->getAttendanceType();
+                                if ($getAttendanceType == 2 || $getAttendanceType == 0) {
+                                ?>
+                            <li class="<?php if ($sub_page == 'attendance/student_entries') echo 'nav-active';?>">
+                                <a href="<?=base_url('attendance/student_entry')?>">
+                                    <span><i class="fas fa-caret-right"></i><?=translate('student')?></span>
+                                </a>
+                            </li>
+                            <?php } if ($getAttendanceType == 2 || $getAttendanceType == 1) { ?>
+                            <li class="<?php if ($sub_page == 'attendance_period/index') echo 'nav-active';?>">
+                                <a href="<?=base_url('attendance_period/index')?>">
+                                    <span><i class="fas fa-caret-right"></i><?=translate('subject_wise')?></span>
+                                </a>
+                            </li>
+                            <?php } } if(get_permission('employee_attendance', 'is_add')) { ?>
+                            <li class="<?php if ($sub_page == 'attendance/employees_entries') echo 'nav-active';?>">
+                                <a href="<?=base_url('attendance/employees_entry')?>">
+                                    <span><i class="fas fa-caret-right"></i><?=translate('employee')?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('exam_attendance', 'is_add')) { ?>
+                            <li class="<?php if ($sub_page == 'attendance/exam_entries') echo 'nav-active';?>">
+                                <a href="<?=base_url('attendance/exam_entry')?>">
+                                    <span><i class="fas fa-caret-right"></i><?=translate('exam')?></span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php } } ?>
+                    <?php if ($this->app_lib->isExistingAddon('qrcode') && moduleIsEnabled('qr_code_attendance')) { 
+                        if(get_permission('qr_code_student_attendance', 'is_add') ||
+                            get_permission('qr_code_employee_attendance', 'is_add') ||
+                                get_permission('qr_code_student_attendance_report', 'is_view') ||
+                                get_permission('qr_code_employee_attendance_report', 'is_view') ) {
+                            
+                            include "qr_code_menu.php";
+
+                         } } ?>
                     <?php if (moduleIsEnabled('inventory')) { 
                         if (get_permission('product', 'is_view') ||
                             get_permission('product_category', 'is_view') ||
@@ -139,7 +209,6 @@
                         <svg viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true><g id=" SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">
-                                        <title>group_line</title>
                                         <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                             <g id="Development" transform="translate(-768.000000, 0.000000)">
                                                 <g id="group_line" transform="translate(768.000000, 0.000000)">
@@ -1261,76 +1330,7 @@
                         </ul>
                     </li>
                     <?php }} ?>
-                     <!--attendance--->
-                    <?php
                      
-                    if (moduleIsEnabled('attendance')) {
-                        if(get_permission('student_attendance', 'is_add') ||
-                        get_permission('employee_attendance', 'is_add') ||
-                        get_permission('exam_attendance', 'is_add')) {
-                        ?>
-                 
-                  
-             
-                            <!-- attendance control -->
-                            <li class="nav-parent <?php if ($main_menu == 'attendance') echo 'nav-expanded nav-active'; ?>">
-                                <a>
-                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M16 4.00195C18.175 4.01406 19.3529 4.11051 20.1213 4.87889C21 5.75757 21 7.17179 21 10.0002V16.0002C21 18.8286 21 20.2429 20.1213 21.1215C19.2426 22.0002 17.8284 22.0002 15 22.0002H9C6.17157 22.0002 4.75736 22.0002 3.87868 21.1215C3 20.2429 3 18.8286 3 16.0002V10.0002C3 7.17179 3 5.75757 3.87868 4.87889C4.64706 4.11051 5.82497 4.01406 8 4.00195" stroke="currentColor" stroke-width="1.5"></path>
-                                            <path d="M10.5 14L17 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M7 14H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M7 10.5H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M7 17.5H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M10.5 10.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M10.5 17.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            <path d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z" stroke="currentColor" stroke-width="1.5"></path>
-                                        </g>
-                                    </svg> <span><?=translate('attendance')?></span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <?php if(get_permission('student_attendance', 'is_add')) { 
-                                $getAttendanceType = $this->app_lib->getAttendanceType();
-                                if ($getAttendanceType == 2 || $getAttendanceType == 0) {
-                                ?>
-                            <li class="<?php if ($sub_page == 'attendance/student_entries') echo 'nav-active';?>">
-                                <a href="<?=base_url('attendance/student_entry')?>">
-                                    <span><i class="fas fa-caret-right"></i><?=translate('student')?></span>
-                                </a>
-                            </li>
-                            <?php } if ($getAttendanceType == 2 || $getAttendanceType == 1) { ?>
-                            <li class="<?php if ($sub_page == 'attendance_period/index') echo 'nav-active';?>">
-                                <a href="<?=base_url('attendance_period/index')?>">
-                                    <span><i class="fas fa-caret-right"></i><?=translate('subject_wise')?></span>
-                                </a>
-                            </li>
-                            <?php } } if(get_permission('employee_attendance', 'is_add')) { ?>
-                            <li class="<?php if ($sub_page == 'attendance/employees_entries') echo 'nav-active';?>">
-                                <a href="<?=base_url('attendance/employees_entry')?>">
-                                    <span><i class="fas fa-caret-right"></i><?=translate('employee')?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('exam_attendance', 'is_add')) { ?>
-                            <li class="<?php if ($sub_page == 'attendance/exam_entries') echo 'nav-active';?>">
-                                <a href="<?=base_url('attendance/exam_entry')?>">
-                                    <span><i class="fas fa-caret-right"></i><?=translate('exam')?></span>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php } } ?>
-                    <?php if ($this->app_lib->isExistingAddon('qrcode') && moduleIsEnabled('qr_code_attendance')) { 
-                        if(get_permission('qr_code_student_attendance', 'is_add') ||
-                            get_permission('qr_code_employee_attendance', 'is_add') ||
-                                get_permission('qr_code_student_attendance_report', 'is_view') ||
-                                get_permission('qr_code_employee_attendance_report', 'is_view') ) {
-                            
-                            include "qr_code_menu.php";
-
-                         } } ?>
                     <?php
                     if (moduleIsEnabled('library')) {
                         if(get_permission('book', 'is_view') ||
@@ -1934,7 +1934,35 @@
                         </a>
                     </li>
                     <?php } ?>
+<!-------------->
 
+
+                    <!------------>
+ 
+   <li class="nav-parent">
+                                <a>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle> <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"></circle> <path d="M15 9L19 5" stroke="currentColor" stroke-width="1.5"></path> <path d="M5 19L9 15" stroke="currentColor" stroke-width="1.5"></path> <path d="M9 9L5 5" stroke="currentColor" stroke-width="1.5"></path> <path d="M19 19L15 15" stroke="currentColor" stroke-width="1.5"></path> </g></svg> <span> Help/Knowlegebase</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                <li>
+                                              <a href="<?= base_url('#') ?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 8C4 5.17157 4 3.75736 4.87868 2.87868C5.75736 2 7.17157 2 10 2H14C16.8284 2 18.2426 2 19.1213 2.87868C20 3.75736 20 5.17157 20 8V16C20 18.8284 20 20.2426 19.1213 21.1213C18.2426 22 16.8284 22 14 22H10C7.17157 22 5.75736 22 4.87868 21.1213C4 20.2426 4 18.8284 4 16V8Z" stroke="currentColor" stroke-width="1.5"></path> <path d="M19.8978 16H7.89778C6.96781 16 6.50282 16 6.12132 16.1022C5.08604 16.3796 4.2774 17.1883 4 18.2235" stroke="currentColor" stroke-width="1.5"></path> <path d="M8 7H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M8 10.5H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>Tutorials</span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="<?= base_url('#') ?>">
+                                                  <span><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19.5617 7C19.7904 5.69523 18.7863 4.5 17.4617 4.5H6.53788C5.21323 4.5 4.20922 5.69523 4.43784 7" stroke="currentColor" stroke-width="1.5"></path> <path d="M17.4999 4.5C17.5283 4.24092 17.5425 4.11135 17.5427 4.00435C17.545 2.98072 16.7739 2.12064 15.7561 2.01142C15.6497 2 15.5194 2 15.2588 2H8.74099C8.48035 2 8.35002 2 8.24362 2.01142C7.22584 2.12064 6.45481 2.98072 6.45704 4.00434C6.45727 4.11135 6.47146 4.2409 6.49983 4.5" stroke="currentColor" stroke-width="1.5"></path> <path d="M14.5812 13.6159C15.1396 13.9621 15.1396 14.8582 14.5812 15.2044L11.2096 17.2945C10.6669 17.6309 10 17.1931 10 16.5003L10 12.32C10 11.6273 10.6669 11.1894 11.2096 11.5258L14.5812 13.6159Z" stroke="currentColor" stroke-width="1.5"></path> <path d="M2.38351 13.793C1.93748 10.6294 1.71447 9.04765 2.66232 8.02383C3.61017 7 5.29758 7 8.67239 7H15.3276C18.7024 7 20.3898 7 21.3377 8.02383C22.2855 9.04765 22.0625 10.6294 21.6165 13.793L21.1935 16.793C20.8437 19.2739 20.6689 20.5143 19.7717 21.2572C18.8745 22 17.5512 22 14.9046 22H9.09536C6.44881 22 5.12553 22 4.22834 21.2572C3.33115 20.5143 3.15626 19.2739 2.80648 16.793L2.38351 13.793Z" stroke="currentColor" stroke-width="1.5"></path> </g></svg> Video Tutorials</span>
+                                              </a>
+                                          </li>
+                                          <li>
+                                              <a href="<?= base_url('#') ?>">
+                                                  <span><svg viewBox="0 0 24 24" id="_24x24_On_Light_Support" data-name="24x24/On Light/Support" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="view-box" width="24" height="24" fill="none"></rect> <path id="Shape" d="M8,17.751a2.749,2.749,0,0,1,5.127-1.382C15.217,15.447,16,14,16,11.25v-3c0-3.992-2.251-6.75-5.75-6.75S4.5,4.259,4.5,8.25v3.5a.751.751,0,0,1-.75.75h-1A2.753,2.753,0,0,1,0,9.751v-1A2.754,2.754,0,0,1,2.75,6h.478c.757-3.571,3.348-6,7.022-6s6.264,2.429,7.021,6h.478a2.754,2.754,0,0,1,2.75,2.75v1a2.753,2.753,0,0,1-2.75,2.75H17.44A5.85,5.85,0,0,1,13.5,17.84,2.75,2.75,0,0,1,8,17.751Zm1.5,0a1.25,1.25,0,1,0,1.25-1.25A1.251,1.251,0,0,0,9.5,17.751Zm8-6.75h.249A1.251,1.251,0,0,0,19,9.751v-1A1.251,1.251,0,0,0,17.75,7.5H17.5Zm-16-2.25v1A1.251,1.251,0,0,0,2.75,11H3V7.5H2.75A1.251,1.251,0,0,0,1.5,8.751Z" transform="translate(1.75 2.25)" fill="currentColor"></path> </g></svg> Contact Support</span>
+                                              </a>
+                                          </li>
+                                  
+                                  </ul>
+                              </li>
+                     
+<!------------------------------------------------------------->
                     <?php
                     $schoolSettings = false;
                     if (get_permission('school_settings', 'is_view') ||

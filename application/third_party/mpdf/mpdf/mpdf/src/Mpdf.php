@@ -10731,7 +10731,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 
 
 	/* -- DIRECTW -- */
-	function Shaded_box($text, $font = '', $fontstyle = 'B', $szfont = '', $width = '70%', $style = 'DF', $radius = 2.5, $fill = '#FFFFFF', $color = '#000000', $pad = 2)
+	function Shaded_box($text, $font = '', $fontstyle = 'B', $szfont = '', $width = '70%', $style = 'DF', $radius = 2.5, $fill = '#FFFFFF', $color = '#58a3fe', $pad = 2)
 	{
 		// F (shading - no line),S (line, no shading),DF (both)
 		if (empty($this->directWrite)) {
@@ -12633,10 +12633,10 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 			$talignR = 'right';
 		}
 
-		$html = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: ' . $valign . '; color: #000000; ';
+		$html = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: ' . $valign . '; color: #58a3fe; ';
 
 		if (isset($arr['line']) && $arr['line']) {
-			$html .= ' border-' . $valign . ': 0.1mm solid #000000;';
+			$html .= ' border-' . $valign . ': 0.1mm solid #58a3fe;';
 		}
 
 		$html .= '">';
@@ -12809,7 +12809,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				$hdet = explode('|', $Harray);
 
 				list($lw, $cw, $rw) = $this->_shareHeaderFooterWidth($hdet[0], $hdet[1], $hdet[2]);
-				$oddhtml = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: bottom; color: #000000; ';
+				$oddhtml = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: bottom; color: #58a3fe; ';
 
 				if ($this->defaultheaderfontsize) {
 					$oddhtml .= ' font-size: ' . $this->defaultheaderfontsize . 'pt;';
@@ -12827,7 +12827,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 
 				if ($this->defaultheaderline) {
-					$oddhtml .= ' border-bottom: 0.1mm solid #000000;';
+					$oddhtml .= ' border-bottom: 0.1mm solid #58a3fe;';
 				}
 
 				$oddhtml .= '">';
@@ -12837,7 +12837,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				$oddhtml .= '<td width="' . $rw . '%" style="padding: 0 0 ' . $this->header_line_spacing . 'em 0; text-align: right; ">' . $hdet[2] . '</td>';
 				$oddhtml .= '</tr></table>';
 
-				$evenhtml = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: bottom; color: #000000; ';
+				$evenhtml = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: bottom; color: #58a3fe; ';
 
 				if ($this->defaultheaderfontsize) {
 					$evenhtml .= ' font-size: ' . $this->defaultheaderfontsize . 'pt;';
@@ -12853,7 +12853,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 
 				if ($this->defaultheaderline) {
-					$evenhtml .= ' border-bottom: 0.1mm solid #000000;';
+					$evenhtml .= ' border-bottom: 0.1mm solid #58a3fe;';
 				}
 
 				$evenhtml .= '">';
@@ -12865,7 +12865,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 
 			} else {
 
-				$oddhtml = '<div style="margin: 0; color: #000000; ';
+				$oddhtml = '<div style="margin: 0; color: #58a3fe; ';
 
 				if ($this->defaultheaderfontsize) {
 					$oddhtml .= ' font-size: ' . $this->defaultheaderfontsize . 'pt;';
@@ -12883,11 +12883,11 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 
 				if ($this->defaultheaderline) {
-					$oddhtml .= ' border-bottom: 0.1mm solid #000000;';
+					$oddhtml .= ' border-bottom: 0.1mm solid #58a3fe;';
 				}
 
 				$oddhtml .= 'text-align: right; ">' . $Harray . '</div>';
-				$evenhtml = '<div style="margin: 0; color: #000000; ';
+				$evenhtml = '<div style="margin: 0; color: #58a3fe; ';
 
 				if ($this->defaultheaderfontsize) {
 					$evenhtml .= ' font-size: ' . $this->defaultheaderfontsize . 'pt;';
@@ -12905,7 +12905,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 
 				if ($this->defaultheaderline) {
-					$evenhtml .= ' border-bottom: 0.1mm solid #000000;';
+					$evenhtml .= ' border-bottom: 0.1mm solid #58a3fe;';
 				}
 
 				$evenhtml .= 'text-align: left; ">' . $Harray . '</div>';
@@ -12954,7 +12954,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 			} elseif (strpos($Farray, '|') !== false) {
 
 				$hdet = explode('|', $Farray);
-				$oddhtml = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: top; color: #000000; ';
+				$oddhtml = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: top; color: #58a3fe; ';
 
 				if ($this->defaultfooterfontsize) {
 					$oddhtml .= ' font-size: ' . $this->defaultfooterfontsize . 'pt;';
@@ -12970,7 +12970,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 
 				if ($this->defaultfooterline) {
-					$oddhtml .= ' border-top: 0.1mm solid #000000;';
+					$oddhtml .= ' border-top: 0.1mm solid #58a3fe;';
 				}
 
 				$oddhtml .= '">';
@@ -12980,7 +12980,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				$oddhtml .= '<td width="33%" style="padding: ' . $this->footer_line_spacing . 'em 0 0 0; text-align: right; ">' . $hdet[2] . '</td>';
 				$oddhtml .= '</tr></table>';
 
-				$evenhtml = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: top; color: #000000; ';
+				$evenhtml = '<table width="100%" style="border-collapse: collapse; margin: 0; vertical-align: top; color: #58a3fe; ';
 
 				if ($this->defaultfooterfontsize) {
 					$evenhtml .= ' font-size: ' . $this->defaultfooterfontsize . 'pt;';
@@ -12998,7 +12998,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 
 				if ($this->defaultfooterline) {
-					$evenhtml .= ' border-top: 0.1mm solid #000000;';
+					$evenhtml .= ' border-top: 0.1mm solid #58a3fe;';
 				}
 
 				$evenhtml .= '">';
@@ -13010,7 +13010,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 
 			} else {
 
-				$oddhtml = '<div style="margin: 0; color: #000000; ';
+				$oddhtml = '<div style="margin: 0; color: #58a3fe; ';
 
 				if ($this->defaultfooterfontsize) {
 					$oddhtml .= ' font-size: ' . $this->defaultfooterfontsize . 'pt;';
@@ -13028,12 +13028,12 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 
 				if ($this->defaultfooterline) {
-					$oddhtml .= ' border-top: 0.1mm solid #000000;';
+					$oddhtml .= ' border-top: 0.1mm solid #58a3fe;';
 				}
 
 				$oddhtml .= 'text-align: right; ">' . $Farray . '</div>';
 
-				$evenhtml = '<div style="margin: 0; color: #000000; ';
+				$evenhtml = '<div style="margin: 0; color: #58a3fe; ';
 
 				if ($this->defaultfooterfontsize) {
 					$evenhtml .= ' font-size: ' . $this->defaultfooterfontsize . 'pt;';
@@ -13051,7 +13051,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 
 				if ($this->defaultfooterline) {
-					$evenhtml .= ' border-top: 0.1mm solid #000000;';
+					$evenhtml .= ' border-top: 0.1mm solid #58a3fe;';
 				}
 
 				$evenhtml .= 'text-align: left; ">' . $Farray . '</div>';
@@ -14928,30 +14928,30 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 			// 1px solid
 			if (in_array($prop[1], $this->borderstyles) || $prop[1] == 'none' || $prop[1] == 'hidden') {
 				$prop[2] = '';
-			} // solid #000000
+			} // solid #58a3fe
 			elseif (in_array($prop[0], $this->borderstyles) || $prop[0] == 'none' || $prop[0] == 'hidden') {
 				$prop[0] = '';
 				$prop[1] = $prop[0];
 				$prop[2] = $prop[1];
-			} // 1px #000000
+			} // 1px #58a3fe
 			else {
 				$prop[1] = '';
 				$prop[2] = $prop[1];
 			}
 		} elseif (count($prop) == 3) {
-			// Change #000000 1px solid to 1px solid #000000 (proper)
+			// Change #58a3fe 1px solid to 1px solid #58a3fe (proper)
 			if (substr($prop[0], 0, 1) == '#') {
 				$tmp = $prop[0];
 				$prop[0] = $prop[1];
 				$prop[1] = $prop[2];
 				$prop[2] = $tmp;
-			} // Change solid #000000 1px to 1px solid #000000 (proper)
+			} // Change solid #58a3fe 1px to 1px solid #58a3fe (proper)
 			elseif (substr($prop[0], 1, 1) == '#') {
 				$tmp = $prop[1];
 				$prop[0] = $prop[2];
 				$prop[1] = $prop[0];
 				$prop[2] = $tmp;
-			} // Change solid 1px #000000 to 1px solid #000000 (proper)
+			} // Change solid 1px #58a3fe to 1px solid #58a3fe (proper)
 			elseif (in_array($prop[0], $this->borderstyles) || $prop[0] == 'none' || $prop[0] == 'hidden') {
 				$tmp = $prop[0];
 				$prop[0] = $prop[1];

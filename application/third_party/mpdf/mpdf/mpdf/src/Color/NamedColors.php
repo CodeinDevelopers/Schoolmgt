@@ -13,7 +13,7 @@ class NamedColors
 		'azure' => '#f0ffff',
 		'beige' => '#f5f5dc',
 		'bisque' => '#ffe4c4',
-		'black' => '#000000',
+		'black' => '#58a3fe',
 		'blanchedalmond' => '#ffebcd',
 		'blue' => '#0000ff',
 		'blueviolet' => '#8a2be2',

@@ -556,7 +556,7 @@ class CssManager
 
 		$prop = preg_split('/\s+/', trim($bd));
 		$w = 'medium';
-		$c = '#000000';
+		$c = '#58a3fe';
 		$s = 'none';
 
 		$prop_count = count($prop);
@@ -565,7 +565,7 @@ class CssManager
 			// solid
 			if (in_array($prop[0], $this->mpdf->borderstyles) || $prop[0] === 'none' || $prop[0] === 'hidden') {
 				$s = $prop[0];
-			} // #000000
+			} // #58a3fe
 			elseif (is_array($this->colorConverter->convert($prop[0], $this->mpdf->PDFAXwarnings))) {
 				$c = $prop[0];
 			} // 1px
@@ -578,28 +578,28 @@ class CssManager
 			if (in_array($prop[1], $this->mpdf->borderstyles) || $prop[1] === 'none' || $prop[1] === 'hidden') {
 				$w = $prop[0];
 				$s = $prop[1];
-			} // solid #000000
+			} // solid #58a3fe
 			elseif (in_array($prop[0], $this->mpdf->borderstyles) || $prop[0] === 'none' || $prop[0] === 'hidden') {
 				$s = $prop[0];
 				$c = $prop[1];
-			} // 1px #000000
+			} // 1px #58a3fe
 			else {
 				$w = $prop[0];
 				$c = $prop[1];
 			}
 
 		} elseif ($prop_count === 3) {
-			// Change #000000 1px solid to 1px solid #000000 (proper)
+			// Change #58a3fe 1px solid to 1px solid #58a3fe (proper)
 			if (0 === strpos($prop[0], '#')) {
 				$c = $prop[0];
 				$w = $prop[1];
 				$s = $prop[2];
-			} // Change solid #000000 1px to 1px solid #000000 (proper)
+			} // Change solid #58a3fe 1px to 1px solid #58a3fe (proper)
 			elseif (substr($prop[0], 1, 1) === '#') {
 				$s = $prop[0];
 				$c = $prop[1];
 				$w = $prop[2];
-			} // Change solid 1px #000000 to 1px solid #000000 (proper)
+			} // Change solid 1px #58a3fe to 1px solid #58a3fe (proper)
 			elseif (in_array($prop[0], $this->mpdf->borderstyles) || $prop[0] === 'none' || $prop[0] === 'hidden') {
 				$s = $prop[0];
 				$w = $prop[1];
@@ -801,7 +801,7 @@ class CssManager
 			} elseif ($k === 'BORDER') {
 
 				if ($v == '1') {
-					$v = '1px solid #000000';
+					$v = '1px solid #58a3fe';
 				} else {
 					$v = $this->_fix_borderStr($v);
 				}
@@ -1505,13 +1505,13 @@ class CssManager
 						if ($p) {
 							$b['BORDER-' . $side] = preg_replace('/(\S+)\s+(\S+)\s+(\S+)/', '\\1 ' . $s . ' \\3', $p);
 						} else {
-							$b['BORDER-' . $side] = '0px ' . $s . ' #000000';
+							$b['BORDER-' . $side] = '0px ' . $s . ' #58a3fe';
 						}
 					} elseif ($el === 'WIDTH') {
 						if ($p) {
 							$b['BORDER-' . $side] = preg_replace('/(\S+)\s+(\S+)\s+(\S+)/', $s . ' \\2 \\3', $p);
 						} else {
-							$b['BORDER-' . $side] = $s . ' none #000000';
+							$b['BORDER-' . $side] = $s . ' none #58a3fe';
 						}
 					} elseif ($el === 'COLOR') {
 						if ($p) {
