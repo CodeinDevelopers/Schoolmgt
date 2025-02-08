@@ -270,37 +270,7 @@
 							<span class="error"><?php echo form_error('copyright_text'); ?></span>
 						</div>
 					</div>
-					<div class="form-group">
-						<label  class="col-md-3 control-label"><?php echo translate('facebook_url'); ?></label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" name="facebook_url" value="<?php echo set_value('facebook_url', $setting['facebook_url']); ?>" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label  class="col-md-3 control-label"><?php echo translate('twitter_url'); ?></label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" name="twitter_url" value="<?php echo set_value('twitter_url', $setting['twitter_url']); ?>" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label  class="col-md-3 control-label"><?php echo translate('youtube_url'); ?></label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" name="youtube_url" value="<?php echo set_value('youtube_url', $setting['youtube_url']); ?>" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label  class="col-md-3 control-label"><?php echo translate('google_plus'); ?></label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" name="google_plus" value="<?php echo set_value('google_plus', $setting['google_plus']); ?>" />
-							<span class="error"><?php echo form_error('google_plus'); ?></span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label  class="col-md-3 control-label"><?php echo translate('linkedin_url'); ?></label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" name="linkedin_url" value="<?php echo set_value('linkedin_url', $setting['linkedin_url']); ?>" />
-						</div>
-					</div>
+				
 					<div class="form-group">
 						<label  class="col-md-3 control-label"><?php echo translate('pinterest_url'); ?></label>
 						<div class="col-md-6">

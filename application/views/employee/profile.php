@@ -4,12 +4,6 @@
 		<div class="profile-head social">
 			<div class="col-md-12 col-lg-4 col-xl-3">
 				<div class="image-content-center user-pro">
-					<div class="preview">
-						<ul class="social-icon-one">
-							<li><a href="<?=empty($staff['facebook_url']) ? '#' : $staff['facebook_url']?>"><span class="fab fa-facebook-f"></span></a></li>
-							<li><a href="<?=empty($staff['twitter_url']) ? '#' : $staff['twitter_url']?>"><span class="fab fa-twitter"></span></a></li>
-							<li><a href="<?=empty($staff['linkedin_url']) ? '#' : $staff['linkedin_url']?>"><span class="fab fa-linkedin-in"></span></a></li>
-						</ul>
 						<img src="<?=get_image_url('staff', $staff['photo'])?>">
 					</div>
 				</div>
@@ -279,45 +273,7 @@
 									</div>
 								</div>
 
-								<!-- social links -->
-								<div class="headers-line">
-									<i class="fas fa-globe"></i> <?=translate('social_links')?>
-								</div>
-
-								<div class="row mb-md">
-									<div class="col-md-4 mb-sm">
-										<div class="form-group">
-											<label class="control-label">Facebook</label>
-											<div class="input-group">
-												<span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
-												<input type="text" class="form-control" name="facebook" value="<?=set_value('facebook', $staff['facebook_url'])?>" />
-											</div>
-											<span class="error"><?php echo form_error('facebook'); ?></span>
-										</div>
-									</div>
-									<div class="col-md-4 mb-sm">
-										<div class="form-group">
-											<label class="control-label">Twitter</label>
-											<div class="input-group">
-												<span class="input-group-addon"><i class="fab fa-twitter"></i></span>
-												<input type="text" class="form-control" name="twitter" value="<?=set_value('twitter', $staff['twitter_url'])?>" />
-											</div>
-											<span class="error"><?php echo form_error('twitter'); ?></span>
-										</div>
-									</div>
-									<div class="col-md-4 mb-sm">
-										<div class="form-group">
-											<label class="control-label">Linkedin</label>
-											<div class="input-group">
-												<span class="input-group-addon"><i class="fab fa-linkedin-in"></i></span>
-												<input type="text" class="form-control" name="linkedin" value="<?=set_value('linkedin', $staff['linkedin_url'])?>" />
-											</div>
-											<span class="error"><?php echo form_error('linkedin'); ?></span>
-										</div>
-									</div>
-								</div>
-							</fieldset>
-						</div>
+							
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-md-offset-9 col-md-3">

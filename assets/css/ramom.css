@@ -42,7 +42,7 @@
 
 .widget-row-in .box-top-line {
 	padding: 5px 0 0;
-	border-top: #d2322d 4px solid;
+	border-top: #d2322d 1px solid;
 	text-align: right;
 }
 
@@ -82,7 +82,6 @@ html.dark .row.widget-row-in > div {
 .round-overlap {
 	width: 150px;
 	height: 150px;
-	border: 2px solid rgba(120,130,140,0.13);
 	position: absolute;
 	border-radius: 100%;
 	font-size: 35px;

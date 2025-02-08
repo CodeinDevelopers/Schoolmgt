@@ -1455,12 +1455,11 @@ html.fixed .visible-xl-inline-block {
 	text-align: center;
 	top: 14px;
 	width: 30px;
-	border: 1px solid #e4e4e4;
+	
 }
 
 html.dark .header .toggle-sidebar-left {
 	color: #fff;
-	border-color: #404142;
 }
 
 .header-right,

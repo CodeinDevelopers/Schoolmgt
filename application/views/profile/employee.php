@@ -4,12 +4,6 @@
 		<div class="profile-head social">
 			<div class="col-md-12 col-lg-4 col-xl-3">
 				<div class="image-content-center user-pro">
-					<div class="preview">
-						<ul class="social-icon-one">
-							<li><a href="<?=empty($staff['facebook_url']) ? '#' : $staff['facebook_url']?>"><span class="fab fa-facebook-f"></span></a></li>
-							<li><a href="<?=empty($staff['twitter_url']) ? '#' : $staff['twitter_url']?>"><span class="fab fa-twitter"></span></a></li>
-							<li><a href="<?=empty($staff['linkedin_url']) ? '#' : $staff['linkedin_url']?>"><span class="fab fa-linkedin-in"></span></a></li>
-						</ul>
 						<img src="<?=get_image_url('staff', $staff['photo'])?>">
 					</div>
 				</div>

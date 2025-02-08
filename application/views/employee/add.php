@@ -256,43 +256,6 @@
 						</div>
 					</div>
 
-					<!-- social links -->
-					<div class="headers-line">
-						<i class="fas fa-globe"></i> <?=translate('social_links')?>
-					</div>
-
-					<div class="row mb-lg">
-						<div class="col-md-4 mb-sm">
-							<div class="form-group">
-								<label class="control-label">Facebook</label>
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
-									<input type="text" class="form-control" name="facebook" value="<?=set_value('facebook')?>" placeholder="eg: https://www.facebook.com/username" />
-								</div>
-								<span class="error"><?php echo form_error('facebook'); ?></span>
-							</div>
-						</div>
-						<div class="col-md-4 mb-sm">
-							<div class="form-group">
-								<label class="control-label">Twitter</label>
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fab fa-twitter"></i></span>
-									<input type="text" class="form-control" name="twitter" value="<?=set_value('twitter')?>" placeholder="eg: https://www.twitter.com/username" />
-								</div>
-								<span class="error"><?php echo form_error('twitter'); ?></span>
-							</div>
-						</div>
-						<div class="col-md-4 mb-sm">
-							<div class="form-group">
-								<label class="control-label">Linkedin</label>
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fab fa-linkedin-in"></i></span>
-									<input type="text" class="form-control" name="linkedin" value="<?=set_value('linkedin')?>" placeholder="eg: https://www.linkedin.com/username" />
-								</div>
-								<span class="error"><?php echo form_error('linkedin'); ?></span>
-							</div>
-						</div>
-					</div>
 
 					<!-- bank details -->
 					<div class="headers-line">
