@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 		<section class="panel">
 			<header class="panel-heading">
-				<h4 class="panel-title"><?php echo translate('select_ground'); ?></h4>
+				<h4 class="panel-title">Select Class to be Promoted</h4>
 			</header>
 			<?php echo form_open($this->uri->uri_string(), array('class' => 'validate'));?>
 			<div class="panel-body">
@@ -74,7 +74,7 @@
 						</div>
 						<div class="col-md-12 mb-md">
 							<div class="checkbox-replace">
-								<label class="i-checks"><input type="checkbox" name="due_forward"><i></i>Carry Forward Due in Next Session</label>
+								<label class="i-checks"><input type="checkbox" name="due_forward"><i></i>Roll Over Oustanding Fees to Next Session</label>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -184,7 +184,7 @@
 									</td>
 									<td class="leave">
 										<div class="pt-csm checkbox-replace">
-											<label class="i-checks"><input type="checkbox" name="promote[<?=$key?>][leave]" value="<?=$row['id']?>" ><i></i> Leave / Add Alumni</label>
+											<label class="i-checks"><input type="checkbox" name="promote[<?=$key?>][leave]" value="<?=$row['id']?>" ><i></i> Graduate / Add Alumni</label>
 										</div>
 									</td>
 								</tr>

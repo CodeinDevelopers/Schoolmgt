@@ -6,7 +6,7 @@ $currency_symbol = $global_config['currency_symbol'];
 	<div class="col-md-12">
 		<section class="panel">
 			<header class="panel-heading">
-				<h4 class="panel-title"><?=translate('select_ground')?></h4>
+				<h4 class="panel-title">Select Class & Fees Type</h4>
 			</header>
 			<?php echo form_open($this->uri->uri_string(), array('class' => 'validate'));?>
 			<div class="panel-body">

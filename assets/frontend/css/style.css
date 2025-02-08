@@ -1,10 +1,10 @@
 /* Google Web Fonts */
 
 :root {
-    --thm-primary: #ff685c;
+    --thm-primary: #2c39fd;
     --thm-text: #232323;
     --thm-secondary-text: #8d8d8d;
-    --thm-hover: #ed4235;
+    --thm-hover: #2c39fd;
     --thm-footer-text: #ed4235;
     --thm-primary-rgb: 0, 155, 219;
     --thm-black: #000;
@@ -2917,15 +2917,18 @@ ul#doctors-grid.grid > li > .bio-box {
 
 .box2 {
     padding: 30px;
-    border: 1px solid #cdcdcd;
+    border: 1.5px solid #898989;
+    border-radius: 10px !important;
 }
 
 .form-box {
     margin-top: 30px;
+    border-radius: 9px;
 }
 
 .form-box .form-group {
     margin-bottom: 20px;
+    border-radius: 9px;
 }
 
 .form-box label {
@@ -2940,10 +2943,12 @@ ul#doctors-grid.grid > li > .bio-box {
     line-height: normal;
     height: 40px;
     border-color: #d4d6d7;
+    border-radius: 7px;
 }
 
 .form-box textarea.form-control {
     padding: 15px;
+    border-radius: 7px;
 }
 
 .form-box .checkbox input[type=checkbox] {
@@ -2959,6 +2964,7 @@ ul#doctors-grid.grid > li > .bio-box {
     padding: 6px 30px;
     font-size: 18px;
     text-transform: uppercase;
+    border-radius: 7px;
 }
 
 
@@ -4139,6 +4145,7 @@ ul#doctors-grid.grid > li > .bio-box {
     border-radius: var(--thm-radius);
     height: 40px !important;
     line-height: 40px !important;
+    border-radius: 9px;
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field,
@@ -4800,8 +4807,10 @@ ul#doctors-grid.grid > li > .bio-box {
     text-transform: initial;
     padding: 4px 15px;
     font-size: inherit;
-    border-top-left-radius: 0 !important;
+    border-top-left-radius: 0px !important;
     border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 9px !important;
+    border-top-right-radius: 9px !important;
 }
 
 /* latest news */

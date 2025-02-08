@@ -3,6 +3,7 @@
 		<div class="profile-head social">
 			<div class="col-md-12 col-lg-4 col-xl-3">
 				<div class="image-content-center user-pro">
+				<div class="preview">
 						<img src="<?=get_image_url('parent', $parent['photo'])?>">
 					</div>
 				</div>

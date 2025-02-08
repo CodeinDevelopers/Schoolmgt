@@ -4,7 +4,7 @@
 
 		<section class="panel">
 			<header class="panel-heading">
-				<h4 class="panel-title"><?=translate('select_ground')?></h4>
+				<h4 class="panel-title">Select Class</h4>
 			</header>
 			<?php echo form_open($this->uri->uri_string(), array('class' => 'validate'));?>
 			<div class="panel-body">

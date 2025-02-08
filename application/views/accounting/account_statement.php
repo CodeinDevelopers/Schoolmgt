@@ -4,7 +4,7 @@ $currency_symbol = $global_config['currency_symbol'];
 ?>
 <section class="panel">
 	<header class="panel-heading">
-		<h4 class="panel-title"> <?php echo translate('select_ground'); ?></h4>
+		<h4 class="panel-title">Select Type & Date</h4>
 	</header>
 	<?php echo form_open($this->uri->uri_string(), array('class' => 'validate')); ?>
 		<div class="panel-body">

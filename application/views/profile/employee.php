@@ -4,6 +4,7 @@
 		<div class="profile-head social">
 			<div class="col-md-12 col-lg-4 col-xl-3">
 				<div class="image-content-center user-pro">
+				<div class="preview">
 						<img src="<?=get_image_url('staff', $staff['photo'])?>">
 					</div>
 				</div>
@@ -215,49 +216,10 @@
 							</div>
 						</div>
 <?php } ?>
-						<!-- social links -->
-						<div class="headers-line">
-							<i class="fas fa-globe"></i> <?=translate('social_links')?>
-						</div>
-
-						<div class="row mb-md">
-							<div class="col-md-4 mb-sm">
-								<div class="form-group">
-									<label class="control-label">Facebook</label>
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fab fa-facebook-f"></i></span>
-										<input type="text" class="form-control" name="facebook" value="<?=set_value('facebook', $staff['facebook_url'])?>" />
-									</div>
-									<span class="error"><?php echo form_error('facebook'); ?></span>
-								</div>
-							</div>
-							<div class="col-md-4 mb-sm">
-								<div class="form-group">
-									<label class="control-label">Twitter</label>
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fab fa-twitter"></i></span>
-										<input type="text" class="form-control" name="twitter" value="<?=set_value('twitter', $staff['twitter_url'])?>" />
-									</div>
-									<span class="error"><?php echo form_error('twitter'); ?></span>
-								</div>
-							</div>
-							<div class="col-md-4 mb-sm">
-								<div class="form-group">
-									<label class="control-label">Linkedin</label>
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fab fa-linkedin-in"></i></span>
-										<input type="text" class="form-control" name="linkedin" value="<?=set_value('linkedin', $staff['linkedin_url'])?>" />
-									</div>
-									<span class="error"><?php echo form_error('linkedin'); ?></span>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-				</div>
 				<div class="panel-footer">
 					<div class="row">
 						<div class="col-md-offset-9 col-md-3">
-							<button class="btn btn-default btn-block" type="submit"><i class="fas fa-plus-circle"></i> <?php echo translate('update'); ?></button>
+							<button class="btn btn-default btn-block" type="submit"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 20V15H9V20M18 20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H14.1716C14.702 4 15.2107 4.21071 15.5858 4.58579L19.4142 8.41421C19.7893 8.78929 20 9.29799 20 9.82843V18C20 19.1046 19.1046 20 18 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <?php echo translate('update'); ?></button>
 						</div>	
 					</div>
 				</div>
