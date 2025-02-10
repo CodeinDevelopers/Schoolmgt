@@ -205,32 +205,6 @@ foreach ($get_session as $session) :
 					</div>
 				</div>
 			</li>
-			<?php if (get_permission('student_attendance', 'is_add')): ?>
-<li>
-    <a href="<?php echo base_url('attendance/student_entry'); ?>" 
-       style="display: flex; align-items: center; padding: 4px 2px; border: 2px solid #eee; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;"
-       onmouseover="this.style.backgroundColor='#f0f0f0';  this.querySelector('span').style.color='#666666'; this.querySelectorAll('path').forEach(path => path.style.stroke='#666666')"
-       onmouseout="this.style.backgroundColor='';  this.querySelector('span').style.color='#808080'; this.querySelectorAll('path').forEach(path => path.style.stroke='#808080')">
-        <span style="display: flex; align-items: center;">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                    <path d="M16 4.00195C18.175 4.01406 19.3529 4.11051 20.1213 4.87889C21 5.75757 21 7.17179 21 10.0002V16.0002C21 18.8286 21 20.2429 20.1213 21.1215C19.2426 22.0002 17.8284 22.0002 15 22.0002H9C6.17157 22.0002 4.75736 22.0002 3.87868 21.1215C3 20.2429 3 18.8286 3 16.0002V10.0002C3 7.17179 3 5.75757 3.87868 4.87889C4.64706 4.11051 5.82497 4.01406 8 4.00195" stroke="#808080" stroke-width="1.5"></path>
-                    <path d="M10.5 14L17 14" stroke="#808080" stroke-width="1.5" stroke-linecap="round"></path>
-                    <path d="M7 14H7.5" stroke="#808080" stroke-width="1.5" stroke-linecap="round"></path>
-                    <path d="M7 10.5H7.5" stroke="#808080" stroke-width="1.5" stroke-linecap="round"></path>
-                    <path d="M7 17.5H7.5" stroke="#808080" stroke-width="1.5" stroke-linecap="round"></path>
-                    <path d="M10.5 10.5H17" stroke="#808080" stroke-width="1.5" stroke-linecap="round"></path>
-                    <path d="M10.5 17.5H17" stroke="#808080" stroke-width="1.5" stroke-linecap="round"></path>
-                    <path d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z" stroke="#808080" stroke-width="1.5"></path>
-                </g>
-            </svg>
-            <span style="margin-left: 0px; color: #808080; font-size: 14px;">Take Attendance</span>
-        </span>
-    </a>
-</li>
-<?php endif; ?>
 		</ul>
 
 		<!-- user profile box -->
