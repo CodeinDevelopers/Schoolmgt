@@ -30,12 +30,12 @@
 }
 
 /* Modern, softer colors */
-.quick-action-btn.btn-primary { background-color: rgba(52, 152, 219, 0.85); }
-.quick-action-btn.btn-info { background-color: rgba(91, 192, 222, 0.85); }
-.quick-action-btn.btn-success { background-color: rgba(46, 204, 113, 0.85); }
-.quick-action-btn.btn-warning { background-color: rgba(241, 196, 15, 0.85); }
-.quick-action-btn.btn-danger { background-color: rgba(231, 76, 60, 0.85); }
-.quick-action-btn.btn-purple { background-color: rgba(155, 89, 182, 0.85); }
+.quick-action-btn.btn-primary { background-color: rgb(0, 193, 51); }
+.quick-action-btn.btn-info { background-color: rgb(36, 95, 224); }
+.quick-action-btn.btn-success { background-color: rgb(247, 192, 74) ;}
+.quick-action-btn.btn-warning { background-color: rgb(53, 206, 218); }
+.quick-action-btn.btn-danger { background-color: rgb(255, 0, 51); }
+.quick-action-btn.btn-purple { background-color: rgb(0, 198, 252); }
 
 .quick-action-btn:hover {
     transform: translateY(-2px);
