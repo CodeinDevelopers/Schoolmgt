@@ -67,7 +67,7 @@ if ($extINTL == true) {
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="bill-data">
-										<p class="h5 mb-xs text-dark text-weight-semibold">Invoice To :</p>
+										<p class="h5 mb-xs text-dark text-weight-semibold">Invoice For:</p>
 										<address>
 											<?php 
 											echo $basic['first_name'] . ' ' . $basic['last_name'] . '<br>';
@@ -83,7 +83,7 @@ if ($extINTL == true) {
 								</div>
 								<div class="col-xs-6">
 									<div class="bill-data text-right">
-										<p class="h5 mb-xs text-dark text-weight-semibold">Academic :</p>
+										<p class="h5 mb-xs text-dark text-weight-semibold">School:</p>
 										<address>
 											<?php 
 											echo $basic['school_name'] . "<br/>";
@@ -98,7 +98,7 @@ if ($extINTL == true) {
 						</div>
 					<?php if (get_permission('collect_fees', 'is_add')) { ?>
 						<button type="button" class="btn btn-default btn-sm mb-sm hidden-print" id="collectFees" data-loading-text="<i class='fas fa-spinner fa-spin'></i> Processing">
-							<i class="fas fa-coins fa-fw"></i> Selected Fees Collect
+							<i class="fas fa-coins fa-fw"></i> Collect Selected Fees
 						</button>
 					<?php } ?>
 						<div class="table-responsive br-none">
@@ -204,7 +204,7 @@ if ($extINTL == true) {
 										<li><strong><?=translate('paid')?> :</strong> <?=currencyFormat($total_paid); ?></li>
 										<li><strong><?=translate('fine')?> :</strong> <?=currencyFormat($total_fine); ?></li>
 										<?php if ($total_balance != 0): ?>
-										<li><strong><?=translate('total_paid')?> (with fine) :</strong> <?=currencyFormat($total_paid + $total_fine); ?></li>
+										<li><strong><?=translate('total_paid')?> :</strong> <?=currencyFormat($total_paid + $total_fine); ?></li>
 										<li>
 											<strong><?=translate('balance')?> : </strong> 
 											<?php
@@ -287,7 +287,7 @@ if ($extINTL == true) {
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="bill-data">
-										<p class="h5 mb-xs text-dark text-weight-semibold">Invoice To :</p>
+										<p class="h5 mb-xs text-dark text-weight-semibold">Invoice For:</p>
 										<address>
 											<?php 
 											echo $basic['first_name'] . ' ' . $basic['last_name'] . '<br>';

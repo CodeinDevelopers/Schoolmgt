@@ -54,7 +54,7 @@ if (count($student_array)) {
 		<div class="row">
 			<div class="col-xs-6">
 				<div class="bill-data">
-					<p class="h5 mb-xs text-dark text-weight-semibold">Invoice To :</p>
+					<p class="h5 mb-xs text-dark text-weight-semibold">Invoice For:</p>
 					<address>
 						<?php 
 						echo $basic['first_name'] . ' ' . $basic['last_name'] . '<br>';
@@ -70,7 +70,7 @@ if (count($student_array)) {
 			</div>
 			<div class="col-xs-6">
 				<div class="bill-data text-right">
-					<p class="h5 mb-xs text-dark text-weight-semibold">Academic :</p>
+					<p class="h5 mb-xs text-dark text-weight-semibold">School:</p>
 					<address>
 						<?php 
 						echo $basic['school_name'] . "<br/>";
@@ -162,7 +162,7 @@ if (count($student_array)) {
 					<li><strong><?=translate('paid')?> :</strong> <?=currencyFormat($total_paid); ?></li>
 					<li><strong><?=translate('fine')?> :</strong> <?=currencyFormat($total_fine); ?></li>
 					<?php if ($total_balance != 0): ?>
-					<li><strong><?=translate('total_paid')?> (with fine) :</strong> <?=currencyFormat($total_paid + $total_fine); ?></li>
+					<li><strong><?=translate('total_paid')?> :</strong> <?=currencyFormat($total_paid + $total_fine); ?></li>
 					<li>
 						<strong><?=translate('balance')?> : </strong> 
 						<?php

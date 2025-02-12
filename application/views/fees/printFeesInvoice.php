@@ -29,7 +29,7 @@ if ($extINTL == true) {
 				$paidWithFine = number_format(($total_paid + $total_fine), 2, '.', '');
 				?>
 			<li>
-				<strong><?=translate('total_paid')?> (with fine) : </strong> 
+				<strong><?=translate('total_paid')?>: </strong> 
 				<?php
 				$numberSPELL = "";
 				if ($extINTL == true) {

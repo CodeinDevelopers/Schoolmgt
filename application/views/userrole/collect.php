@@ -70,7 +70,7 @@ if (count($allocations)) {
 								<div class="row">
 									<div class="col-xs-6">
 										<div class="bill-data">
-											<p class="h5 mb-xs text-dark text-weight-semibold">Invoice To :</p>
+											<p class="h5 mb-xs text-dark text-weight-semibold">Invoice For:</p>
 											<address>
 												<?php 
 												echo $basic['first_name'] . ' ' . $basic['last_name'] . '<br>';
@@ -261,7 +261,7 @@ if (count($allocations)) {
 								<div class="row">
 									<div class="col-xs-6">
 										<div class="bill-data">
-											<p class="h5 mb-xs text-dark text-weight-semibold">Invoice To :</p>
+											<p class="h5 mb-xs text-dark text-weight-semibold"> </p>
 											<address>
 												<?php 
 												echo $basic['first_name'] . ' '. $basic['last_name'] . '<br>';
