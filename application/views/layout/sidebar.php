@@ -891,7 +891,6 @@
                                     </svg> <span><?=translate('student_accounting') .$getOfflinePaymentsTotal; ?></span>
                         </a>
                         <ul class="nav nav-children">
-
                             <?php if(get_permission('offline_payments', 'is_view') || get_permission('offline_payments_type', 'is_view')) { ?>
                             <li class="nav-parent <?php if ($main_menu == 'offline_payments') echo 'nav-expanded nav-active';?>">
                                 <a>
@@ -918,7 +917,7 @@
                             <li class="<?php } if ($sub_page == 'fees/allocation') echo 'nav-active';?>">
                                 <a href="<?=base_url('fees/allocation')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_allocation')?></span></a>
                             </li>
-                            <?php } if(get_permission('invoice', 'is_view')) { ?>
+                            <?php if(get_permission('invoice', 'is_view')) { ?>
                             <li class="<?php if ($sub_page == 'fees/invoice_list' || $sub_page == 'fees/collect') echo 'nav-active';?>">
                                 <a href="<?=base_url('fees/invoice_list')?>"><span><i class="fas fa-caret-right"></i><?=translate('payments_history')?></span></a>
                             </li>
