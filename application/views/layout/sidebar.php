@@ -913,7 +913,8 @@
                                     <?php } ?>
                                 </ul>
                             </li>
-                            <?php if(get_permission('fees_allocation', 'is_view')) { ?>
+                            <?php } ?>
+                            <?php  if(get_permission('fees_allocation', 'is_view')) { ?>
                             <li class="<?php } if ($sub_page == 'fees/allocation') echo 'nav-active';?>">
                                 <a href="<?=base_url('fees/allocation')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_allocation')?></span></a>
                             </li>
@@ -943,6 +944,7 @@
                             </li>
                             <?php ?>
                         </ul>
+                    </li>
                     <?php }} ?>
                     <?php
                     if (moduleIsEnabled('office_accounting')) {
