@@ -843,8 +843,7 @@
                                             <span><?=translate('category')?></span>
                                         </a>
                                     </li>
-                                
-                                <?php } ?>
+                                <?php ?>
                                 </ul>
                             </li>
                             <?php } ?>
@@ -859,6 +858,7 @@
                         </ul>
                     </li>
                     <?php }} ?>
+                    
                     <?php
                     if (moduleIsEnabled('student_accounting')) {
                         if(get_permission('fees_type', 'is_view') ||
