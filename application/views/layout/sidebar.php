@@ -843,7 +843,7 @@
                                             <span><?=translate('category')?></span>
                                         </a>
                                     </li>
-                                <?php ?>
+                                <?php } ?>
                                 </ul>
                             </li>
                             <?php } ?>
