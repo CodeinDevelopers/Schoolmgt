@@ -1319,13 +1319,6 @@ html.dark .invoice-summary ul.amounts li {
     left: 20px;
 }
 
-.material-switch > .label-primary {
-    background-color: #3c8dbc !important;
-}
-
-html.dark .material-switch > .label-primary {
-    background-color: #ff685c !important;
-}
 
 /* Data Table Buttons Custom CSS */
 .dt-buttons .btn{
