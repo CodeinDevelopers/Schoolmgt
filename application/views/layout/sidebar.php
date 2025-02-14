@@ -731,7 +731,133 @@
                         </ul>
                     </li>
                     <?php } ?>
-                   
+                    <?php
+                    if (moduleIsEnabled('human_resource')) {
+                        if(get_permission('salary_template', 'is_view') ||
+                        get_permission('salary_assign', 'is_view') ||
+                        get_permission('salary_payment', 'is_view') ||
+                        get_permission('advance_salary_manage', 'is_view') ||
+                        get_permission('advance_salary_request', 'is_view') ||
+                        get_permission('leave_category', 'is_view') ||
+                        get_permission('leave_category', 'is_add') ||
+                        get_permission('leave_request', 'is_view') ||
+                        get_permission('leave_manage', 'is_view') ||
+                        get_permission('award', 'is_view')) {
+                    ?>
+                    <!-- human resource -->
+                    <li class="nav-parent <?php if ($main_menu == 'payroll' || $main_menu == 'advance_salary' || $main_menu == 'leave' || $main_menu == 'award') echo 'nav-expanded nav-active';?>">
+                        <a>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="27px" height="27px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 18.2C14.2091 18.2 16 16.4091 16 14.2C16 11.9908 14.2091 10.2 12 10.2C9.79086 10.2 8 11.9908 8 14.2C8 16.4091 9.79086 18.2 12 18.2Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10.4399 14.2999L11.0899 14.9499C11.2799 15.1399 11.5899 15.1399 11.7799 14.9599L13.5599 13.3199" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7.99995 22H15.9999C20.0199 22 20.7399 20.39 20.9499 18.43L21.6999 10.43C21.9699 7.99 21.2699 6 16.9999 6H6.99995C2.72995 6 2.02995 7.99 2.29995 10.43L3.04995 18.43C3.25995 20.39 3.97995 22 7.99995 22Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8 6V5.2C8 3.43 8 2 11.2 2H12.8C16 2 16 3.43 16 5.2V6" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M21.65 11C19.92 12.26 18 13.14 16.01 13.64" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2.62 11.27C4.29 12.41 6.11 13.22 8 13.68" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <?=translate('hrm')?></span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <?php
+                            if(get_permission('salary_template', 'is_view') ||
+                            get_permission('salary_assign', 'is_view') ||
+                            get_permission('salary_payment', 'is_view')) {
+                            ?>
+                            <!-- payroll -->
+                            <li class="nav-parent <?php if($main_menu == 'payroll') echo 'nav-expanded nav-active';?>">
+                                <a>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 9.5V14.5M18 9.5V14.5M3.11111 6H20.8889C21.5025 6 22 6.53726 22 7.2V16.8C22 17.4627 21.5025 18 20.8889 18H3.11111C2.49746 18 2 17.4627 2 16.8V7.2C2 6.53726 2.49746 6 3.11111 6ZM14.5 12C14.5 13.3807 13.3807 14.5 12 14.5C10.6193 14.5 9.5 13.3807 9.5 12C9.5 10.6193 10.6193 9.5 12 9.5C13.3807 9.5 14.5 10.6193 14.5 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> 
+                                    <span><?=translate('payroll')?></span>
+                                </a>
+                                <ul class="nav nav-children">
+                                <?php } if(get_permission('salary_payment', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'payroll/salary_payment' || $sub_page == 'payroll/create' || $sub_page == 'payroll/invoice') echo 'nav-active';?>">
+                                        <a href="<?=base_url('payroll')?>">
+                                            <span><?=translate('salary_payment')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } if(get_permission('salary_assign', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'payroll/salary_assign') echo 'nav-active';?>">
+                                        <a href="<?=base_url('payroll/salary_assign')?>">
+                                            <span><?=translate('salary_assign')?></span>
+                                        </a>
+                                    </li>
+                                    <?php }if(get_permission('salary_template', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'payroll/salary_templete' || $sub_page == 'payroll/salary_templete_edit') echo 'nav-active';?>">
+                                        <a href="<?=base_url('payroll/salary_template')?>">
+                                            <span><?=translate('salary_template')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
+                            <?php } ?>
+                            <?php
+                            if(get_permission('advance_salary_manage', 'is_view') ||
+                            get_permission('advance_salary_request', 'is_view')) {
+                            ?>
+                            <!-- advance salary managements -->
+                            <li class="nav-parent <?php
+                            if ($main_menu == 'advance_salary') echo 'nav-expanded nav-active';?>">
+                                <a>
+                                <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="currentColor" d="M256 640v192h640V384H768v-64h150.976c14.272 0 19.456 1.472 24.64 4.288a29.056 29.056 0 0 1 12.16 12.096c2.752 5.184 4.224 10.368 4.224 24.64v493.952c0 14.272-1.472 19.456-4.288 24.64a29.056 29.056 0 0 1-12.096 12.16c-5.184 2.752-10.368 4.224-24.64 4.224H233.024c-14.272 0-19.456-1.472-24.64-4.288a29.056 29.056 0 0 1-12.16-12.096c-2.688-5.184-4.224-10.368-4.224-24.576V640h64z"></path><path fill="currentColor" d="M768 192H128v448h640V192zm64-22.976v493.952c0 14.272-1.472 19.456-4.288 24.64a29.056 29.056 0 0 1-12.096 12.16c-5.184 2.752-10.368 4.224-24.64 4.224H105.024c-14.272 0-19.456-1.472-24.64-4.288a29.056 29.056 0 0 1-12.16-12.096C65.536 682.432 64 677.248 64 663.04V169.024c0-14.272 1.472-19.456 4.288-24.64a29.056 29.056 0 0 1 12.096-12.16C85.568 129.536 90.752 128 104.96 128h685.952c14.272 0 19.456 1.472 24.64 4.288a29.056 29.056 0 0 1 12.16 12.096c2.752 5.184 4.224 10.368 4.224 24.64z"></path><path fill="currentColor" d="M448 576a160 160 0 1 1 0-320 160 160 0 0 1 0 320zm0-64a96 96 0 1 0 0-192 96 96 0 0 0 0 192z"></path></g></svg> 
+                                    <span><?=translate('advance_salary')?></span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <?php } if(get_permission('advance_salary_request', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'advance_salary/request') echo 'nav-active';?>">
+                                        <a href="<?=base_url('advance_salary/request')?>">
+                                            <span><?=translate('my_application')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } if(get_permission('advance_salary_manage', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'advance_salary/index') echo 'nav-active';?>">
+                                        <a href="<?=base_url('advance_salary')?>">
+                                            <span><?=translate('manage_application')?></span>
+                                        </a>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
+                            <?php } ?>
+                            <?php
+                            if(get_permission('leave_category', 'is_view') ||
+                            get_permission('leave_manage', 'is_view') ||
+                            get_permission('leave_request', 'is_view')) {
+                            ?>
+                            <!-- leave managements -->
+                            <li class="nav-parent <?php
+                            if ($main_menu == 'leave') echo 'nav-expanded nav-active';?>">
+                                <a>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.53259 18.1345C8.20862 18.3926 8.15523 18.8644 8.41332 19.1884C8.67142 19.5123 9.14328 19.5657 9.46725 19.3076L8.53259 18.1345ZM13.7289 17.0001V16.2501C13.7225 16.2501 13.7162 16.2501 13.7099 16.2503L13.7289 17.0001ZM23.1912 17.7501C23.6054 17.7501 23.9412 17.4143 23.9412 17.0001C23.9412 16.5859 23.6054 16.2501 23.1912 16.2501V17.7501ZM9.46725 19.3076C10.6865 18.3363 12.1895 17.7893 13.7479 17.7498L13.7099 16.2503C11.825 16.2981 10.0073 16.9596 8.53259 18.1345L9.46725 19.3076ZM13.7289 17.7501H23.1912V16.2501H13.7289V17.7501Z" fill="currentColor"></path> <path d="M22.0375 7.26015L22.284 7.96848L22.285 7.96813L22.0375 7.26015ZM22.4795 5.72516L23.0656 5.25721L23.0651 5.25651L22.4795 5.72516ZM5.05367 11.7891L4.30369 11.7852L4.30369 11.7859L5.05367 11.7891ZM6.35366 12.7181L6.59958 13.4266L6.60016 13.4264L6.35366 12.7181ZM22.285 7.96813C22.5458 7.87697 22.7809 7.72464 22.9707 7.52391L21.8809 6.49333C21.8557 6.51992 21.8246 6.54009 21.79 6.55217L22.285 7.96813ZM22.9707 7.52391C23.1606 7.32318 23.2995 7.07989 23.3759 6.81442L21.9345 6.39936C21.9244 6.43452 21.906 6.46675 21.8809 6.49333L22.9707 7.52391ZM23.3759 6.81442C23.4524 6.54894 23.4641 6.26901 23.4101 5.99808L21.939 6.29124C21.9462 6.32713 21.9446 6.36421 21.9345 6.39936L23.3759 6.81442ZM23.4101 5.99808C23.3561 5.72715 23.238 5.4731 23.0656 5.25721L21.8934 6.19312C21.9163 6.22171 21.9319 6.25536 21.939 6.29124L23.4101 5.99808ZM23.0651 5.25651C21.7039 3.55587 19.849 2.31893 17.7559 1.71596L17.3407 3.15734C19.1358 3.67446 20.7266 4.7353 21.894 6.19382L23.0651 5.25651ZM17.7559 1.71596C15.6627 1.113 13.4341 1.17364 11.3768 1.88955L11.8698 3.30621C13.6342 2.69223 15.5455 2.64022 17.3407 3.15734L17.7559 1.71596ZM11.3768 1.88955C9.31948 2.60546 7.53466 3.94143 6.26799 5.71358L7.4883 6.58582C8.57464 5.06597 10.1054 3.9202 11.8698 3.30621L11.3768 1.88955ZM6.26799 5.71358C5.00131 7.48573 4.31506 9.60693 4.30369 11.7852L5.80366 11.793C5.81341 9.92487 6.40196 8.10567 7.4883 6.58582L6.26799 5.71358ZM4.30369 11.7859C4.30252 12.0623 4.36763 12.335 4.49355 12.581L5.82881 11.8976C5.81213 11.865 5.80351 11.8289 5.80366 11.7923L4.30369 11.7859ZM4.49355 12.581C4.61947 12.827 4.80254 13.0393 5.0274 13.1999L5.89951 11.9795C5.86973 11.9583 5.84549 11.9302 5.82881 11.8976L4.49355 12.581ZM5.0274 13.1999C5.25226 13.3606 5.51237 13.4651 5.78592 13.5045L5.99998 12.0199C5.96375 12.0147 5.9293 12.0008 5.89951 11.9795L5.0274 13.1999ZM5.78592 13.5045C6.05946 13.544 6.33848 13.5173 6.59958 13.4266L6.10774 12.0096C6.07317 12.0216 6.03621 12.0251 5.99998 12.0199L5.78592 13.5045ZM6.60016 13.4264L22.284 7.96848L21.791 6.55182L6.10717 12.0098L6.60016 13.4264Z" fill="currentColor"></path> <path d="M14.8925 9.71063C14.7387 9.32604 14.3022 9.13896 13.9177 9.29277C13.5331 9.44659 13.346 9.88305 13.4998 10.2676L14.8925 9.71063ZM16.3038 17.2786C16.4576 17.6632 16.894 17.8502 17.2786 17.6964C17.6632 17.5426 17.8503 17.1061 17.6965 16.7216L16.3038 17.2786ZM13.4998 10.2676L16.3038 17.2786L17.6965 16.7216L14.8925 9.71063L13.4998 10.2676Z" fill="currentColor"></path> <path d="M0.842114 21.5057C0.431041 21.4548 0.056556 21.7468 0.00567908 22.1579C-0.0451979 22.569 0.246799 22.9435 0.657872 22.9943L0.842114 21.5057ZM5.24995 20.75L5.80663 20.2474C5.67053 20.0967 5.4791 20.0076 5.27611 20.0005C5.07313 19.9934 4.87595 20.069 4.72967 20.2099L5.24995 20.75ZM11.9999 20.75L12.5566 20.2474C12.4144 20.0899 12.2121 20 11.9999 20C11.7877 20 11.5854 20.0899 11.4432 20.2474L11.9999 20.75ZM18.7498 20.75L19.2701 20.2099C19.1238 20.069 18.9267 19.9934 18.7237 20.0005C18.5207 20.0076 18.3293 20.0967 18.1932 20.2474L18.7498 20.75ZM20.8302 22.0089L21.0673 21.2974L20.8302 22.0089ZM23.287 23.0009C23.6985 22.9536 23.9938 22.5818 23.9465 22.1702C23.8993 21.7587 23.5274 21.4634 23.1159 21.5107L23.287 23.0009ZM0.657872 22.9943C1.58314 23.1088 2.5223 23.0153 3.40678 22.7204L2.93244 21.2974C2.25987 21.5216 1.54571 21.5928 0.842114 21.5057L0.657872 22.9943ZM3.40678 22.7204C4.29126 22.4256 5.09874 21.937 5.77024 21.2902L4.72967 20.2099C4.21904 20.7017 3.60502 21.0732 2.93244 21.2974L3.40678 22.7204ZM4.69327 21.2526C5.18991 21.8027 5.79646 22.2425 6.4737 22.5434L7.08288 21.1727C6.59742 20.957 6.16264 20.6418 5.80663 20.2474L4.69327 21.2526ZM6.4737 22.5434C7.15094 22.8444 7.88381 22.9999 8.62492 22.9999V21.5C8.09368 21.5 7.56834 21.3885 7.08288 21.1727L6.4737 22.5434ZM8.62492 22.9999C9.36604 22.9999 10.0989 22.8444 10.7761 22.5434L10.167 21.1727C9.6815 21.3885 9.15617 21.5 8.62492 21.5V22.9999ZM10.7761 22.5434C11.4534 22.2425 12.0599 21.8027 12.5566 21.2526L11.4432 20.2474C11.0872 20.6418 10.6524 20.957 10.167 21.1727L10.7761 22.5434ZM11.4432 21.2526C11.9399 21.8027 12.5464 22.2425 13.2236 22.5434L13.8328 21.1727C13.3474 20.957 12.9126 20.6418 12.5566 20.2474L11.4432 21.2526ZM13.2236 22.5434C13.9009 22.8444 14.6337 22.9999 15.3749 22.9999V21.5C14.8436 21.5 14.3183 21.3885 13.8328 21.1727L13.2236 22.5434ZM15.3749 22.9999C16.116 22.9999 16.8488 22.8444 17.5261 22.5434L16.9169 21.1727C16.4314 21.3885 15.9061 21.5 15.3749 21.5V22.9999ZM17.5261 22.5434C18.2033 22.2425 18.8099 21.8027 19.3065 21.2526L18.1932 20.2474C17.8372 20.6418 17.4024 20.957 16.9169 21.1727L17.5261 22.5434ZM18.2295 21.2902C18.9011 21.937 19.7085 22.4256 20.593 22.7204L21.0673 21.2974C20.3948 21.0732 19.7807 20.7017 19.2701 20.2099L18.2295 21.2902ZM20.593 22.7204C21.46 23.0094 22.3795 23.1051 23.287 23.0009L23.1159 21.5107C22.4258 21.5899 21.7266 21.5172 21.0673 21.2974L20.593 22.7204Z" fill="currentColor"></path> <path d="M10.9146 2.84426C11.0507 3.23548 11.4782 3.44232 11.8694 3.30625C12.2606 3.17018 12.4675 2.74272 12.3314 2.3515L10.9146 2.84426ZM11.6887 0.503828C11.5527 0.112606 11.1252 -0.094234 10.734 0.0418375C10.3428 0.177909 10.1359 0.605364 10.272 0.996586L11.6887 0.503828ZM12.3314 2.3515L11.6887 0.503828L10.272 0.996586L10.9146 2.84426L12.3314 2.3515Z" fill="currentColor"></path> </g></svg>
+                                    <span><?=translate('leave')?></span>
+                                </a>
+                                <ul class="nav nav-children">
+                                <?php  if(get_permission('leave_request', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'leave/request') echo 'nav-active';?>">
+                                        <a href="<?=base_url('leave/request')?>">
+                                            <span><?=translate('my_application')?></span>
+                                        </a>
+                                    </li>
+                                <?php  if(get_permission('leave_manage', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'leave/index') echo 'nav-active';?>">
+                                        <a href="<?=base_url('leave')?>">
+                                            <span><?=translate('manage_application')?></span>
+                                        </a>
+                                    </li>
+                                <?php if(get_permission('leave_category', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'leave/category') echo 'nav-active';?>">
+                                        <a href="<?=base_url('leave/category')?>">
+                                            <span><?=translate('category')?></span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                                </ul>
+                            </li>
+                            <?php } ?>
+                            <?php if(get_permission('award', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'award/index' || $sub_page == 'award/edit') echo 'nav-active';?>">
+                                 <a href="<?=base_url('award')?>">
+                                 <svg viewBox="0 -1 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>award</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-256.000000, -412.000000)" fill="currentColor"> <path d="M281.98,424 L281.98,418 C285.932,418 285.973,417.791 285.973,420 C285.973,422.209 284.186,424 281.98,424 L281.98,424 Z M279.984,422 C279.984,426.418 276.41,432 272,432 C267.59,432 264.016,426.418 264.016,422 L264.016,416 C264.016,415.011 265.055,414 266.012,414 L277.988,414 C278.945,414 279.984,414.979 279.984,416 L279.984,422 L279.984,422 Z M262.02,424 C259.815,424 258.027,422.209 258.027,420 C258.027,417.791 258.068,418 262.02,418 L262.02,424 L262.02,424 Z M281.98,416 C281.98,413.791 280.193,412 277.988,412 L266.012,412 C263.807,412 262.02,413.791 262.02,416 C255.183,416 256.031,415.999 256.031,420 C256.031,423.313 258.712,426 262.02,426 C262.258,426 262.486,425.962 262.716,425.93 C264.056,429.854 267.213,433.389 271.002,433.928 L271.002,440 L268.008,440 C267.457,440 267.01,440.447 267.01,441 C267.01,441.553 267.457,442 268.008,442 L275.992,442 C276.543,442 276.99,441.553 276.99,441 C276.99,440.447 276.543,440 275.992,440 L272.998,440 L272.998,433.928 C276.787,433.389 279.944,429.854 281.285,425.93 C281.514,425.962 281.742,426 281.98,426 C285.288,426 287.969,423.313 287.969,420 C287.969,415.999 288.817,416 281.98,416 L281.98,416 Z" id="award" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg> 
+                                     <span><?=translate('award')?></span>
+                                 </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
                     
                     <?php
                     if (moduleIsEnabled('student_accounting')) {
@@ -786,7 +912,7 @@
                                     <?php } ?>
                                 </ul>
                             </li>
-                            <?php } ?>
+                            <?php }} ?>
                             <?php  if(get_permission('fees_allocation', 'is_view')) { ?>
                             <li class="<?php } if ($sub_page == 'fees/allocation') echo 'nav-active';?>">
                                 <a href="<?=base_url('fees/allocation')?>"><span><i class="fas fa-caret-right"></i><?=translate('fees_allocation')?></span></a>
