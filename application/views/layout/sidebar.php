@@ -855,7 +855,7 @@
                                      <span><?=translate('award')?></span>
                                  </a>
                             </li>
-                            <?php ?>
+                            <?php } ?>
                         </ul>
                     </li>
                     <?php }} ?>
