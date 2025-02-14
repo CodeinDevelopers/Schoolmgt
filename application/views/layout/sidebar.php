@@ -762,7 +762,7 @@
                                     <span><?=translate('payroll')?></span>
                                 </a>
                                 <ul class="nav nav-children">
-                                <?php if(get_permission('salary_payment', 'is_view')){ ?>
+                                <?php } if(get_permission('salary_payment', 'is_view')){ ?>
                                     <li class="<?php if ($sub_page == 'payroll/salary_payment' || $sub_page == 'payroll/create' || $sub_page == 'payroll/invoice') echo 'nav-active';?>">
                                         <a href="<?=base_url('payroll')?>">
                                             <span><?=translate('salary_payment')?></span>
