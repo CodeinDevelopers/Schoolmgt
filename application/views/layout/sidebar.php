@@ -796,7 +796,7 @@
                                     <span><?=translate('advance_salary')?></span>
                                 </a>
                                 <ul class="nav nav-children">
-                                    <?php  if(get_permission('advance_salary_request', 'is_view')){ ?>
+                                    <?php } if(get_permission('advance_salary_request', 'is_view')){ ?>
                                     <li class="<?php if ($sub_page == 'advance_salary/request') echo 'nav-active';?>">
                                         <a href="<?=base_url('advance_salary/request')?>">
                                             <span><?=translate('my_application')?></span>
@@ -825,7 +825,7 @@
                                     <span><?=translate('leave')?></span>
                                 </a>
                                 <ul class="nav nav-children">
-                                <?php  if(get_permission('leave_request', 'is_view')){ ?>
+                                <?php } if(get_permission('leave_request', 'is_view')){ ?>
                                     <li class="<?php if ($sub_page == 'leave/request') echo 'nav-active';?>">
                                         <a href="<?=base_url('leave/request')?>">
                                             <span><?=translate('my_application')?></span>
