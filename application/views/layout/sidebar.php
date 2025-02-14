@@ -825,7 +825,7 @@
                                     <span><?=translate('leave')?></span>
                                 </a>
                                 <ul class="nav nav-children">
-                                <?php } if(get_permission('leave_request', 'is_view')){ ?>
+                                <?php  if(get_permission('leave_request', 'is_view')){ ?>
                                     <li class="<?php if ($sub_page == 'leave/request') echo 'nav-active';?>">
                                         <a href="<?=base_url('leave/request')?>">
                                             <span><?=translate('my_application')?></span>
@@ -837,7 +837,7 @@
                                             <span><?=translate('manage_application')?></span>
                                         </a>
                                     </li>
-                                <?php if(get_permission('leave_category', 'is_view')){ ?>
+                                <?php } if(get_permission('leave_category', 'is_view')){ ?>
                                     <li class="<?php if ($sub_page == 'leave/category') echo 'nav-active';?>">
                                         <a href="<?=base_url('leave/category')?>">
                                             <span><?=translate('category')?></span>
