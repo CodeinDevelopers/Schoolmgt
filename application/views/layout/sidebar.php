@@ -858,7 +858,7 @@
                             <?php } ?>
                         </ul>
                     </li>
-                    <?php } ?>
+                    <?php }} ?>
                     <?php
                     if (moduleIsEnabled('student_accounting')) {
                         if(get_permission('fees_type', 'is_view') ||
