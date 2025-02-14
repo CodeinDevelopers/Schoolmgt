@@ -943,7 +943,6 @@
                             </li>
                             <?php ?>
                         </ul>
-                    </li>
                     <?php }} ?>
                     <?php
                     if (moduleIsEnabled('office_accounting')) {
