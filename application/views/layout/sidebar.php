@@ -825,13 +825,13 @@
                                     <span><?=translate('leave')?></span>
                                 </a>
                                 <ul class="nav nav-children">
-                                <?php } if(get_permission('leave_request', 'is_view')){ ?>
+                                <?php  if(get_permission('leave_request', 'is_view')){ ?>
                                     <li class="<?php if ($sub_page == 'leave/request') echo 'nav-active';?>">
                                         <a href="<?=base_url('leave/request')?>">
                                             <span><?=translate('my_application')?></span>
                                         </a>
                                     </li>
-                                <?php } if(get_permission('leave_manage', 'is_view')){ ?>
+                                <?php  if(get_permission('leave_manage', 'is_view')){ ?>
                                     <li class="<?php if ($sub_page == 'leave/index') echo 'nav-active';?>">
                                         <a href="<?=base_url('leave')?>">
                                             <span><?=translate('manage_application')?></span>
@@ -858,7 +858,7 @@
                             <?php ?>
                         </ul>
                     </li>
-                    <?php } ?>
+                    <?php }} ?>
                     <?php
                     if (moduleIsEnabled('student_accounting')) {
                         if(get_permission('fees_type', 'is_view') ||
@@ -1290,7 +1290,8 @@
                             </li>
                         <?php } } ?>
                         <?php 
-                        if (moduleIsEnabled('human_resource')) {
+                        if (
+                            moduleIsEnabled('human_resource')) {
                             if(get_permission('salary_summary_report', 'is_view') || get_permission('leave_reports', 'is_view')){ ?>
                             <li class="nav-parent <?php if ($main_menu == 'payroll_reports' || $main_menu == 'leave_reports') echo 'nav-expanded nav-active'; ?>">
                                 <a><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
