@@ -837,7 +837,7 @@
                                             <span><?=translate('manage_application')?></span>
                                         </a>
                                     </li>
-                                <?php } if(get_permission('leave_category', 'is_view')){ ?>
+                                <?php if(get_permission('leave_category', 'is_view')){ ?>
                                     <li class="<?php if ($sub_page == 'leave/category') echo 'nav-active';?>">
                                         <a href="<?=base_url('leave/category')?>">
                                             <span><?=translate('category')?></span>
