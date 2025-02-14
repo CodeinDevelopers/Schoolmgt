@@ -762,28 +762,30 @@
                                     <span><?=translate('payroll')?></span>
                                 </a>
                                 <ul class="nav nav-children">
-                                <?php } if(get_permission('salary_payment', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'payroll/salary_payment' || $sub_page == 'payroll/create' || $sub_page == 'payroll/invoice') echo 'nav-active';?>">
-                                        <a href="<?=base_url('payroll')?>">
-                                            <span><?=translate('salary_payment')?></span>
-                                        </a>
-                                    </li>
-                                    <?php } if(get_permission('salary_assign', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'payroll/salary_assign') echo 'nav-active';?>">
-                                        <a href="<?=base_url('payroll/salary_assign')?>">
-                                            <span><?=translate('salary_assign')?></span>
-                                        </a>
-                                    </li>
-                                    <?php if(get_permission('salary_template', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'payroll/salary_templete' || $sub_page == 'payroll/salary_templete_edit') echo 'nav-active';?>">
-                                        <a href="<?=base_url('payroll/salary_template')?>">
-                                            <span><?=translate('salary_template')?></span>
-                                        </a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
-                            <?php } ?>
+                                <?php if(get_permission('salary_payment', 'is_view')){ ?>
+    <li class="<?php if ($sub_page == 'payroll/salary_payment' || $sub_page == 'payroll/create' || $sub_page == 'payroll/invoice') echo 'nav-active';?>">
+        <a href="<?=base_url('payroll')?>">
+            <span><?=translate('salary_payment')?></span>
+        </a>
+    </li>
+<?php } ?>
+
+<?php if(get_permission('salary_assign', 'is_view')){ ?>
+    <li class="<?php if ($sub_page == 'payroll/salary_assign') echo 'nav-active';?>">
+        <a href="<?=base_url('payroll/salary_assign')?>">
+            <span><?=translate('salary_assign')?></span>
+        </a>
+    </li>
+<?php } ?> 
+
+<?php if(get_permission('salary_template', 'is_view')){ ?>
+    <li class="<?php if ($sub_page == 'payroll/salary_template' || $sub_page == 'payroll/salary_template_edit') echo 'nav-active';?>">
+        <a href="<?=base_url('payroll/salary_template')?>">
+            <span><?=translate('salary_template')?></span>
+        </a>
+    </li>
+<?php } ?>
+
                             <?php
                             if(get_permission('advance_salary_manage', 'is_view') ||
                             get_permission('advance_salary_request', 'is_view')) {
