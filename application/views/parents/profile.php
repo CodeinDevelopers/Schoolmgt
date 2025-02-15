@@ -1,28 +1,57 @@
 <div class="row appear-animation" data-appear-animation="<?=$global_config['animations'] ?>">
+	<div class="row">
 	<div class="col-md-12 mb-lg">
-		<div class="profile-head social">
-			<div class="col-md-12 col-lg-4 col-xl-3">
-				<div class="image-content-center user-pro">
-				<div class="preview">
-						<img src="<?=get_image_url('parent', $parent['photo'])?>">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-5 col-xl-5">
-				<h5><?=html_escape($parent['name'])?></h5>
+	<div class="student-profile-card" style="margin-right: 15px;
+    margin-left: 16px;">
+    <div class="profile-content">
+        <div class="profile-image">
+		<img src="<?=get_image_url('parent', $parent['photo'])?>">
+        </div>
+        
+        <div class="profile-details">
+		<h2><?=html_escape($parent['name'])?></h2>
 				<p><?=ucfirst('parent')?></p>
-				<ul>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('relation')?>"><i class="fas fa-bezier-curve"></i></div> <?=html_escape($parent['relation'])?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('occupation')?>"><i class="fas fa-user-tag"></i></div> <?=html_escape(empty($parent['occupation']) ? 'N/A' : $parent['occupation']);?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('income')?>"><i class="fas fa-dollar-sign"></i></div> <?=html_escape(empty($parent['income']) ? 'N/A' : $parent['income']);?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('mobile_no')?>"><i class="fas fa-phone"></i></div> <?=html_escape(empty($parent['mobileno']) ? 'N/A' : $parent['mobileno']);?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('email')?>"><i class="far fa-envelope"></i></div> <?=html_escape(!empty($parent['email']) ? $parent['email'] : 'N/A')?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('address')?>"><i class="fas fa-home"></i></div> <?=html_escape(!empty($parent['address']) ? $parent['address'] : 'N/A'); ?></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('relation')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('relation')?>:</span>
+                    </div>
+                    <span><?=html_escape($parent['relation'])?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('mobile_no')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('mobile_no')?>:</span>
+                    </div>
+                    <span><?=html_escape(empty($parent['mobileno']) ? 'N/A' : $parent['mobileno']);?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('email')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15.5a3 3 0 01-3 3h-12a3 3 0 01-3-3m18 0v-2a3 3 0 00-3-3H6a3 3 0 00-3 3v2m18 0l-3-3m3 3l-3 3" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('email')?>:</span>
+                    </div>
+                    <span><?=html_escape(!empty($parent['email']) ? $parent['email'] : 'N/A')?></span>
+                </div>
+				<div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('address')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('address')?>:</span>
+                    </div>
+                    <span><?=html_escape(!empty($parent['address']) ? $parent['address'] : 'N/A'); ?></span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
 	<div class="col-md-12">
 		<div class="panel-group" id="accordion">
 		<div class="panel panel-accordion">

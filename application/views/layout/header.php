@@ -141,6 +141,7 @@ a.ramom-action-btn:active {
 .ramom-action-btn:hover i {
     transform: scale(1.1);
     color: #2563eb;
+    
 }
 
 /* Updated logout specific styling */
@@ -176,6 +177,11 @@ a.ramom-logout-btn:hover {
     border-color: #2563eb;
 }
 
+a.ramom-action-btn span {
+        font-size: 12px; 
+        white-space: nowrap; 
+    }
+
 /* Mobile-specific styles */
 @media (max-width: 768px) {
     .ramom-modern-header {
@@ -189,24 +195,163 @@ a.ramom-logout-btn:hover {
     }
 
     .ramom-user-welcome {
-        width: 100%; /* Ensure full width */
+        width: 100%; 
     }
 
     .ramom-header-actions {
-        width: 100%; /* Ensure full width */
-        justify-content: flex-start; /* Align buttons to the start */
-        gap: 0.5rem; /* Adjust spacing between buttons */
+        width: 100%; 
+        justify-content: flex-start;
+        gap: 0.5rem; 
     }
 
+   
     a.ramom-action-btn span {
-        display: none; /* Show button text on mobile */
+        font-size: 10px; 
+        white-space: nowrap; 
     }
+
 
     a.ramom-action-btn {
-        width: auto; /* Allow buttons to take natural width */
-        padding: 0.5rem 1rem; /* Restore padding */
+        width: auto; 
+        padding: 0.5rem 1rem;
     }
     
+}
+@media (max-width: 480px) {
+    a.ramom-action-btn span {
+        font-size: 10px;
+    }
+}
+.student-profile-card {
+    background: #ffffff;
+    padding: 2rem 2rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 17px ;
+}
+
+.profile-content {
+    padding: 24px;
+    display: flex;
+    gap: 24px;
+}
+
+.profile-image img {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-details {
+    flex-grow: 1;
+}
+
+.student-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 4px 0;
+}
+
+.student-type {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 16px 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #4a5568;
+}
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: fit-content; /* Allow width to expand based on content */
+    height: 32px;
+    background-color: #f3f4f6;
+    border-radius: 16px; /* Changed from 50% to fixed value to make it pill-shaped */
+    color: #4a5568;
+    padding: 0 12px; /* Add horizontal padding for text */
+    gap: 8px; /* Space between icon and text */
+}
+
+.icon-wrapper svg {
+    width: 16px;
+    height: 16px;
+}
+
+.icon-text {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.action-area {
+    margin-left: auto;
+    display: flex;
+    align-items: flex-start;
+}
+
+.dashboard-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.dashboard-button:hover {
+    background-color: #1d4ed8;
+}
+
+.dashboard-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.profile-content {
+flex-direction: column;
+}
+
+.profile-image {
+margin: 0 auto;
+}
+
+ .profile-details {
+text-align: center;
+}
+
+ .info-grid {
+   grid-template-columns: 1fr;
+}
+.action-area {
+margin: 16px auto 0;
+}
+
+.info-item {
+ justify-content: center;
+ }
+
 }
 </style>
 	<?php

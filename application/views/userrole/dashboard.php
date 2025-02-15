@@ -1,7 +1,62 @@
+<!-- Modern Dashboard Header -->
+<div class="ramom-modern-header">
+    <div class="ramom-header-content">
+        <div class="ramom-user-welcome">
+            <div class="ramom-user-profile">
+                <?php
+                $profile_image = get_image_url('staff', $this->session->userdata('photo'));
+                ?>
+                <img src="<?php echo $profile_image; ?>" alt="User Image" class="ramom-profile-img">
+            </div>
+            <div class="ramom-user-info">
+                <h1 class="ramom-welcome-text">
+                    Welcome Back, 
+                    <span class="ramom-user-name">
+                        <?php echo $this->session->userdata('name'); ?>
+                    </span>
+                </h1>
+                <p class="ramom-subtitle">Have a good day at work</p>
+            </div>
+        </div>
+
+        <div class="ramom-header-actions">
+		<?php if (is_parent_loggedin()) { ?>
+			<a href="<?=base_url('parents/my_children')?>" class="ramom-action-btn">
+        <span>Select Child</span>
+    </a>
+<?php } ?>
+			<?php if (get_permission('student', 'is_add')): ?>
+            <a href="<?php echo base_url('student/add'); ?>" class="ramom-action-btn">
+			<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M18.18 8.03933L18.6435 7.57589C19.4113 6.80804 20.6563 6.80804 21.4241 7.57589C22.192 8.34374 22.192 9.58868 21.4241 10.3565L20.9607 10.82M18.18 8.03933C18.18 8.03933 18.238 9.02414 19.1069 9.89309C19.9759 10.762 20.9607 10.82 20.9607 10.82M18.18 8.03933L13.9194 12.2999C13.6308 12.5885 13.4865 12.7328 13.3624 12.8919C13.2161 13.0796 13.0906 13.2827 12.9882 13.4975C12.9014 13.6797 12.8368 13.8732 12.7078 14.2604L12.2946 15.5L12.1609 15.901M20.9607 10.82L16.7001 15.0806C16.4115 15.3692 16.2672 15.5135 16.1081 15.6376C15.9204 15.7839 15.7173 15.9094 15.5025 16.0118C15.3203 16.0986 15.1268 16.1632 14.7396 16.2922L13.5 16.7054L13.099 16.8391M13.099 16.8391L12.6979 16.9728C12.5074 17.0363 12.2973 16.9867 12.1553 16.8447C12.0133 16.7027 11.9637 16.4926 12.0272 16.3021L12.1609 15.901M13.099 16.8391L12.1609 15.901" stroke="currentColor" stroke-width="1.5"></path>
+                                        <path d="M8 13H10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                        <path d="M8 9H14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                        <path d="M8 17H9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                        <path d="M19.8284 3.17157C18.6569 2 16.7712 2 13 2H11C7.22876 2 5.34315 2 4.17157 3.17157C3 4.34315 3 6.22876 3 10V14C3 17.7712 3 19.6569 4.17157 20.8284C5.34315 22 7.22876 22 11 22H13C16.7712 22 18.6569 22 19.8284 20.8284C20.7715 19.8853 20.9554 18.4796 20.9913 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                    </g>
+                                </svg>
+                <span>Register New Student</span>
+            </a>
+			<?php endif; ?>
+			<?php if (get_permission('question_bank', 'is_view')): ?>
+			<a href="<?php echo base_url('onlineexam/question'); ?>" class="ramom-action-btn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"width="28px" height="28px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.5 7.5H16.1C16.9401 7.5 17.3601 7.5 17.681 7.66349C17.9632 7.8073 18.1927 8.03677 18.3365 8.31901C18.5 8.63988 18.5 9.05992 18.5 9.9V17.5C18.5 18.6046 17.6046 19.5 16.5 19.5V19.5C15.3954 19.5 14.5 18.6046 14.5 17.5V7.7C14.5 6.57989 14.5 6.01984 14.282 5.59202C14.0903 5.21569 13.7843 4.90973 13.408 4.71799C12.9802 4.5 12.4201 4.5 11.3 4.5H7.7C6.57989 4.5 6.01984 4.5 5.59202 4.71799C5.21569 4.90973 4.90973 5.21569 4.71799 5.59202C4.5 6.01984 4.5 6.5799 4.5 7.7V16.3C4.5 17.4201 4.5 17.9802 4.71799 18.408C4.90973 18.7843 5.21569 19.0903 5.59202 19.282C6.01984 19.5 6.5799 19.5 7.7 19.5H16.5" stroke="currentColor"></path> <path d="M11 6.5H8C7.53406 6.5 7.30109 6.5 7.11732 6.57612C6.87229 6.67761 6.67761 6.87229 6.57612 7.11732C6.5 7.30109 6.5 7.53406 6.5 8C6.5 8.46594 6.5 8.69891 6.57612 8.88268C6.67761 9.12771 6.87229 9.32239 7.11732 9.42388C7.30109 9.5 7.53406 9.5 8 9.5H11C11.4659 9.5 11.6989 9.5 11.8827 9.42388C12.1277 9.32239 12.3224 9.12771 12.4239 8.88268C12.5 8.69891 12.5 8.46594 12.5 8C12.5 7.53406 12.5 7.30109 12.4239 7.11732C12.3224 6.87229 12.1277 6.67761 11.8827 6.57612C11.6989 6.5 11.4659 6.5 11 6.5Z" stroke="currentColor"></path> <path d="M6.5 11.5H12.5" stroke="currentColor" stroke-linecap="round"></path> <path d="M6.5 13.5H12.5" stroke="currentColor" stroke-linecap="round"></path> <path d="M6.5 15.5H12.5" stroke="currentColor" stroke-linecap="round"></path> <path d="M6.5 17.5H10.5" stroke="currentColor" stroke-linecap="round"></path> </g></svg>
+                <span>Question Bank</span>
+            </a>
+            <?php endif; ?>
+            <a href="<?php echo base_url('authentication/logout'); ?>" class="ramom-action-btn ramom-logout-btn">
+			<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1,.cls-2{fill:none;stroke:currentColor;stroke-linecap:round;stroke-width:1.5px;}.cls-1{stroke-linejoin:round;}.cls-2{stroke-linejoin:bevel;}</style> </defs> <g id="ic-actions-log-out"> <path class="cls-1" d="M15.71,15v4a2,2,0,0,1-2,2h-6a2,2,0,0,1-2-2V5a2,2,0,0,1,2-2h6a2,2,0,0,1,2,2V9"></path> <line class="cls-2" x1="12.5" y1="11.95" x2="22.5" y2="11.95"></line> <path class="cls-2" d="M18.82,8l3.44,3.44a.83.83,0,0,1,0,1.18L18.88,16"></path> </g> </g></svg>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+</div>
 <?php 
 if ($this->saas_model->checkSubscriptionValidity()) { ?>
 <?php if (empty($student_id)): ?>
-	<div class="row">
+	<div>
 		<?php
 		$sessionID = get_session_id();
 		$this->db->select('s.id,s.first_name,s.last_name,s.photo,s.register_no,s.birthday,e.class_id,e.section_id,e.id as enroll_id,e.roll,e.session_id,c.name as class_name,se.name as section_name');
@@ -16,30 +71,68 @@ if ($this->saas_model->checkSubscriptionValidity()) { ?>
 			$students = $query->result();
 			foreach ($students as $row):
 		?>
-		<div class="col-md-12 mb-lg">
-			<div class="profile-head">
-				<div class="col-md-12 col-lg-4 col-xl-3">
-					<div class="image-content-center user-pro">
-						<div class="preview">
-							<img src="<?php echo get_image_url('student', $row->photo);?>">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-12 col-lg-5 col-xl-5">
-					<h5><?=html_escape($row->first_name . " " . $row->last_name)?></h5>
-					<p><?=translate('my_child')?></p>
-					<ul>
-						<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('class')?>"><i class="fas fa-school"></i></div><?=html_escape($row->class_name).' ('.html_escape($row->section_name).')'?></li>
-						<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('roll')?>"><i class="fas fa-award"></i></div><?=html_escape($row->roll)?></li>
-						<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('register_no')?>"><i class="far fa-registered"></i></div><?=html_escape($row->register_no)?></li>
-						<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('birthday')?>"><i class="fas fa-birthday-cake"></i></div><?=_d($row->birthday)?></li>
-					</ul>
-				</div>
-				<div class="col-md-12 col-lg-3 col-xl-4">
-					<a href="<?=base_url('parents/select_child/' . $row->enroll_id);?>" class="chil-shaw btn btn-primary btn-circle pull-right"><i class="fas fa-tachometer-alt"></i> <?=translate('dashboard')?></a>
-				</div>
-			</div>
-		</div>
+		<div class="student-profile-card">
+    <div class="profile-content">
+        <div class="profile-image">
+            <img src="<?php echo get_image_url('student', $row->photo);?>" alt="Student Photo">
+        </div>
+        
+        <div class="profile-details">
+            <h2 class="student-name">
+                <?=html_escape($row->first_name . " " . $row->last_name)?>
+            </h2>
+            <p class="student-type"><?=translate('my_child')?></p>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('class')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span><?=html_escape($row->class_name)?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('roll')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span><?=html_escape($row->roll)?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('register_no')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span><?=html_escape($row->register_no)?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('birthday')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15.5a3 3 0 01-3 3h-12a3 3 0 01-3-3m18 0v-2a3 3 0 00-3-3H6a3 3 0 00-3 3v2m18 0l-3-3m3 3l-3 3" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span><?=_d($row->birthday)?></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-area">
+            <a href="<?=base_url('parents/select_child/' . $row->enroll_id);?>" 
+               class="dashboard-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <?=translate('dashboard')?>
+            </a>
+        </div>
+    </div>
+</div>
 		<?php endforeach; } else { ?>
 			<div class="alert alert-subl text-center">
 				<strong><i class="fas fa-exclamation-triangle"></i> <?=translate('no_child_was_found')?></strong>

@@ -35,33 +35,60 @@ if ($last_name['status'] == 1 || $gender['status'] == 1 || $blood_group['status'
 	$personal = true;
 }
 ?>
-<div class="row">
-	<div class="col-md-12 mb-lg">
-		<div class="profile-head">
-			<div class="col-md-12 col-lg-4 col-xl-3">
-				<div class="image-content-center user-pro">
-					<div class="preview">
-						<img src="<?php echo get_image_url('student', $student['photo']);?>">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-5 col-xl-5">
-				<h5><?=$student['first_name'] . ' ' . $student['last_name']?></h5>
-				<p><?=translate('student')  . " / " . $student['category_name']?></p>
-				<ul>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('guardian_name')?>"><i class="fas fa-users"></i></div> <?=(!empty($getParent['name']) ? $getParent['name'] : 'N/A'); ?></li>
-				<?php if (!empty($student['birthday'])) { ?>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('birthday')?>"><i class="fas fa-birthday-cake"></i></div> <?=_d($student['birthday'])?></li>
-				<?php } ?>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('class')?>"><i class="fas fa-school"></i></div> <?=$student['class_name'] . ' ('.$student['section_name'] . ')'?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('mobile_no')?>"><i class="fas fa-phone-volume"></i></div> <?=(!empty($student['mobileno']) ? $student['mobileno'] : 'N/A'); ?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('email')?>"><i class="far fa-envelope"></i></div> <?=$student['email']?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('present_address')?>"><i class="fas fa-home"></i></div> <?=(!empty($student['current_address']) ? $student['current_address'] : 'N/A'); ?></li>
-				</ul>
-			</div>
-		</div>
-	</div>
 
+	<div class="row">
+	<div class="col-md-12 mb-lg">
+	<div class="student-profile-card" style="margin-right: 15px;
+    margin-left: 16px;">
+    <div class="profile-content">
+        <div class="profile-image">
+		<img src="<?php echo get_image_url('student', $student['photo']);?>">
+        </div>
+        
+        <div class="profile-details">
+		<h2><?=$student['first_name'] . ' ' . $student['last_name']?></h2>
+		<p><?=translate('student') ?></p>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('class')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('class')?>:</span>
+                    </div>
+                    <span><?=$student['class_name'] ?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('section')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('section')?>:</span>
+                    </div>
+                    <span><?=$student['section_name'] ?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('register_no')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15.5a3 3 0 01-3 3h-12a3 3 0 01-3-3m18 0v-2a3 3 0 00-3-3H6a3 3 0 00-3 3v2m18 0l-3-3m3 3l-3 3" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('register_no')?>:</span>
+                    </div>
+                    <span><?=$student['register_no']?></span>
+                </div>
+				<div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('guardian_name')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('guardian_name')?>:</span>
+                    </div>
+                    <span><?=(!empty($getParent['name']) ? $getParent['name'] : 'N/A'); ?></span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
 	<div class="col-md-12">
 		<section class="panel">
 			<div class="tabs-custom">
