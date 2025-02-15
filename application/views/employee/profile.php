@@ -1,28 +1,50 @@
 <?php $widget = (is_superadmin_loggedin() ? '4' : '6'); ?>
 <div class="row appear-animation" data-appear-animation="<?=$global_config['animations'] ?>">
+<div class="row">
 	<div class="col-md-12 mb-lg">
-		<div class="profile-head social">
-			<div class="col-md-12 col-lg-4 col-xl-3">
-				<div class="image-content-center user-pro">
-				<div class="preview">
-						<img src="<?=get_image_url('staff', $staff['photo'])?>">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 col-lg-5 col-xl-5">
-				<h5><?php echo $staff['name']; ?></h5>
-				<p><?php echo ucfirst($staff['role'])?> / <?php echo $staff['designation_name']; ?></p>
-				<ul>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('department')?>"><i class="fas fa-user-tie"></i></div> <?=(!empty($staff['department_name']) ? $staff['department_name'] : 'N/A'); ?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('birthday')?>"><i class="fas fa-birthday-cake"></i></div> <?=_d($staff['birthday'])?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('joining_date')?>"><i class="far fa-calendar-alt"></i></div> <?=_d($staff['joining_date'])?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('mobile_no')?>"><i class="fas fa-phone"></i></div> <?=(!empty($staff['mobileno']) ? $staff['mobileno'] : 'N/A'); ?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('email')?>"><i class="far fa-envelope"></i></div> <?=$staff['email']?></li>
-					<li><div class="icon-holder" data-toggle="tooltip" data-original-title="<?=translate('present_address')?>"><i class="fas fa-home"></i></div> <?=(!empty($staff['present_address']) ? $staff['present_address'] : 'N/A'); ?></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	<div class="student-profile-card" style="margin-right: 15px;
+    margin-left: 16px;">
+    <div class="profile-content">
+        <div class="profile-image">
+		<img src="<?=get_image_url('parent', $parent['photo'])?>">
+        </div>
+        
+        <div class="profile-details">
+		<h2><?php echo $staff['name']; ?></h2>
+				<p><?php echo ucfirst($staff['role']) ?></p>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('designation')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('designation')?>:</span>
+                    </div>
+                    <span><?=html_escape($staff['designation_name'])?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('joining_date')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('joining_date')?>:</span>
+                    </div>
+                    <span><?=_d($staff['joining_date'])?></span>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon-wrapper" title="<?=translate('mobile_no')?>">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15.5a3 3 0 01-3 3h-12a3 3 0 01-3-3m18 0v-2a3 3 0 00-3-3H6a3 3 0 00-3 3v2m18 0l-3-3m3 3l-3 3" stroke-width="2" stroke-linecap="round"/>
+                        </svg><span class="icon-text"><?=translate('mobile_no')?>:</span>
+                    </div>
+                    <span><?=(!empty($staff['mobileno']) ? $staff['mobileno'] : 'N/A'); ?></span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
 	
 	<div class="col-md-12">
 		<div class="panel-group" id="accordion">

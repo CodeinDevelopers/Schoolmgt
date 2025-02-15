@@ -139,7 +139,7 @@ if (count($student_array)) {
 			</div>
 			<div class="invoice-col right">
 				<div class="bill-data text-right">
-					<p class="h5 mb-xs text-dark text-weight-semibold">Academic :</p>
+					<p class="h5 mb-xs text-dark text-weight-semibold">School:</p>
 					<address>
 						<?php 
 						echo $basic['school_name'] . "<br/>";

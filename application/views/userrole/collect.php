@@ -83,7 +83,7 @@ if (count($allocations)) {
 									</div>
 									<div class="col-xs-6">
 										<div class="bill-data text-right">
-											<p class="h5 mb-xs text-dark text-weight-semibold">Academic :</p>
+											<p class="h5 mb-xs text-dark text-weight-semibold">School:</p>
 											<address>
 												<?php 
 												echo $basic['school_name'] . "<br/>";
@@ -274,7 +274,7 @@ if (count($allocations)) {
 									</div>
 									<div class="col-xs-6">
 										<div class="bill-data text-right">
-											<p class="h5 mb-xs text-dark text-weight-semibold">Academic :</p>
+											<p class="h5 mb-xs text-dark text-weight-semibold">School:</p>
 											<address>
 												<?php 
 												echo $basic['school_name'] . "<br/>";
