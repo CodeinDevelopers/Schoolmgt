@@ -59,13 +59,18 @@
                 <h2 class="text-2xl font-bold tracking-tight">
                     <?php echo $global_config['institute_name'];?>
                 </h2>
-                <p class="text-sm text-gray-600 mt-2">
-                    Login to your account to continue
-                </p>
             </div>
 
             <!-- Login Form -->
             <div class="vercel-card rounded-lg p-8">
+            <div class="mb-6">
+                    <h3 class="text-xl font-semibold mb-2 text-center">
+                        Welcome Back!
+                    </h3>
+                    <p class="text-gray-600 text-sm text-center">
+                    Login to your Account to Continue to your Dashboard
+                    </p>
+                </div>
                 <?php echo form_open($this->uri->uri_string()); ?>
                     <div class="space-y-5">
                         <div class="<?php if (form_error('email')) echo 'has-error'; ?>">
@@ -124,11 +129,19 @@
    </a>
 </div>
             <!-- Footer -->
-            <div class="mt-8 text-center">
-                <p class="text-sm text-gray-600"><?php echo $global_config['footer_text'];?></p>
-            </div>
-        </div>
-    </div>
+            <footer class="w-full py-4 text-center text-gray-600 text-sm">
+    ©<?php echo date('Y'); ?> <strong>Acamedium.</strong> All rights reserved.
+    <br>
+    Licenced to <strong><?php echo $global_config['institute_name'];?></strong>. 
+    <br>
+    <span>
+        Designed by 
+        <strong>
+            <span style="color: #ff2b13;">Codein</span><span style="color: #43cdc2;">Developers</span>.
+        </strong>
+    </span>
+</footer>
+
 
     <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.js');?>"></script>
     <script src="<?php echo base_url('assets/vendor/jquery-placeholder/jquery-placeholder.js');?>"></script>

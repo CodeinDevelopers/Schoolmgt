@@ -3,12 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * @package : Acamedium
- * @version : 6.5
+ * @version : 6.6
  * @developed by : Codeindevelopers
  * @support : support@codeindevelopers.com.ng
  * @author url : https://codeindevelopers.com.ng
  * @filename : Home.php
- * @copyright : Reserved 2024-present Codeindevelopers
+  * @copyright : Reserved 2024-present Codeindevelopers
  */
 
 class Home extends Frontend_Controller
@@ -279,7 +279,7 @@ class Home extends Frontend_Controller
                 }
                 // check out admission payment status
                 $this->load->model('admissionpayment_model');
-                $getStudent = $this->admissionpayment_model->getStudentDetails($reference_no);
+                $getStudent = $this->admissionpayment_model->getStudentDetails($studentID);
                 if ($getStudent['fee_elements']['status'] == 0) {
                     $url = base_url("home/admission_confirmation/" . $reference_no);
                     if (empty($arrayData['section_id'])) {
@@ -387,10 +387,10 @@ class Home extends Frontend_Controller
         return $return_photo;
     }
 
-    public function admission_confirmation($referenceNo = '')
+    public function admission_confirmation($studentID = '')
     {
         $this->load->model('admissionpayment_model');
-        $getStudent = $this->admissionpayment_model->getStudentDetails($referenceNo);
+        $getStudent = $this->admissionpayment_model->getStudentDetails($studentID);
         if (empty($getStudent['id'])) {
             set_alert('error', "This application was not found.");
             redirect($_SERVER['HTTP_REFERER']);
@@ -537,13 +537,20 @@ class Home extends Frontend_Controller
                 $sessionID = $this->input->post('session_id');
                 $registerNo = $this->input->post('register_no');
                 $examID = $this->input->post('exam_id');
-                $userID = $this->db->select('id')->where('register_no', $registerNo)->get('student')->row_array();
+
+                $this->db->select('student.id,enroll.class_id,enroll.section_id');
+                $this->db->from('enroll');
+                $this->db->join('student', 'student.id = enroll.student_id', 'inner');
+                $this->db->where('student.register_no', $registerNo);
+                $this->db->where('enroll.session_id', $sessionID);
+                $userID = $this->db->get()->row_array();
+
                 if (empty($userID)) {
-                    $array = array('status' => '0', 'error' => "Register No Not Found.");
+                    $array = array('status' => '0', 'error' => "Student Dose Not exist.");
                     echo json_encode($array);
                     exit();
                 }
-                $result = $this->exam_model->getStudentReportCard($userID['id'], $examID, $sessionID);
+                $result = $this->exam_model->getStudentReportCard($userID['id'], $examID, $sessionID, $userID['class_id'], $userID['section_id']);
                 if (empty($result['exam'])) {
                     $array = array('status' => '0', 'error' => "Exam Results Not Found.");
                     echo json_encode($array);

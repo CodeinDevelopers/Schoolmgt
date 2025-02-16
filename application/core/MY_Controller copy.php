@@ -113,30 +113,13 @@ class Admin_Controller extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('saas_model');
-        if (!is_loggedin()) {
-            $this->session->set_userdata('redirect_url', current_url());
-            redirect(base_url('login'), 'refresh');
-        }
-
-        if (!$this->saas_model->checkSubscriptionValidity()) {
-            redirect(base_url('dashboard'));
-        }
-    }
-}
-
-class Dashboard_Controller extends MY_Controller
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('saas_model');
         if (!is_loggedin()) {
             $this->session->set_userdata('redirect_url', current_url());
             redirect(base_url('login'), 'refresh');
         }
     }
 }
+
 
 class User_Controller extends MY_Controller
 {
@@ -147,12 +130,9 @@ class User_Controller extends MY_Controller
             $this->session->set_userdata('redirect_url', current_url());
             redirect(base_url('login'), 'refresh');
         }
-        $this->load->model('saas_model');
-        if (!$this->saas_model->checkSubscriptionValidity()) {
-            redirect(base_url('dashboard'));
-        }
     }
 }
+
 
 class Authentication_Controller extends MY_Controller
 {
@@ -169,16 +149,10 @@ class Frontend_Controller extends MY_Controller
     {
         parent::__construct();
         $this->load->model('home_model');
-        $this->load->model('saas_model');
         $branchID = $this->home_model->getDefaultBranch();
         $cms_setting = $this->db->get_where('front_cms_setting', array('branch_id' => $branchID))->row_array();
         if (!$cms_setting['cms_active']) {
             redirect(site_url('login'));
-        } else {
-            if (!$this->saas_model->checkSubscriptionValidity($branchID)) {
-                $this->session->set_flashdata('website_expired_msg', '1');
-                redirect(base_url());
-            }
         }
         $this->data['cms_setting'] = $cms_setting;
     }

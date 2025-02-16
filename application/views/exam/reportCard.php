@@ -1,58 +1,78 @@
 <?php $marksheet_template = $this->marksheet_template_model->getTemplate($templateID, $branchID); ?>
 <style type="text/css">
-	.mark-container {
-		height: 100%;
-		min-width: 1000px;
-	    position: relative;
-	    z-index: 2;
-	    margin: 0 auto;
-	    font-size: 12px;
-	    padding: <?=$marksheet_template['top_space'] . 'px ' . $marksheet_template['right_space'] . 'px ' . $marksheet_template['bottom_space'] . 'px ' . $marksheet_template['left_space'] . 'px'?>;
-	}
-	table {
-	    border-collapse: collapse;
-	    width: 100%;
-	    margin: 0 auto;
-	}
+    .mark-container {
+        height: 100%;
+        min-width: 100vf;
+        position: relative;
+        z-index: 2;
+        margin: 0 auto;
+        font-size: 12px;
+        padding: <?=$marksheet_template['top_space'] . 'px ' . $marksheet_template['right_space'] . 'px ' . $marksheet_template['bottom_space'] . 'px ' . $marksheet_template['left_space'] . 'px'?>;
+        border-radius: 10px;
+    }
 
-	@page {
-		margin: -2px;
-		size: <?php echo $marksheet_template['page_layout'] == 1 ? 'portrait' : 'landscape'; ?>;
-	}
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-	@media print {
-		.pagebreak {
-			clear: both;
-			page-break-before: always;
-		}
-		.table-bordered > thead > tr > th,
-		.table-bordered > tbody > tr > th,
-		.table-bordered > tfoot > tr > th,
-		.table-bordered > thead > tr > td,
-		.table-bordered > tbody > tr > td,
-		.table-bordered > tfoot > tr > td {
-		    border-color: #000 !important;
-		    background: transparent !important;
-		}
-	}
+    @page {
+        margin: -2px;
+        size: <?php echo $marksheet_template['page_layout'] == 1 ? 'portrait' : 'landscape'; ?>;
+    }
 
-	.table-bordered {
-	    border-color: #000 !important;
-	}
+    @media print {
+        .pagebreak {
+            clear: both;
+            page-break-before: always;
+        }
+        .table-bordered > thead > tr > th,
+        .table-bordered > tbody > tr > th,
+        .table-bordered > tfoot > tr > th,
+        .table-bordered > thead > tr > td,
+        .table-bordered > tbody > tr > td,
+        .table-bordered > tfoot > tr > td {
+            border-color: #000 !important;
+            background: transparent !important;
+            border-radius: 10px;
+        }
+    }
 
-	.background {
-		position: absolute;
-		z-index: 0;
-		width: 100%;
-		height: 100%;
-	<?php if (empty($marksheet_template['background'])) { ?>
-		background: #fff;
-	<?php } else { ?>
-		background-image: url("<?=base_url('uploads/marksheet/' . $marksheet_template['background'])?>") !important;
-		background-repeat: no-repeat !important;
-		background-size: 100% 100% !important;
-	<?php } ?>
-	}
+    .table-bordered {
+        border-color: #000 !important;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .background {
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    <?php if (empty($marksheet_template['background'])) { ?>
+        background: #fff;
+    <?php } else { ?>
+        background-image: url("<?=base_url('uploads/marksheet/' . $marksheet_template['background'])?>") !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 100% !important;
+    <?php } ?>
+    }
+
+   
+    .table-bordered td,
+    .table-bordered th {
+        border-radius: 4px;  
+    }
+
+    .mark-container,
+    .table-bordered,
+    .background {
+        transition: all 0.3s ease;
+    }
 </style>
 
 <?php

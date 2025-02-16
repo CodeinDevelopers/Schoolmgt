@@ -69,7 +69,7 @@
 							<th>Mother Name</td>
 							<td><?=$student['mother_name']?></td>
 							<th>Class</td>
-							<td><?=$student['class'] . " (" . $student['section'] . ")"?></td>
+							<td><?=$student['class_name']?></td>
 							<th>Gender</td>
 							<td><?=ucfirst($student['gender'])?></td>
 						</tr>

@@ -9,6 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author url : https://codeindevelopers.com.ng
  * @filename : Student.php
  * @copyright : Reserved 2024-present Codeindevelopers
+
  */
 
 class Student extends Admin_Controller
@@ -844,7 +845,8 @@ class Student extends Admin_Controller
         $classID = $this->input->post('class_id');
         $sectionID = $this->input->post('section_id');
         if ($this->uri->segment(3)) {
-            $this->db->where_not_in('student_id', $this->uri->segment(3));
+            $studentID = $this->db->select('student_id')->where('id', $this->uri->segment(3))->get('enroll')->row()->student_id;
+            $this->db->where_not_in('student_id', $studentID);
         }
         if ($unique_roll == 2) {
             $this->db->where('section_id', $sectionID);
@@ -864,7 +866,8 @@ class Student extends Admin_Controller
     {
         $branchID = $this->application_model->get_branch_id();
         if ($this->uri->segment(3)) {
-            $this->db->where_not_in('id', $this->uri->segment(3));
+            $studentID = $this->db->select('student_id')->where('id', $this->uri->segment(3))->get('enroll')->row()->student_id;
+            $this->db->where_not_in('id', $studentID);
         }
         $this->db->where('register_no', $register);
         $query = $this->db->get('student')->num_rows();

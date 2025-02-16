@@ -71,10 +71,10 @@
                 ?>
 
                 <div class="mb-6">
-                    <h3 class="text-xl font-semibold mb-2">
-                        <i class="fas fa-fingerprint mr-2"></i><?php echo translate('password_restoration');?>
+                    <h3 class="text-xl font-semibold mb-2 text-center">
+                        <i class="fas fa-fingerprint mr-2 "></i><?php echo translate('password_restoration');?>
                     </h3>
-                    <p class="text-gray-600 text-sm">
+                    <p class="text-gray-600 text-sm text-center">
                         Enter your email and you will receive reset instructions
                     </p>
                 </div>
@@ -112,12 +112,18 @@
                 <?php echo form_close();?>
             </div>
 
-            <!-- Footer -->
-            <div class="mt-8 text-center">
-                <p class="text-sm text-gray-600"><?php echo $global_config['footer_text'];?></p>
-            </div>
-        </div>
-    </div>
+            <footer class="w-full py-4 text-center text-gray-600 text-sm">
+    ©<?php echo date('Y'); ?> <strong>Acamedium.</strong> All rights reserved.
+    <br>
+    Licenced to <strong><?php echo $global_config['institute_name'];?></strong>. 
+    <br>
+    <span>
+        Designed by 
+        <strong>
+            <span style="color: #ff2b13;">Codein</span><span style="color: #43cdc2;">Developers</span>.
+        </strong>
+    </span>
+</footer>
 
     <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.js');?>"></script>
     <script src="<?php echo base_url('assets/vendor/jquery-placeholder/jquery-placeholder.js');?>"></script>
