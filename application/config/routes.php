@@ -84,6 +84,8 @@ $route['login'] = 'authentication/index';
 $route['install'] = 'install/index';
 $route['home'] = 'home/index';
 $route['cbt'] = 'cbt/index';
+$route['exam_results'] = 'home/exam_results';
+$route['admission'] = 'home/admission';
 
 // CBT specific routes
 $route['cbt/ss1'] = 'cbt/ss1';
