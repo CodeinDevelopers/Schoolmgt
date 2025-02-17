@@ -63,5 +63,30 @@
         </div>
     </div>
     <!-- Top Bar Ends -->
+    <?php
+$news_list = $this->home_model->getLatestNews($branchID);
+if (!empty($news_list)) {
+	$url_alias = $cms_setting['url_alias'];
+	?>
+<div class="latest--news">
+    <div class="container">
+        <div class="d-lg-flex align-items-center">
+            <div class="latest-title d-flex align-items-center text-nowrap text-white text-uppercase">
+                <i class="fa-solid fa-bolt"></i> Latest News
+            </div>
+			<div class="news-updates-list overflow-hidden mt-2 mb-2" data-marquee="true">
+				<ul class="nav">
+				<?php foreach ($news_list as $key => $value) { ?>
+					<li><a class="text-white" href="<?php echo base_url($url_alias . '/news_view/' . $value->alias); ?>"><strong><?php echo str_pad($key + 1, 2, '0', STR_PAD_LEFT); ?>.</strong> <?php echo $value->title . " - <span class='date-text'>" .  _d($value->date); ?></span></a></li>
+				<?php } ?>
+				</ul>
+			</div>
+			<div class="current-date text-nowrap text-white">
+				<span class="date-now"><i class="fa-regular fa-clock"></i> <?php echo _d(date('Y-m-d')) ?></span>
+			</div>
+        </div>
+    </div>
+</div>
+<?php } ?>
 </header>
 <!-- Header Ends -->

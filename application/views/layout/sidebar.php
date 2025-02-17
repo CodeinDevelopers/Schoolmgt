@@ -106,6 +106,107 @@
                         </ul>
                     </li>
                     <?php }} ?>
+                    <?php
+                    if (moduleIsEnabled('website')) {
+                        if (get_permission('frontend_setting', 'is_view') ||
+                            get_permission('frontend_menu', 'is_view') ||
+                            get_permission('frontend_section', 'is_view') ||
+                            get_permission('manage_page', 'is_view') ||
+                            get_permission('frontend_slider', 'is_view') ||
+                            get_permission('frontend_features', 'is_view') ||
+                            get_permission('frontend_testimonial', 'is_view') ||
+                            get_permission('frontend_services', 'is_view') ||
+                            get_permission('frontend_gallery', 'is_view') ||
+                            get_permission('frontend_gallery_category', 'is_view') ||
+                            get_permission('frontend_news', 'is_view') ||
+                            get_permission('frontend_faq', 'is_view')) {
+                            ?>
+                    <!-- Patient Details -->
+                    <li class="nav-parent <?php if ($main_menu == 'frontend') echo 'nav-expanded nav-active'; ?>">
+                        <a><svg fill="currentColor" viewBox="-1 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16.417 9.57a7.917 7.917 0 1 1-8.144-7.908 1.758 1.758 0 0 1 .451 0 7.913 7.913 0 0 1 7.693 7.907zM5.85 15.838q.254.107.515.193a11.772 11.772 0 0 1-1.572-5.92h-3.08a6.816 6.816 0 0 0 4.137 5.727zM2.226 6.922a6.727 6.727 0 0 0-.511 2.082h3.078a11.83 11.83 0 0 1 1.55-5.89q-.249.083-.493.186a6.834 6.834 0 0 0-3.624 3.622zm8.87 2.082a14.405 14.405 0 0 0-.261-2.31 9.847 9.847 0 0 0-.713-2.26c-.447-.952-1.009-1.573-1.497-1.667a8.468 8.468 0 0 0-.253 0c-.488.094-1.05.715-1.497 1.668a9.847 9.847 0 0 0-.712 2.26 14.404 14.404 0 0 0-.261 2.309zm-.974 5.676a9.844 9.844 0 0 0 .713-2.26 14.413 14.413 0 0 0 .26-2.309H5.903a14.412 14.412 0 0 0 .261 2.31 9.844 9.844 0 0 0 .712 2.259c.487 1.036 1.109 1.68 1.624 1.68s1.137-.644 1.623-1.68zm4.652-2.462a6.737 6.737 0 0 0 .513-2.107h-3.082a11.77 11.77 0 0 1-1.572 5.922q.261-.086.517-.194a6.834 6.834 0 0 0 3.624-3.621zM11.15 3.3a6.82 6.82 0 0 0-.496-.187 11.828 11.828 0 0 1 1.55 5.89h3.081A6.815 6.815 0 0 0 11.15 3.3z"></path></g></svg> <?php echo translate('frontend'); ?></span></a>
+                        <ul class="nav nav-children">
+                        <?php if(get_permission('frontend_setting', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/setting') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/setting'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('setting'); ?></span>
+                                </a>
+                            </li>
+                       <?php } if(get_permission('frontend_menu', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/menu' || $sub_page == 'frontend/menu_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/menu'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('menu'); ?></span>
+                                </a>
+                            </li>
+                        <?php } if(get_permission('frontend_section', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/section_home' ||
+                                            $sub_page == 'frontend/section_doctors' ||
+                                                $sub_page == 'frontend/section_appointment' ||
+                                                    $sub_page == 'frontend/section_faq' ||
+                                                        $sub_page == 'frontend/section_contact' ||
+                                                            $sub_page == 'frontend/section_about' ||
+                                                                $sub_page == 'frontend/section_services') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/section/index'); ?>">
+                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('page') . " " . translate('section'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('manage_page', 'is_view')){ ?>
+                                    <li class="<?php if ($sub_page == 'frontend/content' || $sub_page == 'frontend/content_edit') echo 'nav-active'; ?>">
+                                        <a href="<?php echo base_url('frontend/content/index'); ?>">
+                                            <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('manage') . " " . translate('page'); ?></span>
+                                        </a>
+                                    </li>
+                            <?php } if(get_permission('frontend_slider', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/slider' || $sub_page == 'frontend/slider_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/slider'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('slider'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_features', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/features' || $sub_page == 'frontend/features_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/features'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('features'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_testimonial', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/testimonial' || $sub_page == 'frontend/testimonial_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/testimonial'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('testimonial'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_services', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/services' || $sub_page == 'frontend/services_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/services'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('service'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_faq', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/faq' || $sub_page == 'frontend/faq_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/faq/index'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('faq'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_gallery_category', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/gallery_category') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/gallery/category'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('gallery') . " " . translate('category'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_gallery', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/gallery' || $sub_page == 'frontend/gallery_edit' || $sub_page == 'frontend/gallery_album') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/gallery/index'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('gallery'); ?></span>
+                                </a>
+                            </li>
+                            <?php } if(get_permission('frontend_news', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'frontend/news' || $sub_page == 'frontend/news_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/news/index'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('news'); ?></span>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <?php }} ?>
                     <!--attendance--->
                     <?php
                      
@@ -225,7 +326,7 @@
                     <!-- Home work -->
                     <li class="nav-parent <?php if ($main_menu == 'homework') echo 'nav-expanded nav-active';?>">
                         <a>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 22H14C19 22 21 20 21 15V9C21 4 19 2 14 2H10C5 2 3 4 3 9V15C3 20 5 22 10 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17.25 8.29004C14.26 5.63004 9.74 5.63004 6.75 8.29004L8.93 11.79C10.68 10.23 13.32 10.23 15.07 11.79L17.25 8.29004Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <span><?=translate('homework')?></span>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 10.9112C3 10.8182 3 10.7717 3.00057 10.7303C3.0385 7.98021 4.94139 5.60803 7.61778 4.97443C7.65803 4.9649 7.70344 4.95481 7.79425 4.93463C7.87787 4.91605 7.91968 4.90675 7.96109 4.89775C10.6226 4.31875 13.3774 4.31875 16.0389 4.89775C16.0803 4.90675 16.1221 4.91605 16.2057 4.93463C16.2966 4.95481 16.342 4.9649 16.3822 4.97443C19.0586 5.60803 20.9615 7.98021 20.9994 10.7303C21 10.7717 21 10.8182 21 10.9112V16.3752C21 18.4931 19.529 20.3269 17.4615 20.7864C13.8644 21.5857 10.1356 21.5857 6.53853 20.7864C4.47101 20.3269 3 18.4931 3 16.3752V10.9112Z" stroke="currentColor" stroke-width="1.5"></path> <path opacity="0.5" d="M17.5 15.5V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M15.9585 4.5C15.7205 3.08114 14.4865 2 13 2H11C9.51353 2 8.27954 3.08114 8.0415 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M3 14C8.72979 16.5466 15.2702 16.5466 21 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M10 13H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg> <span><?=translate('homework')?></span>
                         </a>
                         <ul class="nav nav-children">
                             <?php if(get_permission('homework', 'is_view')) { ?>
@@ -1777,107 +1878,7 @@
                     <!-- school subscription (SaaS)  -->
                         <?php include "saas_menu.php"; ?>
                     <?php endif; ?>
-                    <?php
-                    if (moduleIsEnabled('website')) {
-                        if (get_permission('frontend_setting', 'is_view') ||
-                            get_permission('frontend_menu', 'is_view') ||
-                            get_permission('frontend_section', 'is_view') ||
-                            get_permission('manage_page', 'is_view') ||
-                            get_permission('frontend_slider', 'is_view') ||
-                            get_permission('frontend_features', 'is_view') ||
-                            get_permission('frontend_testimonial', 'is_view') ||
-                            get_permission('frontend_services', 'is_view') ||
-                            get_permission('frontend_gallery', 'is_view') ||
-                            get_permission('frontend_gallery_category', 'is_view') ||
-                            get_permission('frontend_news', 'is_view') ||
-                            get_permission('frontend_faq', 'is_view')) {
-                            ?>
-                    <!-- Patient Details -->
-                    <li class="nav-parent <?php if ($main_menu == 'frontend') echo 'nav-expanded nav-active'; ?>">
-                        <a><svg fill="currentColor" viewBox="-1 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16.417 9.57a7.917 7.917 0 1 1-8.144-7.908 1.758 1.758 0 0 1 .451 0 7.913 7.913 0 0 1 7.693 7.907zM5.85 15.838q.254.107.515.193a11.772 11.772 0 0 1-1.572-5.92h-3.08a6.816 6.816 0 0 0 4.137 5.727zM2.226 6.922a6.727 6.727 0 0 0-.511 2.082h3.078a11.83 11.83 0 0 1 1.55-5.89q-.249.083-.493.186a6.834 6.834 0 0 0-3.624 3.622zm8.87 2.082a14.405 14.405 0 0 0-.261-2.31 9.847 9.847 0 0 0-.713-2.26c-.447-.952-1.009-1.573-1.497-1.667a8.468 8.468 0 0 0-.253 0c-.488.094-1.05.715-1.497 1.668a9.847 9.847 0 0 0-.712 2.26 14.404 14.404 0 0 0-.261 2.309zm-.974 5.676a9.844 9.844 0 0 0 .713-2.26 14.413 14.413 0 0 0 .26-2.309H5.903a14.412 14.412 0 0 0 .261 2.31 9.844 9.844 0 0 0 .712 2.259c.487 1.036 1.109 1.68 1.624 1.68s1.137-.644 1.623-1.68zm4.652-2.462a6.737 6.737 0 0 0 .513-2.107h-3.082a11.77 11.77 0 0 1-1.572 5.922q.261-.086.517-.194a6.834 6.834 0 0 0 3.624-3.621zM11.15 3.3a6.82 6.82 0 0 0-.496-.187 11.828 11.828 0 0 1 1.55 5.89h3.081A6.815 6.815 0 0 0 11.15 3.3z"></path></g></svg> <?php echo translate('frontend'); ?></span></a>
-                        <ul class="nav nav-children">
-                        <?php if(get_permission('frontend_setting', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/setting') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/setting'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('setting'); ?></span>
-                                </a>
-                            </li>
-                       <?php } if(get_permission('frontend_menu', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/menu' || $sub_page == 'frontend/menu_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/menu'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('menu'); ?></span>
-                                </a>
-                            </li>
-                        <?php } if(get_permission('frontend_section', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/section_home' ||
-                                            $sub_page == 'frontend/section_doctors' ||
-                                                $sub_page == 'frontend/section_appointment' ||
-                                                    $sub_page == 'frontend/section_faq' ||
-                                                        $sub_page == 'frontend/section_contact' ||
-                                                            $sub_page == 'frontend/section_about' ||
-                                                                $sub_page == 'frontend/section_services') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/section/index'); ?>">
-                                    <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('page') . " " . translate('section'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('manage_page', 'is_view')){ ?>
-                                    <li class="<?php if ($sub_page == 'frontend/content' || $sub_page == 'frontend/content_edit') echo 'nav-active'; ?>">
-                                        <a href="<?php echo base_url('frontend/content/index'); ?>">
-                                            <span><i class="fas fa-caret-right" aria-hidden="true"></i><?php echo translate('manage') . " " . translate('page'); ?></span>
-                                        </a>
-                                    </li>
-                            <?php } if(get_permission('frontend_slider', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/slider' || $sub_page == 'frontend/slider_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/slider'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('slider'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_features', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/features' || $sub_page == 'frontend/features_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/features'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('features'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_testimonial', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/testimonial' || $sub_page == 'frontend/testimonial_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/testimonial'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('testimonial'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_services', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/services' || $sub_page == 'frontend/services_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/services'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('service'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_faq', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/faq' || $sub_page == 'frontend/faq_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/faq/index'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('faq'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_gallery_category', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/gallery_category') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/gallery/category'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('gallery') . " " . translate('category'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_gallery', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/gallery' || $sub_page == 'frontend/gallery_edit' || $sub_page == 'frontend/gallery_album') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/gallery/index'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('gallery'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_news', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/news' || $sub_page == 'frontend/news_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/news/index'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('news'); ?></span>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <?php }} ?>
+                    
 
                     <?php
                     if (moduleIsEnabled('reception')) {

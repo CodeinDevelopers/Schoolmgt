@@ -43,7 +43,7 @@
 	    <!-- Web Application Manifest -->
 	    <link rel="manifest" href="./manifest.json">
 	    <!-- Chrome for Android theme color -->
-	    <meta name="theme-color" content="#6e8fd4">
+	    <meta name="theme-color" content="rgba(255, 255, 255, 0.8)">
 	    
 	    <!-- Add to homescreen for Chrome on Android -->
 	    <meta name="mobile-web-app-capable" content="yes">
