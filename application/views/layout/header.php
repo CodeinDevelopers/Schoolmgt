@@ -117,6 +117,7 @@ a.ramom-action-btn {
     transition: all 0.3s ease;
     text-decoration: none !important;
     font-weight: 500;
+
 }
 
 /* Updated hover states for anchor */
@@ -126,7 +127,7 @@ a.ramom-action-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border-color: #cbd5e1;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 a.ramom-action-btn:active {
@@ -141,20 +142,20 @@ a.ramom-action-btn:active {
 .ramom-action-btn:hover i {
     transform: scale(1.1);
     color: #2563eb;
-    
+    text-decoration: none !important;
 }
 
 /* Updated logout specific styling */
 a.ramom-logout-btn {
-    background: #fef2f2;
-    border-color: #fecaca;
-    color: #dc2626;
+    background: rgb(234, 248, 242);
+    border-color: rgb(196, 248, 224);
+    color: #2ad385;
 }
 
 a.ramom-logout-btn:hover {
-    background: #fee2e2;
-    color: #dc2626;
-    border-color: #fca5a5;
+    background: rgb(223, 252, 239);
+    color:rgb(30, 192, 117);
+    border-color: rgb(196, 248, 224);
     text-decoration: none;
 }
 
@@ -319,7 +320,8 @@ a.ramom-action-btn span {
 }
 
 .dashboard-button:hover {
-    background-color: #1d4ed8;
+    background-color:rgb(229, 236, 252);
+    text-decoration: none !important;
 }
 
 .dashboard-button svg {

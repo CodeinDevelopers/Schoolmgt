@@ -23,7 +23,7 @@ if ($extINTL == true) {
 <?php endif; ?>
 <?php if (get_permission('collect_fees', 'is_add') && $invoice['status'] != 'total'): ?>
 			<li>
-				<a href="#fully_paid" data-toggle="tab"><i class="far fa-credit-card"></i> Fully Paid</a>
+				<a href="#fully_paid" data-toggle="tab"><i class="far fa-credit-card"></i> Full Payment</a>
 			</li>
 <?php endif; ?>
 		</ul>
@@ -318,7 +318,7 @@ if ($extINTL == true) {
 						</div>
 					<?php if (get_permission('fees_revert', 'is_delete')): ?>
 						<button type="button" class="btn btn-default btn-sm mb-sm hidden-print" id="selected_revert" data-loading-text="<i class='fas fa-spinner fa-spin'></i> Processing">
-							<i class="fas fa-trash-restore-alt"></i> <?php echo translate('selected_revert'); ?>
+							<i class="fas fa-trash-restore-alt"></i> Reverse Transaction(s)
 						</button>
 					<?php endif; ?>
 						<div class="table-responsive">
@@ -501,7 +501,7 @@ if ($extINTL == true) {
 								<textarea name="remarks" rows="2" class="form-control" placeholder="<?=translate('write_your_remarks')?>"></textarea>
 								<div class="checkbox-replace mt-lg">
 									<label class="i-checks">
-										<input type="checkbox" name="guardian_sms" checked> <i></i> Guardian Confirmation Sms
+										<input type="checkbox" name="guardian_sms" checked> <i></i>Send Text Notification
 									</label>
 								</div>
 							</div>

@@ -19,9 +19,6 @@ if (count($allocations)) {
 				</li>
 	<?php endif; ?>
 	<?php if ($invoice['status'] != 'total'): ?>
-				<li>
-					<a href="#collect_fees" data-toggle="tab"><i class="far fa-credit-card"></i> <?=translate('online_pay')?></a>
-				</li>
 			<?php if ($getOfflinePaymentsConfig == 1) { ?>
 				<li>
 					<a href="#offline_payments" data-toggle="tab"><i class="far fa-credit-card"></i> <?=translate('offline_payments')?></a>
