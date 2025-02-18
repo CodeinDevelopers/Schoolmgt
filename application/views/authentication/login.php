@@ -196,24 +196,33 @@
     // Swap Login SVG on Submit
     const loginForm = document.querySelector("form");
     const loginButton = document.querySelector("#btn_submit");
-    const originalSVG = loginButton.innerHTML; // Store the original SVG
+    
 
     const loadingSVG = `
         <div class="flex items-center justify-center space-x-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"width="24px" height="24px" style="display: inline-block; vertical-align: middle;"><radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stop-color="currentColor"></stop><stop offset=".3" stop-color="currentColor" stop-opacity=".9"></stop><stop offset=".6" stop-color="currentColor" stop-opacity=".6"></stop><stop offset=".8" stop-color="currentColor" stop-opacity=".3"></stop><stop offset="1" stop-color="currentColor" stop-opacity="0"></stop></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="0.6" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="currentColor" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle></svg> <span>Logging in...</span>
         </div>`;
+        const errorSVG = `
+         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="21px" height="21px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0" ></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 6C8 3.79086 9.79086 2 12 2H17.5C19.9853 2 22 4.01472 22 6.5V17.5C22 19.9853 19.9853 22 17.5 22H12C9.79086 22 8 20.2091 8 18V17C8 16.4477 8.44772 16 9 16C9.55228 16 10 16.4477 10 17V18C10 19.1046 10.8954 20 12 20H17.5C18.8807 20 20 18.8807 20 17.5V6.5C20 5.11929 18.8807 4 17.5 4H12C10.8954 4 10 4.89543 10 6V7C10 7.55228 9.55228 8 9 8C8.44772 8 8 7.55228 8 7V6ZM12.2929 8.29289C12.6834 7.90237 13.3166 7.90237 13.7071 8.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L13.7071 15.7071C13.3166 16.0976 12.6834 16.0976 12.2929 15.7071C11.9024 15.3166 11.9024 14.6834 12.2929 14.2929L13.5858 13L5 13C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11L13.5858 11L12.2929 9.70711C11.9024 9.31658 11.9024 8.68342 12.2929 8.29289Z" fill="currentColor"></path> </g></svg> <?php echo translate('login');?>`;
 
-    loginForm.addEventListener("submit", function (e) {
+         loginForm.addEventListener("submit", function (e) {
+        e.preventDefault(); 
         loginButton.innerHTML = loadingSVG;
         loginButton.classList.add("flex", "items-center", "justify-center");
-    });
 
-    // Restore SVG if an error occurs
-    <?php if ($this->session->flashdata('alert-message-error')): ?>
         setTimeout(() => {
-            loginButton.innerHTML = `<?php echo $originalSVG; ?>`;
-        }, 50); // Restore SVG after delay
-    <?php endif; ?>
+            // Simulate an error response
+            const errorOccurred = <?php echo $this->session->flashdata('alert-message-error') ? 'true' : 'false'; ?>;
+
+            if (errorOccurred) {
+           
+                loginButton.innerHTML = errorSVG;
+            } else {
+                // Proceed with actual form submission
+                loginForm.submit();
+            }
+        }, 2000); // Simulating delay before restoring button content
+    });
 });
 
 </script>
