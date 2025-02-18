@@ -193,10 +193,11 @@
         }
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
+    // Swap Login SVG on Submit
     const loginForm = document.querySelector("form");
     const loginButton = document.querySelector("#btn_submit");
     const originalSVG = loginButton.innerHTML; // Store the original SVG
+
     const loadingSVG = `
         <div class="flex items-center justify-center space-x-2">
             <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -207,24 +208,16 @@
         </div>`;
 
     loginForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent default form submission
         loginButton.innerHTML = loadingSVG;
         loginButton.classList.add("flex", "items-center", "justify-center");
-
-        // Simulate form submission (replace with actual AJAX submission logic)
-        setTimeout(() => {
-            // Simulate an error response
-            const errorOccurred = <?php echo $this->session->flashdata('alert-message-error') ? 'true' : 'false'; ?>;
-            
-            if (errorOccurred) {
-                // Restore the original button content if there's an error
-                loginButton.innerHTML = originalSVG;
-            } else {
-                // Proceed with actual form submission
-                loginForm.submit();
-            }
-        }, 2000); // Simulating delay before restoring button content
     });
+
+    // Restore SVG if an error occurs
+    <?php if ($this->session->flashdata('alert-message-error')): ?>
+        setTimeout(() => {
+            loginButton.innerHTML = `<?php echo $originalSVG; ?>`;
+        }, 50); // Restore SVG after delay
+    <?php endif; ?>
 });
 
 </script>
