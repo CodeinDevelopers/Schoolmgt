@@ -145,7 +145,60 @@
 
     <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.js');?>"></script>
     <script src="<?php echo base_url('assets/vendor/jquery-placeholder/jquery-placeholder.js');?>"></script>
-
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Show/Hide Password Toggle
+    const passwordField = document.querySelector("input[name='password']");
+    // Create the eye toggle button
+    const togglePassword = document.createElement("button");
+    togglePassword.type = "button";
+    togglePassword.classList.add("absolute", "right-3", "top-10", "text-gray-600", "focus:outline-none");
+    // Eye open SVG
+    const eyeOpenSVG = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+        </svg>`;
+    // Eye closed SVG
+    const eyeClosedSVG = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.6 18.6 0 014.62-5.94"/>
+            <path d="M9.88 9.88A3 3 0 0115 12a3 3 0 01-.88 2.12"/>
+            <path d="M3 3l18 18"/>
+        </svg>`;
+    togglePassword.innerHTML = eyeOpenSVG;
+    passwordField.parentElement.style.position = "relative";
+    passwordField.parentElement.appendChild(togglePassword);
+    // Toggle password visibility
+    togglePassword.addEventListener("click", function () {
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            togglePassword.innerHTML = eyeClosedSVG;
+        } else {
+            passwordField.type = "password";
+            togglePassword.innerHTML = eyeOpenSVG;
+        }
+    });
+    // Swap Login SVG on Submit
+    const loginForm = document.querySelector("form");
+    const loginButton = document.querySelector("#btn_submit");
+    const originalSVG = loginButton.innerHTML; // Store the original SVG
+    const loadingSVG = `
+        <svg class="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l5-5-5-5v4a8 8 0 100 16z"></path>
+        </svg> Logging in...`;
+    loginForm.addEventListener("submit", function (e) {
+        loginButton.innerHTML = loadingSVG;
+    });
+    // Restore SVG if an error occurs
+    <?php if ($this->session->flashdata('alert-message-error')): ?>
+        setTimeout(() => {
+            loginButton.innerHTML = `<?php echo $originalSVG; ?>`;
+        }, 500); // Restore SVG after delay
+    <?php endif; ?>
+});
+</script>
     <?php
     $alertclass = "";
     if($this->session->flashdata('alert-message-success')){
