@@ -238,12 +238,9 @@
         loginButton.classList.add("flex", "items-center", "justify-center");
     });
 
-    // Restore SVG if an error occurs
     <?php if ($this->session->flashdata('alert-message-error')): ?>
-        setTimeout(() => {
-            loginButton.innerHTML = `<?php echo addslashes($originalSVG); ?>`; // Restore SVG after delay
-        }, 0);
-    <?php endif; ?>
+    loginButton.innerHTML = `<?php echo addslashes($originalSVG); ?>`; // Restore SVG immediately
+<?php endif; ?>
 });
 
 </script>
