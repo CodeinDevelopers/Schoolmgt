@@ -58,7 +58,7 @@
             <div class="text-center mb-8">
                 <img src="<?=$this->application_model->getBranchImage($branch_id, 'logo')?>" 
                      alt="Logo" 
-                     class="h-12 mx-auto mb-6">
+                     class="h-12 mx-auto">
                 <h2 class="text-2xl font-bold tracking-tight">
                     <?php echo $global_config['institute_name'];?>
                 </h2>
@@ -66,23 +66,22 @@
 
             <!-- Login Form -->
             <div class="vercel-card rounded-lg p-8">
-                <!-- Error Messages Section -->
-                <?php 
-                if($this->session->flashdata('alert-message-error')){
-                    echo '<div class="mb-6 p-4 rounded-md bg-red-50 text-red-700">' . $this->session->flashdata('alert-message-error') . '</div>';
-                }
-                if($this->session->flashdata('alert-message-success')){
-                    echo '<div class="mb-6 p-4 rounded-md bg-green-50 text-green-700">' . $this->session->flashdata('alert-message-success') . '</div>';
-                }
-                ?>
-
                 <div class="mb-6">
                     <h3 class="text-xl font-semibold mb-2 text-center">
                         Welcome Back!
                     </h3>
-                    <p class="text-gray-600 text-sm text-center">
+                    <p class="text-gray-600 text-sm text-center mb-6">
                         Login to your Account to Continue to your Dashboard
                     </p>
+                     <!-- Error Messages Section -->
+                <?php 
+                if($this->session->flashdata('alert-message-error')){
+                    echo '<div class="mb-6 p-4 rounded-md bg-red-50 text-red-700 text-center">' . $this->session->flashdata('alert-message-error') . '</div>';
+                }
+                if($this->session->flashdata('alert-message-success')){
+                    echo '<div class="mb-6 p-4 rounded-md bg-green-50 text-green-700 text-center">' . $this->session->flashdata('alert-message-success') . '</div>';
+                }
+                ?>
                 </div>
 
                 <?php echo form_open($this->uri->uri_string()); ?>
@@ -135,8 +134,7 @@
                                 class="w-full btn-vercel py-2 px-4 rounded-md font-medium">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="21px" height="21px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M8 6C8 3.79086 9.79086 2 12 2H17.5C19.9853 2 22 4.01472 22 6.5V17.5C22 19.9853 19.9853 22 17.5 22H12C9.79086 22 8 20.2091 8 18V17C8 16.4477 8.44772 16 9 16C9.55228 16 10 16.4477 10 17V18C10 19.1046 10.8954 20 12 20H17.5C18.8807 20 20 18.8807 20 17.5V6.5C20 5.11929 18.8807 4 17.5 4H12C10.8954 4 10 4.89543 10 6V7C10 7.55228 9.55228 8 9 8C8.44772 8 8 7.55228 8 7V6ZM12.2929 8.29289C12.6834 7.90237 13.3166 7.90237 13.7071 8.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L13.7071 15.7071C13.3166 16.0976 12.6834 16.0976 12.2929 15.7071C11.9024 15.3166 11.9024 14.6834 12.2929 14.2929L13.5858 13L5 13C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11L13.5858 11L12.2929 9.70711C11.9024 9.31658 11.9024 8.68342 12.2929 8.29289Z" fill="currentColor"/>
-                            </svg> 
-                            <?php echo translate('login');?>
+                            </svg> <?php echo translate('login');?>
                         </button>
                     </div>
                 <?php echo form_close();?>
@@ -170,14 +168,14 @@
     <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.js');?>"></script>
     <script src="<?php echo base_url('assets/vendor/jquery-placeholder/jquery-placeholder.js');?>"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
             // Show/Hide Password Toggle
             const passwordField = document.querySelector("input[name='password']");
             
             // Create the eye toggle button
             const togglePassword = document.createElement("button");
             togglePassword.type = "button";
-            togglePassword.classList.add("absolute", "right-3", "top-2", "text-gray-600", "focus:outline-none");
+            togglePassword.classList.add("absolute", "right-3", "top-3", "text-gray-600", "focus:outline-none");
 
             // Eye open SVG
             const eyeOpenSVG = `
@@ -187,8 +185,7 @@
                 </svg>`;
 
             // Eye closed SVG
-            const eyeClosedSVG = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            const eyeClosedSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.6 18.6 0 014.62-5.94"/>
                     <path d="M9.88 9.88A3 3 0 0115 12a3 3 0 01-.88 2.12"/>
                     <path d="M3 3l18 18"/>
@@ -228,8 +225,7 @@ const loadingSVG = `
                 <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="0.6" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
             </circle>
             <circle transform-origin="center" fill="none" opacity=".2" stroke="currentColor" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle>
-        </svg>
-        <span>Logging in...</span>
+        </svg><span>Logging in...</span>
     </div>`;
 
 loginForm.addEventListener("submit", function (e) {

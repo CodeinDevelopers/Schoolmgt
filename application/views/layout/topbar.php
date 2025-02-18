@@ -4,9 +4,13 @@
 			<img src="<?=$this->application_model->getBranchImage(get_loggedin_branch_id(), 'logo-small')?>" height="40">
 		</a>
 
-		<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
-		<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H20C20.5523 7 21 6.55228 21 6C21 5.44772 20.5523 5 20 5H4ZM3 12C3 11.4477 3.44772 11 4 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H4C3.44772 13 3 12.5523 3 12ZM3 18C3 17.4477 3.44772 17 4 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H4C3.44772 19 3 18.5523 3 18Z" fill="currentColor"></path> </g></svg>
-		</div>
+		<div class="visible-xs toggle-sidebar-left" id="menuButton" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+    <!-- Default Menu Icon -->
+	<svg id="menuIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H20C20.5523 7 21 6.55228 21 6C21 5.44772 20.5523 5 20 5H4ZM3 12C3 11.4477 3.44772 11 4 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H4C3.44772 13 3 12.5523 3 12ZM3 18C3 17.4477 3.44772 17 4 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H4C3.44772 19 3 18.5523 3 18Z" fill="currentColor"></path> </g></svg>
+    
+    <!-- Close Icon -->
+	<svg id="closeIcon" fill="currentColor" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" style="display: none; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M114,100l49-49a9.9,9.9,0,0,0-14-14L100,86,51,37A9.9,9.9,0,0,0,37,51l49,49L37,149a9.9,9.9,0,0,0,14,14l49-49,49,49a9.9,9.9,0,0,0,14-14Z"></path></g></svg>
+</div>
 	</div>
 
 	<div class="header-left hidden-xs">
@@ -249,4 +253,37 @@ foreach ($get_session as $session) :
 			</div>
 		</div>
 	</div>
+	<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var menuButton = document.getElementById("menuButton");
+    var menuIcon = document.getElementById("menuIcon");
+    var closeIcon = document.getElementById("closeIcon");
+    var htmlElement = document.documentElement; // Reference to <html>
+
+    menuButton.addEventListener("click", function() {
+        // Check if sidebar is opened
+        var isOpened = htmlElement.classList.contains("sidebar-left-opened");
+
+        // Toggle icon visibility
+        if (isOpened) {
+            menuIcon.style.display = "inline-block";
+            closeIcon.style.display = "none";
+        } else {
+            menuIcon.style.display = "none";
+            closeIcon.style.display = "inline-block";
+        }
+    });
+
+    // Also handle closing event to switch back to menu icon
+    window.addEventListener("sidebar-left-toggle", function(event) {
+        if (event.detail && event.detail.added) {
+            menuIcon.style.display = "none";
+            closeIcon.style.display = "inline-block";
+        } else {
+            menuIcon.style.display = "inline-block";
+            closeIcon.style.display = "none";
+        }
+    });
+});
+</script>
 </header>
