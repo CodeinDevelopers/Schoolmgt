@@ -6,7 +6,7 @@
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <meta name="keywords" content=""/>
     <meta name="description" content="Ramom School Management System">
-    <meta name="author" content="RamomCoder">
+    <meta name="author" content="Acamedium">
     <title>Ramom School - Installation</title>
     <link rel="shortcut icon" href="<?=base_url('assets/images/favicon.png')?>">
     <link href="<?=$this->_install->is_secure('fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light')?>" rel="stylesheet" type="text/css">
@@ -374,7 +374,7 @@
                     </div>
                 </div>
             </section>
-            <center> 2024 © All Rights Reserved - <a href="about:blank">RamomCoder</a></center>
+            <center> 2024 © All Rights Reserved - <a href="about:blank">Acamedium</a></center>
 		</div>
 		<script src="<?=base_url('assets/vendor/bootstrap/js/bootstrap.js')?>"></script>
 		<script src="<?php echo base_url('assets/vendor/select2/js/select2.js');?>"></script>

@@ -91,7 +91,7 @@ if (count($student_array)) {
 		<div class="row">
 			<div class="invoice-col">
 				<div class="ib">
-					<img src="<?=$this->application_model->getBranchImage($basic['branch_id'], 'printing-logo')?>" alt="RamomCoder Img" />
+					<img src="<?=$this->application_model->getBranchImage($basic['branch_id'], 'printing-logo')?>" alt="Acamedium Img" />
 				</div>
 			</div>
 			<div class="invoice-col text-right">
