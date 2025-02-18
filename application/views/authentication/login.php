@@ -222,6 +222,7 @@
                 // Proceed with actual form submission
                 loginForm.submit();
             }
+        }, 2000); // Simulating delay before restoring button content
     });
 });
 
