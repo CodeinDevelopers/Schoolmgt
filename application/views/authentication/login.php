@@ -40,6 +40,15 @@
             background: rgba(0, 0, 0, 0.8);
             transform: translateY(-1px);
         }
+        button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.text-error {
+    color: #dc2626; /* Bright red */
+    font-weight: bold;
+}
+
     </style>
     <script type="text/javascript">
         var base_url = '<?php echo base_url() ?>';
@@ -83,7 +92,7 @@
                                    class="w-full px-4 py-2 rounded-md input-vercel text-gray-900 placeholder-gray-500 focus:outline-none"
                                    placeholder="<?php echo translate('username');?>">
                             <?php if (form_error('email')): ?>
-                                <p class="text-red-600 text-sm mt-1"><?php echo form_error('email'); ?></p>
+                                <p class="text-error text-sm mt-1"><?php echo form_error('email'); ?></p>
                             <?php endif; ?>
                         </div>
 
@@ -96,7 +105,7 @@
                                    class="w-full px-4 py-2 rounded-md input-vercel text-gray-900 placeholder-gray-500 focus:outline-none"
                                    placeholder="<?php echo translate('password');?>">
                             <?php if (form_error('password')): ?>
-                                <p class="text-red-600 text-sm mt-1"><?php echo form_error('password'); ?></p>
+                                <p class="text-error-600 text-sm mt-1"><?php echo form_error('password'); ?></p>
                             <?php endif; ?>
                         </div>
 
