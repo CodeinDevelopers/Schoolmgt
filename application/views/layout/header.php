@@ -183,6 +183,62 @@ a.ramom-action-btn span {
         font-size: 12px; 
         white-space: nowrap; 
     }
+    .ramom-dashboard-buttons {
+    display: flex;
+    gap: 1rem; /* Space between buttons */
+    flex-wrap: wrap; /* Ensures they wrap on smaller screens */
+}
+
+.ramom-dashboard-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff; /* White background */
+    border: 1px solid #e5e7eb;
+    color: #475569;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    text-decoration: none !important; /* Ensure no underlines */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    flex: 1; /* Allows buttons to expand equally */
+    min-width: 150px; /* Ensures buttons don’t shrink too much */
+}
+
+/* Add subtle bottom color */
+.ramom-dashboard-btn::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 0 0 0.75rem 0.75rem;
+}
+
+/* Icon Styling */
+.ramom-dashboard-btn i {
+    font-size: 1.2rem;
+}
+
+/* Colors for Each Button */
+.pay-fees::after { background: #2563eb; }
+.exam-result::after { background: #059669; }
+.calendar::after { background: #f59e0b; }
+.attendance::after { background: #1e293b; }
+
+/* Hover Effects */
+.ramom-dashboard-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: #cbd5e1;
+    text-decoration: none !important; /* Ensure text stays clean */
+}
+
 
 /* Mobile-specific styles */
 @media (max-width: 768px) {

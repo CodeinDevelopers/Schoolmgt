@@ -122,13 +122,27 @@ else :
 <?php } ?>
         </div>
     </div>
-</div></div>
+</div>
+<?php if (is_parent_loggedin()) { ?>
 <!-- Fees Summary Card -->
 <div class="row">
     <div class="col-md-12">
         <div class="ramom-dashboard-card">
             <div class="ramom-card-header">
-                <h3 class="ramom-card-title"><i class="fas fa-money-bill-alt"></i> 
+                <h3 class="ramom-card-title"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M17.4142 10.4142C18 9.82843 18 8.88562 18 7C18 5.11438 18 4.17157 17.4142 3.58579M17.4142 10.4142C16.8284 11 15.8856 11 14 11H10C8.11438 11 7.17157 11 6.58579 10.4142M17.4142 10.4142C17.4142 10.4142 17.4142 10.4142 17.4142 10.4142ZM17.4142 3.58579C16.8284 3 15.8856 3 14 3L10 3C8.11438 3 7.17157 3 6.58579 3.58579M17.4142 3.58579C17.4142 3.58579 17.4142 3.58579 17.4142 3.58579ZM6.58579 3.58579C6 4.17157 6 5.11438 6 7C6 8.88562 6 9.82843 6.58579 10.4142M6.58579 3.58579C6.58579 3.58579 6.58579 3.58579 6.58579 3.58579ZM6.58579 10.4142C6.58579 10.4142 6.58579 10.4142 6.58579 10.4142Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M13 7C13 7.55228 12.5523 8 12 8C11.4477 8 11 7.55228 11 7C11 6.44772 11.4477 6 12 6C12.5523 6 13 6.44772 13 7Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M18 6C16.3431 6 15 4.65685 15 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M18 8C16.3431 8 15 9.34315 15 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M6 6C7.65685 6 9 4.65685 9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M6 8C7.65685 8 9 9.34315 9 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M5 20.3884H7.25993C8.27079 20.3884 9.29253 20.4937 10.2763 20.6964C12.0166 21.0549 13.8488 21.0983 15.6069 20.8138C16.4738 20.6734 17.326 20.4589 18.0975 20.0865C18.7939 19.7504 19.6469 19.2766 20.2199 18.7459C20.7921 18.216 21.388 17.3487 21.8109 16.6707C22.1736 16.0894 21.9982 15.3762 21.4245 14.943C20.7873 14.4619 19.8417 14.462 19.2046 14.9433L17.3974 16.3084C16.697 16.8375 15.932 17.3245 15.0206 17.4699C14.911 17.4874 14.7962 17.5033 14.6764 17.5172M14.6764 17.5172C14.6403 17.5214 14.6038 17.5254 14.5668 17.5292M14.6764 17.5172C14.8222 17.486 14.9669 17.396 15.1028 17.2775C15.746 16.7161 15.7866 15.77 15.2285 15.1431C15.0991 14.9977 14.9475 14.8764 14.7791 14.7759C11.9817 13.1074 7.62942 14.3782 5 16.2429M14.6764 17.5172C14.6399 17.525 14.6033 17.5292 14.5668 17.5292M14.5668 17.5292C14.0434 17.5829 13.4312 17.5968 12.7518 17.5326" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <rect x="2" y="14" width="3" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"></rect>
+                                        </g>
+                                    </svg>
                 <?php 
                     echo translate('fees_summary'); 
                     if (isset($student_name) && !empty($student_name)) {
@@ -212,7 +226,7 @@ else :
         </div>
     </div>
 </div>
-
+<?php }  ?>
 <!-- Attendance Summary Card -->
 <div class="row">
     <div class="col-md-12">
@@ -272,8 +286,28 @@ else :
             </div>
         </div>
     </div>
+</div></div>
+<div class="row">
+    <div class="col-md-12">
+<div class="ramom-dashboard-buttons">
+    <a href="#" class="ramom-dashboard-btn pay-fees">
+        <i class="fas fa-receipt"></i> Pay Fees
+    </a>
+    <a href="#" class="ramom-dashboard-btn exam-result">
+        <i class="fas fa-file-alt"></i> Exam Result
+    </a>
+    <a href="#" class="ramom-dashboard-btn calendar">
+        <i class="fas fa-calendar-alt"></i> Calendar
+    </a>
+    <a href="#" class="ramom-dashboard-btn attendance">
+        <i class="fas fa-user-check"></i> Attendance
+    </a>
 </div>
 
+
+
+
+	</div></div>
 	<div class="row">
 		<!-- annual fees summary of students graph -->
 		<div class="col-md-12">
@@ -285,87 +319,6 @@ else :
 					</div>
 				</div>
 			</section>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12 col-lg-12 col-sm-12">
-			<div class="panel">
-			<div class="panel-body">
-				<div class="row widget-row-in">
-					<div class="col-lg-3 col-sm-6 widget-row-d-br">
-						<div class="widget-col-in row">
-							<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-book-reader"></i>
-								<h5 class="text-muted"><?=translate('book_issued')?></h5>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<h3 class="counter text-right mt-md text-primary">
-									<?=$book_issued?>
-								</h3>
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="box-top-line line-color-primary">
-									<span class="text-muted text-uppercase"><?=translate('interval_month')?></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6 widget-row-d-br b-r-none">
-						<div class="widget-col-in row">
-							<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-cloud-download-alt"></i>
-								<h5 class="text-muted"><?=translate('attachments')?></h5> </div>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<h3 class="counter text-right text-primary">
-									<?=$get_monthly_attachments?>
-								</h3>
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="box-top-line line-color-primary">
-										<span class="text-muted text-uppercase"><?=translate('interval_month')?></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6 widget-row-d-br">
-						<div class="widget-col-in row">
-							<div class="col-md-6 col-sm-6 col-xs-6"> <i class="far fa-money-bill-alt" ></i>
-								<h5 class="text-muted"><?=translate('fees_payment')?></h5></div>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<h3 class="counter text-right mt-md text-primary">
-									<?=$get_monthly_payment?>
-								</h3>
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="box-top-line line-color-primary">
-									<span class="text-muted text-uppercase"><?=translate('interval_month');?></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="widget-col-in row">
-							<div class="col-md-6 col-sm-6 col-xs-6"> <i class="fas fa-bullhorn"></i>
-								<h5 class="text-muted"><?=translate('events')?></h5>
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<h3 class="counter text-right mt-md text-primary">
-									<?php
-										$this->db->from('event');
-										$this->db->where('start_date BETWEEN DATE_SUB(CURDATE() ,INTERVAL 1 MONTH) AND CURDATE() AND branch_id = "'. get_loggedin_branch_id() .'"');
-								    	echo $this->db->get()->num_rows();				
-									?>
-								</h3>
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="box-top-line line-color-primary">
-										<span class="text-muted text-uppercase"><?=translate('interval_month') ?></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
 		</div>
 	</div>
 
