@@ -80,9 +80,13 @@ if ($this->saas_model->checkSubscriptionValidity()) { ?>
 else :
     $book_issued = $this->dashboard_model->getMonthlyBookIssued($student_id);
     $get_monthly_payment = $this->dashboard_model->getMonthlyPayment($student_id);
-    $fees_summary = $this->dashboard_model->annualFeessummaryCharts($school_id, $student_id);
+	$fees_summary = $this->dashboard_model->annualFeessummaryCharts($school_id, $student_id);
+	$fee_summary_totals = $this->dashboard_model->getFeeSummaryTotals($school_id, $student_id);
     $get_student_attendance = $this->dashboard_model->getStudentAttendance($student_id);
+	$attendance_summary = $this->dashboard_model->getStudentAttendance($student_id);
     $get_monthly_attachments = $this->dashboard_model->get_monthly_attachments($student_id);
+	$student_name = get_type_name_by_id('student', $student_id, 'first_name') . ' ' . 
+                get_type_name_by_id('student', $student_id, 'last_name');
 ?>
 
 <div class="dashboard-page" style="padding:0px;">
@@ -100,7 +104,11 @@ else :
                 <h1 class="ramom-welcome-text">
                     Welcome To 
                     <span class="ramom-user-name">
-					<?=html_escape($row->first_name . " " . $row->last_name)?>
+					<?php 
+            if (isset($student_name) && !empty($student_name)) {
+                echo $student_name;
+            }
+        ?> 's
                     </span> Dashboard
                 </h1>
                 <p class="ramom-subtitle">Welcome to your Dashboard</p>
@@ -133,6 +141,156 @@ else :
         </div>
     </div>
 </div></div>
+<!-- Fees Summary Card -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="ramom-dashboard-card">
+            <div class="ramom-card-header">
+                <h3 class="ramom-card-title"><i class="fas fa-money-bill-alt"></i> 
+                <?php 
+                    echo translate('fees_summary'); 
+                    if (isset($student_name) && !empty($student_name)) {
+                        echo " for " . $student_name;
+                    }
+                ?></h3>
+            </div>
+            <div class="ramom-card-body">
+                <div class="ramom-summary-grid">
+                    <!-- Total Allocated Fees -->
+                    <div class="ramom-stat-card ramom-primary">
+                        <div class="ramom-stat-content">
+                            <h3 class="ramom-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_allocated']); ?></h3>
+                            <p class="ramom-stat-label"><?php echo translate('total_fees_allocated'); ?></p>
+                        </div>
+                        <div class="ramom-stat-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Total Paid Fees -->
+                    <div class="ramom-stat-card ramom-success">
+                        <div class="ramom-stat-content">
+                            <h3 class="ramom-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_paid']); ?></h3>
+                            <p class="ramom-stat-label"><?php echo translate('total_fees_paid'); ?></p>
+                        </div>
+                        <div class="ramom-stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Total Outstanding Fees -->
+                    <div class="ramom-stat-card ramom-warning">
+                        <div class="ramom-stat-content">
+                            <h3 class="ramom-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_outstanding']); ?></h3>
+                            <p class="ramom-stat-label"><?php echo translate('total_outstanding_fees'); ?></p>
+                        </div>
+                        <div class="ramom-stat-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Progress -->
+                <div class="ramom-progress-container">
+                    <div class="ramom-progress-header">
+                        <span class="ramom-progress-label"><?php echo translate('payment_progress'); ?></span>
+                        <span class="ramom-progress-percentage"><?php echo $fee_summary_totals['payment_percentage']; ?>%</span>
+                    </div>
+                    <div class="ramom-progress">
+                        <div class="ramom-progress-bar" style="width: <?php echo $fee_summary_totals['payment_percentage']; ?>%"></div>
+                    </div>
+                </div>
+                
+                <!-- Fees Details Button -->
+                <div class="ramom-card-footer">
+                    <a href="<?php echo base_url('userrole/invoice#history'); ?>" class="ramom-action-btn">
+                        <i class="fas fa-list-alt"></i>
+                        <span><?php echo translate('view_fees_details'); ?></span>
+                    </a>
+					<a href="<?php echo base_url('userrole/invoice#invoice'); ?>" class="ramom-action-btn ">
+			<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M17.4142 10.4142C18 9.82843 18 8.88562 18 7C18 5.11438 18 4.17157 17.4142 3.58579M17.4142 10.4142C16.8284 11 15.8856 11 14 11H10C8.11438 11 7.17157 11 6.58579 10.4142M17.4142 10.4142C17.4142 10.4142 17.4142 10.4142 17.4142 10.4142ZM17.4142 3.58579C16.8284 3 15.8856 3 14 3L10 3C8.11438 3 7.17157 3 6.58579 3.58579M17.4142 3.58579C17.4142 3.58579 17.4142 3.58579 17.4142 3.58579ZM6.58579 3.58579C6 4.17157 6 5.11438 6 7C6 8.88562 6 9.82843 6.58579 10.4142M6.58579 3.58579C6.58579 3.58579 6.58579 3.58579 6.58579 3.58579ZM6.58579 10.4142C6.58579 10.4142 6.58579 10.4142 6.58579 10.4142Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M13 7C13 7.55228 12.5523 8 12 8C11.4477 8 11 7.55228 11 7C11 6.44772 11.4477 6 12 6C12.5523 6 13 6.44772 13 7Z" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M18 6C16.3431 6 15 4.65685 15 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M18 8C16.3431 8 15 9.34315 15 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M6 6C7.65685 6 9 4.65685 9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M6 8C7.65685 8 9 9.34315 9 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M5 20.3884H7.25993C8.27079 20.3884 9.29253 20.4937 10.2763 20.6964C12.0166 21.0549 13.8488 21.0983 15.6069 20.8138C16.4738 20.6734 17.326 20.4589 18.0975 20.0865C18.7939 19.7504 19.6469 19.2766 20.2199 18.7459C20.7921 18.216 21.388 17.3487 21.8109 16.6707C22.1736 16.0894 21.9982 15.3762 21.4245 14.943C20.7873 14.4619 19.8417 14.462 19.2046 14.9433L17.3974 16.3084C16.697 16.8375 15.932 17.3245 15.0206 17.4699C14.911 17.4874 14.7962 17.5033 14.6764 17.5172M14.6764 17.5172C14.6403 17.5214 14.6038 17.5254 14.5668 17.5292M14.6764 17.5172C14.8222 17.486 14.9669 17.396 15.1028 17.2775C15.746 16.7161 15.7866 15.77 15.2285 15.1431C15.0991 14.9977 14.9475 14.8764 14.7791 14.7759C11.9817 13.1074 7.62942 14.3782 5 16.2429M14.6764 17.5172C14.6399 17.525 14.6033 17.5292 14.5668 17.5292M14.5668 17.5292C14.0434 17.5829 13.4312 17.5968 12.7518 17.5326" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <rect x="2" y="14" width="3" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"></rect>
+                                        </g>
+                                    </svg>
+                <span>Pay Fees</span>
+            </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Attendance Summary Card -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="ramom-dashboard-card">
+            <div class="ramom-card-header">
+                <h3 class="ramom-card-title"><i class="fas fa-calendar-check"></i> 
+                <?php 
+                    echo translate('attendance_summary'); 
+                    if (isset($student_name) && !empty($student_name)) {
+                        echo " for " . $student_name;
+                    }
+                ?></h3>
+            </div>
+            <div class="ramom-card-body">
+                <div class="ramom-summary-grid">
+                    <!-- Total Present Days -->
+                    <div class="ramom-stat-card ramom-success">
+                        <div class="ramom-stat-content">
+                            <h3 class="ramom-stat-value"><?php echo array_sum($attendance_summary['total_present']); ?></h3>
+                            <p class="ramom-stat-label"><?php echo translate('present_days'); ?></p>
+                        </div>
+                        <div class="ramom-stat-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Total Absent Days -->
+                    <div class="ramom-stat-card ramom-danger">
+                        <div class="ramom-stat-content">
+                            <h3 class="ramom-stat-value"><?php echo array_sum($attendance_summary['total_absent']); ?></h3>
+                            <p class="ramom-stat-label"><?php echo translate('absent_days'); ?></p>
+                        </div>
+                        <div class="ramom-stat-icon">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Total Late Days -->
+                    <div class="ramom-stat-card ramom-warning">
+                        <div class="ramom-stat-content">
+                            <h3 class="ramom-stat-value"><?php echo array_sum($attendance_summary['total_late']); ?></h3>
+                            <p class="ramom-stat-label"><?php echo translate('late_days'); ?></p>
+                        </div>
+                        <div class="ramom-stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Attendance Details Button -->
+                <div class="ramom-card-footer">
+                    <a href="<?php echo base_url('student/attendance_details'); ?>" class="ramom-action-btn">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span><?php echo translate('view_attendance_details'); ?></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 	<div class="row">
 		<!-- annual fees summary of students graph -->
 		<div class="col-md-12">

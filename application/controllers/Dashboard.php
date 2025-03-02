@@ -58,12 +58,19 @@ class Dashboard extends Dashboard_Controller
             $this->data['sqlMode'] = $getSQLMode;
             if ($getSQLMode == false) {
                 $this->data['fees_summary'] = $this->dashboard_model->annualFeessummaryCharts($schoolID);
+                $this->data['fee_summary_totals'] = $this->dashboard_model->getFeeSummaryTotals($schoolID);
             } else {
                 $this->data['fees_summary'] = array(
                     'total_fee' => 0,
                     'total_paid' => 0,
                     'total_due' => 0,
                 );
+                $this->data['fee_summary_totals'] = [
+                    'total_allocated' => '0.00',
+                    'total_paid' => '0.00',
+                    'total_outstanding' => '0.00',
+                    'payment_percentage' => 0
+                ];
             }
             $this->data['student_by_class'] = $this->dashboard_model->getStudentByClass($schoolID);
             $this->data['income_vs_expense'] = $this->dashboard_model->getIncomeVsExpense($schoolID);
@@ -95,4 +102,5 @@ class Dashboard extends Dashboard_Controller
         $this->data['main_menu'] = 'dashboard';
         $this->load->view('layout/index', $this->data);
     }
+    
 }

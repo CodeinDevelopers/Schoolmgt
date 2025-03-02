@@ -57,6 +57,7 @@
 .p-5 {
     padding: 5px;
 }
+/** FOR PROFILE AND CUSTOME WIDGET */
 .ramom-modern-header {
     background: #ffffff;
     padding: 2rem 2rem;
@@ -221,6 +222,255 @@ a.ramom-action-btn span {
 @media (max-width: 480px) {
     a.ramom-action-btn span {
         font-size: 10px;
+    }
+}
+/* Dashboard Cards Styling */
+.ramom-dashboard-card {
+    background: #ffffff;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.ramom-dashboard-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.ramom-card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ramom-card-title {
+    font-size: 1.80rem;
+    font-weight: 400;
+    margin: 0;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ramom-card-title i {
+    color: #2563eb;
+}
+
+.ramom-card-body {
+    padding: 1.5rem;
+}
+
+/* Summary Grid */
+.ramom-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Stat Cards */
+.ramom-stat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.ramom-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ramom-stat-content {
+    position: relative;
+    z-index: 2;
+}
+
+.ramom-stat-value {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    color: #ffffff;
+}
+
+.ramom-stat-label {
+    margin: 0;
+    font-size: 1.50rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+.ramom-stat-icon {
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.ramom-stat-card:hover .ramom-stat-icon {
+    transform: scale(1.1);
+}
+
+/* Card Colors */
+.ramom-primary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.ramom-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.ramom-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.ramom-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Progress Bar */
+.ramom-progress-container {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.ramom-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.ramom-progress-label {
+    font-weight: 500;
+    color: #4b5563;
+    font-size: 1.80rem;
+}
+
+.ramom-progress-percentage {
+    font-weight: 600;
+    color: #10b981;
+    font-size: 1.80rem;
+}
+
+.ramom-progress {
+    height: 8px;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ramom-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #059669);
+    border-radius: 4px;
+    transition: width 0.6s ease;
+}
+
+/* Chart Container */
+.ramom-chart-container {
+    width: 100%;
+    height: 340px;
+    padding: 0.5rem;
+}
+
+/* Card Footer with Action Button */
+.ramom-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+}
+
+/* Reusing your existing action button styles with minor modifications */
+.ramom-card-footer .ramom-action-btn {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin-left: 10px;
+}
+
+.ramom-card-footer .ramom-action-btn:hover {
+    background: #f1f5f9;
+    color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-color: #cbd5e1;
+    text-decoration: none !important;
+}
+
+a.ramom-logout-btn {
+    background: rgb(234, 248, 242);
+    border-color: rgb(196, 248, 224);
+    color: #2ad385;
+}
+
+a.ramom-logout-btn:hover {
+    background: rgb(223, 252, 239);
+    color:rgb(30, 192, 117);
+    border-color: rgb(196, 248, 224);
+    text-decoration: none;
+}
+
+.ramom-card-footer .ramom-action-btn i {
+    transition: transform 0.3s ease;
+    font-size: 0.875rem;
+}
+
+.ramom-card-footer .ramom-action-btn:hover i {
+    transform: scale(1.1);
+    color: #2563eb;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .ramom-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .ramom-card-header, .ramom-card-body {
+        padding: 1rem;
+    }
+    
+    .ramom-stat-value {
+        font-size: 1.98rem;
+    }
+    
+    .ramom-stat-icon {
+        font-size: 1.5rem;
+    }
+    
+    .ramom-chart-container {
+        height: 280px;
+    }
+    
+    .ramom-card-footer {
+        justify-content: center;
     }
 }
 .student-profile-card {

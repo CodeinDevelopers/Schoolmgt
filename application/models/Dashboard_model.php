@@ -259,4 +259,22 @@ class Dashboard_model extends CI_Model
         );
         return empty($codes[$lang]) ? '' : $codes[$lang];
     }
+    public function getFeeSummaryTotals($schoolID = '', $studentID = '')
+{
+    // Get annual data first (reusing your existing method)
+    $annual_data = $this->annualFeessummaryCharts($schoolID, $studentID);
+    
+    // Calculate grand totals
+    $total_allocated = array_sum($annual_data['total_fee']);
+    $total_paid = array_sum($annual_data['total_paid']);
+    $total_outstanding = array_sum($annual_data['total_due']);
+    
+    return [
+        'total_allocated' => number_format($total_allocated, 2),
+        'total_paid' => number_format($total_paid, 2),
+        'total_outstanding' => number_format($total_outstanding, 2),
+        'payment_percentage' => ($total_allocated > 0) ? 
+            number_format(($total_paid / $total_allocated) * 100, 1) : 0
+    ];
+}
 }
