@@ -423,16 +423,16 @@ a.ramom-action-btn span {
     text-decoration: none !important;
 }
 
-a.ramom-logout-btn {
-    background: rgb(234, 248, 242);
-    border-color: rgb(196, 248, 224);
-    color: #2ad385;
+a.ramom-pay-btn {
+    background: rgb(234, 248, 242) !important;
+    border-color: rgb(196, 248, 224) !important;
+    color: #2ad385 !important;
 }
 
-a.ramom-logout-btn:hover {
-    background: rgb(223, 252, 239);
-    color:rgb(30, 192, 117);
-    border-color: rgb(196, 248, 224);
+a.ramom-pay-btn:hover {
+    background: rgb(223, 252, 239) !important;
+    color:rgb(30, 192, 117) !important;
+    border-color: rgb(196, 248, 224) !important;
     text-decoration: none;
 }
 
