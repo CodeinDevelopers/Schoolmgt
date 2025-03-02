@@ -43,17 +43,17 @@
 	    <!-- Web Application Manifest -->
 	    <link rel="manifest" href="./manifest.json">
 	    <!-- Chrome for Android theme color -->
-	    <meta name="theme-color" content="rgba(255, 255, 255, 0.8)">
+	    <meta name="theme-color" content="#ffffff">
 	    
 	    <!-- Add to homescreen for Chrome on Android -->
 	    <meta name="mobile-web-app-capable" content="yes">
-	    <meta name="application-name" content="Ramom School">
+	    <meta name="application-name" content="Acamedium">
 	    <link rel="icon" sizes="512x512" href="<?php echo base_url('uploads/appIcons/icon-512x512.png')?>">
 	    
 	    <!-- Add to homescreen for Safari on iOS -->
 	    <meta name="apple-mobile-web-app-capable" content="yes">
 	    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-	    <meta name="apple-mobile-web-app-title" content="Ramom School">
+	    <meta name="apple-mobile-web-app-title" content="Acamedium">
 	    <link rel="apple-touch-icon" href="<?php echo base_url('uploads/appIcons/icon-512x512.png')?>">
 
 	    <script type="text/javascript">

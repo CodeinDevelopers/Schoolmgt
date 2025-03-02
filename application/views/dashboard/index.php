@@ -1,27 +1,27 @@
 <!-- Modern Dashboard Header -->
-<div class="ramom-modern-header">
-    <div class="ramom-header-content">
-        <div class="ramom-user-welcome">
-            <div class="ramom-user-profile">
+<div class="cdev-modern-header">
+    <div class="cdev-header-content">
+        <div class="cdev-user-welcome">
+            <div class="cdev-user-profile">
                 <?php
                 $profile_image = get_image_url('staff', $this->session->userdata('photo'));
                 ?>
-                <img src="<?php echo $profile_image; ?>" alt="User Image" class="ramom-profile-img">
+                <img src="<?php echo $profile_image; ?>" alt="User Image" class="cdev-profile-img">
             </div>
-            <div class="ramom-user-info">
-                <h1 class="ramom-welcome-text">
+            <div class="cdev-user-info">
+                <h1 class="cdev-welcome-text">
                     Welcome Back, 
-                    <span class="ramom-user-name">
+                    <span class="cdev-user-name">
                         <?php echo $this->session->userdata('name'); ?>
                     </span>
                 </h1>
-                <p class="ramom-subtitle">Have a good day at work</p>
+                <p class="cdev-subtitle">Have a good day at work</p>
             </div>
         </div>
 
-        <div class="ramom-header-actions">
+        <div class="cdev-header-actions">
             <?php if (get_permission('student_attendance', 'is_add')): ?>
-            <a href="<?php echo base_url('attendance/student_entry'); ?>" class="ramom-action-btn">
+            <a href="<?php echo base_url('attendance/student_entry'); ?>" class="cdev-action-btn">
 			<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -39,7 +39,7 @@
             </a>
 			<?php endif; ?>
 			<?php if (get_permission('student', 'is_add')): ?>
-            <a href="<?php echo base_url('student/add'); ?>" class="ramom-action-btn">
+            <a href="<?php echo base_url('student/add'); ?>" class="cdev-action-btn">
 			<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

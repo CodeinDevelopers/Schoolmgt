@@ -9,7 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<!-- include stylesheet -->
 	<?php include 'stylesheet.php';?>
-<style>.quick-actions-grid {
+<style>
+
+.quick-actions-grid {
     display: flex;
     flex-wrap: wrap;
     margin: -5px;
@@ -58,7 +60,7 @@
     padding: 5px;
 }
 /** FOR PROFILE AND CUSTOME WIDGET */
-.ramom-modern-header {
+.cdev-modern-header {
     background: #ffffff;
     padding: 2rem 2rem;
     margin-bottom: 1rem;
@@ -67,45 +69,45 @@
     border: 1px solid #e5e7eb;
 }
 
-.ramom-header-content {
+.cdev-header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 80px;
 }
 
-.ramom-user-welcome {
+.cdev-user-welcome {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
 
-.ramom-welcome-text {
+.cdev-welcome-text {
     font-size: 1.75rem;
     font-weight: 600;
     margin: 0;
     color: #1e293b;
 }
 
-.ramom-user-name {
+.cdev-user-name {
     font-weight: 700;
     color: #2563eb;
 }
 
-.ramom-subtitle {
+.cdev-subtitle {
     margin: 0.25rem 0 0 0;
     font-size: 0.95rem;
     color: #64748b;
 }
 
-.ramom-header-actions {
+.cdev-header-actions {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
 /* Changed to target anchor specifically */
-a.ramom-action-btn {
+a.cdev-action-btn {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     color: #475569;
@@ -122,7 +124,7 @@ a.ramom-action-btn {
 }
 
 /* Updated hover states for anchor */
-a.ramom-action-btn:hover {
+a.cdev-action-btn:hover {
     background: #f1f5f9;
     color: #2563eb;
     transform: translateY(-2px);
@@ -131,41 +133,41 @@ a.ramom-action-btn:hover {
     text-decoration: none !important;
 }
 
-a.ramom-action-btn:active {
+a.cdev-action-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.ramom-action-btn i {
+.cdev-action-btn i {
     transition: transform 0.3s ease;
 }
 
-.ramom-action-btn:hover i {
+.cdev-action-btn:hover i {
     transform: scale(1.1);
     color: #2563eb;
     text-decoration: none !important;
 }
 
 /* Updated logout specific styling */
-a.ramom-logout-btn {
+a.cdev-logout-btn {
     background: rgb(234, 248, 242);
     border-color: rgb(196, 248, 224);
     color: #2ad385;
 }
 
-a.ramom-logout-btn:hover {
+a.cdev-logout-btn:hover {
     background: rgb(223, 252, 239);
     color:rgb(30, 192, 117);
     border-color: rgb(196, 248, 224);
     text-decoration: none;
 }
 
-.ramom-user-profile {
+.cdev-user-profile {
     width: 52px;
     height: 52px;
 }
 
-.ramom-profile-img {
+.cdev-profile-img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -174,22 +176,22 @@ a.ramom-logout-btn:hover {
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.ramom-profile-img:hover {
+.cdev-profile-img:hover {
     transform: scale(1.05);
     border-color: #2563eb;
 }
 
-a.ramom-action-btn span {
+a.cdev-action-btn span {
         font-size: 12px; 
         white-space: nowrap; 
     }
-    .ramom-dashboard-buttons {
+    .cdev-dashboard-buttons {
     display: flex;
     gap: 1rem; /* Space between buttons */
     flex-wrap: wrap; /* Ensures they wrap on smaller screens */
 }
 
-.ramom-dashboard-btn {
+.cdev-dashboard-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -210,7 +212,7 @@ a.ramom-action-btn span {
 }
 
 /* Add subtle bottom color */
-.ramom-dashboard-btn::after {
+.cdev-dashboard-btn::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -221,7 +223,7 @@ a.ramom-action-btn span {
 }
 
 /* Icon Styling */
-.ramom-dashboard-btn i {
+.cdev-dashboard-btn i {
     font-size: 1.2rem;
 }
 
@@ -232,7 +234,7 @@ a.ramom-action-btn span {
 .attendance::after { background: #1e293b; }
 
 /* Hover Effects */
-.ramom-dashboard-btn:hover {
+.cdev-dashboard-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-color: #cbd5e1;
@@ -242,46 +244,46 @@ a.ramom-action-btn span {
 
 /* Mobile-specific styles */
 @media (max-width: 768px) {
-    .ramom-modern-header {
+    .cdev-modern-header {
         padding: 1.5rem 1rem;
     }
 
-    .ramom-header-content {
+    .cdev-header-content {
         flex-direction: column; /* Stack elements vertically */
         align-items: flex-start; /* Align items to the start */
         gap: 1rem; /* Add spacing between stacked elements */
     }
 
-    .ramom-user-welcome {
+    .cdev-user-welcome {
         width: 100%; 
     }
 
-    .ramom-header-actions {
+    .cdev-header-actions {
         width: 100%; 
         justify-content: flex-start;
         gap: 0.5rem; 
     }
 
    
-    a.ramom-action-btn span {
+    a.cdev-action-btn span {
         font-size: 10px; 
         white-space: nowrap; 
     }
 
 
-    a.ramom-action-btn {
+    a.cdev-action-btn {
         width: auto; 
         padding: 0.5rem 1rem;
     }
     
 }
 @media (max-width: 480px) {
-    a.ramom-action-btn span {
+    a.cdev-action-btn span {
         font-size: 10px;
     }
 }
 /* Dashboard Cards Styling */
-.ramom-dashboard-card {
+.cdev-dashboard-card {
     background: #ffffff;
     padding: 0;
     margin-bottom: 1.5rem;
@@ -292,12 +294,12 @@ a.ramom-action-btn span {
     transition: all 0.3s ease;
 }
 
-.ramom-dashboard-card:hover {
+.cdev-dashboard-card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
 }
 
-.ramom-card-header {
+.cdev-card-header {
     padding: 1.25rem 1.5rem;
     border-bottom: 1px solid #e5e7eb;
     display: flex;
@@ -305,7 +307,7 @@ a.ramom-action-btn span {
     justify-content: space-between;
 }
 
-.ramom-card-title {
+.cdev-card-title {
     font-size: 1.80rem;
     font-weight: 400;
     margin: 0;
@@ -315,16 +317,16 @@ a.ramom-action-btn span {
     gap: 0.75rem;
 }
 
-.ramom-card-title i {
+.cdev-card-title i {
     color: #2563eb;
 }
 
-.ramom-card-body {
+.cdev-card-body {
     padding: 1.5rem;
 }
 
 /* Summary Grid */
-.ramom-summary-grid {
+.cdev-summary-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
@@ -332,7 +334,7 @@ a.ramom-action-btn span {
 }
 
 /* Stat Cards */
-.ramom-stat-card {
+.cdev-stat-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -343,31 +345,31 @@ a.ramom-action-btn span {
     transition: all 0.3s ease;
 }
 
-.ramom-stat-card:hover {
+.cdev-stat-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.ramom-stat-content {
+.cdev-stat-content {
     position: relative;
     z-index: 2;
 }
 
-.ramom-stat-value {
+.cdev-stat-value {
     font-size: 2.5rem;
     font-weight: 600;
     margin: 0 0 0.25rem 0;
     color: #ffffff;
 }
 
-.ramom-stat-label {
+.cdev-stat-label {
     margin: 0;
     font-size: 1.50rem;
     color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
 }
 
-.ramom-stat-icon {
+.cdev-stat-icon {
     position: relative;
     z-index: 1;
     font-size: 2rem;
@@ -378,60 +380,60 @@ a.ramom-action-btn span {
     transition: all 0.3s ease;
 }
 
-.ramom-stat-card:hover .ramom-stat-icon {
+.cdev-stat-card:hover .cdev-stat-icon {
     transform: scale(1.1);
 }
 
 /* Card Colors */
-.ramom-primary {
+.cdev-primary {
     background: linear-gradient(135deg, #3b82f6, #2563eb);
 }
 
-.ramom-success {
+.cdev-success {
     background: linear-gradient(135deg, #10b981, #059669);
 }
 
-.ramom-warning {
+.cdev-warning {
     background: linear-gradient(135deg, #f59e0b, #d97706);
 }
 
-.ramom-danger {
+.cdev-danger {
     background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
 /* Progress Bar */
-.ramom-progress-container {
+.cdev-progress-container {
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
 }
 
-.ramom-progress-header {
+.cdev-progress-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
 }
 
-.ramom-progress-label {
+.cdev-progress-label {
     font-weight: 500;
     color: #4b5563;
     font-size: 1.80rem;
 }
 
-.ramom-progress-percentage {
+.cdev-progress-percentage {
     font-weight: 600;
     color: #10b981;
     font-size: 1.80rem;
 }
 
-.ramom-progress {
+.cdev-progress {
     height: 8px;
     background-color: #f1f5f9;
     border-radius: 4px;
     overflow: hidden;
 }
 
-.ramom-progress-bar {
+.cdev-progress-bar {
     height: 100%;
     background: linear-gradient(90deg, #10b981, #059669);
     border-radius: 4px;
@@ -439,21 +441,21 @@ a.ramom-action-btn span {
 }
 
 /* Chart Container */
-.ramom-chart-container {
+.cdev-chart-container {
     width: 100%;
     height: 340px;
     padding: 0.5rem;
 }
 
 /* Card Footer with Action Button */
-.ramom-card-footer {
+.cdev-card-footer {
     display: flex;
     justify-content: flex-end;
     padding-top: 0.5rem;
 }
 
 /* Reusing your existing action button styles with minor modifications */
-.ramom-card-footer .ramom-action-btn {
+.cdev-card-footer .cdev-action-btn {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     color: #475569;
@@ -470,7 +472,7 @@ a.ramom-action-btn span {
     margin-left: 10px;
 }
 
-.ramom-card-footer .ramom-action-btn:hover {
+.cdev-card-footer .cdev-action-btn:hover {
     background: #f1f5f9;
     color: #2563eb;
     transform: translateY(-2px);
@@ -479,53 +481,53 @@ a.ramom-action-btn span {
     text-decoration: none !important;
 }
 
-a.ramom-pay-btn {
+a.cdev-pay-btn {
     background: rgb(234, 248, 242) !important;
     border-color: rgb(196, 248, 224) !important;
     color: #2ad385 !important;
 }
 
-a.ramom-pay-btn:hover {
+a.cdev-pay-btn:hover {
     background: rgb(223, 252, 239) !important;
     color:rgb(30, 192, 117) !important;
     border-color: rgb(196, 248, 224) !important;
     text-decoration: none;
 }
 
-.ramom-card-footer .ramom-action-btn i {
+.cdev-card-footer .cdev-action-btn i {
     transition: transform 0.3s ease;
     font-size: 0.875rem;
 }
 
-.ramom-card-footer .ramom-action-btn:hover i {
+.cdev-card-footer .cdev-action-btn:hover i {
     transform: scale(1.1);
     color: #2563eb;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    .ramom-summary-grid {
+    .cdev-summary-grid {
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
     
-    .ramom-card-header, .ramom-card-body {
+    .cdev-card-header, .cdev-card-body {
         padding: 1rem;
     }
     
-    .ramom-stat-value {
+    .cdev-stat-value {
         font-size: 1.98rem;
     }
     
-    .ramom-stat-icon {
+    .cdev-stat-icon {
         font-size: 1.5rem;
     }
     
-    .ramom-chart-container {
+    .cdev-chart-container {
         height: 280px;
     }
     
-    .ramom-card-footer {
+    .cdev-card-footer {
         justify-content: center;
     }
 }
@@ -683,6 +685,7 @@ margin: 16px auto 0;
 	?>
 	<!-- ramom css -->
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/ramom.css');?>">
+	<!-- cdev css -->
 	<?php if ($theme_config["border_mode"] == 'false'): ?>
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/skins/square-borders.css');?>">
 	<?php endif; ?>
