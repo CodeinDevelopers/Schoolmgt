@@ -4,7 +4,7 @@
     
 <div class="text-center px-4">
     <!-- Logo Container -->
-    <div class="mb-8 flex justify-center">
+    <div class="flex justify-center">
         <a href="<?php echo base_url('#'); ?>" class="flex-shrink-0">
             <img src="<?=$this->application_model->getBranchImage($branch_id, 'logo')?>" alt="Logo" style="height: 60px;">
         </a>
