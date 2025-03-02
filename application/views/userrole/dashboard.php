@@ -189,7 +189,7 @@ else :
 
                         <!-- Fees Details Button -->
                         <div class="ramom-card-footer">
-						<?php if ($fee_summary_totals['payment_percentage'] = 100) : ?>
+						<?php if ($fee_summary_totals['payment_percentage'] == 100) : ?>
                             <a href="<?php echo base_url('userrole/invoice#history'); ?>" class="ramom-action-btn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 16L16.1 18.5L20 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 14H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M10 18H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M3 6L13.5 6M20 6L17.75 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M20 10L9.5 10M3 10H5.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
                                 <span><?php echo translate('view_payment_history'); ?></span>
                             </a>
