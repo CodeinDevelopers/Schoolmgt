@@ -10,55 +10,6 @@
 	<!-- include stylesheet -->
 	<?php include 'stylesheet.php';?>
 <style>
-
-.quick-actions-grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -5px;
-}
-
-.quick-action-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    aspect-ratio: 1;
-    padding: 10px;
-    border-radius: 8px;
-    text-decoration: none !important; /* Prevents underline */
-    transition: all 0.3s ease;
-    opacity: 0.9;
-}
-
-/* Modern, softer colors */
-.quick-action-btn.btn-primary { background-color: rgb(0, 193, 51); }
-.quick-action-btn.btn-info { background-color: rgb(36, 95, 224); }
-.quick-action-btn.btn-success { background-color: rgb(247, 192, 74) ;}
-.quick-action-btn.btn-warning { background-color: rgb(53, 206, 218); }
-.quick-action-btn.btn-danger { background-color: rgb(255, 0, 51); }
-.quick-action-btn.btn-purple { background-color: rgb(0, 198, 252); }
-
-.quick-action-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    opacity: 1;
-}
-
-.quick-action-btn i {
-    margin-bottom: 8px;
-    color: white;
-}
-
-.quick-action-btn span {
-    color: white;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.p-5 {
-    padding: 5px;
-}
 /** FOR PROFILE AND CUSTOME WIDGET */
 .cdev-modern-header {
     background: #ffffff;
@@ -106,7 +57,6 @@
     gap: 1rem;
 }
 
-/* Changed to target anchor specifically */
 a.cdev-action-btn {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -123,7 +73,6 @@ a.cdev-action-btn {
 
 }
 
-/* Updated hover states for anchor */
 a.cdev-action-btn:hover {
     background: #f1f5f9;
     color: #2563eb;
@@ -148,7 +97,6 @@ a.cdev-action-btn:active {
     text-decoration: none !important;
 }
 
-/* Updated logout specific styling */
 a.cdev-logout-btn {
     background: rgb(234, 248, 242);
     border-color: rgb(196, 248, 224);
@@ -195,23 +143,22 @@ a.cdev-action-btn span {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #ffffff; /* White background */
+    background: #ffffff; 
     border: 1px solid #e5e7eb;
     color: #475569;
     padding: 1rem;
     border-radius: 0.75rem;
-    text-decoration: none !important; /* Ensure no underlines */
+    text-decoration: none !important; 
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     justify-content: center;
     text-align: center;
     position: relative;
-    flex: 1; /* Allows buttons to expand equally */
-    min-width: 150px; /* Ensures buttons don’t shrink too much */
+    flex: 1; 
+    min-width: 150px; 
 }
 
-/* Add subtle bottom color */
 .cdev-dashboard-btn::after {
     content: "";
     position: absolute;
@@ -222,36 +169,32 @@ a.cdev-action-btn span {
     border-radius: 0 0 0.75rem 0.75rem;
 }
 
-/* Icon Styling */
+
 .cdev-dashboard-btn i {
     font-size: 1.2rem;
 }
 
-/* Colors for Each Button */
 .pay-fees::after { background: #2563eb; }
 .exam-result::after { background: #059669; }
 .calendar::after { background: #f59e0b; }
 .attendance::after { background: #1e293b; }
 
-/* Hover Effects */
 .cdev-dashboard-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-color: #cbd5e1;
-    text-decoration: none !important; /* Ensure text stays clean */
+    text-decoration: none !important;
 }
 
-
-/* Mobile-specific styles */
 @media (max-width: 768px) {
     .cdev-modern-header {
         padding: 1.5rem 1rem;
     }
 
     .cdev-header-content {
-        flex-direction: column; /* Stack elements vertically */
-        align-items: flex-start; /* Align items to the start */
-        gap: 1rem; /* Add spacing between stacked elements */
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 1rem; 
     }
 
     .cdev-user-welcome {
@@ -264,7 +207,6 @@ a.cdev-action-btn span {
         gap: 0.5rem; 
     }
 
-   
     a.cdev-action-btn span {
         font-size: 10px; 
         white-space: nowrap; 
@@ -282,7 +224,7 @@ a.cdev-action-btn span {
         font-size: 10px;
     }
 }
-/* Dashboard Cards Styling */
+
 .cdev-dashboard-card {
     background: #ffffff;
     padding: 0;
@@ -325,7 +267,6 @@ a.cdev-action-btn span {
     padding: 1.5rem;
 }
 
-/* Summary Grid */
 .cdev-summary-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -333,7 +274,6 @@ a.cdev-action-btn span {
     margin-bottom: 1.5rem;
 }
 
-/* Stat Cards */
 .cdev-stat-card {
     display: flex;
     justify-content: space-between;
@@ -384,7 +324,6 @@ a.cdev-action-btn span {
     transform: scale(1.1);
 }
 
-/* Card Colors */
 .cdev-primary {
     background: linear-gradient(135deg, #3b82f6, #2563eb);
 }
@@ -401,7 +340,6 @@ a.cdev-action-btn span {
     background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
-/* Progress Bar */
 .cdev-progress-container {
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
@@ -440,21 +378,13 @@ a.cdev-action-btn span {
     transition: width 0.6s ease;
 }
 
-/* Chart Container */
-.cdev-chart-container {
-    width: 100%;
-    height: 340px;
-    padding: 0.5rem;
-}
 
-/* Card Footer with Action Button */
 .cdev-card-footer {
     display: flex;
     justify-content: flex-end;
     padding-top: 0.5rem;
 }
 
-/* Reusing your existing action button styles with minor modifications */
 .cdev-card-footer .cdev-action-btn {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -587,13 +517,13 @@ a.cdev-pay-btn:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: fit-content; /* Allow width to expand based on content */
+    min-width: fit-content; 
     height: 32px;
     background-color: #f3f4f6;
-    border-radius: 16px; /* Changed from 50% to fixed value to make it pill-shaped */
+    border-radius: 16px;
     color: #4a5568;
-    padding: 0 12px; /* Add horizontal padding for text */
-    gap: 8px; /* Space between icon and text */
+    padding: 0 12px;
+    gap: 8px; 
 }
 
 .icon-wrapper svg {
@@ -604,7 +534,7 @@ a.cdev-pay-btn:hover {
 .icon-text {
     font-size: 14px;
     font-weight: 500;
-    white-space: nowrap; /* Prevents text from wrapping */
+    white-space: nowrap; 
 }
 
 .action-area {
@@ -637,7 +567,6 @@ a.cdev-pay-btn:hover {
     height: 16px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
 .profile-content {
 flex-direction: column;
@@ -663,9 +592,7 @@ margin: 16px auto 0;
  }
 
 }
-/* Dashboard Widgets Redesign with Unique Classes */
 
-/* Main Widget Row */
 .cdev-widget-row-in {
     display: flex;
     flex-wrap: no-wrap;
@@ -674,7 +601,6 @@ margin: 16px auto 0;
    
 }
 
-/* Card Wrapper - Important for layout */
 .cdev-stat-card-wrapper {
     width: 100%;
     margin-bottom: 1.5rem;
@@ -684,7 +610,6 @@ margin: 16px auto 0;
     flex-wrap: wrap;
 }
 
-/* Widget Card */
 .cdev-dashboard-panel {
     background: #ffffff;
     border-radius: 0.75rem;
@@ -704,7 +629,6 @@ margin: 16px auto 0;
     padding: 0;
 }
 
-/* Widget Content */
 .cdev-widget-col-in {
     position: relative;
     padding: 1.5rem;
@@ -712,7 +636,6 @@ margin: 16px auto 0;
     height: 100%;
 }
 
-/* Widget Title */
 .cdev-widget-col-in h5 {
     font-size: 1.25rem;
     font-weight: 500;
@@ -723,7 +646,6 @@ margin: 16px auto 0;
     gap: 0.5rem;
 }
 
-/* Counter Values */
 .cdev-stat-counter {
     font-size: 2.25rem;
     font-weight: 600;
@@ -735,7 +657,6 @@ margin: 16px auto 0;
     color: #2563eb;
 }
 
-/* Replace box-top-line with modern indicator */
 .cdev-stat-footer {
     display: block;
     margin-top: 0.75rem;
@@ -749,7 +670,6 @@ margin: 16px auto 0;
     color: #64748b;
 }
 
-/* Line color variations */
 .cdev-indicator-primary {
     position: relative;
 }
@@ -765,7 +685,6 @@ margin: 16px auto 0;
     border-radius: 1.5px;
 }
 
-/* Enhanced Dashboard Widgets with Gradient Background */
 .cdev-dashboard-stat-card {
     position: relative;
     overflow: hidden;
@@ -776,7 +695,6 @@ margin: 16px auto 0;
     width: 100%;
 }
 
-/* Gradient variations for cards */
 .cdev-stat-students {
     background: linear-gradient(135deg, #3b82f6, #2563eb);
 }
@@ -815,7 +733,6 @@ margin: 16px auto 0;
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Icon for each stat card */
 .cdev-stat-icon {
     position: absolute;
     bottom: -15px;
@@ -837,24 +754,25 @@ margin: 16px auto 0;
     opacity: 0.2;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1200px) {
     .cdev-stat-card-wrapper {
-        width: 33.33%; /* 3 cards per row on large tablets/small desktops */
+        width: 33.33%; 
     }
 }
 
 @media (max-width: 992px) {
     .cdev-stat-card-wrapper {
-        width: 50%; /* 2 cards per row on tablets as requested */
+        width: 100%; 
     }
+    .cdev-widget-row-in {display: flex;flex-wrap: wrap;}
 }
 
 @media (max-width: 576px) {
     .cdev-stat-card-wrapper {
-        width: 100%; /* 1 card per row on mobile */
+        width: 100%; 
+   
     }
-    
+    .cdev-widget-row-in { display: flex;flex-wrap: wrap;}
     .cdev-widget-row-in {
         gap: 1rem;
     }
@@ -865,6 +783,75 @@ margin: 16px auto 0;
     
     .cdev-stat-counter {
         font-size: 1.75rem;
+    }
+}
+
+/* Add action buttons container */
+.cdev-stat-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+/* Style for the button */
+.cdev-stat-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+a.cdev-stat-btn{text-decoration: none !important;}
+.cdev-stat-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.cdev-stat-btn i {
+    margin-right: 4px;
+    font-size: 0.875rem;
+}
+
+/* Button colors to match card themes */
+.cdev-stat-students .cdev-stat-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.cdev-stat-parents .cdev-stat-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 4px rgba(5, 150, 105, 0.3);
+}
+
+.cdev-stat-teachers .cdev-stat-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 4px rgba(217, 119, 6, 0.3);
+}
+
+.cdev-stat-admission .cdev-stat-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+}
+
+/* Make sure buttons don't break the layout on small screens */
+@media (max-width: 576px) {
+    .cdev-stat-actions {
+        top: 5px;
+        right: 5px;
+    }
+    
+    .cdev-stat-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
     }
 }
 </style>
