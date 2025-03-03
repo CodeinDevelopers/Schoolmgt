@@ -187,8 +187,8 @@ a.cdev-action-btn span {
     }
     .cdev-dashboard-buttons {
     display: flex;
-    gap: 1rem; /* Space between buttons */
-    flex-wrap: wrap; /* Ensures they wrap on smaller screens */
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .cdev-dashboard-btn {
@@ -662,6 +662,210 @@ margin: 16px auto 0;
  justify-content: center;
  }
 
+}
+/* Dashboard Widgets Redesign with Unique Classes */
+
+/* Main Widget Row */
+.cdev-widget-row-in {
+    display: flex;
+    flex-wrap: no-wrap;
+    gap: 1rem;
+    width: 100%;
+   
+}
+
+/* Card Wrapper - Important for layout */
+.cdev-stat-card-wrapper {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Widget Card */
+.cdev-dashboard-panel {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.cdev-dashboard-panel:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.cdev-panel-body {
+    padding: 0;
+}
+
+/* Widget Content */
+.cdev-widget-col-in {
+    position: relative;
+    padding: 1.5rem;
+    margin: 0;
+    height: 100%;
+}
+
+/* Widget Title */
+.cdev-widget-col-in h5 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #1e293b;
+    margin: 0 0 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Counter Values */
+.cdev-stat-counter {
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.cdev-text-primary {
+    color: #2563eb;
+}
+
+/* Replace box-top-line with modern indicator */
+.cdev-stat-footer {
+    display: block;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.cdev-stat-footer span {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #64748b;
+}
+
+/* Line color variations */
+.cdev-indicator-primary {
+    position: relative;
+}
+
+.cdev-indicator-primary::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    border-radius: 1.5px;
+}
+
+/* Enhanced Dashboard Widgets with Gradient Background */
+.cdev-dashboard-stat-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: block;
+    width: 100%;
+}
+
+/* Gradient variations for cards */
+.cdev-stat-students {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.cdev-stat-parents {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.cdev-stat-teachers {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.cdev-stat-admission {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+}
+
+.cdev-dashboard-stat-card .cdev-widget-col-in {
+    padding: 1.75rem;
+}
+
+.cdev-dashboard-stat-card h5 {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.80rem;
+    margin-bottom: 0.75rem;
+}
+
+.cdev-dashboard-stat-card .cdev-stat-counter {
+    color: #ffffff;
+}
+
+.cdev-dashboard-stat-card .cdev-stat-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cdev-dashboard-stat-card .cdev-stat-footer span {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Icon for each stat card */
+.cdev-stat-icon {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    font-size: 5rem;
+    opacity: 0.15;
+    color: #ffffff;
+    transform: rotate(-15deg);
+    transition: all 0.3s ease;
+}
+
+.cdev-dashboard-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.cdev-dashboard-stat-card:hover .cdev-stat-icon {
+    transform: rotate(0deg) scale(1.1);
+    opacity: 0.2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .cdev-stat-card-wrapper {
+        width: 33.33%; /* 3 cards per row on large tablets/small desktops */
+    }
+}
+
+@media (max-width: 992px) {
+    .cdev-stat-card-wrapper {
+        width: 50%; /* 2 cards per row on tablets as requested */
+    }
+}
+
+@media (max-width: 576px) {
+    .cdev-stat-card-wrapper {
+        width: 100%; /* 1 card per row on mobile */
+    }
+    
+    .cdev-widget-row-in {
+        gap: 1rem;
+    }
+    
+    .cdev-widget-col-in {
+        padding: 1.25rem;
+    }
+    
+    .cdev-stat-counter {
+        font-size: 1.75rem;
+    }
 }
 </style>
 	<?php
