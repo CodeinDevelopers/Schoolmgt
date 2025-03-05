@@ -497,7 +497,7 @@ if (!is_superadmin_loggedin()) {
 								<h3 class="cdev-stat-value">
     <?php echo html_escape($global_config['currency_symbol'] . ' ' . number_format($totalBalance, 2)); ?> 
 </h3>
-                                    <p class="cdev-stat-label"><?php echo translate('current_balance'); ?></p>
+                                    <p class="cdev-stat-label"><?php echo translate('balance'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
                                     <i class="fas fa-file-invoice-dollar"></i>
@@ -507,7 +507,7 @@ if (!is_superadmin_loggedin()) {
                             <div class="cdev-stat-card cdev-primary">
                                 <div class="cdev-stat-content">
                                     <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . number_format($totalIncome, 2)); ?> 
-                                    <p class="cdev-stat-label"><?php echo translate('total_income'); ?></p>
+                                    <p class="cdev-stat-label"><?php echo translate('income'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
                                     <i class="fas fa-check-circle"></i>
@@ -517,7 +517,7 @@ if (!is_superadmin_loggedin()) {
                             <div class="cdev-stat-card cdev-danger">
                                 <div class="cdev-stat-content">
                                     <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . number_format($totalExpense, 2)); ?></h3>
-                                    <p class="cdev-stat-label"><?php echo translate('total_expenses'); ?></p>
+                                    <p class="cdev-stat-label"><?php echo translate('expenses'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
                                     <i class="fas fa-exclamation-circle"></i>
