@@ -446,6 +446,9 @@ a.cdev-pay-btn:hover {
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
+    .cdev-exp-grid {
+    grid-template-columns: repeat(1, 1fr);
+}
     
     .cdev-card-header, .cdev-card-body {
         padding: 1rem;
