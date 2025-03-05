@@ -273,6 +273,12 @@ a.cdev-action-btn span {
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
+.cdev-exp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
 
 .cdev-stat-card {
     display: flex;
@@ -398,7 +404,7 @@ a.cdev-action-btn span {
     transition: all 0.3s ease;
     text-decoration: none !important;
     font-weight: 500;
-    font-size: 0.875rem;
+    font-size: 1.4rem;
     margin-left: 10px;
 }
 
@@ -857,6 +863,22 @@ a.cdev-stat-btn{text-decoration: none !important;}
         font-size: 0.75rem;
     }
 }
+.cdev-stat-admission .cdev-stat-counter {
+    color: #ffffff;
+}
+
+.text-success {
+    color: #10b981 !important;
+}
+
+.text-danger {
+    color: #ef4444 !important;
+}
+.smaller-icon {
+    font-size: 0.8em;
+    margin: left 5px;
+}
+
 </style>
 	<?php
 	if(isset($headerelements)) {

@@ -40,16 +40,29 @@
 <div class="row">
             <div class="col-md-12">
                 <div class="cdev-dashboard-buttons">
-                    <a href="<?=base_url('attendance/student_entry')?>" class="cdev-dashboard-btn pay-fees"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 10.9112C3 10.8182 3 10.7717 3.00057 10.7303C3.0385 7.98021 4.94139 5.60803 7.61778 4.97443C7.65803 4.9649 7.70344 4.95481 7.79425 4.93463C7.87787 4.91605 7.91968 4.90675 7.96109 4.89775C10.6226 4.31875 13.3774 4.31875 16.0389 4.89775C16.0803 4.90675 16.1221 4.91605 16.2057 4.93463C16.2966 4.95481 16.342 4.9649 16.3822 4.97443C19.0586 5.60803 20.9615 7.98021 20.9994 10.7303C21 10.7717 21 10.8182 21 10.9112V16.3752C21 18.4931 19.529 20.3269 17.4615 20.7864C13.8644 21.5857 10.1356 21.5857 6.53853 20.7864C4.47101 20.3269 3 18.4931 3 16.3752V10.9112Z" stroke="currentColor" stroke-width="1.5"></path> <path opacity="0.5" d="M17.5 15.5V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M15.9585 4.5C15.7205 3.08114 14.4865 2 13 2H11C9.51353 2 8.27954 3.08114 8.0415 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M3 14C8.72979 16.5466 15.2702 16.5466 21 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M10 13H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                    <a href="<?=base_url('attendance/student_entry')?>" class="cdev-dashboard-btn pay-fees"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M16 4.00195C18.175 4.01406 19.3529 4.11051 20.1213 4.87889C21 5.75757 21 7.17179 21 10.0002V16.0002C21 18.8286 21 20.2429 20.1213 21.1215C19.2426 22.0002 17.8284 22.0002 15 22.0002H9C6.17157 22.0002 4.75736 22.0002 3.87868 21.1215C3 20.2429 3 18.8286 3 16.0002V10.0002C3 7.17179 3 5.75757 3.87868 4.87889C4.64706 4.11051 5.82497 4.01406 8 4.00195" stroke="currentColor" stroke-width="1.5"></path>
+                                            <path d="M10.5 14L17 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M7 14H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M7 10.5H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M7 17.5H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M10.5 10.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M10.5 17.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z" stroke="currentColor" stroke-width="1.5"></path>
+                                        </g>
+                                    </svg>
                         <?=translate('take_class_attendance')?>
                     </a>
-                    <a href="<?=base_url('timetable/viewclass')?>" class="cdev-dashboard-btn exam-result"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.44 2H17.55C21.11 2 22 2.89 22 6.44V12.77C22 16.33 21.11 17.21 17.56 17.21H6.44C2.89 17.22 2 16.33 2 12.78V6.44C2 2.89 2.89 2 6.44 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 17.22V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2 13H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7.5 22H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    <a href="<?=base_url('timetable/viewclass')?>" class="cdev-dashboard-btn exam-result"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 10V6C4 4.89543 4.89543 4 6 4H18C19.1046 4 20 4.89543 20 6V10M4 10V15M4 10H9M20 10V15M20 10H15M4 15V18C4 19.1046 4.89543 20 6 20H9M4 15H9M20 15V18C20 19.1046 19.1046 20 18 20H15M20 15H15M9 15H15M9 15V10M9 15V20M15 15V10M15 15V20M9 10H15M9 20H15M10 7H14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                         <?=translate('class_time_table')?>
                     </a>
-					<a href="<?=base_url('timetable/teacherview')?>" class="cdev-dashboard-btn attendance"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM11.8284 6.75736C12.3807 6.75736 12.8284 7.20507 12.8284 7.75736V12.7245L16.3553 14.0653C16.8716 14.2615 17.131 14.8391 16.9347 15.3553C16.7385 15.8716 16.1609 16.131 15.6447 15.9347L11.4731 14.349C11.085 14.2014 10.8284 13.8294 10.8284 13.4142V7.75736C10.8284 7.20507 11.2761 6.75736 11.8284 6.75736Z" fill="currentColor"></path> </g></svg>
+					<a href="<?=base_url('timetable/teacherview')?>" class="cdev-dashboard-btn attendance"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="1.5"></circle> <path d="M13 15C13 16.1046 13 17 9 17C5 17 5 16.1046 5 15C5 13.8954 6.79086 13 9 13C11.2091 13 13 13.8954 13 15Z" stroke="currentColor" stroke-width="1.5"></path> <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z" stroke="currentColor" stroke-width="1.5"></path> <path d="M19 12H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M19 9H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M19 15H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
                         <span><?=translate('my_schedule')?></span>
                     </a>
-                    <a href="<?=base_url('onlineexam/question')?>" class="cdev-dashboard-btn calendar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"></path> <path d="M6 15.8L7.14286 17L10 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 8.8L7.14286 10L10 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M13 9L18 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M13 16L18 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                    <a href="<?=base_url('onlineexam/question')?>" class="cdev-dashboard-btn calendar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6111 1.5837C17.2678 1.34703 18.75 2.63255 18.75 4.30606V5.68256C19.9395 6.31131 20.75 7.56102 20.75 9.00004V19C20.75 21.0711 19.0711 22.75 17 22.75H7C4.92893 22.75 3.25 21.0711 3.25 19V5.00004C3.25 4.99074 3.25017 4.98148 3.2505 4.97227C3.25017 4.95788 3.25 4.94344 3.25 4.92897C3.25 4.02272 3.91638 3.25437 4.81353 3.12621L15.6111 1.5837ZM4.75 6.75004V19C4.75 20.2427 5.75736 21.25 7 21.25H17C18.2426 21.25 19.25 20.2427 19.25 19V9.00004C19.25 7.7574 18.2426 6.75004 17 6.75004H4.75ZM5.07107 5.25004H17.25V4.30606C17.25 3.54537 16.5763 2.96104 15.8232 3.06862L5.02566 4.61113C4.86749 4.63373 4.75 4.76919 4.75 4.92897C4.75 5.10629 4.89375 5.25004 5.07107 5.25004ZM7.25 12C7.25 11.5858 7.58579 11.25 8 11.25H16C16.4142 11.25 16.75 11.5858 16.75 12C16.75 12.4143 16.4142 12.75 16 12.75H8C7.58579 12.75 7.25 12.4143 7.25 12ZM7.25 15.5C7.25 15.0858 7.58579 14.75 8 14.75H13.5C13.9142 14.75 14.25 15.0858 14.25 15.5C14.25 15.9143 13.9142 16.25 13.5 16.25H8C7.58579 16.25 7.25 15.9143 7.25 15.5Z" fill="currentColor"></path> </g></svg>
                         <?=translate('question_bank')?>
                     </a></div> </div></div>
 					<?php } ?>
@@ -250,7 +263,7 @@ if (!is_superadmin_loggedin()) {
                             <!-- Total Allocated Fees -->
                             <div class="cdev-stat-card cdev-primary">
                                 <div class="cdev-stat-content">
-                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_allocated']); ?></h3>
+                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . $fee_summary_totals['total_allocated']); ?></h3>
                                     <p class="cdev-stat-label"><?php echo translate('total_fees_allocated'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
@@ -261,7 +274,7 @@ if (!is_superadmin_loggedin()) {
                             <!-- Total Paid Fees -->
                             <div class="cdev-stat-card cdev-success">
                                 <div class="cdev-stat-content">
-                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_paid']); ?></h3>
+                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . $fee_summary_totals['total_paid']); ?></h3>
                                     <p class="cdev-stat-label"><?php echo translate('total_fees_paid'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
@@ -272,7 +285,7 @@ if (!is_superadmin_loggedin()) {
                             <!-- Total Outstanding Fees -->
                             <div class="cdev-stat-card cdev-warning">
                                 <div class="cdev-stat-content">
-                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_outstanding']); ?></h3>
+                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . $fee_summary_totals['total_outstanding']); ?></h3>
                                     <p class="cdev-stat-label"><?php echo translate('total_outstanding_fees'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
@@ -347,24 +360,29 @@ if (!is_superadmin_loggedin()) {
 	<?php } ?>
 
 	<?php if (is_accountant_loggedin()) { ?>
+
 	<div class="row">
             <div class="col-md-12">
                 <div class="cdev-dashboard-buttons">
                     <a href="<?=base_url('userrole/homework')?>" class="cdev-dashboard-btn pay-fees"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 10.9112C3 10.8182 3 10.7717 3.00057 10.7303C3.0385 7.98021 4.94139 5.60803 7.61778 4.97443C7.65803 4.9649 7.70344 4.95481 7.79425 4.93463C7.87787 4.91605 7.91968 4.90675 7.96109 4.89775C10.6226 4.31875 13.3774 4.31875 16.0389 4.89775C16.0803 4.90675 16.1221 4.91605 16.2057 4.93463C16.2966 4.95481 16.342 4.9649 16.3822 4.97443C19.0586 5.60803 20.9615 7.98021 20.9994 10.7303C21 10.7717 21 10.8182 21 10.9112V16.3752C21 18.4931 19.529 20.3269 17.4615 20.7864C13.8644 21.5857 10.1356 21.5857 6.53853 20.7864C4.47101 20.3269 3 18.4931 3 16.3752V10.9112Z" stroke="currentColor" stroke-width="1.5"></path> <path opacity="0.5" d="M17.5 15.5V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M15.9585 4.5C15.7205 3.08114 14.4865 2 13 2H11C9.51353 2 8.27954 3.08114 8.0415 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M3 14C8.72979 16.5466 15.2702 16.5466 21 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M10 13H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
-                        <?=translate('take_class_attendance')?>
+                        <?=translate('salary_payment')?>
                     </a>
                     <a href="<?=base_url('userrole/online_exam')?>" class="cdev-dashboard-btn exam-result"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.44 2H17.55C21.11 2 22 2.89 22 6.44V12.77C22 16.33 21.11 17.21 17.56 17.21H6.44C2.89 17.22 2 16.33 2 12.78V6.44C2 2.89 2.89 2 6.44 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 17.22V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2 13H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7.5 22H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-                        <?=translate('class_time_table')?>
+                        <?=translate('invoices')?>
                     </a>
 					<a href="<?=base_url('userrole/class_schedule')?>" class="cdev-dashboard-btn attendance"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM11.8284 6.75736C12.3807 6.75736 12.8284 7.20507 12.8284 7.75736V12.7245L16.3553 14.0653C16.8716 14.2615 17.131 14.8391 16.9347 15.3553C16.7385 15.8716 16.1609 16.131 15.6447 15.9347L11.4731 14.349C11.085 14.2014 10.8284 13.8294 10.8284 13.4142V7.75736C10.8284 7.20507 11.2761 6.75736 11.8284 6.75736Z" fill="currentColor"></path> </g></svg>
-                        <span><?=translate('my_schedule')?></span>
+                        <span><?=translate('fees_reminder')?></span>
                     </a>
                     <a href="<?=base_url('userrole/report_card')?>" class="cdev-dashboard-btn calendar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"></path> <path d="M6 15.8L7.14286 17L10 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 8.8L7.14286 10L10 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M13 9L18 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M13 16L18 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
-                        <?=translate('question_bank')?>
+                        <?=translate('new_deposite')?>
                     </a> <a href="<?=base_url('userrole/report_card')?>" class="cdev-dashboard-btn calendar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"></path> <path d="M6 15.8L7.14286 17L10 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 8.8L7.14286 10L10 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M13 9L18 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M13 16L18 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
-                        <?=translate('report_card')?>
-                    </a></div></div></div>
-					<div class="row">
+                        <?=translate('account_stament')?>
+                    </a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
             <div class="col-md-12">
                 <div class="cdev-dashboard-card">
                     <div class="cdev-card-header">
@@ -379,29 +397,27 @@ if (!is_superadmin_loggedin()) {
                             <!-- Total Allocated Fees -->
                             <div class="cdev-stat-card cdev-primary">
                                 <div class="cdev-stat-content">
-                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_allocated']); ?></h3>
+                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . $fee_summary_totals['total_allocated']); ?></h3>
                                     <p class="cdev-stat-label"><?php echo translate('total_fees_allocated'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
                                     <i class="fas fa-file-invoice-dollar"></i>
                                 </div>
                             </div>
-
                             <!-- Total Paid Fees -->
                             <div class="cdev-stat-card cdev-success">
                                 <div class="cdev-stat-content">
-                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_paid']); ?></h3>
+                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . $fee_summary_totals['total_paid']); ?></h3>
                                     <p class="cdev-stat-label"><?php echo translate('total_fees_paid'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
                             </div>
-
                             <!-- Total Outstanding Fees -->
                             <div class="cdev-stat-card cdev-warning">
                                 <div class="cdev-stat-content">
-                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . $fee_summary_totals['total_outstanding']); ?></h3>
+                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . $fee_summary_totals['total_outstanding']); ?></h3>
                                     <p class="cdev-stat-label"><?php echo translate('total_outstanding_fees'); ?></p>
                                 </div>
                                 <div class="cdev-stat-icon">
@@ -409,7 +425,6 @@ if (!is_superadmin_loggedin()) {
                                 </div>
                             </div>
                         </div>
-
                         <!-- Payment Progress -->
                         <div class="cdev-progress-container">
                             <div class="cdev-progress-header">
@@ -420,15 +435,12 @@ if (!is_superadmin_loggedin()) {
                                 <div class="cdev-progress-bar" style="width: <?php echo $fee_summary_totals['payment_percentage']; ?>%"></div>
                             </div>
                         </div>
-
                         <!-- Fees Details Button -->
                         <div class="cdev-card-footer">
-						
                             <a href="<?php echo base_url('offline_payments/payments'); ?>" class="cdev-action-btn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11 6L21 6.00072M11 12L21 12.0007M11 18L21 18.0007M3 11.9444L4.53846 13.5L8 10M3 5.94444L4.53846 7.5L8 4M4.5 18H4.51M5 18C5 18.2761 4.77614 18.5 4.5 18.5C4.22386 18.5 4 18.2761 4 18C4 17.7239 4.22386 17.5 4.5 17.5C4.77614 17.5 5 17.7239 5 18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                                 <span><?php echo translate('approve_payments'); ?></span>
                             </a>
-							
-                                <a href="<?php echo base_url('fees/invoice_list'); ?>" class="cdev-action-btn cdev-pay-btn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                            <a href="<?php echo base_url('fees/invoice_list'); ?>" class="cdev-action-btn cdev-pay-btn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                         <g id="SVGRepo_iconCarrier">
@@ -445,8 +457,84 @@ if (!is_superadmin_loggedin()) {
                                     <span><?php echo translate('record_payment'); ?></span>
                                 </a>
                         </div>
-                    </div>   </div>
-					<?php } ?>
+                    </div>   
+				</div>
+<?php } ?>
+<?php if (get_permission('monthly_income_vs_expense_chart', 'is_view')) { 
+    // Calculate totals
+    $totalIncome = 0;
+    $totalExpense = 0;
+
+    foreach ($income_vs_expense as $item) {
+        if (stripos($item['name'], 'income') !== false) {
+            $totalIncome += $item['value'];
+        } elseif (stripos($item['name'], 'expense') !== false) {
+            $totalExpense += $item['value'];
+        }
+    }
+
+    // Calculate total balance
+    $totalBalance = $totalIncome - $totalExpense;
+    
+    // Determine balance trend
+    $balanceTrend = $totalBalance >= 0 ? 'positive' : 'negative';
+?>
+
+<div class="cdev-dashboard-card">
+                    <div class="cdev-card-header">
+                        <h3 class="cdev-card-title">
+                            <?php 
+                                echo translate('income_&_expenses'); 
+                            ?>
+                        </h3>
+                    </div>
+                    <div class="cdev-card-body">
+                        <div class="cdev-exp-grid">
+                            <!-- Current Balance -->
+                            <div class="cdev-stat-card cdev-success">
+                                <div class="cdev-stat-content">
+								
+								<h3 class="cdev-stat-value">
+    <?php echo html_escape($global_config['currency_symbol'] . ' ' . number_format($totalBalance, 2)); ?> 
+</h3>
+                                    <p class="cdev-stat-label"><?php echo translate('current_balance'); ?></p>
+                                </div>
+                                <div class="cdev-stat-icon">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                            </div>
+                            <!--Income-->
+                            <div class="cdev-stat-card cdev-primary">
+                                <div class="cdev-stat-content">
+                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . number_format($totalIncome, 2)); ?> 
+                                    <p class="cdev-stat-label"><?php echo translate('total_income'); ?></p>
+                                </div>
+                                <div class="cdev-stat-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <!--Expense -->
+                            <div class="cdev-stat-card cdev-danger">
+                                <div class="cdev-stat-content">
+                                    <h3 class="cdev-stat-value"><?php echo html_escape($global_config['currency_symbol'] . ' ' . number_format($totalExpense, 2)); ?></h3>
+                                    <p class="cdev-stat-label"><?php echo translate('total_expenses'); ?></p>
+                                </div>
+                                <div class="cdev-stat-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+						<div class="cdev-card-footer">
+                            <a href="<?php echo base_url('accounting/all_transactions'); ?>" class="cdev-action-btn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11 6L21 6.00072M11 12L21 12.0007M11 18L21 18.0007M3 11.9444L4.53846 13.5L8 10M3 5.94444L4.53846 7.5L8 4M4.5 18H4.51M5 18C5 18.2761 4.77614 18.5 4.5 18.5C4.22386 18.5 4 18.2761 4 18C4 17.7239 4.22386 17.5 4.5 17.5C4.77614 17.5 5 17.7239 5 18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                <span><?php echo translate('transaction_history'); ?></span>
+                            </a>
+							<a href="<?php echo base_url('accounting/voucher_expense'); ?>" class="cdev-action-btn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="currentColor"></path> </g></svg><?php echo translate('record_expense'); ?></span>
+                            </a>
+                            
+                    </div>   </div> 
+				</div>
+<?php } ?>
+
 	<div class="row">
     <!-- event calendar -->
     <div class="col-md-<?php echo $div3 ?>">
@@ -520,44 +608,6 @@ if (!is_superadmin_loggedin()) {
 			</div>
 		</div>
 	<?php } ?>
-	</div>
-	
-<div class="row">
-<?php if (get_permission('monthly_income_vs_expense_chart', 'is_view')) { ?>
-		<!-- monthly cash book transaction -->
-		<div class="<?php echo get_permission('annual_student_fees_summary_chart', 'is_view') ? 'col-md-12 col-lg-4 col-xl-3' : 'col-md-12'; ?>">
-			<section class="panel pg-fw">
-				<div class="panel-body">
-					<h4 class="chart-title mb-xs"><?=translate('income_vs_expense_of') . " " . translate(strtolower(date('F')))?></h4>
-					<div id="cash_book_transaction"></div>
-					<div class="round-overlap"><i class="fab fa-sellcast"></i></div>
-					<div class="text-center">
-						<ul class="list-inline">
-							<li>
-								<h6 class="text-muted"><i class="fa fa-circle text-blue"></i> <?=translate('income')?></h6>
-							</li>
-							<li>
-								<h6 class="text-muted"><i class="fa fa-circle text-danger"></i> <?=translate('expense')?></h6>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</section>
-		</div>
-<?php } ?>
-<?php if (get_permission('annual_student_fees_summary_chart', 'is_view')) { ?>
-		<!-- student fees summary graph -->
-		<div class="<?php echo get_permission('monthly_income_vs_expense_chart', 'is_view') ? 'col-md-12 col-lg-8 col-xl-9' : 'col-md-12'; ?>">
-			<section class="panel">
-				<div class="panel-body">
-					<h4 class="chart-title mb-md"><?=translate('annual_fee_summary')?></h4>
-					<div class="pe-chart">
-						<canvas id="fees_graph" style="height: 322px;"></canvas>
-					</div>
-				</div>
-			</section>
-		</div>
-<?php } ?>
 	</div>
 
 <div class="zoom-anim-dialog modal-block modal-block-primary mfp-hide" id="modal">
