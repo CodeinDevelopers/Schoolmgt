@@ -178,6 +178,9 @@ a.attendance:hover { color: #1e293b; }
 .profile-cb::after { background: #8b5cf6; }
 a.profile-cb:hover { color: #8b5cf6; }
 
+.due-fees::after { background: #ff0202; }
+a.due-fees:hover { color: #ff0202; }
+
 .cdev-dashboard-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
