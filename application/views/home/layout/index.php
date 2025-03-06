@@ -11,6 +11,8 @@
 		<title><?php echo $page_data['page_title'] . " - " . $cms_setting['application_title']; ?></title>
 		<!-- Bootstrap -->
 		<link href="<?php echo base_url() ?>assets/frontend/css/bootstrap.min.css" rel="stylesheet">
+
+		<link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Template CSS Files  -->
 		<link rel="stylesheet" href="<?php echo base_url('assets/vendor/font-awesome/css/all.min.css'); ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/frontend/plugins/animate.min.css'); ?>">
