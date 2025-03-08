@@ -1325,13 +1325,13 @@ html.dark .invoice-summary ul.amounts li {
 	color: #555;
 	border: 0;
 	border-bottom: 1px solid #d8d8d8;
-	border-radius: 0;
+	border-radius: 10;
 	margin: 4px;
 	padding: 5px 10px;
 }
 
 .dt-buttons .btn-default{
-	background-color: #f7f3f2;
+	background-color: #f0f5f9;
 }
 
 .dt-buttons .btn-default:hover {
