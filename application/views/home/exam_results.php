@@ -35,7 +35,13 @@
             background: rgba(0, 0, 0, 0.8);
             transform: translateY(-1px);
         }
-    
+        #print {
+        margin-bottom: 20px;
+        margin-top: 0px;
+        padding: 2px 15px;
+        font-size: 14px;
+        font-weight: 500;
+    }
     </style>
 </head>
 <body class="min-h-screen vercel-gradient text-gray-900">

@@ -237,36 +237,41 @@
 									<td><?php echo $row1['section_name']; ?></td>
 									<td><?php echo $row1['roll']; ?></td>
 									<td><?php echo ($row1['totalMarks'] . '/' . $row1['totalFullmarks']); ?></td>
-								<?php if ($exam_details->type_id != 2) { ?>
-									<td><?php echo number_format($row1['percentage'], 2, '.', '') . " %"; ?></td>
-								<?php } if ($exam_details->type_id != 1) { ?>
-									<td>
-										<?php
-										$totalSubjects = count($get_subjects);
-										if(!empty($totalSubjects)) {
-											echo number_format(($row1['totalGradePoint'] / $totalSubjects), 2,'.','');
-										}
-										?>
-									</td>
-								<?php } ?>
-									<td>
-									<?php
-										if ($row1['result_status'] == 0) {
-											if ($row1['result_pass']  == true) {
-												echo '<span class="label label-primary">PASS</span>';
-											} else {
-												echo '<span class="label label-danger">FAIL</span>';
-											}
-										} else {
-											echo "All marks not registered";
-										} ?>
-									</td>
-								<?php if ($generated == true) { ?>
-									<td>
-										<?php echo $row1['rank'] ?>
-									</td>
-								<?php } ?>
-									<td>
+									<?php if ($exam_details->type_id != 2) { ?>
+    <td><?php echo number_format($row1['percentage'], 2, '.', '') . " %"; ?></td>
+<?php } if ($exam_details->type_id != 1) { ?>
+    <td>
+        <?php
+        $totalSubjects = count($get_subjects);
+        if(!empty($totalSubjects)) {
+            echo number_format(($row1['totalGradePoint'] / $totalSubjects), 2,'.','');
+        }
+        ?>
+    </td>
+<?php } ?>
+    <td>
+    <?php
+        if ($row1['result_status'] == 0) {
+            $percentage = number_format($row1['percentage'], 2, '.', '');
+            
+            if ($percentage < 45) {
+                echo '<span class="label label-danger">FAIL</span>';
+            } elseif ($percentage >= 85) {
+                echo '<span class="label label-success">EXCELLENT</span>';
+            } else {
+                echo '<span class="label label-primary">PASS</span>';
+            }
+        } else {
+            echo "All marks not registered";
+        }
+    ?>
+    </td>
+<?php if ($generated == true) { ?>
+    <td>
+        <?php echo $row1['rank'] ?>
+    </td>
+<?php } ?>
+<td>
 										<div class="form-group">
 											<input class="form-control" type="text" autocomplete="off" name="rank[<?php echo $key ?>][position]" value="<?php echo $count; ?>">
 											<span class="error"></span>

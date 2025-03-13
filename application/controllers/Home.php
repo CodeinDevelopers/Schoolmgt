@@ -279,7 +279,7 @@ class Home extends Frontend_Controller
                 }
                 // check out admission payment status
                 $this->load->model('admissionpayment_model');
-                $getStudent = $this->admissionpayment_model->getStudentDetails($studentID);
+                $getStudent = $this->admissionpayment_model->getStudentDetails($reference_no);
                 if ($getStudent['fee_elements']['status'] == 0) {
                     $url = base_url("home/admission_confirmation/" . $reference_no);
                     if (empty($arrayData['section_id'])) {
@@ -387,10 +387,10 @@ class Home extends Frontend_Controller
         return $return_photo;
     }
 
-    public function admission_confirmation($studentID = '')
+    public function admission_confirmation($referenceNo = '')
     {
         $this->load->model('admissionpayment_model');
-        $getStudent = $this->admissionpayment_model->getStudentDetails($studentID);
+        $getStudent = $this->admissionpayment_model->getStudentDetails($referenceNo);
         if (empty($getStudent['id'])) {
             set_alert('error', "This application was not found.");
             redirect($_SERVER['HTTP_REFERER']);
@@ -459,7 +459,8 @@ class Home extends Frontend_Controller
                 }
                 redirect(base_url('home/contact'));
             }
-        }
+        } 
+        $this->data['branchID'] = $branchID;
         $this->data['page_data'] = $this->home_model->get('front_cms_contact', array('branch_id' => $branchID), true);
         $this->data['main_contents'] = $this->load->view('home/contact', $this->data, true);
         $this->load->view('home/layout/index', $this->data);
@@ -491,7 +492,14 @@ class Home extends Frontend_Controller
                     }
                 }
                 $registerNo = $this->input->post('register_no');
-                $userID = $this->db->select('id')->where('register_no', $registerNo)->get('student')->row_array();
+                $sessionID = get_session_id();        
+                $this->db->select('e.id');
+                $this->db->from('enroll as e');
+                $this->db->join('student as s', "e.student_id = s.id", 'inner');
+                $this->db->where('e.session_id', $sessionID);
+                $this->db->where('s.register_no', $registerNo);
+                $this->db->where('s.active', 1);
+                $userID = $this->db->get()->row_array();
                 if (empty($userID)) {
                     $array = array('status' => '0', 'error' => "Register No Not Found.");
                     echo json_encode($array);
@@ -542,11 +550,12 @@ class Home extends Frontend_Controller
                 $this->db->from('enroll');
                 $this->db->join('student', 'student.id = enroll.student_id', 'inner');
                 $this->db->where('student.register_no', $registerNo);
+                $this->db->where('student.active', 1);
                 $this->db->where('enroll.session_id', $sessionID);
                 $userID = $this->db->get()->row_array();
 
                 if (empty($userID)) {
-                    $array = array('status' => '0', 'error' => "Student Dose Not exist.");
+                    $array = array('status' => '0', 'error' => "Register No Not Found.");
                     echo json_encode($array);
                     exit();
                 }
@@ -654,6 +663,7 @@ class Home extends Frontend_Controller
         $this->db->where('front_cms_menu.alias', $url);
         $this->db->where('front_cms_menu.publish', 1);
         $getData = $this->db->get()->row_array();
+        $this->data['branchID'] = $getData['branch_id'];
       
         $this->data['page_data'] = $getData;
         $this->data['active_menu'] = 'page';
@@ -703,7 +713,7 @@ class Home extends Frontend_Controller
         $branchID = $this->home_model->getDefaultBranch();
         $url_alias = $this->data['cms_setting']['url_alias'];
         $getLatestNewsList = $this->home_model->getLatestNewsList($branchID);
-        $page = html_escape(urldecode($this->input->get('page')));
+        $page = empty($this->input->get('page')) ? 0 : html_escape(urldecode($this->input->get('page')));
         if (is_numeric($page)) {
             $page = !empty($page) ? $page : 0;
         } else {

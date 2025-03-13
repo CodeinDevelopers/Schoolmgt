@@ -32,7 +32,7 @@
 				<tr>
 				<td style="width:40%;vertical-align: top;"><img style="max-width:225px;" src="<?=$this->application_model->getBranchImage($getExam['branch_id'], 'report-card-logo')?>"></td>
 				<td style="width:60%;vertical-align: top;">
-					<table align="right" class="table-head text-right" >
+				<table align="right" class="table-head" style="text-align: right;">
 						<tbody>
 							<tr><th style="font-size: 26px;" class="text-right"><?=$getSchool['school_name']?></th></tr>
 							<tr><th style="font-size: 14px; padding-top: 4px;" class="text-right">Academic Session: <?=$schoolYear?></th></tr>

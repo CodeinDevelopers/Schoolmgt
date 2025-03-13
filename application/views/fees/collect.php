@@ -520,6 +520,7 @@ if ($extINTL == true) {
 					<?php echo form_close();?>
 				</div>
 			<?php endif; ?>
+			
 			<!--fully paid form-->
 			<?php if($invoice['status'] != 'total'): ?>
 				<div id="fully_paid" class="tab-pane">

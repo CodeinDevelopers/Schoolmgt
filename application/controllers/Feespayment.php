@@ -1,16 +1,3 @@
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-/**
- * @package : Acamedium
- * @version : 6.5
- * @developed by : Codeindevelopers
- * @support : support@codeindevelopers.com.ng
- * @author url : https://codeindevelopers.com.ng
- * @filename : Feespayment.php
- * @copyright : Reserved 2024-present Codeindevelopers
- */
-
 class Feespayment extends Admin_Controller
 {
 
@@ -162,6 +149,10 @@ class Feespayment extends Admin_Controller
                 }
                 if ($payVia == 'nepalste') {
                     $url = base_url("feespayment/nepalste");
+                    $this->session->set_userdata("params", $params);
+                }
+                if ($payVia == 'bkash') {
+                    $url = base_url("feespayment/bkash");
                     $this->session->set_userdata("params", $params);
                 }
 
@@ -1054,18 +1045,18 @@ class Feespayment extends Admin_Controller
         if ($_GET['status_id'] == 1 && !empty($_GET['billcode'])) {
             $some_data = array(
                 'billCode' => $_GET['billcode'],
-                'billpaymentStatus' => '1'
-            );  
+                'billpaymentStatus' => '1',
+            );
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_URL, 'https://toyyibpay.com/index.php/api/getBillTransactions');  
+            curl_setopt($curl, CURLOPT_URL, 'https://toyyibpay.com/index.php/api/getBillTransactions');
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $some_data);
 
             $result = curl_exec($curl);
-            $info = curl_getinfo($curl);  
+            $info = curl_getinfo($curl);
             curl_close($curl);
             $result = json_decode($result);
             if (!empty($result[0]->billpaymentStatus) && $result[0]->billpaymentStatus == 1) {
@@ -1100,7 +1091,6 @@ class Feespayment extends Admin_Controller
     public function toyyibpay_callbackurl()
     {
         //some code here
-
     }
 
     // payhere payment gateway script start
@@ -1231,7 +1221,7 @@ class Feespayment extends Admin_Controller
                     'checkout_theme' => 'dark',
                     'customer_name' => $params['student_name'],
                     'customer_email' => (empty($params['student_email']) ? 'john@mail.com' : $params['student_email']),
-                ]; 
+                ];
 
                 //live end point
                 $url = "https://nepalste.com.np/payment/initiate";
@@ -1242,11 +1232,11 @@ class Feespayment extends Admin_Controller
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
                 curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_POSTFIELDS,  $parameters);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $result = curl_exec($ch); 
+                $result = curl_exec($ch);
                 curl_close($ch);
                 $obj = json_decode($result);
                 if (!empty($obj)) {
@@ -1274,11 +1264,11 @@ class Feespayment extends Admin_Controller
             $data = $_POST['data'];
 
             // Generate your signature
-            $customKey = $data['amount'].$identifier;
+            $customKey = $data['amount'] . $identifier;
             $secret = $config['nepalste_secret_key'];
-            $mySignature = strtoupper(hash_hmac('sha256', $customKey , $secret));
+            $mySignature = strtoupper(hash_hmac('sha256', $customKey, $secret));
             $myIdentifier = $params['myIdentifier'];
-            if($status == "success" && $signature == $mySignature &&  $identifier ==  $myIdentifier){
+            if ($status == "success" && $signature == $mySignature && $identifier == $myIdentifier) {
                 $arrayFees = array(
                     'allocation_id' => $params['allocation_id'],
                     'type_id' => $params['type_id'],
@@ -1293,6 +1283,152 @@ class Feespayment extends Admin_Controller
                 );
                 $this->savePaymentData($arrayFees);
             }
+        }
+    }
+
+    public function bkash_getToken($credentials_arr = [])
+    {
+        $post_token = array(
+            'app_key' => $credentials_arr['bkash_app_key'],
+            'app_secret' => $credentials_arr['bkash_app_secret'],
+        );
+        $url = curl_init($credentials_arr['base_url'] . "/checkout/token/grant");
+        $post_token = json_encode($post_token);
+        $header = array(
+            'Content-Type:application/json',
+            "password:" . $credentials_arr['bkash_password'],
+            "username:" . $credentials_arr['bkash_username'],
+        );
+        curl_setopt($url, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($url, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($url, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($url, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($url, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($url, CURLOPT_POSTFIELDS, $post_token);
+        curl_setopt($url, CURLOPT_FOLLOWLOCATION, 1);
+        $result_data = curl_exec($url);
+        curl_close($url);
+        $response = json_decode($result_data, true);
+        $this->session->set_userdata("bkash_token", $response['id_token']);
+        return $response['id_token'];
+    }
+
+    public function bkash()
+    {
+        $config = $this->get_payment_config();
+        $params = $this->session->userdata('params');
+        if (!empty($params)) {
+            if ($config['bkash_app_key'] == "" && $config['bkash_app_secret'] == "") {
+                set_alert('error', 'bkash config not available');
+                redirect($_SERVER['HTTP_REFERER']);
+            } else {
+                if ($config['bkash_sandbox']) {
+                    $url = 'https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized'; //sandbox
+                } else {
+                    $url = 'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized';
+                }
+                $config['base_url'] = $url;
+
+                // create Token
+                $this->bkash_getToken($config);
+                $post_token = array(
+                    'mode' => '0011',
+                    'amount' => floatval($params['amount'] + $params['fine']),
+                    'payerReference' => "Submitting student fees Invoice No - " . $params['invoice_no'],
+                    'callbackURL' => base_url('feespayment/bkash_callback'),
+                    'currency' => 'BDT',
+                    'intent' => 'sale',
+                    'merchantInvoiceNumber' => 'INV' . rand(),
+                );
+
+                $url = curl_init($config['base_url'] . "/checkout/create");
+                $post_token = json_encode($post_token);
+                $header = array(
+                    'Content-Type:application/json',
+                    'Authorization:' . $this->session->userdata("bkash_token"),
+                    'X-APP-Key:' . $config['bkash_app_key'],
+                );
+                curl_setopt($url, CURLOPT_HTTPHEADER, $header);
+                curl_setopt($url, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($url, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($url, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($url, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($url, CURLOPT_POSTFIELDS, $post_token);
+                curl_setopt($url, CURLOPT_FOLLOWLOCATION, 1);
+                $result_data = curl_exec($url);
+                curl_close($url);
+
+                $response = json_decode($result_data, true);
+                if (isset($response['bkashURL']) && !empty($response['bkashURL'])) {
+                    header("Location: " . $response['bkashURL']);
+                } else {
+                    set_alert('error', "Transaction Failed");
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
+            }
+        }
+    }
+
+    public function bkash_callback()
+    {
+        if ($_GET['status'] == 'success') {
+            $config = $this->get_payment_config();
+            $params = $this->session->userdata('params');
+            $this->session->set_userdata("params", "");
+
+            $paymentID = $_GET['paymentID'];
+            $post_token = array(
+                'paymentID' => $paymentID,
+            );
+
+            if ($config['bkash_sandbox']) {
+                $url = 'https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized'; //sandbox
+            } else {
+                $url = 'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized';
+            }
+            $config['base_url'] = $url;
+
+            $url = curl_init($config['base_url'] . "/checkout/execute");
+            $post_token = json_encode($post_token);
+            $header = array(
+                'Content-Type:application/json',
+                'Authorization:' . $this->session->userdata("bkash_token"),
+                'X-APP-Key:' . $config['bkash_app_key'],
+            );
+            curl_setopt($url, CURLOPT_HTTPHEADER, $header);
+            curl_setopt($url, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($url, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($url, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($url, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($url, CURLOPT_POSTFIELDS, $post_token);
+            curl_setopt($url, CURLOPT_FOLLOWLOCATION, 1);
+            $result_data = curl_exec($url);
+            curl_close($url);
+            $obj = json_decode($result_data);
+
+            if (!empty($obj) && $obj->statusCode == '0000') {
+                $arrayFees = array(
+                    'allocation_id' => $params['allocation_id'],
+                    'type_id' => $params['type_id'],
+                    'collect_by' => "",
+                    'amount' => $params['amount'],
+                    'discount' => 0,
+                    'fine' => $params['fine'],
+                    'pay_via' => 20,
+                    'collect_by' => 'online',
+                    'remarks' => "Fees deposits online via bKash TXN ID: " . $obj->trxID,
+                    'date' => date("Y-m-d"),
+                );
+                $this->savePaymentData($arrayFees);
+                set_alert('success', translate('payment_successfull'));
+                redirect(base_url('userrole/invoice'));
+            } else {
+                set_alert('error', "Transaction Failed");
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+        } else {
+            set_alert('error', "Transaction Failed");
+            redirect(base_url('userrole/invoice'));
         }
     }
 

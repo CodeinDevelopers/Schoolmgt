@@ -6,7 +6,7 @@
     margin-left: 16px;">
     <div class="profile-content">
         <div class="profile-image">
-		<img src="<?=get_image_url('parent', $parent['photo'])?>">
+		<img src="<?=get_image_url('staff', $staff['photo'])?>">
         </div>
         
         <div class="profile-details">
