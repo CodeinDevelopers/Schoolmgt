@@ -276,4 +276,75 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let deferredPrompt;
+    const installContainer = document.getElementById('pwa-install-container');
+    const installButton = document.getElementById('pwa-install-button');
+    const iosModal = document.getElementById('ios-install-modal');
+    const closeButton = document.querySelector('.close-button');
+    const isMobile = () => {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+    if (!isMobile()) {
+        return;
+    }
+    const isRunningStandalone = () => {
+        return (window.matchMedia('(display-mode: standalone)').matches) || 
+               (window.navigator.standalone) || 
+               document.referrer.includes('android-app://');
+    };
+    const isIOS = () => {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    };
+    const isIOSSafari = () => {
+        return isIOS() && /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+    };
+    if (isRunningStandalone()) {
+        installContainer.classList.add('hidden');
+    } else {
+        if (isIOSSafari()) {
+            installContainer.classList.remove('hidden');
+        }
+    }
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installContainer.classList.remove('hidden');
+    });
+    installButton.addEventListener('click', async () => {
+        if (isIOSSafari()) {
+            iosModal.classList.remove('hidden');
+            return;
+        }
+        if (!deferredPrompt) {
+            return;
+        }
+        
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        
+        if (outcome === 'accepted') {
+            installContainer.classList.add('hidden');
+        }
+    });
+    closeButton.addEventListener('click', () => {
+        iosModal.classList.add('hidden');
+    });
+    window.addEventListener('click', (event) => {
+        if (event.target === iosModal) {
+            iosModal.classList.add('hidden');
+        }
+    });
+    window.addEventListener('appinstalled', (evt) => {
+        installContainer.classList.add('hidden');
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && isRunningStandalone()) {
+            installContainer.classList.add('hidden');
+        }
+    });
+});
+</script>
 </header>
