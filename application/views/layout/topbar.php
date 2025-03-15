@@ -245,106 +245,132 @@ foreach ($get_session as $session) :
 	</div>
 	<script>
 document.addEventListener("DOMContentLoaded", function() {
+    // Sidebar functionality
     var menuButton = document.getElementById("menuButton");
     var menuIcon = document.getElementById("menuIcon");
     var closeIcon = document.getElementById("closeIcon");
-    var htmlElement = document.documentElement; // Reference to <html>
+    var htmlElement = document.documentElement;
 
-    menuButton.addEventListener("click", function() {
-        // Check if sidebar is opened
-        var isOpened = htmlElement.classList.contains("sidebar-left-opened");
+    if (menuButton && menuIcon && closeIcon) {
+        menuButton.addEventListener("click", function() {
+            // Check if sidebar is opened
+            var isOpened = htmlElement.classList.contains("sidebar-left-opened");
 
-        // Toggle icon visibility
-        if (isOpened) {
-            menuIcon.style.display = "inline-block";
-            closeIcon.style.display = "none";
-        } else {
-            menuIcon.style.display = "none";
-            closeIcon.style.display = "inline-block";
-        }
-    });
+            // Toggle icon visibility
+            if (isOpened) {
+                menuIcon.style.display = "inline-block";
+                closeIcon.style.display = "none";
+            } else {
+                menuIcon.style.display = "none";
+                closeIcon.style.display = "inline-block";
+            }
+        });
 
-    // Also handle closing event to switch back to menu icon
-    window.addEventListener("sidebar-left-toggle", function(event) {
-        if (event.detail && event.detail.added) {
-            menuIcon.style.display = "none";
-            closeIcon.style.display = "inline-block";
-        } else {
-            menuIcon.style.display = "inline-block";
-            closeIcon.style.display = "none";
-        }
-    });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+        // Also handle closing event to switch back to menu icon
+        window.addEventListener("sidebar-left-toggle", function(event) {
+            if (event.detail && event.detail.added) {
+                menuIcon.style.display = "none";
+                closeIcon.style.display = "inline-block";
+            } else {
+                menuIcon.style.display = "inline-block";
+                closeIcon.style.display = "none";
+            }
+        });
+    }
+
+    // PWA Installation functionality
     let deferredPrompt;
     const installContainer = document.getElementById('pwa-install-container');
     const installButton = document.getElementById('pwa-install-button');
     const iosModal = document.getElementById('ios-install-modal');
     const closeButton = document.querySelector('.close-button');
+    
+    // Helper functions for PWA
     const isMobile = () => {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     };
-    if (!isMobile()) {
-        return;
-    }
+    
     const isRunningStandalone = () => {
         return (window.matchMedia('(display-mode: standalone)').matches) || 
                (window.navigator.standalone) || 
                document.referrer.includes('android-app://');
     };
+    
     const isIOS = () => {
         return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     };
+    
     const isIOSSafari = () => {
         return isIOS() && /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     };
-    if (isRunningStandalone()) {
-        installContainer.classList.add('hidden');
-    } else {
-        if (isIOSSafari()) {
-            installContainer.classList.remove('hidden');
+
+    // Only run PWA code if on mobile
+    if (isMobile()) {
+        if (isRunningStandalone()) {
+            if (installContainer) installContainer.classList.add('hidden');
+        } else {
+            if (installContainer && isIOSSafari()) {
+                installContainer.classList.remove('hidden');
+            }
         }
+
+        // PWA install prompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installContainer) installContainer.classList.remove('hidden');
+        });
+
+        // Install button click handler
+        if (installButton) {
+            installButton.addEventListener('click', async () => {
+                if (isIOSSafari()) {
+                    if (iosModal) iosModal.classList.remove('hidden');
+                    return;
+                }
+                
+                if (!deferredPrompt) {
+                    return;
+                }
+                
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                
+                if (outcome === 'accepted' && installContainer) {
+                    installContainer.classList.add('hidden');
+                }
+            });
+        }
+
+        // Close button for iOS modal
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                if (iosModal) iosModal.classList.add('hidden');
+            });
+        }
+
+        // Close modal when clicking outside
+        if (iosModal) {
+            window.addEventListener('click', (event) => {
+                if (event.target === iosModal) {
+                    iosModal.classList.add('hidden');
+                }
+            });
+        }
+
+        // Handle app installed event
+        window.addEventListener('appinstalled', (evt) => {
+            if (installContainer) installContainer.classList.add('hidden');
+        });
+
+        // Check if running standalone when visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && isRunningStandalone() && installContainer) {
+                installContainer.classList.add('hidden');
+            }
+        });
     }
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        installContainer.classList.remove('hidden');
-    });
-    installButton.addEventListener('click', async () => {
-        if (isIOSSafari()) {
-            iosModal.classList.remove('hidden');
-            return;
-        }
-        if (!deferredPrompt) {
-            return;
-        }
-        
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        
-        if (outcome === 'accepted') {
-            installContainer.classList.add('hidden');
-        }
-    });
-    closeButton.addEventListener('click', () => {
-        iosModal.classList.add('hidden');
-    });
-    window.addEventListener('click', (event) => {
-        if (event.target === iosModal) {
-            iosModal.classList.add('hidden');
-        }
-    });
-    window.addEventListener('appinstalled', (evt) => {
-        installContainer.classList.add('hidden');
-    });
-    document.addEventListener('visibilitychange', () => {
-        if (!document.hidden && isRunningStandalone()) {
-            installContainer.classList.add('hidden');
-        }
-    });
 });
 </script>
 </header>
