@@ -392,71 +392,81 @@ if (count($allocations)) {
 				
 				<!--add fees form-->
 				<?php if($invoice['status'] != 'total'): ?>
-					<div id="collect_fees" class="tab-pane">
-						<div class="mb-xlg">
-						<?php echo form_open('feespayment/checkout', array('class' => 'form-horizontal frm-submit' )); ?>
-							<input type="hidden" name="invoice_no" value="<?=$invoice['invoice_no']?>">
-							<div class="form-group">
-								<label class="col-md-3 control-label"><?=translate('fees_type')?> <span class="required">*</span></label>
-								<div class="col-md-6">
-								<?php
-									echo form_dropdown("fees_type", $typeData, set_value('fees_type'), "class='form-control' onchange='getBalanceByType(this)' 
-									data-plugin-selectTwo data-width='100%' ");
-								?>
-								<span class="error"></span>
-								</div>
+	<div id="collect_fees" class="tab-pane">
+		<div class="mb-xlg">
+		<?php echo form_open('feespayment/checkout', array('class' => 'form-horizontal frm-submit' )); ?>
+			<input type="hidden" name="invoice_no" value="<?=$invoice['invoice_no']?>">
+			
+			<!-- New multiple fees selection section -->
+			<div class="form-group">
+				<label class="col-md-3 control-label"><?=translate('select_fees')?> <span class="required">*</span></label>
+				<div class="col-md-6">
+					<div class="fees-selection-container">
+						<?php foreach ($typeData as $key => $value): ?>
+							<?php if($key != ''): ?>
+							<div class="checkbox-custom checkbox-primary mb-sm">
+								<input type="checkbox" name="selected_fees[]" id="fee_<?=$key?>" value="<?=$key?>" class="fee-checkbox" data-fee-type="<?=$key?>">
+								<label for="fee_<?=$key?>"><?=$value?></label>
+								<input type="text" class="form-control input-sm fee-amount-input" id="amount_<?=$key?>" placeholder="Amount" disabled>
 							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label"><?=translate('amount')?> <span class="required">*</span></label>
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="fee_amount" id="feeAmount" value="" autocomplete="off" />
-									<span class="error"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label"><?=translate('fine')?></label>
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="fine_amount" id="fineAmount" value="0" autocomplete="off" readonly="" />
-									<span class="error"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label"><?=translate('payment_method')?> <span class="required">*</span></label>
-								<div class="col-md-6">
-		    						<?php
-										$payvia_list = array('' => translate('select_payment_method'));
-										if ($config['paypal_status'] == 1)
-											$payvia_list['paypal'] = 'Paypal';
-										if ($config['stripe_status'] == 1)
-											$payvia_list['stripe'] = 'Stripe';
-										if ($config['payumoney_status'] == 1)
-											$payvia_list['payumoney'] = 'PayUmoney';
-										if ($config['paystack_status'] == 1)
-											$payvia_list['paystack'] = 'Paystack';
-										if ($config['razorpay_status'] == 1)
-											$payvia_list['razorpay'] = 'Razorpay';
-										if ($config['sslcommerz_status'] == 1)
-											$payvia_list['sslcommerz'] = 'SSLcommerz';
-										if ($config['jazzcash_status'] == 1)
-											$payvia_list['jazzcash'] = 'Jazzcash';
-										if ($config['midtrans_status'] == 1)
-											$payvia_list['midtrans'] = 'Midtrans';
-										if ($config['flutterwave_status'] == 1)
-											$payvia_list['flutterwave'] = 'Flutter Wave';
-	                                    if ($config['paytm_status'] == 1)
-	                                        $payvia_list['paytm'] = 'Paytm';
-	                                    if ($config['toyyibpay_status'] == 1)
-	                                        $payvia_list['toyyibpay'] = 'toyyibPay';
-	                                    if ($config['payhere_status'] == 1)
-	                                        $payvia_list['payhere'] = 'Payhere';
-	                                    if ($config['nepalste_status'] == 1)
-	                                        $payvia_list['nepalste'] = 'Nepalste';
-		    							echo form_dropdown("pay_via", $payvia_list, set_value('pay_via'), "class='form-control' data-plugin-selectTwo data-width='100%' id='pay_via'
-		    							data-minimum-results-for-search='Infinity' ");
-		    						?>
-									<span class="error"></span>
-								</div>
-							</div>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</div>
+					<span class="error"></span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-3 control-label"><?=translate('amount')?> <span class="required">*</span></label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="fee_amount" id="feeAmount" value="" autocomplete="off" readonly />
+					<span class="error"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label"><?=translate('fine')?></label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="fine_amount" id="fineAmount" value="0" autocomplete="off" readonly="" />
+					<span class="error"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label"><?=translate('payment_method')?> <span class="required">*</span></label>
+				<div class="col-md-6">
+					<?php
+						$payvia_list = array('' => translate('select_payment_method'));
+						if ($config['paypal_status'] == 1)
+							$payvia_list['paypal'] = 'Paypal';
+						if ($config['stripe_status'] == 1)
+							$payvia_list['stripe'] = 'Stripe';
+						if ($config['payumoney_status'] == 1)
+							$payvia_list['payumoney'] = 'PayUmoney';
+						if ($config['paystack_status'] == 1)
+							$payvia_list['paystack'] = 'Paystack';
+						if ($config['razorpay_status'] == 1)
+							$payvia_list['razorpay'] = 'Razorpay';
+						if ($config['sslcommerz_status'] == 1)
+							$payvia_list['sslcommerz'] = 'SSLcommerz';
+						if ($config['jazzcash_status'] == 1)
+							$payvia_list['jazzcash'] = 'Jazzcash';
+						if ($config['midtrans_status'] == 1)
+							$payvia_list['midtrans'] = 'Midtrans';
+						if ($config['flutterwave_status'] == 1)
+							$payvia_list['flutterwave'] = 'Flutter Wave';
+                        if ($config['paytm_status'] == 1)
+                            $payvia_list['paytm'] = 'Paytm';
+                        if ($config['toyyibpay_status'] == 1)
+                            $payvia_list['toyyibpay'] = 'toyyibPay';
+                        if ($config['payhere_status'] == 1)
+                            $payvia_list['payhere'] = 'Payhere';
+                        if ($config['nepalste_status'] == 1)
+                            $payvia_list['nepalste'] = 'Nepalste';
+						echo form_dropdown("pay_via", $payvia_list, set_value('pay_via'), "class='form-control' data-plugin-selectTwo data-width='100%' id='pay_via'
+						data-minimum-results-for-search='Infinity' ");
+					?>
+					<span class="error"></span>
+				</div>
+			</div>
 						
 							<div class="form-group payu"  style="display: none;">
 								<label class="col-md-3 control-label">Name <span class="required">*</span></label>

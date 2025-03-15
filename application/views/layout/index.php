@@ -37,10 +37,90 @@
 			</section>
 		</div>
 	</section>
-
+	<div id="ios-install-modal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h3>Install App on iOS</h3>
+        <ol>
+            <li>Tap the share button <svg class="share-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg> at the bottom of your screen</li>
+            <li>Scroll down and tap "Add to Home Screen"</li>
+            <li>Tap "Add" in the top right corner</li>
+        </ol>
+    </div>
+</div>
 	<!-- JS Script -->
 	<?php $this->load->view('layout/script.php');?>
-	
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let deferredPrompt;
+    const installContainer = document.getElementById('pwa-install-container');
+    const installButton = document.getElementById('pwa-install-button');
+    const iosModal = document.getElementById('ios-install-modal');
+    const closeButton = document.querySelector('.close-button');
+    const isMobile = () => {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+    if (!isMobile()) {
+        return;
+    }
+    const isRunningStandalone = () => {
+        return (window.matchMedia('(display-mode: standalone)').matches) || 
+               (window.navigator.standalone) || 
+               document.referrer.includes('android-app://');
+    };
+    const isIOS = () => {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    };
+    const isIOSSafari = () => {
+        return isIOS() && /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+    };
+    if (isRunningStandalone()) {
+        installContainer.classList.add('hidden');
+    } else {
+        if (isIOSSafari()) {
+            installContainer.classList.remove('hidden');
+        }
+    }
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installContainer.classList.remove('hidden');
+    });
+    installButton.addEventListener('click', async () => {
+        if (isIOSSafari()) {
+            iosModal.classList.remove('hidden');
+            return;
+        }
+        if (!deferredPrompt) {
+            return;
+        }
+        
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        
+        if (outcome === 'accepted') {
+            installContainer.classList.add('hidden');
+        }
+    });
+    closeButton.addEventListener('click', () => {
+        iosModal.classList.add('hidden');
+    });
+    window.addEventListener('click', (event) => {
+        if (event.target === iosModal) {
+            iosModal.classList.add('hidden');
+        }
+    });
+    window.addEventListener('appinstalled', (evt) => {
+        installContainer.classList.add('hidden');
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && isRunningStandalone()) {
+            installContainer.classList.add('hidden');
+        }
+    });
+});
+</script>
 	<?php
 	$alertclass = "";
 	if($this->session->flashdata('alert-message-success')){
