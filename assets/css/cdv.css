@@ -897,152 +897,68 @@ a.cdev-stat-btn{text-decoration: none !important;}
     }
 }
 
-.install-button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    position: relative;
-}
-
-.icon-container {
-    position: relative;
-    display: inline-block;
-}
-
-.icon-container svg {
-    width: 36px;
-    height: 36px;
-    stroke: #4a6cf7;
-    transition: stroke 0.3s ease;
-}
-
-.install-button:hover svg {
-    stroke: #3a5bd9;
-}
-
-.badge {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: #ff4757;
-    color: white;
-    border-radius: 12px;
-    padding: 2px 8px;
-    font-size: 12px;
-    font-weight: bold;
-    white-space: nowrap;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-.modal {
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+.cdev-search-container {
+    font-family: Arial, sans-serif;
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 90%;
-    width: 350px;
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #666;
-}
-.modal-content h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #333;
-}
-.modal-content ol {
-    padding-left: 20px;
-    margin-bottom: 0;
-}
-.modal-content li {
-    margin-bottom: 12px;
-    display: flex;
     align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 990px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
-.share-icon {
-    margin-left: 5px;
-    vertical-align: middle;
+
+.cdev-search-box {
+    width: 100%;
+    padding: 11px 40px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
 }
-@media (max-width: 480px) {
-    .badge {
-        font-size: 10px;
-        padding: 1px 6px;
-        right: -6px;
+.cdev-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+    transition: all 0.2s ease-in-out;
+}
+.cdev-search-icon {
+    left: 10px;
+}
+
+.cdev-cancel-icon {
+    left: 10px; 
+    display: none;
+}
+.cdev-send-icon {
+    right: 10px;
+    display: none;
+}
+.cdev-search-box:focus ~ .cdev-search-icon,
+.cdev-search-box:not(:placeholder-shown) ~ .cdev-search-icon {
+    display: none;
+}
+.cdev-search-box:focus ~ .cdev-cancel-icon,
+.cdev-search-box:not(:placeholder-shown) ~ .cdev-cancel-icon {
+    display: block;
+}
+.cdev-search-box:not(:placeholder-shown) ~ .cdev-send-icon {
+    display: block;
+}
+.cdev-search-form {
+    width: 100%;
+}
+@media screen and (min-width: 991px) {
+    .cdev-search-container {
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
     }
 }
- .search-container {
-        position: relative;
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .search-box {
-        width: 100%;
-        padding: 10px 40px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        outline: none;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        transition: all 0.2s ease-in-out;
-    }
-
-    .icon {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        width: 16px;
-        height: 16px;
-        opacity: 0.6;
-        transition: all 0.2s ease-in-out;
-    }
-
-    .search-icon {
-        left: 10px;
-    }
-
-    .cancel-icon {
-        left: 10px;
-        display: none;
-    }
-
-    .send-icon {
-        right: 10px;
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-
-    .search-box:focus ~ .search-icon,
-    .search-box:not(:placeholder-shown) ~ .search-icon {
-        display: none;
-    }
-
-    .search-box:focus ~ .cancel-icon,
-    .search-box:not(:placeholder-shown) ~ .cancel-icon {
-        display: block;
-    }
-
-    .search-box:not(:placeholder-shown) ~ .send-icon {
-        display: block;
-    }

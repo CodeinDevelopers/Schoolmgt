@@ -143,13 +143,7 @@ class Student extends Admin_Controller
             access_denied();
         }
 
-        // check saas student add limit
-        if($this->app_lib->isExistingAddon('saas')) {
-            if (!checkSaasLimit('student')) {
-                set_alert('error', translate('update_your_package'));
-                redirect(site_url('dashboard'));
-            }
-        }
+
         $getBranch = $this->getBranchDetails();
         $branchID = $this->application_model->get_branch_id();
         $this->data['getBranch'] = $getBranch;
@@ -175,13 +169,6 @@ class Student extends Admin_Controller
             // check access permission
             if (!get_permission('student', 'is_add')) {
                 ajax_access_denied();
-            }
-
-            // check saas student add limit
-            if($this->app_lib->isExistingAddon('saas')) {
-                if (!checkSaasLimit('student')) {
-                    ajax_access_denied();
-                }
             }
 
             $getBranch = $this->getBranchDetails();

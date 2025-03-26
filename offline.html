@@ -3,274 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academium - Offline</title>
+    <title>You're Offline - Acamedium</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background-color: #f0f2f5;
-            color: #333;
-        }
-        
-        .container {
-            padding: 16px;
-            max-width: 100%;
-        }
-        
-        .offline-message {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: white;
-            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .offline-message h2 {
-            margin-bottom: 10px;
-            color: #555;
-        }
-        
-        .offline-message p {
-            color: #777;
-            margin-bottom: 15px;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
-        }
-        
-        .action-button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
+            background-color: #f5f5f5;
+            margin: 0;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
+            justify-content: center;
         }
-        
-        .refresh-button {
+        .offline-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            max-width: 120px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        button {
             background-color: #4285f4;
             color: white;
-        }
-        
-        .wifi-button {
-            background-color: #34a853;
-            color: white;
-        }
-        
-        .action-button:hover {
-            opacity: 0.9;
-        }
-        
-        .icon {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-        }
-        
-        .skeleton-card {
-            height: 80px;
-            background-color: white;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            padding: 15px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        .skeleton-row {
-            height: 20px;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: pulse 1.5s infinite;
+            border: none;
+            padding: 12px 24px;
             border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
-        
-        .skeleton-row.short {
-            width: 60%;
+        button:hover {
+            background-color: #3367d6;
         }
-        
-        .box-row {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        
-        .box-skeleton {
-            flex: 1;
-            height: 120px;
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        .box-skeleton-inner {
-            position: relative;
-            height: 100%;
-        }
-        
-        .box-skeleton-inner .skeleton-row:first-child {
-            width: 40%;
-            margin-bottom: 40px;
-        }
-        
-        .box-skeleton-inner .skeleton-row:last-child {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-        
-        .box-skeleton.blue {
-            background-color: rgba(66, 133, 244, 0.1);
-        }
-        
-        .box-skeleton.green {
-            background-color: rgba(52, 168, 83, 0.1);
-        }
-        
-        .box-skeleton.orange {
-            background-color: rgba(251, 188, 5, 0.1);
-        }
-        
-        .box-skeleton.purple {
-            background-color: rgba(209, 105, 240, 0.1);
-        }
-        
-        @keyframes pulse {
-            0% {
-                background-position: 200% 0;
-            }
-            100% {
-                background-position: -200% 0;
-            }
+        .status-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
-  
-    
-    <div class="container">
-        <!-- Offline Message -->
-        <div class="offline-message">
-            <h2>You're offline</h2>
-            <p>Please check your internet connection to access all features</p>
-        </div>
-        
-        <!-- Action Buttons -->
-        <div class="button-container">
-            <button class="action-button refresh-button" onclick="window.location.reload()">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4C7.58 4 4.01 7.58 4.01 12C4.01 16.42 7.58 20 12 20C15.73 20 18.84 17.45 19.73 14H17.65C16.83 16.33 14.61 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6C13.66 6 15.14 6.69 16.22 7.78L13 11H20V4L17.65 6.35Z" fill="white"/>
-                </svg>
-                Refresh
-            </button>
-            <button class="action-button wifi-button" onclick="openWifiSettings()">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 9L12 20L23 9C19.66 5.66 15.84 3.5 12 3.5C8.16 3.5 4.34 5.66 1 9Z" fill="white" opacity="0.3"/>
-                    <path d="M4.8 12.2L12 19.5L19.2 12.2C17.2 10.2 14.7 9 12 9C9.3 9 6.8 10.2 4.8 12.2Z" fill="white" opacity="0.7"/>
-                    <path d="M8.4 15.4L12 19L15.6 15.4C14.6 14.4 13.3 13.8 12 13.8C10.7 13.8 9.4 14.4 8.4 15.4Z" fill="white"/>
-                </svg>
-                WiFi Settings
-            </button>
-        </div>
-        
-        <!-- Skeleton Dashboard -->
-        <div class="skeleton-card">
-            <div class="skeleton-row"></div>
-            <div class="skeleton-row short"></div>
-        </div>
-        
-        <div class="box-row">
-            <div class="box-skeleton">
-                <div class="box-skeleton-inner">
-                    <div class="skeleton-row"></div>
-                    <div class="skeleton-row"></div>
-                </div>
-            </div>
-            <div class="box-skeleton">
-                <div class="box-skeleton-inner">
-                    <div class="skeleton-row"></div>
-                    <div class="skeleton-row"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="box-row">
-            <div class="box-skeleton blue">
-                <div class="box-skeleton-inner">
-                    <div class="skeleton-row"></div>
-                    <div class="skeleton-row"></div>
-                </div>
-            </div>
-            <div class="box-skeleton green">
-                <div class="box-skeleton-inner">
-                    <div class="skeleton-row"></div>
-                    <div class="skeleton-row"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="box-row">
-            <div class="box-skeleton orange">
-                <div class="box-skeleton-inner">
-                    <div class="skeleton-row"></div>
-                    <div class="skeleton-row"></div>
-                </div>
-            </div>
-            <div class="box-skeleton purple">
-                <div class="box-skeleton-inner">
-                    <div class="skeleton-row"></div>
-                    <div class="skeleton-row"></div>
-                </div>
-            </div>
-        </div>
+    <div class="offline-container">
+        <img src="<?php echo base_url('uploads/appIcons/icon-144x144.png')?>" alt="Acamedium Logo" class="logo">
+        <div class="status-icon">📶</div>
+        <h1>You're currently offline</h1>
+        <p>The content you're trying to access isn't available without an internet connection. Please check your connection and try again.</p>
+        <button onclick="window.location.reload()">Refresh Page</button>
     </div>
-
-    <script>
-// Function to open WiFi settings
-function openWifiSettings() {
-    const userAgent = navigator.userAgent.toLowerCase();
-
-    if (/android/.test(userAgent)) {
-        try {
-            // Attempt to open Android WiFi settings
-            window.location.href = 'intent://settings/wifi#Intent;scheme=android;package=com.android.settings;end';
-            
-            // Optionally, show a confirmation message after a delay to let the user know the attempt was made
-            setTimeout(() => {
-                alert('If WiFi settings did not open, please open them manually from your device settings.');
-            }, 3000);
-        } catch (error) {
-            alert('An error occurred while trying to open WiFi settings. Please try manually.');
-        }
-    } 
-    else if (/iphone|ipad|ipod/.test(userAgent)) {
-        // iOS devices do not support this functionality
-        alert('Unfortunately, iOS does not allow apps or websites to open WiFi settings. Please open them manually.');
-    } 
-    else {
-        // Non-mobile devices or unsupported platforms
-        alert('This feature is only supported on Android and iOS devices.');
-    }
-}
-    </script>
 </body>
-</html> 
+</html>
