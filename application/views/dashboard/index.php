@@ -902,3 +902,67 @@ if (!is_superadmin_loggedin()) {
 	}
 })(jQuery);
 </script>
+		    <script>
+    function clearSearch() {
+        const searchBox = document.getElementById("search_text");
+        searchBox.value = "";
+        searchBox.focus();
+        toggleIcons();
+    }
+
+    function toggleIcons() {
+        const searchBox = document.getElementById("search_text");
+        const searchIcon = document.querySelector(".search-icon");
+        const cancelIcon = document.querySelector(".cancel-icon");
+        const sendIcon = document.querySelector(".send-icon");
+
+        if (searchBox.value.length > 0) {
+            searchIcon.style.display = "none";
+            cancelIcon.style.display = "block";
+            sendIcon.style.display = "block";
+        } else {
+            searchIcon.style.display = "block";
+            cancelIcon.style.display = "none";
+            sendIcon.style.display = "none";
+        }
+    }
+
+    document.getElementById("search_text").addEventListener("input", toggleIcons);
+</script>
+
+
+SHIT------>
+
+<script>
+    function clearSearch() {
+        const searchBox = document.getElementById("searchBox");
+        searchBox.value = "";
+        searchBox.focus();
+        toggleIcons();
+    }
+
+    function toggleIcons() {
+        const searchBox = document.getElementById("searchBox");
+        const searchIcon = document.querySelector(".search-icon");
+        const cancelIcon = document.querySelector(".cancel-icon");
+        const sendIcon = document.querySelector(".send-icon");
+
+        if (searchBox.value.length > 0) {
+            searchIcon.style.display = "none";
+            cancelIcon.style.display = "block";
+            sendIcon.style.display = "block";
+        } else {
+            searchIcon.style.display = "block";
+            cancelIcon.style.display = "none";
+            sendIcon.style.display = "none";
+        }
+    }
+
+    function sendSearch() {
+        const searchBox = document.getElementById("searchBox");
+        alert("Searching for: " + searchBox.value);
+    }
+
+    document.getElementById("searchBox").addEventListener("input", toggleIcons);
+</script>
+
