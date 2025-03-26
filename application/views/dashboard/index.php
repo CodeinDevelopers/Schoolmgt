@@ -36,6 +36,35 @@
             </a>
         </div>
     </div></div>
+	<?php if (get_permission('student', 'is_view')): ?>
+    <span class="separator hidden-sm"></span>
+    <?php echo form_open('student/search', array('class' => 'search nav-form')); ?>
+        <div class="search-container">
+            <!-- Input Field -->
+            <input type="text" class="search-box form-control" name="search_text" id="search_text" placeholder="<?php echo translate('student search');?>" oninput="toggleIcons()">
+
+            <!-- Search Icon (Default) -->
+            <svg class="icon search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+
+            <!-- Cancel Icon (Replaces Search Icon) -->
+            <svg class="icon cancel-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" onclick="clearSearch()">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+
+            <!-- Send Button (Appears When Typing) -->
+            <button type="submit" class="send-icon btn btn-default">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                </svg>
+            </button>
+        </div>
+    </form>
+<?php endif; ?>
 	<?php if (is_teacher_loggedin()) { ?>
 <div class="row">
             <div class="col-md-12">
