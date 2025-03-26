@@ -988,3 +988,61 @@ a.cdev-stat-btn{text-decoration: none !important;}
         right: -6px;
     }
 }
+ .search-container {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .search-box {
+        width: 100%;
+        padding: 10px 40px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        opacity: 0.6;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .search-icon {
+        left: 10px;
+    }
+
+    .cancel-icon {
+        left: 10px;
+        display: none;
+    }
+
+    .send-icon {
+        right: 10px;
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .search-box:focus ~ .search-icon,
+    .search-box:not(:placeholder-shown) ~ .search-icon {
+        display: none;
+    }
+
+    .search-box:focus ~ .cancel-icon,
+    .search-box:not(:placeholder-shown) ~ .cancel-icon {
+        display: block;
+    }
+
+    .search-box:not(:placeholder-shown) ~ .send-icon {
+        display: block;
+    }
