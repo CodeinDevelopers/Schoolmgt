@@ -294,7 +294,7 @@
 											<span class="error"><?php echo form_error('username'); ?></span>
 										</div>
 									</div>
-								</div>
+								</div></div>
 
 							
 						<div class="panel-footer">
