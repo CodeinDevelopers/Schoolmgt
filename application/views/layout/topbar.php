@@ -270,100 +270,21 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <script>
-    // Track the dropdown state
-    let dropdownOpen = false;
-    let modalOpen = false;
-
     function cdvedUpdateSelectedSession(sessionName) {
         document.getElementById('cdved-selected-session').textContent = "Current Session: " + sessionName;
-        closeDropdown(); // Close dropdown after selection
     }
 
     function cdvedToggleDropdown() {
         let arrow = document.getElementById('cdved-dropdown-arrow');
         let menu = document.querySelector('.dropdown-menu');
 
-        // Toggle dropdown state
-        dropdownOpen = !dropdownOpen;
-
-        // Update UI based on state
-        if (dropdownOpen) {
-            arrow.style.transform = 'rotate(180deg)';
-            menu.style.display = 'block';
-            // Add event listener for clicks outside dropdown
-            setTimeout(() => {
-                document.addEventListener('click', handleOutsideClick);
-            }, 0);
+        // Toggle rotation class
+        if (arrow.style.transform === 'rotate(180deg)') {
+            arrow.style.transform = 'rotate(0deg)';
         } else {
-            closeDropdown();
+            arrow.style.transform = 'rotate(180deg)';
         }
     }
-
-    function closeDropdown() {
-        let arrow = document.getElementById('cdved-dropdown-arrow');
-        let menu = document.querySelector('.dropdown-menu');
-        
-        dropdownOpen = false;
-        arrow.style.transform = 'rotate(0deg)';
-        menu.style.display = 'none';
-        
-        // Remove outside click handler
-        document.removeEventListener('click', handleOutsideClick);
-    }
-
-    function handleOutsideClick(event) {
-        // Check if click is outside the dropdown
-        const dropdown = document.querySelector('.dropdown-container');
-        if (dropdown && !dropdown.contains(event.target)) {
-            closeDropdown();
-        }
-    }
-
-    // Modal functions
-    function openModal() {
-        const modal = document.getElementById('cdved-modal');
-        modal.style.display = 'block';
-        modalOpen = true;
-        
-        // Add event listener for clicks outside modal
-        setTimeout(() => {
-            document.addEventListener('click', handleModalOutsideClick);
-        }, 0);
-    }
-
-    function closeModal() {
-        const modal = document.getElementById('cdved-modal');
-        modal.style.display = 'none';
-        modalOpen = false;
-        
-        // Remove outside click handler
-        document.removeEventListener('click', handleModalOutsideClick);
-    }
-
-    function handleModalOutsideClick(event) {
-        const modalContent = document.querySelector('.modal-content');
-        if (modalContent && !modalContent.contains(event.target)) {
-            closeModal();
-        }
-    }
-
-    // Initialize event listeners when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize dropdown
-        const dropdownToggle = document.querySelector('.dropdown-toggle');
-        if (dropdownToggle) {
-            dropdownToggle.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent event bubbling
-                cdvedToggleDropdown();
-            });
-        }
-        
-        // Initialize modal close button
-        const closeButtons = document.querySelectorAll('.close-modal');
-        closeButtons.forEach(button => {
-            button.addEventListener('click', closeModal);
-        });
-    });
 </script>
 </header>
 	
