@@ -1,28 +1,3 @@
-<style>
-    #cdved-selected-session {
-        font-weight: 500;
-    }
-
-    .cdved-dropdown-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 15px;
-        border: 1px solid #d1d5db;
-        border-radius: 6px;
-        background: #f9fafb;
-        font-size: 14px;
-        font-weight: 500;
-        color: #4b5563;
-        width: 220px;
-    }
-
-    .cdved-dropdown-toggle i {
-        margin-left: 8px;
-        font-size: 12px;
-        color: #6b7280;
-    }
-</style>
 <header class="header">
 	<div class="logo-env">
 		<a href="#" class="logo">
