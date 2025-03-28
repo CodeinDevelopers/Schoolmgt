@@ -1,3 +1,28 @@
+<style>
+    #cdved-selected-session {
+        font-weight: 500;
+    }
+
+    .cdved-dropdown-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: #f9fafb;
+        font-size: 14px;
+        font-weight: 500;
+        color: #4b5563;
+        width: 220px;
+    }
+
+    .cdved-dropdown-toggle i {
+        margin-left: 8px;
+        font-size: 12px;
+        color: #6b7280;
+    }
+</style>
 <header class="header">
 	<div class="logo-env">
 		<a href="#" class="logo">
@@ -96,52 +121,6 @@ foreach ($multiClass as $key => $class):
 	?>
 
 	
-			<!-- message alert box -->
-			<li>
-				<a href="#" class="dropdown-toggle header-menu-icon" data-toggle="dropdown">
-				<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18.7491 9.70957V9.00497C18.7491 5.13623 15.7274 2 12 2C8.27256 2 5.25087 5.13623 5.25087 9.00497V9.70957C5.25087 10.5552 5.00972 11.3818 4.5578 12.0854L3.45036 13.8095C2.43882 15.3843 3.21105 17.5249 4.97036 18.0229C9.57274 19.3257 14.4273 19.3257 19.0296 18.0229C20.789 17.5249 21.5612 15.3843 20.5496 13.8095L19.4422 12.0854C18.9903 11.3818 18.7491 10.5552 18.7491 9.70957Z" stroke="#717171" stroke-width="1.5"></path> <path d="M7.5 19C8.15503 20.7478 9.92246 22 12 22C14.0775 22 15.845 20.7478 16.5 19" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
-					<?php 
-						$unreadMessage	= $this->application_model->unread_message_alert();
-						if (count($unreadMessage) > 0) {
-							echo '<span class="badge">' . count($unreadMessage) . '</span>';
-						} 
-					?>
-				</a>
-				<div class="dropdown-menu header-menubox qmsg-box-mw">
-					<div class="notification-title">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18.7491 9.70957V9.00497C18.7491 5.13623 15.7274 2 12 2C8.27256 2 5.25087 5.13623 5.25087 9.00497V9.70957C5.25087 10.5552 5.00972 11.3818 4.5578 12.0854L3.45036 13.8095C2.43882 15.3843 3.21105 17.5249 4.97036 18.0229C9.57274 19.3257 14.4273 19.3257 19.0296 18.0229C20.789 17.5249 21.5612 15.3843 20.5496 13.8095L19.4422 12.0854C18.9903 11.3818 18.7491 10.5552 18.7491 9.70957Z" stroke="#717171" stroke-width="1.5"></path> <path d="M7.5 19C8.15503 20.7478 9.92246 22 12 22C14.0775 22 15.845 20.7478 16.5 19" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> </g></svg> <?php echo translate('message');?>
-					</div>
-					<div class="content">
-						<ul>
-							<?php
-								if (count($unreadMessage) > 0) {
-									foreach ($unreadMessage as $message):
-										?>
-								<li>
-									<a href="<?php echo base_url('communication/mailbox/read?type='.$message['msg_type'].'&id='.$message['id']);?>" class="clearfix">
-										<!-- preview of sender image -->
-										<figure class="image pull-right">
-											<img src="<?php echo $message['message_details']['imgPath']; ?>" height="40px" width="40px" class="img-circle">
-										</figure>
-										<!-- preview of sender name and date -->
-										<span class="title line"><strong><?php echo $message['message_details']['userName']; ?></strong>
-										<small>- <?php echo get_nicetime($message['created_at']);?></small>  </span>
-										<!-- preview of the last unread message sub-string -->
-										<span class="message"><?php echo mb_strimwidth(strip_tags($message['body']), 0, 35, "..."); ?></span>
-									</a>
-								</li>
-							<?php
-									endforeach; 
-								}else{
-									echo '<li class="text-center">You do not have any new messages</li>';
-								}
-							?>
-						</ul>
-					</div>
-					<div class="notification-footer">
-						
-		</ul>
-</li>
 			<!-- session switcher box -->
 			<li>
 				<div class="header-menu-icon">
@@ -153,12 +132,13 @@ foreach ($multiClass as $key => $class):
 			<li class="dropdown">
     <a href="#" class="dropdown-toggle header-menu-icon" data-toggle="dropdown" 
        onclick="cdvedToggleDropdown()" 
-       style="display: flex;just ify-content: space-between; align-items: center; padding: 1px 8px; border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb; font-size: 14px; font-weight: 500; color: #4b5563; width: 200px; text-decoration: none; height: 38px;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12Z" stroke="#717171" stroke-width="1.5"></path> <path d="M7 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M2.5 9H21.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M18 17C18 17.5523 17.5523 18 17 18C16.4477 18 16 17.5523 16 17C16 16.4477 16.4477 16 17 16C17.5523 16 18 16.4477 18 17Z" fill="#717171"></path> <path d="M18 13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13C16 12.4477 16.4477 12 17 12C17.5523 12 18 12.4477 18 13Z" fill="#717171"></path> <path d="M13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16C12.5523 16 13 16.4477 13 17Z" fill="#717171"></path> <path d="M13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.5523 12 13 12.4477 13 13Z" fill="#717171"></path> <path d="M8 17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17C6 16.4477 6.44772 16 7 16C7.55228 16 8 16.4477 8 17Z" fill="#717171"></path> <path d="M8 13C8 13.5523 7.55228 14 7 14C6.44772 14 6 13.5523 6 13C6 12.4477 6.44772 12 7 12C7.55228 12 8 12.4477 8 13Z" fill="#717171"></path> </g></svg> <span id="cdved-selected-session" style="font-weight: 500;">
+       style="display: flex; align-items: center; justify-content: space-between; padding: 1px 8px; border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb; font-size: 14px; font-weight: 500; color: #4b5563; width: 200px; text-decoration: none; height: 38px;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12Z" stroke="#717171" stroke-width="1.5"></path> <path d="M7 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M2.5 9H21.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M18 17C18 17.5523 17.5523 18 17 18C16.4477 18 16 17.5523 16 17C16 16.4477 16.4477 16 17 16C17.5523 16 18 16.4477 18 17Z" fill="#717171"></path> <path d="M18 13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13C16 12.4477 16.4477 12 17 12C17.5523 12 18 12.4477 18 13Z" fill="#717171"></path> <path d="M13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16C12.5523 16 13 16.4477 13 17Z" fill="#717171"></path> <path d="M13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.5523 12 13 12.4477 13 13Z" fill="#717171"></path> <path d="M8 17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17C6 16.4477 6.44772 16 7 16C7.55228 16 8 16.4477 8 17Z" fill="#717171"></path> <path d="M8 13C8 13.5523 7.55228 14 7 14C6.44772 14 6 13.5523 6 13C6 12.4477 6.44772 12 7 12C7.55228 12 8 12.4477 8 13Z" fill="#717171"></path> </g></svg><span id="cdved-selected-session" style="font-weight: 500;">
             <?php 
                 $current_session = $this->db->get_where('schoolyear', ['id' => get_session_id()])->row();
                 echo "Session: " . ($current_session ? $current_session->school_year : 'Select Session');
             ?>
-        </span> <i id="cdved-dropdown-arrow" class="fas fa-chevron-down" 
+        </span>
+        <i id="cdved-dropdown-arrow" class="fas fa-chevron-down" 
            style="margin-left: 8px; font-size: 12px; color: #6b7280; transition: transform 0.3s ease;"></i>
     </a>
 
@@ -188,101 +168,18 @@ foreach ($multiClass as $key => $class):
     </div>
 </li>
 	
-		<!-- user profile box -->
-		<span class="separator"></span>
-		<div id="userbox" class="userbox">
-			<a href="#" data-toggle="dropdown">
-				<figure class="profile-picture">
-					<img src="<?php echo get_image_url(get_loggedin_user_type(), $this->session->userdata('logger_photo'));?>" alt="user-image" class="img-circle" height="35">
-				</figure>
-			</a>
-			<div class="dropdown-menu">
-				<ul class="dropdown-user list-unstyled">
-					<li class="user-p-box">
-						<div class="dw-user-box">
-							<div class="u-img">
-								<img src="<?php echo get_image_url(get_loggedin_user_type(), $this->session->userdata('logger_photo'));?>" alt="user">
-							</div>
-							<div class="u-text">
-								<h4><?php echo $this->session->userdata('name');?></h4>
-								<p class="text-muted"><?php echo ucfirst(loggedin_role_name());?></p>
-								<a href="<?php echo base_url('authentication/logout'); ?>" class="btn btn-danger btn-xs"><i class="fas fa-sign-out-alt"></i> <?php echo translate('logout');?></a>
-							</div>
-						</div>
-					</li>
-					<li role="separator" class="divider"></li>
-					<li><a href="<?php echo base_url('profile');?>"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1,.cls-2{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}.cls-1{fill-rule:evenodd;}</style> </defs> <g id="ic-security-secured-profile"> <path class="cls-1" d="M22,8.44c0-1.4-.16-2.64-.21-3.11a1.15,1.15,0,0,0-1.3-1c-.3,0-.95.12-1.68.15a7.35,7.35,0,0,1-2-.16,7.46,7.46,0,0,1-2.19-1.19A14.91,14.91,0,0,1,13,1.81a1.15,1.15,0,0,0-1.57,0A18.08,18.08,0,0,1,9.89,3.1a7.77,7.77,0,0,1-2.2,1.22,8,8,0,0,1-2.28.18,17.22,17.22,0,0,1-1.87-.18,1.14,1.14,0,0,0-1.3,1C2.19,5.8,2.06,7.05,2,8.44a16.94,16.94,0,0,0,.26,4.15,13,13,0,0,0,3.85,5.85,32.09,32.09,0,0,0,4.62,3.62,2.65,2.65,0,0,0,3,0,31.88,31.88,0,0,0,4.36-3.67,13.3,13.3,0,0,0,3.63-5.76A17.34,17.34,0,0,0,22,8.44Z"></path> <path class="cls-1" d="M17,19.33V18a5,5,0,0,0-5-5h0a5,5,0,0,0-5,5v1.33"></path> <circle class="cls-2" cx="12" cy="9.5" r="2.5"></circle> </g> </g></svg> <?php echo translate('profile');?></a></li>
-					<li><a href="<?php echo base_url('profile/password');?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 10V8C6 4.69 7 2 12 2C17 2 18 4.69 18 8V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 22H7C3 22 2 21 2 17V15C2 11 3 10 7 10H17C21 10 22 11 22 15V17C22 21 21 22 17 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.9965 16H16.0054" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11.9955 16H12.0045" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7.99451 16H8.00349" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <?php echo translate('reset_password');?></a></li>
-					<li><a href="<?php echo base_url('communication/mailbox/inbox');?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <circle cx="3" cy="3" r="3" transform="matrix(-1 0 0 1 22 2)" stroke="currentColor" stroke-width="1.5"></circle>
-                                    <path d="M14 2.20004C13.3538 2.06886 12.6849 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88837 21.6244 10.4003 22 12 22C17.5228 22 22 17.5228 22 12C22 11.3151 21.9311 10.6462 21.8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                </g>
-                            </svg> <?php echo translate('mailbox');?></a></li>
-					<?php if(get_permission('global_settings', 'is_view')):?>
-						<li role="separator" class="divider"></li>
-						<li><a href="<?php echo base_url('settings/universal');?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"></circle> <path d="M13.7654 2.15224C13.3978 2 12.9319 2 12 2C11.0681 2 10.6022 2 10.2346 2.15224C9.74457 2.35523 9.35522 2.74458 9.15223 3.23463C9.05957 3.45834 9.0233 3.7185 9.00911 4.09799C8.98826 4.65568 8.70226 5.17189 8.21894 5.45093C7.73564 5.72996 7.14559 5.71954 6.65219 5.45876C6.31645 5.2813 6.07301 5.18262 5.83294 5.15102C5.30704 5.08178 4.77518 5.22429 4.35436 5.5472C4.03874 5.78938 3.80577 6.1929 3.33983 6.99993C2.87389 7.80697 2.64092 8.21048 2.58899 8.60491C2.51976 9.1308 2.66227 9.66266 2.98518 10.0835C3.13256 10.2756 3.3397 10.437 3.66119 10.639C4.1338 10.936 4.43789 11.4419 4.43786 12C4.43783 12.5581 4.13375 13.0639 3.66118 13.3608C3.33965 13.5629 3.13248 13.7244 2.98508 13.9165C2.66217 14.3373 2.51966 14.8691 2.5889 15.395C2.64082 15.7894 2.87379 16.193 3.33973 17C3.80568 17.807 4.03865 18.2106 4.35426 18.4527C4.77508 18.7756 5.30694 18.9181 5.83284 18.8489C6.07289 18.8173 6.31632 18.7186 6.65204 18.5412C7.14547 18.2804 7.73556 18.27 8.2189 18.549C8.70224 18.8281 8.98826 19.3443 9.00911 19.9021C9.02331 20.2815 9.05957 20.5417 9.15223 20.7654C9.35522 21.2554 9.74457 21.6448 10.2346 21.8478C10.6022 22 11.0681 22 12 22C12.9319 22 13.3978 22 13.7654 21.8478C14.2554 21.6448 14.6448 21.2554 14.8477 20.7654C14.9404 20.5417 14.9767 20.2815 14.9909 19.902C15.0117 19.3443 15.2977 18.8281 15.781 18.549C16.2643 18.2699 16.8544 18.2804 17.3479 18.5412C17.6836 18.7186 17.927 18.8172 18.167 18.8488C18.6929 18.9181 19.2248 18.7756 19.6456 18.4527C19.9612 18.2105 20.1942 17.807 20.6601 16.9999C21.1261 16.1929 21.3591 15.7894 21.411 15.395C21.4802 14.8691 21.3377 14.3372 21.0148 13.9164C20.8674 13.7243 20.6602 13.5628 20.3387 13.3608C19.8662 13.0639 19.5621 12.558 19.5621 11.9999C19.5621 11.4418 19.8662 10.9361 20.3387 10.6392C20.6603 10.4371 20.8675 10.2757 21.0149 10.0835C21.3378 9.66273 21.4803 9.13087 21.4111 8.60497C21.3592 8.21055 21.1262 7.80703 20.6602 7C20.1943 6.19297 19.9613 5.78945 19.6457 5.54727C19.2249 5.22436 18.693 5.08185 18.1671 5.15109C17.9271 5.18269 17.6837 5.28136 17.3479 5.4588C16.8545 5.71959 16.2644 5.73002 15.7811 5.45096C15.2977 5.17191 15.0117 4.65566 14.9909 4.09794C14.9767 3.71848 14.9404 3.45833 14.8477 3.23463C14.6448 2.74458 14.2554 2.35523 13.7654 2.15224Z" stroke="currentColor" stroke-width="1.5"></path> </g></svg> <?php echo translate('global_settings');?></a></li>
-					<?php endif; ?>
-					<?php if(get_permission('school_settings', 'is_view') && !is_superadmin_loggedin()):?>
-						<li role="separator" class="divider"></li>
-						<li><a href="<?php echo base_url('school_settings');?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M22 22L2 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17 22V6C17 4.11438 17 3.17157 16.4142 2.58579C15.8284 2 14.8856 2 13 2H11C9.11438 2 8.17157 2 7.58579 2.58579C7 3.17157 7 4.11438 7 6V22" stroke="currentColor" stroke-width="1.5"></path> <path d="M21 22V11.5C21 10.0955 21 9.39331 20.6629 8.88886C20.517 8.67048 20.3295 8.48298 20.1111 8.33706C19.6067 8 18.9045 8 17.5 8" stroke="currentColor" stroke-width="1.5"></path> <path d="M3 22V11.5C3 10.0955 3 9.39331 3.33706 8.88886C3.48298 8.67048 3.67048 8.48298 3.88886 8.33706C4.39331 8 5.09554 8 6.5 8" stroke="currentColor" stroke-width="1.5"></path> <path d="M12 22V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M10 5H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M10 8H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M10 11H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M10 14H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>  <?php echo translate('school_settings');?></a></li>
-					<?php endif; ?>
-					<li role="separator" class="divider"></li>
-					<li><a href="<?php echo base_url('authentication/logout');?>"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1,.cls-2{fill:none;stroke:currentColor;stroke-linecap:round;stroke-width:1.5px;}.cls-1{stroke-linejoin:round;}.cls-2{stroke-linejoin:bevel;}</style> </defs> <g id="ic-actions-log-out"> <path class="cls-1" d="M15.71,15v4a2,2,0,0,1-2,2h-6a2,2,0,0,1-2-2V5a2,2,0,0,1,2-2h6a2,2,0,0,1,2,2V9"></path> <line class="cls-2" x1="12.5" y1="11.95" x2="22.5" y2="11.95"></line> <path class="cls-2" d="M18.82,8l3.44,3.44a.83.83,0,0,1,0,1.18L18.88,16"></path> </g> </g></svg> <?php echo translate('logout');?></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<script>
-document.addEventListener("DOMContentLoaded", function() {
-    var menuButton = document.getElementById("menuButton");
-    var menuIcon = document.getElementById("menuIcon");
-    var closeIcon = document.getElementById("closeIcon");
-    var htmlElement = document.documentElement;
-
-    menuButton.addEventListener("click", function() {
-        // Check if sidebar is opened
-        var isOpened = htmlElement.classList.contains("sidebar-left-opened");
-
-        // Toggle icon visibility
-        if (isOpened) {
-            menuIcon.style.display = "inline-block";
-            closeIcon.style.display = "none";
-        } else {
-            menuIcon.style.display = "none";
-            closeIcon.style.display = "inline-block";
-        }
-    });
-
-    // Also handle closing event to switch back to menu icon
-    window.addEventListener("sidebar-left-toggle", function(event) {
-        if (event.detail && event.detail.added) {
-            menuIcon.style.display = "none";
-            closeIcon.style.display = "inline-block";
-        } else {
-            menuIcon.style.display = "inline-block";
-            closeIcon.style.display = "none";
-        }
-    });
-});
-</script>
-<script>
-    function cdvedUpdateSelectedSession(sessionName) {
-        document.getElementById('cdved-selected-session').textContent = "Current Session: " + sessionName;
-    }
-
-    function cdvedToggleDropdown() {
-        let arrow = document.getElementById('cdved-dropdown-arrow');
-        let menu = document.querySelector('.dropdown-menu');
-        
-        // Toggle rotation class
-        if (arrow.style.transform === 'rotate(180deg)') {
-            arrow.style.transform = 'rotate(0deg)';
-        } else {
-            arrow.style.transform = 'rotate(180deg)';
-        }
-    }
-</script>
-</header>
+			<!-- message alert box -->
+			<li>
+				<a href="#" class="dropdown-toggle header-menu-icon" data-toggle="dropdown">
+				<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18.7491 9.70957V9.00497C18.7491 5.13623 15.7274 2 12 2C8.27256 2 5.25087 5.13623 5.25087 9.00497V9.70957C5.25087 10.5552 5.00972 11.3818 4.5578 12.0854L3.45036 13.8095C2.43882 15.3843 3.21105 17.5249 4.97036 18.0229C9.57274 19.3257 14.4273 19.3257 19.0296 18.0229C20.789 17.5249 21.5612 15.3843 20.5496 13.8095L19.4422 12.0854C18.9903 11.3818 18.7491 10.5552 18.7491 9.70957Z" stroke="#717171" stroke-width="1.5"></path> <path d="M7.5 19C8.15503 20.7478 9.92246 22 12 22C14.0775 22 15.845 20.7478 16.5 19" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+					<?php 
+						$unreadMessage	= $this->application_model->unread_message_alert();
+						if (count($unreadMessage) > 0) {
+							echo '<span class="badge">' . count($unreadMessage) . '</span>';
+						} 
+					?>
+				</a>
+				<div class="dropdown-menu header-menubox qmsg-box-mw">
+					<div class="notification-title">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18.7491 9.70957V9.00497C18.7491 5.13623 15.7274 2 12 2C8.27256 2 5.25087 5.13623 5.25087 9.00497V9.70957C5.25087 10.5552 5.00972 11.3818 4.5578 12.0854L3.45036 13.8095C2.43882 15.3843 3.21105 17.5249 4.97036 18.0229C9.57274 19.3257 14.4273 19.3257 19.0296 18.0229C20.789 17.5249 21.5612 15.3843 20.5496 13.8095L19.4422 12.0854C18.9903 11.3818 18.7491 10.5552 18.7491 9.70957Z" stroke="#717171" stroke-width="1.5"></path> <path d="M7.5 19C8.15503 20.7478 9.92246 22 12 22C14.0775 22 15.845 20.7478 16.5 19" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> </g></svg> <?php echo translate('message');?>
+	
