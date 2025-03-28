@@ -109,7 +109,7 @@ foreach ($multiClass as $key => $class):
        onclick="cdvedToggleDropdown()" 
        style="display: flex; align-items: center; padding: 1px 8px; border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb; font-size: 14px; font-weight: 500; color: #4b5563; width: 200px; text-decoration: none; height: 38px;">
         <!-- Calendar Icon -->
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" style="margin-right: 8px;" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" style="margin-right: 2px;" aria-hidden="true">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
             <g id="SVGRepo_iconCarrier">
