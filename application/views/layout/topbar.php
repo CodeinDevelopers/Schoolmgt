@@ -104,21 +104,61 @@ foreach ($multiClass as $key => $class):
 				</div>
 			</li>
 			
-			<li class="dropdown">
+<li class="dropdown">
     <a href="#" class="dropdown-toggle header-menu-icon" data-toggle="dropdown" 
        onclick="cdvedToggleDropdown()" 
-       style="display: flex; align-items: center; justify-content: space-between; padding: 1px 8px; border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb; font-size: 14px; font-weight: 500; color: #4b5563; width: 200px; text-decoration: none; height: 38px;"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12Z" stroke="#717171" stroke-width="1.5"></path> <path d="M7 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M2.5 9H21.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M18 17C18 17.5523 17.5523 18 17 18C16.4477 18 16 17.5523 16 17C16 16.4477 16.4477 16 17 16C17.5523 16 18 16.4477 18 17Z" fill="#717171"></path> <path d="M18 13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13C16 12.4477 16.4477 12 17 12C17.5523 12 18 12.4477 18 13Z" fill="#717171"></path> <path d="M13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16C12.5523 16 13 16.4477 13 17Z" fill="#717171"></path> <path d="M13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.5523 12 13 12.4477 13 13Z" fill="#717171"></path> <path d="M8 17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17C6 16.4477 6.44772 16 7 16C7.55228 16 8 16.4477 8 17Z" fill="#717171"></path> <path d="M8 13C8 13.5523 7.55228 14 7 14C6.44772 14 6 13.5523 6 13C6 12.4477 6.44772 12 7 12C7.55228 12 8 12.4477 8 13Z" fill="#717171"></path> </g></svg><span id="cdved-selected-session" style="font-weight: 500;">
+       style="display: flex; align-items: center; padding: 1px 8px; border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb; font-size: 14px; font-weight: 500; color: #4b5563; width: 200px; text-decoration: none; height: 38px;">
+        <!-- Calendar Icon -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" style="margin-right: 8px;" aria-hidden="true">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12Z" stroke="#717171" stroke-width="1.5"></path>
+                <path d="M7 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path>
+                <path d="M17 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path>
+                <path d="M2.5 9H21.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path>
+                <path d="M18 17C18 17.5523 17.5523 18 17 18C16.4477 18 16 17.5523 16 17C16 16.4477 16.4477 16 17 16C17.5523 16 18 16.4477 18 17Z" fill="#717171"></path>
+                <path d="M18 13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13C16 12.4477 16.4477 12 17 12C17.5523 12 18 12.4477 18 13Z" fill="#717171"></path>
+                <path d="M13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16C12.5523 16 13 16.4477 13 17Z" fill="#717171"></path>
+                <path d="M13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.5523 12 13 12.4477 13 13Z" fill="#717171"></path>
+                <path d="M8 17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17C6 16.4477 6.44772 16 7 16C7.55228 16 8 16.4477 8 17Z" fill="#717171"></path>
+                <path d="M8 13C8 13.5523 7.55228 14 7 14C6.44772 14 6 13.5523 6 13C6 12.4477 6.44772 12 7 12C7.55228 12 8 12.4477 8 13Z" fill="#717171"></path>
+            </g>
+        </svg>
+        
+        <!-- Session Text -->
+        <span id="cdved-selected-session" style="font-weight: 500; flex-grow: 1;">
             <?php 
                 $current_session = $this->db->get_where('schoolyear', ['id' => get_session_id()])->row();
                 echo "Session: " . ($current_session ? $current_session->school_year : 'Select Session');
             ?>
         </span>
+        
+        <!-- Dropdown Arrow -->
         <i id="cdved-dropdown-arrow" class="fas fa-chevron-down" 
-           style="margin-left: 8px; font-size: 12px; color: #6b7280; transition: transform 0.3s ease;"></i>
+           style="font-size: 12px; color: #6b7280; transition: transform 0.3s ease;"></i>
     </a>
 
     <div class="dropdown-menu header-menubox mh-oh">
-        <div class="notification-title"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12Z" stroke="#717171" stroke-width="1.5"></path> <path d="M7 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M2.5 9H21.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path> <path d="M18 17C18 17.5523 17.5523 18 17 18C16.4477 18 16 17.5523 16 17C16 16.4477 16.4477 16 17 16C17.5523 16 18 16.4477 18 17Z" fill="#717171"></path> <path d="M18 13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13C16 12.4477 16.4477 12 17 12C17.5523 12 18 12.4477 18 13Z" fill="#717171"></path> <path d="M13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16C12.5523 16 13 16.4477 13 17Z" fill="#717171"></path> <path d="M13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.5523 12 13 12.4477 13 13Z" fill="#717171"></path> <path d="M8 17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17C6 16.4477 6.44772 16 7 16C7.55228 16 8 16.4477 8 17Z" fill="#717171"></path> <path d="M8 13C8 13.5523 7.55228 14 7 14C6.44772 14 6 13.5523 6 13C6 12.4477 6.44772 12 7 12C7.55228 12 8 12.4477 8 13Z" fill="#717171"></path> </g></svg> <?php echo translate('academic_session');?></div>
+        <div class="notification-title">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" style="margin-right: 8px;" aria-hidden="true">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12Z" stroke="#717171" stroke-width="1.5"></path>
+                    <path d="M7 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M17 4V2.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M2.5 9H21.5" stroke="#717171" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M18 17C18 17.5523 17.5523 18 17 18C16.4477 18 16 17.5523 16 17C16 16.4477 16.4477 16 17 16C17.5523 16 18 16.4477 18 17Z" fill="#717171"></path>
+                    <path d="M18 13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13C16 12.4477 16.4477 12 17 12C17.5523 12 18 12.4477 18 13Z" fill="#717171"></path>
+                    <path d="M13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16C12.5523 16 13 16.4477 13 17Z" fill="#717171"></path>
+                    <path d="M13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.5523 12 13 12.4477 13 13Z" fill="#717171"></path>
+                    <path d="M8 17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17C6 16.4477 6.44772 16 7 16C7.55228 16 8 16.4477 8 17Z" fill="#717171"></path>
+                    <path d="M8 13C8 13.5523 7.55228 14 7 14C6.44772 14 6 13.5523 6 13C6 12.4477 6.44772 12 7 12C7.55228 12 8 12.4477 8 13Z" fill="#717171"></path>
+                </g>
+            </svg> 
+            <?php echo translate('academic_session');?>
+        </div>
         <div class="content hbox pr-none">
             <div class="scrollable visible-slider dh-tf" data-plugin-scrollable>
                 <div class="scrollable-content">
@@ -142,7 +182,6 @@ foreach ($multiClass as $key => $class):
         </div>
     </div>
 </li>
-	
 			<!-- message alert box -->
 			<li>
 				<a href="#" class="dropdown-toggle header-menu-icon" data-toggle="dropdown">
