@@ -603,7 +603,7 @@ margin: 16px auto 0;
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
-
+/*start Cards for parent, student, admission and Staff*/
 .cdev-stat-card-wrapper {
     width: 100%;
     box-sizing: border-box;
@@ -695,22 +695,25 @@ margin: 16px auto 0;
     height: 100%;
     display: block;
     width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border: 2px solid;
 }
 
 .cdev-stat-students {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border-color: #3b82f6;
 }
 
 .cdev-stat-parents {
-    background: linear-gradient(135deg, #10b981, #059669);
+    border-color: #10b981;
 }
 
 .cdev-stat-teachers {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-color: #f59e0b;
 }
 
 .cdev-stat-admission {
-    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    border-color: #8b5cf6;
 }
 
 .cdev-dashboard-stat-card .cdev-widget-col-in {
@@ -718,21 +721,21 @@ margin: 16px auto 0;
 }
 
 .cdev-dashboard-stat-card h5 {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1.80rem;
+    color: #1e293b;
+    font-size: 1.8rem;
     margin-bottom: 0.75rem;
 }
 
 .cdev-dashboard-stat-card .cdev-stat-counter {
-    color: #ffffff;
+    color: #1e293b;
 }
 
 .cdev-dashboard-stat-card .cdev-stat-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid #e5e7eb;
 }
 
 .cdev-dashboard-stat-card .cdev-stat-footer span {
-    color: rgba(255, 255, 255, 0.8);
+    color: #64748b;
 }
 
 .cdev-stat-icon {
@@ -740,20 +743,20 @@ margin: 16px auto 0;
     bottom: -15px;
     right: -15px;
     font-size: 5rem;
-    opacity: 0.15;
-    color: #ffffff;
+    opacity: 0.1;
+    color: #1e293b;
     transform: rotate(-15deg);
     transition: all 0.3s ease;
 }
 
 .cdev-dashboard-stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .cdev-dashboard-stat-card:hover .cdev-stat-icon {
     transform: rotate(0deg) scale(1.1);
-    opacity: 0.2;
+    opacity: 0.15;
 }
 
 @media (max-width: 1200px) {
@@ -793,7 +796,6 @@ margin: 16px auto 0;
     }
 }
 
-
 .cdev-stat-actions {
     position: absolute;
     top: 10px;
@@ -801,9 +803,8 @@ margin: 16px auto 0;
     z-index: 10;
 }
 
-
 .cdev-stat-admission .cdev-stat-counter {
-    color: #ffffff;
+    color: #1e293b;
 }
 
 .text-success {
@@ -813,12 +814,44 @@ margin: 16px auto 0;
 .text-danger {
     color: #ef4444 !important;
 }
+
 .smaller-icon {
     font-size: 0.8em;
-    margin: left 5px;
+    margin-left: 5px;
 }
+
 .hidden {
     display: none !important;
+}
+
+/* Add some subtle indicators for each card category */
+.cdev-stat-students::after,
+.cdev-stat-parents::after,
+.cdev-stat-teachers::after,
+.cdev-stat-admission::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    opacity: 0.8;
+}
+
+.cdev-stat-students::after {
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
+.cdev-stat-parents::after {
+    background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.cdev-stat-teachers::after {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.cdev-stat-admission::after {
+    background: linear-gradient(90deg, #8b5cf6, #6366f1);
 }
 
 /*mobile search bar */
