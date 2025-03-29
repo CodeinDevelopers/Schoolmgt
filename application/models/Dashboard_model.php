@@ -112,37 +112,77 @@ class Dashboard_model extends CI_Model
 
     /* annual academic fees summary charts */
     public function getWeekendAttendance($branchID = '')
-    {
-        $days = array();
-        $employee_att = array();
-        $student_att = array();
-        $now = new DateTime("6 days ago");
-        $interval = new DateInterval('P1D'); // 1 Day interval
-        $period = new DatePeriod($now, $interval, 6); // 7 Days
-        foreach ($period as $day) {
-            $days[] = $day->format("d-M");
-            $this->db->select('id');
-            if (!empty($branchID)) {
-                $this->db->where('branch_id', $branchID);
-            }
+{
+    $days = array();
+    $employee_att = array(); // Keeps old functionality (teachers present)
+    $student_att = array(); // Keeps old functionality (students present)
 
-            $this->db->where('date = "' . $day->format('Y-m-d') . '" AND (status = "P" OR status = "L")');
-            $student_att[]['y'] = $this->db->get('student_attendance')->num_rows();
+    // New arrays for absentees
+    $student_present = array();
+    $student_absent = array();
+    $employee_present = array();
+    $employee_absent = array();
 
-            $this->db->select('id');
-            if (!empty($branchID)) {
-                $this->db->where('branch_id', $branchID);
-            }
+    $now = new DateTime("6 days ago");
+    $interval = new DateInterval('P1D'); // 1-day interval
+    $period = new DatePeriod($now, $interval, 6); // 7-day range
 
-            $this->db->where('date = "' . $day->format('Y-m-d') . '" AND (status = "P" OR status = "L")');
-            $employee_att[]['y'] = $this->db->get('staff_attendance')->num_rows();
+    foreach ($period as $day) {
+        $days[] = $day->format("d-M");
+
+        // Get present students
+        $this->db->select('id');
+        if (!empty($branchID)) {
+            $this->db->where('branch_id', $branchID);
         }
-        return array(
-            'days' => $days,
-            'employee_att' => $employee_att,
-            'student_att' => $student_att,
-        );
+        $this->db->where('date', $day->format('Y-m-d'));
+        $this->db->where_in('status', ['P', 'L']);
+        $student_present_count = $this->db->get('student_attendance')->num_rows();
+        $student_att[]['y'] = $student_present_count; // Keeps old key
+        $student_present[]['y'] = $student_present_count; // New key for clarity
+
+        // Get absent students
+        $this->db->select('id');
+        if (!empty($branchID)) {
+            $this->db->where('branch_id', $branchID);
+        }
+        $this->db->where('date', $day->format('Y-m-d'));
+        $this->db->where('status', 'A'); // Only absent students
+        $student_absent_count = $this->db->get('student_attendance')->num_rows();
+        $student_absent[]['y'] = $student_absent_count;
+
+        // Get present teachers
+        $this->db->select('id');
+        if (!empty($branchID)) {
+            $this->db->where('branch_id', $branchID);
+        }
+        $this->db->where('date', $day->format('Y-m-d'));
+        $this->db->where_in('status', ['P', 'L']);
+        $employee_present_count = $this->db->get('staff_attendance')->num_rows();
+        $employee_att[]['y'] = $employee_present_count; // Keeps old key
+        $employee_present[]['y'] = $employee_present_count; // New key for clarity
+
+        // Get absent teachers
+        $this->db->select('id');
+        if (!empty($branchID)) {
+            $this->db->where('branch_id', $branchID);
+        }
+        $this->db->where('date', $day->format('Y-m-d'));
+        $this->db->where('status', 'A'); // Only absent teachers
+        $employee_absent_count = $this->db->get('staff_attendance')->num_rows();
+        $employee_absent[]['y'] = $employee_absent_count;
     }
+
+    return array(
+        'days' => $days,
+        'employee_att' => $employee_att, // Old key (teachers present)
+        'student_att' => $student_att, // Old key (students present)
+        'student_present' => $student_present, // New key
+        'employee_present' => $employee_present, // New key
+        'student_absent' => $student_absent, // New key
+        'employee_absent' => $employee_absent // New key
+    );
+}
 
     /* monthly academic cash book transaction charts */
     public function getIncomeVsExpense($branchID = '')

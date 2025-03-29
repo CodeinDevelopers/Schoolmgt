@@ -133,24 +133,6 @@ if ($div == 0) {
 	$widget1 = 12 / $div;
 }
 
-$div2 = 0;
-if (get_permission('admission_count_widget', 'is_view')) {
-	$div2++;	                                                              
-}
-if (get_permission('voucher_count_widget', 'is_view')) {
-	$div2++;	
-}
-if (get_permission('transport_count_widget', 'is_view') && moduleIsEnabled('transport')) {
-	$div2++;	
-}
-if (get_permission('hostel_count_widget', 'is_view') && moduleIsEnabled('hostel')) {
-	$div2++;	
-}
-if ($div2 == 0) {
-	$widget2 = 0;
-}else{
-	$widget2 = 12 / $div2;
-}
 
 $div3 = 12;
 if (get_permission('student_birthday_widget', 'is_view') || get_permission('staff_birthday_widget', 'is_view')) {
@@ -162,14 +144,13 @@ if (get_permission('student_birthday_widget', 'is_view') || get_permission('staf
         <i class="fas fa-exclamation-triangle"></i> This School management system may not work properly because "ONLY_FULL_GROUP_BY" is enabled, <strong>Strongly recommended</strong> - consult with your hosting provider to disable "ONLY_FULL_GROUP_BY" in sql_mode configuration.
     </div>
 <?php } ?>
-
-<?php 
-if (!is_superadmin_loggedin()) {
-	if (!empty($this->saas_model->getSubscriptionsExpiredNotification())) { ?>
-    <div class="alert alert-danger">
-        <?php echo $this->saas_model->getSubscriptionsExpiredNotification(); ?>
-    </div>
-<?php } } ?>
+<?php
+$days = $weekend_attendance["days"];
+$student_present = $weekend_attendance["student_present"];
+$student_absent = $weekend_attendance["student_absent"];
+$employee_present = $weekend_attendance["employee_present"];
+$employee_absent = $weekend_attendance["employee_absent"];
+?>
 <?php if (is_superadmin_loggedin() || is_admin_loggedin() ){ ?>
 <div class="row" style="margin-bottom:10px">
             <div class="col-md-12">
@@ -275,6 +256,52 @@ if (!is_superadmin_loggedin()) {
     </div>
 <?php } ?>
 </div>
+<!----Attendance Card----->
+<div class="cdev-attend-panel">
+    <div class="cdev-panel-header">
+        <h3 class="cdev-panel-title">
+        <?php
+$day = date('l'); 
+$month = strtolower(date('F')); 
+
+if ($day == 'Saturday' || $day == 'Sunday') {
+    echo "No Attendance Today, Enjoy The Weekend!";
+} else {
+    echo translate('attendance_for') . " " . translate(strtolower($day));
+}
+?>
+        </h3>
+    </div>
+    <div class="cdev-panel-content">
+        <div class="cdev-attend-layout">
+            <!-- Students Attendance -->
+            <div class="cdev-metrics-box">
+                <div class="cdev-box-inner">
+                    <div class="cdev-box-content">
+                        <p class="cdev-metrics-header">Students Present Today</p>
+                        <div class="cdev-metrics-data">
+                            <p class="cdev-data-primary">Students Present: <span class="cdev-count-present"><?php echo end($student_present)['y']; ?></span></p>
+                            <p>Students Absent: <span class="cdev-count-absent"><?php echo end($student_absent)['y']; ?></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Teachers Attendance -->
+            <div class="cdev-metrics-box">
+                <div class="cdev-box-inner">
+                    <div class="cdev-box-content">
+                        <p class="cdev-metrics-header">Teachers Present Today</p>
+                        <div class="cdev-metrics-data">
+                            <p class="cdev-data-primary">Teachers Present: <span class="cdev-count-present"><?php echo end($employee_present)['y']; ?></span></p>
+                            <p>Teachers Absent: <span class="cdev-count-absent"><?php echo end($employee_absent)['y']; ?></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+<!----End of Attendance Card---->
 <div class="row">
             <div class="col-md-12">
                 <div class="cdev-dashboard-card">
@@ -748,31 +775,34 @@ if (!is_superadmin_loggedin()) {
 
 <script type="application/javascript">
 (function($) {
-	$('#event_calendar').fullCalendar({
-		header: {
-		left: 'prev,next,today',
-		center: 'title',
-			right: 'month,agendaWeek,agendaDay,listWeek'
-		},
-		firstDay: 1,
-		height: 720,
-		droppable: false,
-		editable: true,
-		timezone: 'UTC',
-		lang: '<?php echo $language ?>',
-		events: {
-			url: "<?=base_url('event/get_events_list/'. $school_id)?>"
-		},
-		
-		eventRender: function(event, element) {
-			$(element).on("click", function() {
-				viewEvent(event.id);
-			});
-			if(event.icon){          
-				element.find(".fc-title").prepend("<i class='fas fa-"+event.icon+"'></i> ");
-			}
-		}
-	});
+    var calendar = $('#event_calendar').fullCalendar({
+        header: {
+            left: 'prev,next,today',
+            center: 'title',
+            right: 'listWeek,month,agendaWeek,agendaDay'
+        },
+        defaultView: 'listWeek', // This should work, but let's force it just in case
+        firstDay: 1,
+        height: 600,
+        droppable: false,
+        editable: true,
+        timezone: 'UTC',
+        lang: '<?php echo $language ?>',
+        events: {
+            url: "<?=base_url('event/get_events_list/'. $school_id)?>"
+        },
+        eventRender: function(event, element) {
+            $(element).on("click", function() {
+                viewEvent(event.id);
+            });
+            if(event.icon){          
+                element.find(".fc-title").prepend("<i class='fas fa-"+event.icon+"'></i> ");
+            }
+        }
+    });
+    setTimeout(function() {
+        $('#event_calendar').fullCalendar('changeView', 'listWeek');
+    }, 100); 
 
 	var days = <?php echo json_encode($weekend_attendance["days"]);?>;
 	var employees_att = <?php echo json_encode($weekend_attendance["employee_att"]);?>;
@@ -833,7 +863,8 @@ if (!is_superadmin_loggedin()) {
 
 <?php if (get_permission('student_quantity_pie_chart', 'is_view')) { ?>
 	// Student Strength Doughnut Chart
-	var color = ['#546570', '#c4ccd3', '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83',  '#ca8622', '#bda29a', '#6e7074'];
+	var color = ['#ffb703', '#f4a261', '#2a9d8f', '#264653', '#f77f00', '#8ecae6', '#023047', '#06d6a0', '#dda15e', '#219ebc', '#ff9f1c', '#5a189a'
+];
 	var strength_data = <?php echo json_encode($student_by_class);?>;
 	var student_strength = document.getElementById("student_strength");
 	var studentchart = echarts.init(student_strength);
@@ -944,4 +975,25 @@ document.querySelectorAll(".search-box").forEach((searchBox) => {
         });
     }
 });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const showMoreBtn = document.getElementById("show-more-btn");
+    const hiddenDays = document.querySelectorAll(".hidden");
+    let isExpanded = false;
+
+    showMoreBtn.addEventListener("click", function () {
+        if (!isExpanded) {
+            // Show all hidden days
+            hiddenDays.forEach(day => day.style.display = "block");
+            showMoreBtn.textContent = "Show Less";
+        } else {
+            // Hide extra days
+            hiddenDays.forEach(day => day.style.display = "none");
+            showMoreBtn.textContent = "Show More";
+        }
+        isExpanded = !isExpanded;
+    });
+});
+
 </script>

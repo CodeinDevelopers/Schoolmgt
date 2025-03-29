@@ -351,38 +351,35 @@ else :
 
 <script type="application/javascript">
 	(function($) {
-		"use strict";
-		
-		// event calendar
-		$('#event_calendar').fullCalendar({
-			header: {
-			left: 'prev,next,today',
-			center: 'title',
-				right: 'month,agendaWeek,agendaDay,listWeek'
-			},
-			firstDay: 1,
-			height: 720,
-			droppable: false,
-			editable: true,
-	        events: {
-	            url: "<?=base_url('event/get_events_list');?>"
-	        },
-			buttonText: {
-				today:    'Today',
-				month:    'Month',
-				week:     'Week',
-				day:      'Day',
-				list:     'List'
-			},
-			eventRender: function(event, element) {
-				$(element).on("click", function() {
-	                view_event(event.id);
-	            });
-				if(event.icon){          
-					element.find(".fc-title").prepend("<i class='fas fa-"+event.icon+"'></i> ");
-				}
-			}
-		});
+    var calendar = $('#event_calendar').fullCalendar({
+        header: {
+            left: 'prev,next,today',
+            center: 'title',
+            right: 'listWeek,month,agendaWeek,agendaDay'
+        },
+        defaultView: 'listWeek', // This should work, but let's force it just in case
+        firstDay: 1,
+        height: 520,
+        droppable: false,
+        editable: true,
+        timezone: 'UTC',
+        lang: '<?php echo $language ?>',
+        events: {
+            url: "<?=base_url('event/get_events_list/'. $school_id)?>"
+        },
+        eventRender: function(event, element) {
+            $(element).on("click", function() {
+                viewEvent(event.id);
+            });
+            if(event.icon){          
+                element.find(".fc-title").prepend("<i class='fas fa-"+event.icon+"'></i> ");
+            }
+        }
+    });
+
+    setTimeout(function() {
+        $('#event_calendar').fullCalendar('changeView', 'listWeek');
+    }, 100); 
 
 		// Own Annual Fee Summary JS
 		var total_fees = <?php echo json_encode($fees_summary['total_fee']);?>;

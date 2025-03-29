@@ -220,7 +220,7 @@ a.due-fees:hover { color: #ff0202; }
         font-size: 10px;
     }
 }
-
+/*Cards for data dis play */
 .cdev-dashboard-card {
     background: #ffffff;
     padding: 0;
@@ -230,11 +230,6 @@ a.due-fees:hover { color: #ff0202; }
     border: 1px solid #e5e7eb;
     overflow: hidden;
     transition: all 0.3s ease;
-}
-
-.cdev-dashboard-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
 }
 
 .cdev-card-header {
@@ -275,7 +270,12 @@ a.due-fees:hover { color: #ff0202; }
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
-
+.cdev-atten-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
 .cdev-stat-card {
     display: flex;
     justify-content: space-between;
@@ -285,11 +285,6 @@ a.due-fees:hover { color: #ff0202; }
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
-}
-
-.cdev-stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .cdev-stat-content {
@@ -442,7 +437,12 @@ a.cdev-pay-btn:hover {
         gap: 0.75rem;
     }
     .cdev-exp-grid {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
+}
+.cdev-atten-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+   
 }
     
     .cdev-card-header, .cdev-card-body {
@@ -465,6 +465,7 @@ a.cdev-pay-btn:hover {
         justify-content: center;
     }
 }
+/*profile card*/
 .student-profile-card {
     background: #ffffff;
     padding: 2rem 2rem;
@@ -622,11 +623,6 @@ margin: 16px auto 0;
     height: 100%;
 }
 
-.cdev-dashboard-panel:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-}
-
 .cdev-panel-body {
     padding: 0;
 }
@@ -747,11 +743,6 @@ margin: 16px auto 0;
     color: #1e293b;
     transform: rotate(-15deg);
     transition: all 0.3s ease;
-}
-
-.cdev-dashboard-stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .cdev-dashboard-stat-card:hover .cdev-stat-icon {
@@ -988,4 +979,99 @@ margin: 16px auto 0;
         overflow: hidden;
     }
     
+}
+
+/* for attendance card */
+.cdev-attend-panel {
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.cdev-panel-header {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cdev-panel-title {
+    margin: 0;
+    color: #333;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.cdev-panel-content {
+    padding: 10px;
+}
+
+/* Attendance Layout */
+.cdev-attend-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Individual Metrics Boxes */
+.cdev-metrics-box {
+    border-radius: 6px;
+    padding: 10px;
+    min-height: 100px; /* Fixed smaller height */
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+.cdev-box-inner {
+    flex: 1;
+}
+
+/* Metrics Content */
+.cdev-box-content {
+    padding: 5px;
+}
+
+.cdev-metrics-header {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 4px;
+    color: #495057;
+}
+
+.cdev-metrics-data {
+    padding: 3px 0;
+}
+
+.cdev-data-primary {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: #495057;
+}
+
+.cdev-count-present {
+    font-weight: 700;
+    font-size: 18px;
+    color: #28a745;  /* Green color for present */
+}
+
+.cdev-count-absent {
+    font-weight: 700;
+    font-size: 18px;
+    color: #dc3545;  /* Red color for absent */
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .cdev-attend-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .cdev-metrics-box {
+        margin-bottom: 8px;
+    }
 }
