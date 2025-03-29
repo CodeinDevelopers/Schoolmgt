@@ -1,3 +1,27 @@
+<style>/* Floating loader at the top-right corner with no background */
+#loading-overlay {
+    position: fixed;
+    top: 10px; /* Distance from the top */
+    right: 10px; /* Distance from the right */
+    width: 40px; /* Adjust size */
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top */
+    display: none; /* Initially hidden */
+}
+
+/* Optional: Fade-in effect */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#loading-overlay svg {
+    animation: fadeIn 0.3s ease-in-out;
+}
+</style>
 <header class="header">
 	<div class="logo-env">
 		<a href="#" class="logo">
@@ -234,7 +258,38 @@ foreach ($multiClass as $key => $class):
         </div>
     </div>
 </li>
-	
+
+<!-- Floating Top-Right Loading Spinner -->
+<div id="loading-overlay">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="24px" height="24px" style="display: inline-block; vertical-align: middle;">
+            <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
+                <stop offset="0" stop-color="currentColor"></stop>
+                <stop offset=".3" stop-color="currentColor" stop-opacity=".9"></stop>
+                <stop offset=".6" stop-color="currentColor" stop-opacity=".6"></stop>
+                <stop offset=".8" stop-color="currentColor" stop-opacity=".3"></stop>
+                <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+            </radialGradient>
+            <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
+                <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="0.6" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
+            </circle>
+            <circle transform-origin="center" fill="none" opacity=".2" stroke="currentColor" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle>
+        </svg>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="30px" height="30px" style="display: inline-block; vertical-align: middle;">
+            <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
+                <stop offset="0" stop-color="currentColor"></stop>
+                <stop offset=".3" stop-color="currentColor" stop-opacity=".9"></stop>
+                <stop offset=".6" stop-color="currentColor" stop-opacity=".6"></stop>
+                <stop offset=".8" stop-color="currentColor" stop-opacity=".3"></stop>
+                <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+            </radialGradient>
+            <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
+                <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="0.6" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
+            </circle>
+            <circle transform-origin="center" fill="none" opacity=".2" stroke="currentColor" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle>
+        </svg>
+</li>
 						
 		</ul>
 
@@ -390,5 +445,25 @@ document.querySelectorAll(".search-box").forEach((searchBox) => {
 
 
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const loader = document.getElementById("loading-overlay");
+
+        // Show loader when clicking a navigation link
+        document.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", function (event) {
+                if (this.target !== "_blank" && this.href !== "#") { // Ignore blank target & anchors
+                    loader.style.display = "flex";
+                }
+            });
+        });
+
+        // Hide loader when page fully loads
+        window.addEventListener("load", function () {
+            loader.style.display = "none";
+        });
+    });
+</script>
+
 </header>
 	
