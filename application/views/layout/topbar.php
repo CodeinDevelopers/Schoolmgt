@@ -433,22 +433,35 @@ document.querySelectorAll(".search-box").forEach((searchBox) => {
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const loader = document.getElementById("loading-overlay");
+    const loader = document.getElementById("loading-overlay");
 
-        // Show loader when clicking a navigation link
-        document.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", function (event) {
-                if (this.target !== "_blank" && this.href !== "#") { // Ignore blank target & anchors
-                    loader.style.display = "flex";
-                }
-            });
-        });
-
-        // Hide loader when page fully loads
-        window.addEventListener("load", function () {
-            loader.style.display = "none";
+    // Show loader when clicking a navigation link
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function (event) {
+            // Get the current URL without hash
+            const currentUrlWithoutHash = window.location.href.split('#')[0];
+            
+            // Skip if:
+            // 1. target is _blank (new window/tab)
+            // 2. href starts with # (hash link)
+            // 3. href is the same page with a hash (e.g., https://example.com/page#section)
+            if (
+                this.target === "_blank" || 
+                this.getAttribute("href").startsWith("#") ||
+                this.href.split('#')[0] === currentUrlWithoutHash
+            ) {
+                return; // Don't show loader
+            }
+            
+            loader.style.display = "flex";
         });
     });
+
+    // Hide loader when page fully loads
+    window.addEventListener("load", function () {
+        loader.style.display = "none";
+    });
+});
 </script>
 
 </header>
