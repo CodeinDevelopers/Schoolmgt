@@ -1465,6 +1465,7 @@ html.dark .header .toggle-sidebar-left {
 .header-right,
 .header-left {
 	height: 59px;
+	width: auto;
 	display: -webkit-box;
 	display: -moz-box;
 	display: -ms-flexbox;
@@ -6393,7 +6394,7 @@ html.dark .open > .dropdown-toggle.btn-default {
 
 .header-menu > li {
 	float: left;
-	margin: -4px 17px 0 0;
+	margin: -4px 15px 0 0;
 	position: relative;
 }
 
@@ -6672,10 +6673,9 @@ html.dark .header-menu .header-menubox .notification-footer {
 	}
 
 	.header-menu > li .header-menubox {
-		left: 15px;
 		right: 15px;
 		top: auto;
-		width: auto !important;
+		width: 180px !important;
 	}
 
 	.header-menu .open .header-menubox {

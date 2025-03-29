@@ -116,11 +116,6 @@ a.cdev-logout-btn:hover {
     transform: scale(1.05);
     border-color: #2563eb;
 }
-
-a.cdev-action-btn span {
-        font-size: 1.4rem; 
-        white-space: nowrap; 
-    }
     .cdev-dashboard-buttons {
     display: flex;
     gap: 1rem;
@@ -404,7 +399,7 @@ a.due-fees:hover { color: #ff0202; }
     transition: all 0.3s ease;
     text-decoration: none !important;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-left: 10px;
 }
 
@@ -884,21 +879,9 @@ a.cdev-stat-btn{text-decoration: none !important;}
 .hidden {
     display: none !important;
 }
-#pwa-install-container {
-    display: none;
-}
-@media (max-width: 768px) {
-    #pwa-install-container {
-        display: block;
-    }
-    
-    #pwa-install-container.hidden {
-        display: none !important;
-    }
-}
 
+/*mobile search bar */
 .cdev-search-container {
-    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -961,4 +944,73 @@ a.cdev-stat-btn{text-decoration: none !important;}
         height: 0;
         overflow: hidden;
     }
+}
+
+/*desktop search bar */
+.cedevu-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-left: 4px;
+}
+
+.cedevu-search-box {
+    width: 100%;
+    padding: 7px 40px 7px 40px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.cedevu-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    transition: all 0.2s ease-in-out;
+}
+
+.cedevu-search-icon {
+    left: 10px;
+}
+
+.cedevu-cancel-icon {
+    left: 10px; 
+    display: none;
+}
+
+.cedevu-send-icon {
+    right: 10px;
+    display: none;
+}
+
+.cedevu-search-box:focus ~ .cedevu-search-icon,
+.cedevu-search-box:not(:placeholder-shown) ~ .cedevu-search-icon {
+    display: none;
+}
+
+.cedevu-search-box:focus ~ .cedevu-cancel-icon,
+.cedevu-search-box:not(:placeholder-shown) ~ .cedevu-cancel-icon {
+    display: block;
+}
+
+.cedevu-search-box:not(:placeholder-shown) ~ .cedevu-send-icon {
+    display: block;
+}
+
+
+@media screen and (max-width: 990px) {
+    .cedevu-search-container {
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+    }
+    
 }
