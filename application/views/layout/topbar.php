@@ -261,7 +261,7 @@ foreach ($multiClass as $key => $class):
 
 <!-- Floating Top-Right Loading Spinner -->
 <div id="loading-overlay">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="24px" height="24px" style="display: inline-block; vertical-align: middle;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="30px" height="30px" style="display: inline-block; vertical-align: middle;">
             <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
                 <stop offset="0" stop-color="currentColor"></stop>
                 <stop offset=".3" stop-color="currentColor" stop-opacity=".9"></stop>
