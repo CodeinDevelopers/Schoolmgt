@@ -1,8 +1,8 @@
 <style>/* Floating loader at the top-right corner with no background */
-#loading-overlay  .load-shii{
+#loading-overlay .load-shii {
     position: fixed;
     top: 10px; /* Distance from the top */
-    right: 10px; /* Distance from the right */
+    right: 14px; /* Updated: Distance from the right (added the 4px as requested) */
     width: 40px; /* Adjust size */
     height: 40px;
     display: flex;
@@ -12,7 +12,7 @@
     display: none; /* Initially hidden */
 }
 
-/* Optional: Fade-in effect 
+/* Optional: Fade-in effect */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -20,7 +20,7 @@
 
 #loading-overlay svg {
     animation: fadeIn 0.3s ease-in-out;
-} */
+}
 </style>
 <header class="header">
 	<div class="logo-env">
