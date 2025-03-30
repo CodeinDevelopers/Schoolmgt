@@ -131,10 +131,6 @@ if ($this->saas_model->checkSubscriptionValidity()) { ?>
 
                         <?php if (is_parent_loggedin()) { ?>
                             <div class="cdev-header-info">
-                                <span><?= translate('class') ?>: <span id="admission-number"><span style="font-weight: bold;"><?= html_escape($class_name) ?></span>
-
-                            </div>
-                            <div class="cdev-header-info">
                                 <span><?= translate('reg_no') ?>: <span id="admission-number"><span style="font-weight: bold;"><?= html_escape($register_no) ?> </span></span></span>
                                 <svg id="copy-admission" class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     xmlns="http://www.w3.org/2000/svg">
