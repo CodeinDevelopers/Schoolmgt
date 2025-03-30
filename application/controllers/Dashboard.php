@@ -110,7 +110,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
  
          // Fetching the voucher list (SAME as all_transactions)
          $this->data['voucherlist'] = $this->accounting_model->getVoucherList(); 
- 
+        // Sort all transactions from new to old
+         usort($this->data['voucherlist'], function ($a, $b) {
+            return strtotime($b['date']) - strtotime($a['date']); 
+        });
          // Load the view only ONCE
          $this->load->view('layout/index', $this->data);
      }
