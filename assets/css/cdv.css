@@ -410,13 +410,39 @@ a.due-fees:hover { color: #ff0202; }
 a.cdev-pay-btn {
     background: rgb(234, 248, 242) !important;
     border-color: rgb(196, 248, 224) !important;
-    color: #2ad385 !important;
+    color: #475569 !important;
 }
 
 a.cdev-pay-btn:hover {
     background: rgb(223, 252, 239) !important;
     color:rgb(30, 192, 117) !important;
     border-color: rgb(196, 248, 224) !important;
+    text-decoration: none;
+}
+
+a.cdev-spend-btn {
+    background: rgb(248, 234, 234) !important;
+    border-color: rgb(248, 196, 196) !important;
+    color: #475569 !important;
+}
+
+a.cdev-spend-btn:hover {
+    background: rgb(252, 223, 223) !important;
+    color: rgb(192, 30, 30) !important;
+    border-color: rgb(248, 196, 196) !important;
+    text-decoration: none;
+}
+
+a.cdev-logout-btn {
+    background: rgb(248, 234, 234) !important;
+    border-color: rgb(248, 196, 196) !important;
+    color: rgb(192, 30, 30) !important;
+}
+
+a.cdev-logout-btn:hover {
+    background: rgb(252, 223, 223) !important;
+    color: rgb(192, 30, 30) !important;
+    border-color: rgb(248, 196, 196) !important;
     text-decoration: none;
 }
 

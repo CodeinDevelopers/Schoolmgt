@@ -58,7 +58,7 @@
                     <?php
                     if (moduleIsEnabled('events')) {
                         if(get_permission('event', 'is_view') ||
-                        get_permission('event_type', 'is_view')) {
+                        get_permission('event_type', 'is_view') ||  get_permission('frontend_news', 'is_view')) {
                         ?>
                     <!-- event -->
                     <li class="nav-parent <?php if ($main_menu == 'event') echo 'nav-expanded nav-active';?>">
@@ -78,6 +78,12 @@
                                     <span><i class="fas fa-caret-right"></i><?=translate('event_type')?></span>
                                 </a>
                             </li>
+                            <?php } if(get_permission('frontend_news', 'is_view')){ ?>
+                            <li class="<?php if ($sub_page == 'event/news' || $sub_page == 'event/news_edit') echo 'nav-active'; ?>">
+                                <a href="<?php echo base_url('frontend/news/index'); ?>">
+                                    <span><i class="fas fa-caret-right"></i><?php echo translate('news'); ?></span>
+                                </a>
+                            </li>
                             <?php } ?>
                         </ul>
                     </li>
@@ -94,7 +100,6 @@
                             get_permission('frontend_services', 'is_view') ||
                             get_permission('frontend_gallery', 'is_view') ||
                             get_permission('frontend_gallery_category', 'is_view') ||
-                            get_permission('frontend_news', 'is_view') ||
                             get_permission('frontend_faq', 'is_view')) {
                             ?>
                     <!-- Patient Details -->
@@ -172,12 +177,6 @@
                             <li class="<?php if ($sub_page == 'frontend/gallery' || $sub_page == 'frontend/gallery_edit' || $sub_page == 'frontend/gallery_album') echo 'nav-active'; ?>">
                                 <a href="<?php echo base_url('frontend/gallery/index'); ?>">
                                     <span><i class="fas fa-caret-right"></i><?php echo translate('gallery'); ?></span>
-                                </a>
-                            </li>
-                            <?php } if(get_permission('frontend_news', 'is_view')){ ?>
-                            <li class="<?php if ($sub_page == 'frontend/news' || $sub_page == 'frontend/news_edit') echo 'nav-active'; ?>">
-                                <a href="<?php echo base_url('frontend/news/index'); ?>">
-                                    <span><i class="fas fa-caret-right"></i><?php echo translate('news'); ?></span>
                                 </a>
                             </li>
                             <?php } ?>

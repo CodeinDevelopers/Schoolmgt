@@ -138,8 +138,8 @@ h6 {
 
 .lds-dual-ring {
     display: inline-block;
-    width: 64px;
-    height: 64px;
+    width: 40px;
+    height: 40px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -149,11 +149,11 @@ h6 {
 .lds-dual-ring:after {
     content: " ";
     display: block;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin: 1px;
     border-radius: 50%;
-    border: 5px solid var(--thm-primary);
+    border: 3px solid var(--thm-primary);
     border-color: var(--thm-primary) transparent var(--thm-primary) transparent;
     animation: lds-dual-ring 1.2s linear infinite;
 }

@@ -67,9 +67,9 @@ class News extends Admin_Controller
         }
 
         $this->data['newslist'] = $this->app_lib->getTable('front_cms_news_list');
-        $this->data['title'] = translate('frontend');
-        $this->data['sub_page'] = 'frontend/news';
-        $this->data['main_menu'] = 'frontend';
+        $this->data['title'] = translate('frontend_news');
+        $this->data['sub_page'] = 'event/news';
+        $this->data['main_menu'] = 'event';
         $this->load->view('layout/index', $this->data);
     }
 
@@ -95,9 +95,9 @@ class News extends Admin_Controller
         }
 
         $this->data['gallery'] = $this->news_model->get('front_cms_news_list', array('id' => $id), true);
-        $this->data['title'] = translate('frontend');
-        $this->data['sub_page'] = 'frontend/news_edit';
-        $this->data['main_menu'] = 'frontend';
+        $this->data['title'] = translate('frontend_news');
+        $this->data['sub_page'] = 'event/news_edit';
+        $this->data['main_menu'] = 'event';
         $this->load->view('layout/index', $this->data);
     }
 

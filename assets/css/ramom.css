@@ -151,16 +151,6 @@ html.dark .tab-content .panel .panel-footer-custom {
 	display: inline-block;
 }
 
-.chart-title:before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: 2px;
-    left: 0;
-    top: -16px;
-    background: #2c39fd;
-}
-
 html.dark .chart-title:before {
     background-color: #ff685c;
 }
