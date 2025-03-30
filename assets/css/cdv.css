@@ -38,12 +38,38 @@
     color: #64748b;
 }
 
-.cdev-header-actions {
+.cdev-header-actions, .cdev-header-actionsp {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
+ .cdev-header-info {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    font-weight: 500;
+}
+
+/* Icon styling */
+.cdev-header-info svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+}
+
+/* Birthday text styling */
+.cdev-header-info span {
+    font-weight: 500;
+}
 /* Hide on small screens */
 @media (max-width: 768px) {
     .cdev-header-actions {
@@ -1146,4 +1172,15 @@ margin: 16px auto 0;
     line-height: 1;
     position: relative;
     top: 1px;
+}
+.copy-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+.copy-icon:hover {
+    stroke: #0284c7;
 }
