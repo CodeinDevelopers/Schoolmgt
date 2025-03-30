@@ -908,7 +908,7 @@ $employee_absent = $weekend_attendance["employee_absent"];
                             </div>
                         <?php } ?>
 
-                        <?php $currency_symbol = $global_config['currency_symbol']; ?>
+<?php $currency_symbol = $global_config['currency_symbol']; ?>
 <div class="row">
 	<div class="col-md-12">
 		<section class="panel">
@@ -921,17 +921,17 @@ $employee_absent = $weekend_attendance["employee_absent"];
 					<thead>
 						<tr>
 							<th width="50"><?php echo translate('sl'); ?></th>
+                            <th><?php echo translate('type'); ?></th>
+                            <th><?php echo translate('amount'); ?></th>
+                            <th><?php echo translate('description'); ?></th>
+                            <th><?php echo translate('date'); ?></th>
 							<th><?php echo translate('account') . " " . translate('name'); ?></th>
-							<th><?php echo translate('type'); ?></th>
 							<th><?php echo translate('voucher') . " " . translate('head'); ?></th>
 							<th><?php echo translate('ref_no'); ?></th>
-							<th><?php echo translate('description'); ?></th>
-							<th><?php echo translate('pay_via'); ?></th>
-							<th><?php echo translate('amount'); ?></th>
-							<th><?php echo translate('dr'); ?></th>
+							<th><?php echo translate('paid_via'); ?></th>
+                            <th><?php echo translate('dr'); ?></th>
 							<th><?php echo translate('cr'); ?></th>
 							<th><?php echo translate('balance'); ?></th>
-							<th><?php echo translate('date'); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -941,17 +941,17 @@ $employee_absent = $weekend_attendance["employee_absent"];
 						<?php if (is_superadmin_loggedin()): ?>
 							<td><?php echo get_type_name_by_id('branch', $row['branch_id']);?></td>
 						<?php endif; ?>
-							<td><?php echo (!empty($row['attachments']) ? '<i class="fas fa-paperclip"></i> ' : ''); ?> <?php echo html_escape($row['ac_name']); ?></td>
 							<td><?php echo ucfirst($row['type']); ?></td>
+                            <td><?php echo currencyFormat($row['amount']); ?></td>
+                            <td><?php echo $row['description']; ?></td>
+                            <td><?php echo _d($row['date']); ?></td>
+                            <td><?php echo (!empty($row['attachments']) ? '<i class="fas fa-paperclip"></i> ' : ''); ?> <?php echo html_escape($row['ac_name']); ?></td>
 							<td><?php echo $row['v_head']; ?></td>
 							<td><?php echo $row['ref']; ?></td>
-							<td><?php echo $row['description']; ?></td>
 							<td><?php echo $row['via_name']; ?></td>
-							<td><?php echo currencyFormat($row['amount']); ?></td>
 							<td><?php echo currencyFormat($row['dr']); ?></td>
 							<td><?php echo currencyFormat($row['cr']); ?></td>
 							<td><?php echo currencyFormat($row['bal']); ?></td>
-							<td><?php echo _d($row['date']); ?></td>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -960,7 +960,6 @@ $employee_absent = $weekend_attendance["employee_absent"];
 		</section>
 	</div>
 </div>
-
     <?php } ?>
  <!-- Accountant expense DashBoard--->
 
