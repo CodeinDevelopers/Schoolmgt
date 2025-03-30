@@ -110,7 +110,7 @@ class Dashboard_model extends CI_Model
         return $this->db->get()->num_rows();
     }
 
-    /* annual academic fees summary charts */
+    /* Modified Model To  */
     public function getWeekendAttendance($branchID = '')
 {
     $days = array();
