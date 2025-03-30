@@ -13,6 +13,45 @@
 		</div>
 	</div>
 <?php } else { ?>
+
+    <!-- Web Application Manifest -->
+<link rel="manifest" href="<?php echo base_url('manifest.json')?>">
+
+
+<meta name="theme-color" content="#ffffff">
+<script type="text/javascript">
+    // Get the base URL from PHP
+    var serviceWorkerUrl = "<?php echo base_url('serviceworker.js'); ?>";
+
+    // Initialize the service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(serviceWorkerUrl, {
+            scope: '/'
+        }).then(function (registration) {
+            // Registration was successful
+            console.log('Service Worker registration successful with scope: ', registration.scope);
+        }).catch(function (err) {
+            // Registration failed
+            console.log('Service Worker registration failed: ', err);
+        });
+    }
+</script>
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Acamedium">
+<link rel="icon" sizes="512x512" href="<?php echo base_url('uploads/appIcons/icon-512x512.png')?>">
+
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Acamedium">
+<link rel="apple-touch-icon" href="<?php echo base_url('uploads/appIcons/icon-512x512.png')?>">
+
+<!-- Add additional iOS icons for better experience -->
+<link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('uploads/appIcons/icon-72x72.png')?>">
+<link rel="apple-touch-icon" sizes="144x144" href="<?php echo base_url('uploads/appIcons/icon-144x144.png')?>">
+<link rel="apple-touch-icon" sizes="192x192" href="<?php echo base_url('uploads/appIcons/icon-192x192.png')?>">
+
 <body>
 <?php } ?>
 	<section class="body">

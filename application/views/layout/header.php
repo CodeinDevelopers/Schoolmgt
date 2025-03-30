@@ -7,6 +7,7 @@
 	<title><?php echo $title;?></title>
     <link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.png');?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	
 	<!-- include stylesheet -->
 	<?php include 'stylesheet.php';?>
 	<?php
