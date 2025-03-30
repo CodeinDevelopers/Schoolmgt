@@ -292,7 +292,7 @@ class Accounting extends Admin_Controller
             echo json_encode($array);
         }
     }
-
+// this function is used to show all transactions
     public function all_transactions()
     {
         if (!get_permission('all_transactions', 'is_view')) {
