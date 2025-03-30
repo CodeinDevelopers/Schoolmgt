@@ -26,14 +26,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
          if (is_student_loggedin() || is_parent_loggedin()) {
              $studentID = 0;
              if (is_student_loggedin()) {
-                 $this->data['title'] = translate('welcome_to') . " " . $this->session->userdata('name');
+                 $this->data['title'] = translate('welcome') . " " . $this->session->userdata('name');
                  $studentID = get_loggedin_user_id();
              } elseif (is_parent_loggedin()) {
                  $studentID = $this->session->userdata('myChildren_id');
                  if (!empty($studentID)) {
                      $this->data['title'] = get_type_name_by_id('student', $studentID, 'first_name') . " - " . translate('dashboard');
                  } else {
-                     $this->data['title'] = translate('welcome_to') . " " . $this->session->userdata('name');
+                     $this->data['title'] = translate('welcome') . " " . $this->session->userdata('name');
                  }
              }
              $this->data['student_id'] = $studentID;
@@ -44,14 +44,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
              if (is_superadmin_loggedin()) {
                  if ($this->input->get('school_id')) {
                      $schoolID = $this->input->get('school_id');
-                     $this->data['title'] = get_type_name_by_id('branch', $schoolID) . " " . translate('branch_dashboard');
+                     $this->data['title'] = get_type_name_by_id('branch', $schoolID) . " " . translate('dashboard');
                  } else {
-                     $this->data['title'] = translate('all_branch_dashboard');
+                     $this->data['title'] = translate('school_dashboard');
                      $schoolID = "";
                  }
              } else {
                  $schoolID = get_loggedin_branch_id();
-                 $this->data['title'] = get_type_name_by_id('branch', $schoolID) . " " . translate('branch_dashboard');
+                 $this->data['title'] = get_type_name_by_id('branch', $schoolID) . " " . translate('dashboard');
              }
  
              $getSQLMode = $this->application_model->getSQLMode();

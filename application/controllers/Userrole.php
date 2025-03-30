@@ -288,7 +288,7 @@ class Userrole extends User_Controller
         $this->load->view('layout/index', $this->data);
     }
 
-    /* after login students or parents produced reports here */
+    /* after login students or parents produce reports here */
     public function attendance()
     {
         $this->load->model('attendance_model');

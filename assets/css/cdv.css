@@ -53,13 +53,22 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
     text-decoration: none !important;
     font-weight: 500;
 }
+.copy-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
 
-/* Icon styling */
+.copy-icon:hover {
+    stroke: #0284c7;
+}
+
 .cdev-header-info svg {
     width: 20px;
     height: 20px;
@@ -574,7 +583,11 @@ a.cdev-logout-btn:hover {
     align-items: center;
     gap: 12px;
     color: #4a5568;
+    justify-content: center; /* Center by default */
 }
+
+
+
 
 .icon-wrapper {
     display: flex;
@@ -582,16 +595,20 @@ a.cdev-logout-btn:hover {
     justify-content: center;
     min-width: fit-content; 
     height: 32px;
-    background-color: #f3f4f6;
+    background-color: #f8fafc;
     border-radius: 16px;
-    color: #4a5568;
-    padding: 0 12px;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
     gap: 8px; 
+    text-decoration: none !important;
+    font-weight: 500;
 }
 
 .icon-wrapper svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
 }
 
 .icon-text {
@@ -1145,7 +1162,7 @@ margin: 16px auto 0;
     transition: transform 0.3s ease;
 }
 
-/* Different styling for Refresh vs Back buttons */
+
 .page-title-icon.cdev-action-btn:has(span:contains("Refresh")) svg {
     color: #3b82f6; /* Blue for refresh icon */
 }
@@ -1172,15 +1189,4 @@ margin: 16px auto 0;
     line-height: 1;
     position: relative;
     top: 1px;
-}
-.copy-icon {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    margin-left: 8px;
-    transition: 0.3s ease-in-out;
-}
-
-.copy-icon:hover {
-    stroke: #0284c7;
 }
