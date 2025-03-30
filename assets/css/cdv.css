@@ -12,7 +12,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 80px;
 }
 
 .cdev-user-welcome {
@@ -35,7 +34,7 @@
 
 .cdev-subtitle {
     margin: 0.25rem 0 0 0;
-    font-size: 0.95rem;
+    font-size: 1.4rem;
     color: #64748b;
 }
 
@@ -43,6 +42,13 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+/* Hide on small screens */
+@media (max-width: 768px) {
+    .cdev-header-actions {
+        display: none;
+    }
 }
 
 a.cdev-action-btn {
@@ -394,7 +400,7 @@ a.due-fees:hover { color: #ff0202; }
     transition: all 0.3s ease;
     text-decoration: none !important;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: 1.72rem;
     margin-left: 10px;
 }
 
