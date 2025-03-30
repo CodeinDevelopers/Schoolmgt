@@ -374,7 +374,7 @@ $employee_absent = $weekend_attendance["employee_absent"];
             </div>
             <!---Count Widget--->
 
-
+       <!---Admin fees summery--->
             <div class="row">
                 <div class="col-md-12">
                     <div class="cdev-dashboard-card">
@@ -471,6 +471,8 @@ $employee_absent = $weekend_attendance["employee_absent"];
                             </div>
                         </div>
                     </div>
+                    
+                       <!---Admin fees summery--->
                     <?php if (get_permission('monthly_income_vs_expense_chart', 'is_view')) {
                         // Calculate totals
                         $totalIncome = 0;
@@ -816,7 +818,7 @@ $employee_absent = $weekend_attendance["employee_absent"];
                         </div>
 <!-- //Accountant Fees summary--->
  <!-- Accountant expense DashBoard--->
-                        <?php if (get_permission('monthly_income_vs_expense_chart', 'is_view')) {
+    <?php if (get_permission('monthly_income_vs_expense_chart', 'is_view')) {
                             $totalIncome = 0;
                             $totalExpense = 0;
                             foreach ($income_vs_expense as $item) {
@@ -829,11 +831,20 @@ $employee_absent = $weekend_attendance["employee_absent"];
                             $totalBalance = $totalIncome - $totalExpense;
                             $balanceTrend = $totalBalance >= 0 ? 'positive' : 'negative';
                         ?>
-
                             <div class="cdev-dashboard-card">
                                 <div class="cdev-card-header">
                                     <h3 class="cdev-card-title">
-                                        <?= translate('income_&_expense_for') . " " . translate(strtolower(date('F'))) ?>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M17.15 13.8201L14.11 16.8601" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M6.84998 13.8201H17.15" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M6.84998 10.1799L9.88998 7.13989" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M17.15 10.1799H6.84998" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                    </svg> <?= translate('income_&_expense_for') . " " . translate(strtolower(date('F'))) ?>
                                     </h3>
                                 </div>
                                 <div class="cdev-card-body">
@@ -889,20 +900,73 @@ $employee_absent = $weekend_attendance["employee_absent"];
                                                     <path d="M12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="currentColor"></path>
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="currentColor"></path>
                                                 </g>
-                                            </svg><?php echo translate('record_expense'); ?></span>
+                                            </svg><span><?php echo translate('record_expense'); ?></span>
                                         </a>
 
                                     </div>
                                 </div>
                             </div>
                         <?php } ?>
-                    <?php } ?>
+
+                        <?php $currency_symbol = $global_config['currency_symbol']; ?>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h4 class="panel-title"><?php echo translate('transactions'); ?></h4>
+			</header>
+			<div class="panel-body">
+				<div class="export_title">All Transactions</div>
+				<table class="table table-bordered table-hover table-condensed table-export" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th width="50"><?php echo translate('sl'); ?></th>
+							<th><?php echo translate('account') . " " . translate('name'); ?></th>
+							<th><?php echo translate('type'); ?></th>
+							<th><?php echo translate('voucher') . " " . translate('head'); ?></th>
+							<th><?php echo translate('ref_no'); ?></th>
+							<th><?php echo translate('description'); ?></th>
+							<th><?php echo translate('pay_via'); ?></th>
+							<th><?php echo translate('amount'); ?></th>
+							<th><?php echo translate('dr'); ?></th>
+							<th><?php echo translate('cr'); ?></th>
+							<th><?php echo translate('balance'); ?></th>
+							<th><?php echo translate('date'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $count = 1; foreach ($voucherlist as $row): ?>
+						<tr>
+							<td><?php echo $count++; ?></td>
+						<?php if (is_superadmin_loggedin()): ?>
+							<td><?php echo get_type_name_by_id('branch', $row['branch_id']);?></td>
+						<?php endif; ?>
+							<td><?php echo (!empty($row['attachments']) ? '<i class="fas fa-paperclip"></i> ' : ''); ?> <?php echo html_escape($row['ac_name']); ?></td>
+							<td><?php echo ucfirst($row['type']); ?></td>
+							<td><?php echo $row['v_head']; ?></td>
+							<td><?php echo $row['ref']; ?></td>
+							<td><?php echo $row['description']; ?></td>
+							<td><?php echo $row['via_name']; ?></td>
+							<td><?php echo currencyFormat($row['amount']); ?></td>
+							<td><?php echo currencyFormat($row['dr']); ?></td>
+							<td><?php echo currencyFormat($row['cr']); ?></td>
+							<td><?php echo currencyFormat($row['bal']); ?></td>
+							<td><?php echo _d($row['date']); ?></td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</div>
+</div>
+
+    <?php } ?>
  <!-- Accountant expense DashBoard--->
 
-
-
+ <!-- event calendar -->
                     <div class="row">
-                        <!-- event calendar -->
+    
                         <div class="col-md-<?php echo $div3 ?>">
                             <section class="panel">
                                 <div class="panel-body">
@@ -945,8 +1009,9 @@ $employee_absent = $weekend_attendance["employee_absent"];
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php }
-                                        if (get_permission('staff_birthday_widget', 'is_view')) { ?>
+                                        <?php } ?>
+
+                                        <?php if (get_permission('staff_birthday_widget', 'is_view')) { ?>
                                             <div class="col-xs-12">
                                                 <div class="panel-body">
                                                     <div class="widget-col-in row">

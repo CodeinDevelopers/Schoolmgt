@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * @package : Ramom SSchool Management System
+ * @package : Acamedium
  * @version : 6.2
  * @developed by : Codeindevelopers
  * @support : support@codeindevelopers.com.ng

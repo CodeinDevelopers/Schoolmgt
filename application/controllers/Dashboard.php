@@ -18,6 +18,7 @@ class Dashboard extends Dashboard_Controller
     {
         parent::__construct();
         $this->load->model('dashboard_model');
+        $this->load->model('accounting_model');
     }
     
     public function index()
@@ -102,5 +103,15 @@ class Dashboard extends Dashboard_Controller
         $this->data['main_menu'] = 'dashboard';
         $this->load->view('layout/index', $this->data);
     }
+
+    public function all_transactions()
+{
+    if (!get_permission('all_transactions', 'is_view')) {
+        access_denied();
+    }
+
+    $this->data['voucherlist'] = $this->accounting_model->getVoucherList();
+    $this->load->view('layout/index', $this->data);
+}
     
 }
