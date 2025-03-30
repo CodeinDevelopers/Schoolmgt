@@ -1105,3 +1105,45 @@ margin: 16px auto 0;
         margin-bottom: 8px;
     }
 }
+
+.page-title-icon.cdev-action-btn {
+    position: relative;
+    margin-right: 1rem;
+    min-width: 6rem;
+    justify-content: center;
+}
+
+.page-title-icon.cdev-action-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+/* Different styling for Refresh vs Back buttons */
+.page-title-icon.cdev-action-btn:has(span:contains("Refresh")) svg {
+    color: #3b82f6; /* Blue for refresh icon */
+}
+
+.page-title-icon.cdev-action-btn:has(span:contains("Back")) svg {
+    color: #475569; /* Gray for back icon */
+    transform: rotate(180deg); /* Flip icon for back */
+}
+
+/* Active state */
+.page-title-icon.cdev-action-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Improved focus state for accessibility */
+.page-title-icon.cdev-action-btn:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Make sure SVG and text align perfectly */
+.page-title-icon.cdev-action-btn span {
+    line-height: 1;
+    position: relative;
+    top: 1px;
+}

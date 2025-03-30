@@ -159,16 +159,10 @@ html.dark .chart-title:before {
 .page-header .page-title-icon {
 	display: flex;
 	align-items: center;
-	color: #777;
 	text-align: center;
-	margin: 11px 0 0 10px;
-	border-radius: 0.25rem;
-	width: 28px;
-	height: 28px;
-	
+	margin: 8px 0 0 10px;
 	font-size: 15px;
 	float: left;
-	justify-content: center;
 	transition: .3s;
 	
 }
