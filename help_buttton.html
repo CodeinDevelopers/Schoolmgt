@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Help Menu</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f5f7fa;
+        }
+
+        .cdev-help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            border: none;
+            outline: none;
+            transition: transform 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Remove focus outline */
+        .cdev-help-button:focus {
+            outline: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cdev-help-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .cdev-help-icon {
+            font-size: 24px;
+            color: #4a5568;
+        }
+        
+        .cdev-menu-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 300px;
+            overflow: hidden;
+            z-index: 1001;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .cdev-menu-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        
+        .cdev-menu-section {
+            border-bottom: 1px solid #edf2f7;
+        }
+        
+        .cdev-menu-section:last-child {
+            border-bottom: none;
+        }
+        
+        .cdev-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            color: #4a5568;
+        }
+        
+        .cdev-menu-item:hover {
+            background-color: #f7fafc;
+        }
+        
+        .cdev-menu-item-icon {
+            margin-right: 12px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cdev-menu-item-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .cdev-new-badge {
+            background-color: #4ade80;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+        
+        .cdev-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 999;
+        }
+        
+        .cdev-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+    </style>
+</head>
+<body>
+    <div id="cdev-content">
+        <h1 style="padding: 20px;">Your App Content Here</h1>
+        <p style="padding: 0 20px;">The help button is fixed at the bottom right of the screen.</p>
+    </div>
+    
+    <button class="cdev-help-button" id="cdev-help-button" aria-label="Help">
+        <div class="cdev-help-icon">?</div>
+    </button>
+    
+    <div class="cdev-overlay" id="cdev-overlay"></div>
+    
+    <div class="cdev-menu-container" id="cdev-menu-container">
+        <div class="cdev-menu-section">
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">🚀</div>
+                <div class="cdev-menu-item-text">What's new</div>
+            </a>
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">✓</div>
+                <div class="cdev-menu-item-text">Get started checklist</div>
+            </a>
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">📹</div>
+                <div class="cdev-menu-item-text">Video tutorials</div>
+            </a>
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">⊕</div>
+                <div class="cdev-menu-item-text">Help Center</div>
+            </a>
+        </div>
+        
+        <div class="cdev-menu-section">
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">⌨️</div>
+                <div class="cdev-menu-item-text">Keyboard shortcuts</div>
+            </a>
+        </div>
+        
+        <div class="cdev-menu-section">
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">💬</div>
+                <div class="cdev-menu-item-text">Share feedback</div>
+                <span class="cdev-new-badge">New</span>
+            </a>
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">🐞</div>
+                <div class="cdev-menu-item-text">Report a bug</div>
+            </a>
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">⭐</div>
+                <div class="cdev-menu-item-text">Request feature</div>
+            </a>
+        </div>
+        
+        <div class="cdev-menu-section">
+            <a href="#" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">👥</div>
+                <div class="cdev-menu-item-text">Community</div>
+            </a>
+        </div>
+        
+        <div class="cdev-menu-section">
+            <a href="https://lottiefiles.com" target="_blank" class="cdev-menu-item">
+                <div class="cdev-menu-item-icon">🌐</div>
+                <div class="cdev-menu-item-text">Lottiefiles.com</div>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        const helpButton = document.getElementById('cdev-help-button');
+        const menuContainer = document.getElementById('cdev-menu-container');
+        const overlay = document.getElementById('cdev-overlay');
+        
+        // Fix for menu sometimes requiring a second click
+        helpButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent any default behavior
+            event.stopPropagation(); // Stop event from bubbling
+            
+            menuContainer.classList.toggle('visible');
+            overlay.classList.toggle('visible');
+            
+            return false; // Extra prevention of default behavior
+        });
+        
+        overlay.addEventListener('click', () => {
+            menuContainer.classList.remove('visible');
+            overlay.classList.remove('visible');
+        });
+        
+        // Improved outside click detection
+        document.addEventListener('click', (event) => {
+            // Only process if menu is visible
+            if (menuContainer.classList.contains('visible')) {
+                // Check if click is outside menu and not on help button
+                if (!menuContainer.contains(event.target) && !helpButton.contains(event.target)) {
+                    menuContainer.classList.remove('visible');
+                    overlay.classList.remove('visible');
+                }
+            }
+        });
+        
+        // Extra handler for touch devices
+        helpButton.addEventListener('touchend', (event) => {
+            event.preventDefault();
+            menuContainer.classList.toggle('visible');
+            overlay.classList.toggle('visible');
+        });
+    </script>
+</body>
+</html>
