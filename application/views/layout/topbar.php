@@ -161,7 +161,7 @@
             <?php  }
             endif;
             ?>
-
+<?php if (!is_student_loggedin()) { ?>
             <!-- message alert box -->
             <li>
                 <a href="#" class="dropdown-toggle header-menu-icon" data-toggle="dropdown">
@@ -219,6 +219,7 @@
                         </ul>
                     </div>
                     <div class="notification-footer">
+                    <?php } ?>
 
     <!-- session switcher box -->
             <li class="dropdown">
@@ -338,7 +339,9 @@
                             </div>
                         </div>
                     </li>
+                    
                     <li role="separator" class="divider"></li>
+                    <?php if (!is_student_loggedin()) { ?>
                     <li><a href="<?php echo base_url('profile'); ?>"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -366,6 +369,7 @@
                                     </g>
                                 </g>
                             </svg> <?php echo translate('profile'); ?></a></li>
+                            <?php } ?>
                     <li><a href="<?php echo base_url('profile/password'); ?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -377,6 +381,7 @@
                                     <path d="M7.99451 16H8.00349" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </g>
                             </svg> <?php echo translate('reset_password'); ?></a></li>
+                            <?php if (!is_student_loggedin()) { ?>
                     <li><a href="<?php echo base_url('communication/mailbox/inbox'); ?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -385,6 +390,7 @@
                                     <path d="M14 2.20004C13.3538 2.06886 12.6849 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88837 21.6244 10.4003 22 12 22C17.5228 22 22 17.5228 22 12C22 11.3151 21.9311 10.6462 21.8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                                 </g>
                             </svg> <?php echo translate('mailbox'); ?></a></li>
+                            <?php } ?>
                     <?php if (get_permission('global_settings', 'is_view')): ?>
                         <li role="separator" class="divider"></li>
                         <li><a href="<?php echo base_url('settings/universal'); ?>"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">

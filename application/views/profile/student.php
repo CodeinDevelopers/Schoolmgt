@@ -35,11 +35,8 @@ if ($last_name['status'] == 1 || $gender['status'] == 1 || $blood_group['status'
 	$personal = true;
 }
 ?>
-
-	<div class="row">
-	<div class="col-md-12 mb-lg">
-	<div class="student-profile-card" style="margin-right: 15px;
-    margin-left: 16px;">
+	<div class="col-md-12">
+	<div class="student-profile-card">
     <div class="profile-content">
         <div class="profile-image">
 		<img src="<?php echo get_image_url('student', $student['photo']);?>">
@@ -89,6 +86,8 @@ if ($last_name['status'] == 1 || $gender['status'] == 1 || $blood_group['status'
         
     </div>
 </div>
+</div>
+
 	<div class="col-md-12">
 		<section class="panel">
 			<div class="tabs-custom">

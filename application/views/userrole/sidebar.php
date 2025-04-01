@@ -45,13 +45,13 @@
                         <svg viewBox="0 0 24 24" id="_24x24_On_Light_Party" data-name="24x24/On Light/Party" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="30px" height="30px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="view-box" width="24" height="24" fill="none"></rect> <path id="Shape" d="M1.14,14.362A3.876,3.876,0,0,1,.592,9.546L6.338.353A.75.75,0,0,1,7.5.22L15.282,8a.749.749,0,0,1-.132,1.166L5.956,14.91a3.895,3.895,0,0,1-4.816-.548Zm.724-4.021a2.393,2.393,0,0,0,3.3,3.3l.892-.557L2.421,9.45Zm5.494,1.924,2.387-1.492L4.728,5.758,3.237,8.144Zm3.692-2.308,2.505-1.566L7.11,1.947,5.544,4.452Z" transform="translate(3.233 5.265)" fill="currentColor"></path> <path id="Shape-2" data-name="Shape" d="M1.5,4.15V.75A.75.75,0,0,0,0,.75v3.4a.75.75,0,0,0,1.5,0Z" transform="translate(14.971 1.45)" fill="#00003a5d1"></path> <path id="Shape-3" data-name="Shape" d="M1.16,3.114,3.82,1.378A.75.75,0,0,0,3,.122L.34,1.857a.75.75,0,1,0,.82,1.256Z" transform="translate(17.312 6.75)" fill="#00000bba2"></path> <path id="Shape-4" data-name="Shape" d="M1.28,2.107l.827-.827A.75.75,0,0,0,1.047.22L.22,1.047A.75.75,0,0,0,1.28,2.107Z" transform="translate(17.971 3.798)" fill="#000ff6783"></path> <path id="Shape-5" data-name="Shape" d="M.75,1.5H.967a.75.75,0,0,0,0-1.5H.75a.75.75,0,0,0,0,1.5Z" transform="translate(18.971 10.625)" fill="#000ffa458"></path> <path id="Shape-6" data-name="Shape" d="M.75,1.5H.967a.75.75,0,0,0,0-1.5H.75a.75.75,0,0,0,0,1.5Z" transform="translate(14.971 7.625)" fill="#000c75fff"></path> <path id="Shape-7" data-name="Shape" d="M1.881,1.478,1.439.453a.75.75,0,1,0-1.377.594L.5,2.073a.75.75,0,1,0,1.377-.594Z" transform="translate(11.528 2.599)" fill="#000ffa458"></path> </g></svg> <span><?=translate('events')?></span>
                         </a>
                     </li>
-<?php } if (is_student_loggedin()) { ?>
-                    <!-- student profile -->
+                    
+                    <!-- student
                     <li class="<?php if ($main_menu == 'profile') echo 'nav-active'; ?>">
                         <a href="<?=base_url('profile')?>">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.12 12.78C12.05 12.77 11.96 12.77 11.88 12.78C10.12 12.72 8.71997 11.28 8.71997 9.50998C8.71997 7.69998 10.18 6.22998 12 6.22998C13.81 6.22998 15.28 7.69998 15.28 9.50998C15.27 11.28 13.88 12.72 12.12 12.78Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M18.74 19.3801C16.96 21.0101 14.6 22.0001 12 22.0001C9.40001 22.0001 7.04001 21.0101 5.26001 19.3801C5.36001 18.4401 5.96001 17.5201 7.03001 16.8001C9.77001 14.9801 14.25 14.9801 16.97 16.8001C18.04 17.5201 18.64 18.4401 18.74 19.3801Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> <span><?=translate('profile')?></span>
                         </a>
-                    </li>
+                    </li> profile -->
                     
                     <?php if (is_student_loggedin()) { ?>
                     <!-- online exam master -->
@@ -190,8 +190,7 @@ if ((is_parent_loggedin() && !empty(get_activeChildren_id())) || is_student_logg
                     </li>
                     
                    
-
-                 
+                    <?php if (is_parent_loggedin()) { ?>
 
                     <!-- supervision -->
                     <li class="nav-parent <?php if ($main_menu == 'supervision')  echo 'nav-expanded nav-active'; ?>">
@@ -215,7 +214,7 @@ if ((is_parent_loggedin() && !empty(get_activeChildren_id())) || is_student_logg
 
                         </ul>
                     </li>
-
+                    <?php } ?>
                     <!-- attendance control -->
                     <li class="<?php if ($main_menu == 'attendance') echo ' nav-active'; ?>">
                         <a href="<?=base_url('userrole/attendance')?>">
@@ -241,7 +240,7 @@ if ((is_parent_loggedin() && !empty(get_activeChildren_id())) || is_student_logg
                         </ul>
                     </li>
 
-
+                    <?php if (is_parent_loggedin()) { ?>
                     <!-- message -->
                     <li class="<?php if ($main_menu == 'message') echo 'nav-active'; ?> ">
                         <a href="<?=base_url('communication/mailbox/inbox')?>">
@@ -255,6 +254,7 @@ if ((is_parent_loggedin() && !empty(get_activeChildren_id())) || is_student_logg
                             </svg> <span><?=translate('message')?></span>
                         </a>
                     </li>
+                    <?php } ?>
                 </ul>
             </nav>
         </div>
