@@ -39,17 +39,7 @@
     <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>certificate-check</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> <rect width="48" height="48" fill="none"></rect> </g> <g id="icons_Q2" data-name="icons Q2"> <path d="M20.6,23.4l-4-3.9a2.1,2.1,0,0,1-.2-2.7,1.9,1.9,0,0,1,3-.2L22,19.2l6.6-6.6a2,2,0,0,1,2.8,2.8l-8,8A1.9,1.9,0,0,1,20.6,23.4Z"></path> <path d="M40,18A16,16,0,1,0,15,31.2V43.9A2.1,2.1,0,0,0,17,46a1.5,1.5,0,0,0,1.1-.4L24,41l5.9,4.6A1.5,1.5,0,0,0,31,46a2.1,2.1,0,0,0,2-2.1V31.2A16,16,0,0,0,40,18ZM12,18A12,12,0,1,1,24,30,12,12,0,0,1,12,18ZM29,39.8l-4.4-3.4a.9.9,0,0,0-1.2,0L19,39.8V33.2a16.9,16.9,0,0,0,5,.8,16.9,16.9,0,0,0,5-.8Z"></path> </g> </g> </g></svg> Exam Results
         </a>
 <a id="installButton" href="#" class="bg-gray-100 text-gray-900 hover:text-black hover:bg-gray-200 border border-gray-200 transition-colors duration-200 rounded-lg px-6 py-3 font-medium" style="display: none;">
-    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-        <title>install</title>
-        <path d="M24 4a2 2 0 0 1 2 2v22.59l5.3-5.3a2 2 0 0 1 2.83 2.83l-9 9a2 2 0 0 1-2.83 0l-9-9a2 2 0 0 1 2.83-2.83l5.3 5.3V6a2 2 0 0 1 2-2zM8 40a2 2 0 0 1 2-2h28a2 2 0 0 1 0 4H10a2 2 0 0 1-2-2z"></path>
-    </svg> Install App
-</a>
-
-<a id="openAppButton" href="/" class="bg-gray-100 text-gray-900 hover:text-black hover:bg-gray-200 border border-gray-200 transition-colors duration-200 rounded-lg px-6 py-3 font-medium" style="display: none;">
-    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
-        <title>open app</title>
-        <path d="M28 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-4 0V9.4L18.7 28.7a2 2 0 1 1-2.8-2.8L35.2 6H28a2 2 0 0 1 0-4zM6 12a2 2 0 0 1 2-2h12a2 2 0 0 1 0 4H10v24h24V26a2 2 0 0 1 4 0v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V12z"></path>
-    </svg> Open in App
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>certificate-check</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> <rect width="48" height="48" fill="none"></rect> </g> <g id="icons_Q2" data-name="icons Q2"> <path d="M20.6,23.4l-4-3.9a2.1,2.1,0,0,1-.2-2.7,1.9,1.9,0,0,1,3-.2L22,19.2l6.6-6.6a2,2,0,0,1,2.8,2.8l-8,8A1.9,1.9,0,0,1,20.6,23.4Z"></path> <path d="M40,18A16,16,0,1,0,15,31.2V43.9A2.1,2.1,0,0,0,17,46a1.5,1.5,0,0,0,1.1-.4L24,41l5.9,4.6A1.5,1.5,0,0,0,31,46a2.1,2.1,0,0,0,2-2.1V31.2A16,16,0,0,0,40,18ZM12,18A12,12,0,1,1,24,30,12,12,0,0,1,12,18ZM29,39.8l-4.4-3.4a.9.9,0,0,0-1.2,0L19,39.8V33.2a16.9,16.9,0,0,0,5,.8,16.9,16.9,0,0,0,5-.8Z"></path> </g> </g> </g></svg> Install App
 </a>
 
 <!-- iOS Installation Guide (hidden by default) -->
@@ -140,52 +130,161 @@
     </div>
 </button>
 <script>
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (event) => {
-    event.preventDefault();
-    deferredPrompt = event;
+document.addEventListener('DOMContentLoaded', () => {
+    const installButton = document.getElementById('installButton');
+    const openAppButton = document.getElementById('openAppButton');
     
-    // Only show the install button for browsers that support it
-    if (isInstallable()) {
-        document.getElementById('installButton').style.display = 'inline-flex';
+    // First check if we're running inside the PWA - hide all buttons
+    if (isRunningAsPWA()) {
+        if (installButton) installButton.style.display = 'none';
+        if (openAppButton) openAppButton.style.display = 'none';
+        console.log('Running as PWA - hiding all buttons');
+        return; // Exit early - no need for other checks
+    }
+    
+    // We're in a browser - now determine if the PWA is installed
+    if (isPWAInstalled()) {
+        // PWA is installed but we're in browser - show Open App button
+        if (openAppButton) openAppButton.style.display = 'inline-flex';
+        if (installButton) installButton.style.display = 'none';
+        console.log('PWA installed, showing Open App button');
+    } else {
+        // Handle iOS separately
+        if (!('beforeinstallprompt' in window) && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            if (installButton) {
+                installButton.style.display = 'inline-flex';
+                installButton.innerText = "Add to Home Screen";
+                installButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const iosGuide = document.getElementById('iosGuide');
+                    if (iosGuide) iosGuide.style.display = 'block';
+                });
+            }
+            if (openAppButton) openAppButton.style.display = 'none';
+            console.log('iOS device detected, showing custom instructions');
+        } else {
+            // For other browsers, wait for install prompt
+            if (installButton) installButton.style.display = 'none';
+            if (openAppButton) openAppButton.style.display = 'none';
+            console.log('Waiting for beforeinstallprompt event');
+        }
     }
 });
 
-document.getElementById('installButton').addEventListener('click', () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('PWA installed');
-                document.getElementById('installButton').style.display = 'none';
-                document.getElementById('openAppButton').style.display = 'inline-flex';
+// Store the install prompt for later use
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (event) => {
+    console.log('beforeinstallprompt event fired');
+    event.preventDefault();
+    deferredPrompt = event;
+    
+    const installButton = document.getElementById('installButton');
+    if (installButton) {
+        installButton.style.display = 'inline-flex';
+    }
+});
+
+// Handle the install button click
+document.addEventListener('DOMContentLoaded', () => {
+    const installButton = document.getElementById('installButton');
+    if (installButton) {
+        installButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('PWA installed');
+                        installButton.style.display = 'none';
+                        const openAppButton = document.getElementById('openAppButton');
+                        if (openAppButton) {
+                            openAppButton.style.display = 'inline-flex';
+                        }
+                    }
+                    deferredPrompt = null;
+                });
             }
-            deferredPrompt = null;
         });
     }
 });
 
-function isInstalled() {
-    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+// Function to detect if currently running as PWA
+function isRunningAsPWA() {
+    return window.matchMedia('(display-mode: standalone)').matches || 
+           window.matchMedia('(display-mode: fullscreen)').matches || 
+           window.navigator.standalone === true;
 }
 
-function isInstallable() {
-    return ('beforeinstallprompt' in window) && /Android|iPhone|iPad|iPod|Windows|Macintosh/.test(navigator.userAgent);
+// Function to detect if PWA is installed but we're in browser
+function isPWAInstalled() {
+    // We can use localStorage to track installation
+    if (localStorage.getItem('pwaInstalled') === 'true') {
+        return true;
+    }
+    
+    // Try to detect via service worker
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        // If service worker is active, it's a good sign the PWA might be installed
+        return true;
+    }
+    
+    return false;
 }
 
-// Show Open in App button if PWA is installed
-if (isInstalled()) {
-    document.getElementById('openAppButton').style.display = 'inline-flex';
-} else if (!isInstallable() && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
-    // For iOS devices where install prompt is not available
-    document.getElementById('installButton').style.display = 'inline-flex';
-    document.getElementById('installButton').innerText = "Add to Home Screen";
-    document.getElementById('installButton').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('iosGuide').style.display = 'block';
-    });
-}
+// Set flag when PWA gets installed
+document.addEventListener('DOMContentLoaded', () => {
+    const installButton = document.getElementById('installButton');
+    if (installButton) {
+        installButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        // Mark as installed in localStorage
+                        localStorage.setItem('pwaInstalled', 'true');
+                        console.log('PWA installed, set flag in localStorage');
+                        
+                        installButton.style.display = 'none';
+                        const openAppButton = document.getElementById('openAppButton');
+                        if (openAppButton) {
+                            openAppButton.style.display = 'inline-flex';
+                        }
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        });
+    }
+    
+    // Handle open app button
+    const openAppButton = document.getElementById('openAppButton');
+    if (openAppButton) {
+        openAppButton.addEventListener('click', () => {
+            // Get the manifest URL from the link tag
+            const manifestLink = document.querySelector('link[rel="manifest"]');
+            if (manifestLink) {
+                fetch(manifestLink.href)
+                    .then(response => response.json())
+                    .then(manifest => {
+                        // Use the start_url from the manifest if available
+                        if (manifest && manifest.start_url) {
+                            window.open(manifest.start_url, '_blank');
+                        } else {
+                            // Fallback to opening the site with a special query parameter
+                            window.open(window.location.origin + '?openFromBrowser=true', '_blank');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching manifest:', error);
+                        // Fallback if manifest can't be fetched
+                        window.open(window.location.origin + '?openFromBrowser=true', '_blank');
+                    });
+            } else {
+                // No manifest found, just open the site
+                window.open(window.location.origin + '?openFromBrowser=true', '_blank');
+            }
+        });
+    }
+});
 </script>
 <script>
         const helpButton = document.getElementById('cdev-help-button');
