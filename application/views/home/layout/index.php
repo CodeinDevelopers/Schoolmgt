@@ -39,8 +39,21 @@
 		<?php echo $cms_setting['google_analytics']; ?>
 
 	
-	  <!-- Web Application Manifest -->
-<link rel="manifest" href="./manifest.json">
+<!-- Web Application Manifest -->
+<link rel="manifest" href="<?php echo base_url('manifest.json'); ?>">
+<script type="text/javascript">
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('<?php echo base_url('serviceworker.js'); ?>')
+      .then(registration => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      })
+      .catch(error => {
+        console.log('Service Worker registration failed:', error);
+      });
+  });
+}
+</script>
 <!-- Chrome for Android theme color -->
 <meta name="theme-color" content="#ffffff">
 
@@ -60,23 +73,10 @@
 <link rel="apple-touch-icon" sizes="144x144" href="<?php echo base_url('uploads/appIcons/icon-144x144.png')?>">
 <link rel="apple-touch-icon" sizes="192x192" href="<?php echo base_url('uploads/appIcons/icon-192x192.png')?>">
 
-<script type="text/javascript">
-    // Initialize the service worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/serviceworker.js', {
-            scope: '/'
-        }).then(function (registration) {
-            // Registration was successful
-            console.log('Service Worker registration successful with scope: ', registration.scope);
-        }).catch(function (err) {
-            // registration failed :(
-            console.log('Service Worker registration failed: ', err);
-        });
-    }
-</script>
+
 		<!-- Theme Color Options -->
-		<script type="text/javascript">
-			document.documentElement.style.setProperty('--thm-primary', '<?php echo $cms_setting["primary_color"] ?>');
+<script type="text/javascript">
+document.documentElement.style.setProperty('--thm-primary', '<?php echo $cms_setting["primary_color"] ?>');
 			document.documentElement.style.setProperty('--thm-hover', '<?php echo $cms_setting["hover_color"] ?>');
 			document.documentElement.style.setProperty('--thm-text', '<?php echo $cms_setting["text_color"] ?>');
 			document.documentElement.style.setProperty('--thm-secondary-text', '<?php echo $cms_setting["text_secondary_color"] ?>');

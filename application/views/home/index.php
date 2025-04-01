@@ -15,8 +15,9 @@
     <h2 class="text-gray-900 text-2xl font-bold mb-8">
     <?php echo $global_config['institute_name'];?> Portal
     </h2>
+ 
 <!-- Buttons Container -->
-<div class="flex flex-col gap-4 max-w-xs mx-auto w-full">
+<div class="w-80 mx-auto flex flex-col gap-4">
     <!-- Dynamic Login/Dashboard Button -->
     <div>
         <?php if (!is_loggedin()) { ?>
@@ -28,16 +29,36 @@
             </a>
         <?php } ?>
     </div>
+    <a href="<?php echo base_url('admission'); ?>" class="bg-gray-100 text-gray-900 hover:text-black hover:bg-gray-200 border border-gray-200 transition-colors duration-200 rounded-lg px-6 py-3 font-medium">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M7 3C5.89543 3 5 3.89543 5 5V17.2C5 18.0566 5.00078 18.6389 5.03755 19.089C5.07337 19.5274 5.1383 19.7516 5.21799 19.908C5.40973 20.2843 5.7157 20.5903 6.09202 20.782C6.24842 20.8617 6.47262 20.9266 6.91104 20.9624C7.36113 20.9992 7.94342 21 8.8 21H15.2C16.0566 21 16.6389 20.9992 17.089 20.9624C17.5274 20.9266 17.7516 20.8617 17.908 20.782C18.2843 20.5903 18.5903 20.2843 18.782 19.908C18.8617 19.7516 18.9266 19.5274 18.9624 19.089C18.9992 18.6389 19 18.0566 19 17.2V13C19 10.7909 17.2091 9 15 9H14.25C12.4551 9 11 7.54493 11 5.75C11 4.23122 9.76878 3 8.25 3H7ZM10 1C16.0751 1 21 5.92487 21 12V17.2413C21 18.0463 21 18.7106 20.9558 19.2518C20.9099 19.8139 20.8113 20.3306 20.564 20.816C20.1805 21.5686 19.5686 22.1805 18.816 22.564C18.3306 22.8113 17.8139 22.9099 17.2518 22.9558C16.7106 23 16.0463 23 15.2413 23H8.75868C7.95372 23 7.28936 23 6.74817 22.9558C6.18608 22.9099 5.66937 22.8113 5.18404 22.564C4.43139 22.1805 3.81947 21.5686 3.43597 20.816C3.18868 20.3306 3.09012 19.8139 3.04419 19.2518C2.99998 18.7106 2.99999 18.0463 3 17.2413L3 5C3 2.79086 4.79086 1 7 1H10ZM17.9474 7.77263C16.7867 5.59506 14.7572 3.95074 12.3216 3.30229C12.7523 4.01713 13 4.85463 13 5.75C13 6.44036 13.5596 7 14.25 7H15C16.0712 7 17.0769 7.28073 17.9474 7.77263Z" fill="currentColor"></path> </g></svg> Admission
+    </a>
     <a href="<?php echo base_url('userrole/online_exam'); ?>" class="bg-gray-100 text-gray-900 hover:text-black hover:bg-gray-200 border border-gray-200 transition-colors duration-200 rounded-lg px-6 py-3 font-medium"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.44 2H17.55C21.11 2 22 2.89 22 6.44V12.77C22 16.33 21.11 17.21 17.56 17.21H6.44C2.89 17.22 2 16.33 2 12.78V6.44C2 2.89 2.89 2 6.44 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 17.22V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2 13H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7.5 22H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
         CBT Exam
     </a>
     <a href="<?php echo base_url('exam_results'); ?>" class="bg-gray-100 text-gray-900 hover:text-black hover:bg-gray-200 border border-gray-200 transition-colors duration-200 rounded-lg px-6 py-3 font-medium">
     <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>certificate-check</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> <rect width="48" height="48" fill="none"></rect> </g> <g id="icons_Q2" data-name="icons Q2"> <path d="M20.6,23.4l-4-3.9a2.1,2.1,0,0,1-.2-2.7,1.9,1.9,0,0,1,3-.2L22,19.2l6.6-6.6a2,2,0,0,1,2.8,2.8l-8,8A1.9,1.9,0,0,1,20.6,23.4Z"></path> <path d="M40,18A16,16,0,1,0,15,31.2V43.9A2.1,2.1,0,0,0,17,46a1.5,1.5,0,0,0,1.1-.4L24,41l5.9,4.6A1.5,1.5,0,0,0,31,46a2.1,2.1,0,0,0,2-2.1V31.2A16,16,0,0,0,40,18ZM12,18A12,12,0,1,1,24,30,12,12,0,0,1,12,18ZM29,39.8l-4.4-3.4a.9.9,0,0,0-1.2,0L19,39.8V33.2a16.9,16.9,0,0,0,5,.8,16.9,16.9,0,0,0,5-.8Z"></path> </g> </g> </g></svg> Exam Results
-    </a>
-    <a href="<?php echo base_url('admission'); ?>" class="bg-gray-100 text-gray-900 hover:text-black hover:bg-gray-200 border border-gray-200 transition-colors duration-200 rounded-lg px-6 py-3 font-medium">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M7 3C5.89543 3 5 3.89543 5 5V17.2C5 18.0566 5.00078 18.6389 5.03755 19.089C5.07337 19.5274 5.1383 19.7516 5.21799 19.908C5.40973 20.2843 5.7157 20.5903 6.09202 20.782C6.24842 20.8617 6.47262 20.9266 6.91104 20.9624C7.36113 20.9992 7.94342 21 8.8 21H15.2C16.0566 21 16.6389 20.9992 17.089 20.9624C17.5274 20.9266 17.7516 20.8617 17.908 20.782C18.2843 20.5903 18.5903 20.2843 18.782 19.908C18.8617 19.7516 18.9266 19.5274 18.9624 19.089C18.9992 18.6389 19 18.0566 19 17.2V13C19 10.7909 17.2091 9 15 9H14.25C12.4551 9 11 7.54493 11 5.75C11 4.23122 9.76878 3 8.25 3H7ZM10 1C16.0751 1 21 5.92487 21 12V17.2413C21 18.0463 21 18.7106 20.9558 19.2518C20.9099 19.8139 20.8113 20.3306 20.564 20.816C20.1805 21.5686 19.5686 22.1805 18.816 22.564C18.3306 22.8113 17.8139 22.9099 17.2518 22.9558C16.7106 23 16.0463 23 15.2413 23H8.75868C7.95372 23 7.28936 23 6.74817 22.9558C6.18608 22.9099 5.66937 22.8113 5.18404 22.564C4.43139 22.1805 3.81947 21.5686 3.43597 20.816C3.18868 20.3306 3.09012 19.8139 3.04419 19.2518C2.99998 18.7106 2.99999 18.0463 3 17.2413L3 5C3 2.79086 4.79086 1 7 1H10ZM17.9474 7.77263C16.7867 5.59506 14.7572 3.95074 12.3216 3.30229C12.7523 4.01713 13 4.85463 13 5.75C13 6.44036 13.5596 7 14.25 7H15C16.0712 7 17.0769 7.28073 17.9474 7.77263Z" fill="currentColor"></path> </g></svg> Admission
-    </a>
+        </a>
+<a id="installButton" href="#" class="bg-gray-100 text-gray-900 hover:text-black hover:bg-gray-200 border border-gray-200 transition-colors duration-200 rounded-lg px-6 py-3 font-medium" style="display: none;">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+        <title>install</title>
+        <path d="M24 4a2 2 0 0 1 2 2v22.59l5.3-5.3a2 2 0 0 1 2.83 2.83l-9 9a2 2 0 0 1-2.83 0l-9-9a2 2 0 0 1 2.83-2.83l5.3 5.3V6a2 2 0 0 1 2-2zM8 40a2 2 0 0 1 2-2h28a2 2 0 0 1 0 4H10a2 2 0 0 1-2-2z"></path>
+    </svg> Install App
+</a>
 
+<a id="openAppButton" href="/" class="bg-gray-100 text-gray-900 hover:text-black hover:bg-gray-200 border border-gray-200 transition-colors duration-200 rounded-lg px-6 py-3 font-medium" style="display: none;">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+        <title>open app</title>
+        <path d="M28 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-4 0V9.4L18.7 28.7a2 2 0 1 1-2.8-2.8L35.2 6H28a2 2 0 0 1 0-4zM6 12a2 2 0 0 1 2-2h12a2 2 0 0 1 0 4H10v24h24V26a2 2 0 0 1 4 0v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V12z"></path>
+    </svg> Open in App
+</a>
+
+<!-- iOS Installation Guide (hidden by default) -->
+<div id="iosGuide" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: white; border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; font-size: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000;">
+    <p style="margin: 0;">📌 To install this app:</p>
+    <p style="margin: 5px 0;">1. Tap the <b>Share</b> button <img src="https://cdn-icons-png.flaticon.com/512/565/565626.png" width="16px" style="vertical-align: middle;"> in Safari.</p>
+    <p style="margin: 5px 0;">2. Select <b>Add to Home Screen</b>.</p>
+    <button onclick="document.getElementById('iosGuide').style.display='none';" style="margin-top: 5px; background: #007aff; color: white; border: none; padding: 5px 10px; border-radius: 5px;">Got it!</button>
+</div>
 </div>
         </div>
     </main>
@@ -119,6 +140,54 @@
     </div>
 </button>
 <script>
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    
+    // Only show the install button for browsers that support it
+    if (isInstallable()) {
+        document.getElementById('installButton').style.display = 'inline-flex';
+    }
+});
+
+document.getElementById('installButton').addEventListener('click', () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('PWA installed');
+                document.getElementById('installButton').style.display = 'none';
+                document.getElementById('openAppButton').style.display = 'inline-flex';
+            }
+            deferredPrompt = null;
+        });
+    }
+});
+
+function isInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+}
+
+function isInstallable() {
+    return ('beforeinstallprompt' in window) && /Android|iPhone|iPad|iPod|Windows|Macintosh/.test(navigator.userAgent);
+}
+
+// Show Open in App button if PWA is installed
+if (isInstalled()) {
+    document.getElementById('openAppButton').style.display = 'inline-flex';
+} else if (!isInstallable() && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    // For iOS devices where install prompt is not available
+    document.getElementById('installButton').style.display = 'inline-flex';
+    document.getElementById('installButton').innerText = "Add to Home Screen";
+    document.getElementById('installButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('iosGuide').style.display = 'block';
+    });
+}
+</script>
+<script>
         const helpButton = document.getElementById('cdev-help-button');
         const menuContainer = document.getElementById('cdev-menu-container');
         const overlay = document.getElementById('cdev-overlay');
@@ -165,6 +234,7 @@
             }
         });
     </script>
+  
 <footer class="w-full py-4 text-center text-gray-600 text-sm">
     ©<?php echo date('Y'); ?> <a href="#"><strong>Acamedium.</strong></a> All rights reserved.
     <br>
