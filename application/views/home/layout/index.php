@@ -74,8 +74,6 @@
         });
     }
 </script>
-	 
-		
 		<!-- Theme Color Options -->
 		<script type="text/javascript">
 			document.documentElement.style.setProperty('--thm-primary', '<?php echo $cms_setting["primary_color"] ?>');
@@ -84,7 +82,7 @@
 			document.documentElement.style.setProperty('--thm-secondary-text', '<?php echo $cms_setting["text_secondary_color"] ?>');
 			document.documentElement.style.setProperty('--thm-footer-text', '<?php echo $cms_setting["footer_text_color"] ?>');
 			document.documentElement.style.setProperty('--thm-radius', '<?php echo $cms_setting["border_radius"] ?>');
-		</script>
+		</script>		
 	</head>
 	<body>
 		<!-- Preloader -->

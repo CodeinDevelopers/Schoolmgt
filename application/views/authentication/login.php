@@ -7,6 +7,7 @@
     <meta name="description" content="<?php echo $global_config['institute_name'] ?>">
     <meta name="author" content="<?php echo $global_config['institute_name'] ?>">
     <title><?php echo translate('login');?></title>
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/cdv.css');?>">
     <link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.png');?>">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
@@ -47,6 +48,7 @@
             font-weight: bold;
         }
     </style>
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/cdv.css');?>">
     <script type="text/javascript">
         var base_url = '<?php echo base_url() ?>';
     </script>
@@ -148,20 +150,137 @@
                     <span>Home</span>
                 </a>
             </div>
+            <div class="cdev-overlay" id="cdev-overlay"></div>
 
-            <!-- Footer -->
-            <footer class="w-full py-4 text-center text-gray-600 text-sm">
-                ©<?php echo date('Y'); ?> <strong>Acamedium.</strong> All rights reserved.
-                <br>
-                Licenced to <strong><?php echo $global_config['institute_name'];?></strong>. 
-                <br>
-                <span>
-                    Designed by 
-                    <strong>
-                        <span style="color: #ff2b13;">Codein</span><span style="color: #43cdc2;">Developers</span>.
-                    </strong>
-                </span>
-            </footer>
+<div class="cdev-menu-container" id="cdev-menu-container">
+    <div class="cdev-menu-section">
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">🚀</div>
+            <div class="cdev-menu-item-text">What's new</div>
+        </a>
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">✓</div>
+            <div class="cdev-menu-item-text">Get started checklist</div>
+        </a>
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">📹</div>
+            <div class="cdev-menu-item-text">Video tutorials</div>
+        </a>
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">⊕</div>
+            <div class="cdev-menu-item-text">Help Center</div>
+        </a>
+    </div>
+
+    <div class="cdev-menu-section">
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">⌨️</div>
+            <div class="cdev-menu-item-text">Keyboard shortcuts</div>
+        </a>
+    </div>
+
+    <div class="cdev-menu-section">
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">💬</div>
+            <div class="cdev-menu-item-text">Share feedback</div>
+            <span class="cdev-new-badge">New</span>
+        </a>
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">🐞</div>
+            <div class="cdev-menu-item-text">Report a bug</div>
+        </a>
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">⭐</div>
+            <div class="cdev-menu-item-text">Request feature</div>
+        </a>
+    </div>
+
+    <div class="cdev-menu-section">
+        <a href="#" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">👥</div>
+            <div class="cdev-menu-item-text">Community</div>
+        </a>
+    </div>
+
+    <div class="cdev-menu-section">
+        <a href="#" target="_blank" class="cdev-menu-item">
+            <div class="cdev-menu-item-icon">🌐</div>
+            <div class="cdev-menu-item-text">Acamedium</div>
+        </a>
+    </div>
+</div>
+
+<button class="cdev-help-button" id="cdev-help-button" aria-label="Help">
+    <div class="cdev-help-icon">
+        <svg id="question-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75ZM1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 7.75C11.3787 7.75 10.875 8.25368 10.875 8.875C10.875 9.28921 10.5392 9.625 10.125 9.625C9.71079 9.625 9.375 9.28921 9.375 8.875C9.375 7.42525 10.5503 6.25 12 6.25C13.4497 6.25 14.625 7.42525 14.625 8.875C14.625 9.83834 14.1056 10.6796 13.3353 11.1354C13.1385 11.2518 12.9761 11.3789 12.8703 11.5036C12.7675 11.6246 12.75 11.7036 12.75 11.75V13C12.75 13.4142 12.4142 13.75 12 13.75C11.5858 13.75 11.25 13.4142 11.25 13V11.75C11.25 11.2441 11.4715 10.8336 11.7266 10.533C11.9786 10.236 12.2929 10.0092 12.5715 9.84439C12.9044 9.64739 13.125 9.28655 13.125 8.875C13.125 8.25368 12.6213 7.75 12 7.75ZM12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z"
+                    fill="#1C274C"></path>
+            </g>
+        </svg>
+        <svg id="close-icon" viewBox="0 0 24 24">
+            <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+        </svg>
+    </div>
+</button>
+<script>
+        const helpButton = document.getElementById('cdev-help-button');
+        const menuContainer = document.getElementById('cdev-menu-container');
+        const overlay = document.getElementById('cdev-overlay');
+
+        // Toggle menu with animation
+        function toggleMenu() {
+            menuContainer.classList.toggle('visible');
+            overlay.classList.toggle('visible');
+
+            // Update aria-expanded for accessibility
+            const isExpanded = menuContainer.classList.contains('visible');
+            helpButton.setAttribute('aria-expanded', isExpanded);
+        }
+
+        // Event listeners with passive where appropriate
+        helpButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            toggleMenu();
+        }, { passive: false });
+
+        overlay.addEventListener('click', toggleMenu, { passive: true });
+
+        document.addEventListener('click', (event) => {
+            if (menuContainer.classList.contains('visible')) {
+                if (!menuContainer.contains(event.target) && !helpButton.contains(event.target)) {
+                    toggleMenu();
+                }
+            }
+        }, { passive: true });
+
+        // Handle keyboard navigation
+        helpButton.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleMenu();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && menuContainer.classList.contains('visible')) {
+                toggleMenu();
+            }
+        });
+    </script>
+          <footer class="w-full py-4 text-center text-gray-600 text-sm">
+    ©<?php echo date('Y'); ?> <a href="#"><strong>Acamedium.</strong></a> All rights reserved.
+    <br>
+    Licenced to <strong><?php echo $global_config['institute_name'];?></strong>. 
+        </strong>
+    </span>
+</footer>
         </div>
     </div>
 
