@@ -60,8 +60,6 @@
                     <?php } ?>
                 </div>
             </div>
-        </div>
-    </div>
     <!-- Top Bar Ends -->
     <?php
 $news_list = $this->home_model->getLatestNews($branchID);
