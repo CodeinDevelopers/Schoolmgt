@@ -1132,23 +1132,4 @@ $employee_absent = $weekend_attendance["employee_absent"];
                             }
                         });
                     </script>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            const showMoreBtn = document.getElementById("show-more-btn");
-                            const hiddenDays = document.querySelectorAll(".hidden");
-                            let isExpanded = false;
-
-                            showMoreBtn.addEventListener("click", function() {
-                                if (!isExpanded) {
-                                    // Show all hidden days
-                                    hiddenDays.forEach(day => day.style.display = "block");
-                                    showMoreBtn.textContent = "Show Less";
-                                } else {
-                                    // Hide extra days
-                                    hiddenDays.forEach(day => day.style.display = "none");
-                                    showMoreBtn.textContent = "Show More";
-                                }
-                                isExpanded = !isExpanded;
-                            });
-                        });
-                    </script>
+                    
