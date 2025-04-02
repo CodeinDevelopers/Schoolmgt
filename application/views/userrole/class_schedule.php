@@ -4,7 +4,7 @@
 			<i class="fas fa-user-clock"></i> <?=translate('schedule') . " " . translate('list');?>
 		</h4>
 		<div class="panel-btn">
-			<button onclick="fn_printElem('printResult')" class="btn btn-default btn-circle icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" style="display: inline-block; vertical-align: middle;" aria-hidden="true">
+			<button onclick="fn_printElem('printResult')" class="btn btn-default btn-circle icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"  style="display: inline-block; vertical-align: middle;" aria-hidden="true">
                                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                                 <g id="SVGRepo_iconCarrier">

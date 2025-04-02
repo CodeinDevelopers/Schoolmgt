@@ -100,6 +100,7 @@ a.cdev-action-btn {
     transition: all 0.3s ease;
     text-decoration: none !important;
     font-weight: 500;
+    font-size: 1.4rem;
 
 }
 
@@ -257,11 +258,7 @@ a.due-fees:hover { color: #ff0202; }
     }
     
 }
-@media (max-width: 480px) {
-    a.cdev-action-btn span {
-        font-size: 10px;
-    }
-}
+
 /*Cards for data dis play */
 .cdev-dashboard-card {
     background: #ffffff;
