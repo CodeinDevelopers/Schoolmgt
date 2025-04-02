@@ -1358,3 +1358,30 @@ margin: 16px auto 0;
 .cdev-menu-item:active {
     transform: translateY(1px);
 }
+
+   /* Floating loader*/
+    .loading-overlay {
+        position: fixed;
+        top: 10px;
+        right: 14px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        display: none;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .loading-overlay svg {
+        animation: fadeIn 0.3s ease-in-out;
+    }
