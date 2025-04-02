@@ -1,31 +1,3 @@
-<style>
-    /* Floating loader*/
-    #loading-overlay .load-shii {
-        position: fixed;
-        top: 10px;
-        right: 14px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        display: none;
-    }
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    #loading-overlay svg {
-        animation: fadeIn 0.3s ease-in-out;
-    }
-</style>
 <header class="header">
     <div class="logo-env">
         <a href="#" class="logo">
@@ -113,6 +85,22 @@
 
     <div class="header-right">
         <ul class="header-menu" style="display: flex; align-items: center; margin-right: 0px;">
+             <!--Top-Right Loading Spinner -->
+            <div id="loading-overlay" class="loading-overlay">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="30px" height="30px" style="display: inline-block; vertical-align: middle;">
+                    <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
+                        <stop offset="0" stop-color="currentColor"></stop>
+                        <stop offset=".3" stop-color="currentColor" stop-opacity=".9"></stop>
+                        <stop offset=".6" stop-color="currentColor" stop-opacity=".6"></stop>
+                        <stop offset=".8" stop-color="currentColor" stop-opacity=".3"></stop>
+                        <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
+                        <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="0.6" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
+                    </circle>
+                    <circle transform-origin="center" fill="none" opacity=".2" stroke="currentColor" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle>
+                </svg>
+            </div>
             <?php
             if (is_student_loggedin()):
                 $this->db->select('enroll.id,class.name as class_name,section.name as section_name');
@@ -298,23 +286,6 @@
                     </div>
                 </div>
             </li>
-
-            <!--Top-Right Loading Spinner -->
-            <div id="loading-overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="30px" height="30px" style="display: inline-block; vertical-align: middle;">
-                    <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
-                        <stop offset="0" stop-color="currentColor"></stop>
-                        <stop offset=".3" stop-color="currentColor" stop-opacity=".9"></stop>
-                        <stop offset=".6" stop-color="currentColor" stop-opacity=".6"></stop>
-                        <stop offset=".8" stop-color="currentColor" stop-opacity=".3"></stop>
-                        <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
-                    </radialGradient>
-                    <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
-                        <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="0.6" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
-                    </circle>
-                    <circle transform-origin="center" fill="none" opacity=".2" stroke="currentColor" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle>
-                </svg>
-            </div>
         </ul>
 
         <!-- user profile box -->
