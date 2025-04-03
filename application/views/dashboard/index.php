@@ -730,7 +730,7 @@ $employee_absent = $weekend_attendance["employee_absent"];
     <!----Teacher/studentAttendance Card----->
             <div class="cdev-attend-panel">
                 <div class="cdev-panel-header">
-                    <h3 class="cdev-panel-title">
+                    <h3 class="panel-title">
                         <?php
                         $day = date('l');
                         $month = strtolower(date('F'));
