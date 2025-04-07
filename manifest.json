@@ -1,13 +1,21 @@
 {
+    "id": "/?source=pwa",
     "name": "Acamedium",
     "short_name": "Acamedium",
+    "description": "Acamedium is a modern educational platform designed to streamline school management and enhance digital learning experiences.",
+    "lang": "en",
+    "dir": "ltr",
     "scope": "/",
     "start_url": "<?php echo base_url('/'); ?>",
     "display": "standalone",
-    "theme_color": "#fff",
+    "display_override": ["standalone", "fullscreen", "minimal-ui", "browser"],
+    "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "orientation": "portrait",
     "status_bar": "black",
+    "categories": ["education", "productivity", "management"],
+    "prefer_related_applications": false,
+
     "icons": [
         {
             "src": "uploads/appIcons/icon-48x48.png",
@@ -44,6 +52,71 @@
             "type": "image/png",
             "sizes": "512x512",
             "purpose": "any"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "uploads/appIcons/login-page.webp",
+            "sizes": "720x1280",
+            "type": "image/png",
+            "label": "Login Screen",
+            "platform": "narrow"
+        },
+        {
+            "src": "uploads/appIcons/parent-dashboard.webp",
+            "sizes": "720x1280",
+            "type": "image/png",
+            "label": "Parent Dashboard",
+            "platform": "narrow"
+        },
+        {
+            "src": "uploads/appIcons/admin-dash.webp",
+            "sizes": "720x1280",
+            "type": "image/png",
+            "label": "Admin Dashboard",
+            "platform": "narrow"
+        },
+        {
+            "src": "uploads/appIcons/fees-dashbord.webp",
+            "sizes": "720x1280",
+            "type": "image/png",
+            "label": "Fees Collection",
+            "platform": "narrow"
+        },
+        {
+            "src": "uploads/appIcons/transactions.webp",
+            "sizes": "720x1280",
+            "type": "image/png",
+            "label": "Transactions",
+            "platform": "narrow"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Open Dashboard",
+            "short_name": "Dashboard",
+            "description": "Go to your main dashboard",
+            "url": "/dashboard",
+            "icons": [
+                {
+                    "src": "uploads/icons/dashboard-shortcut.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "Check Attendance",
+            "short_name": "Attendance",
+            "description": "Check student attendance quickly",
+            "url": "/attendance",
+            "icons": [
+                {
+                    "src": "uploads/icons/attendance-shortcut.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
         }
     ]
 }
