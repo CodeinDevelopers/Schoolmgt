@@ -433,7 +433,7 @@ a.due-fees:hover { color: #ff0202; }
     transition: all 0.3s ease;
     text-decoration: none !important;
     font-weight: 500;
-    font-size: 1.72rem;
+    font-size: 1.45rem;
     margin-left: 10px;
 }
 
@@ -1065,14 +1065,6 @@ margin: 16px auto 0;
     padding: 10px 12px;
     border-bottom: 1px solid #f0f0f0;
 }
-
-.cdev-panel-title {
-    margin: 0;
-    color: #333;
-    font-size: 17px;
-    font-weight: 600;
-}
-
 .cdev-panel-content {
     padding: 10px;
 }
@@ -1084,11 +1076,11 @@ margin: 16px auto 0;
     gap: 12px;
 }
 
-/* Individual Metrics Boxes */
+
 .cdev-metrics-box {
     border-radius: 6px;
     padding: 10px;
-    min-height: 100px; /* Fixed smaller height */
+    min-height: 100px; 
     display: flex;
     flex-direction: column;
     background-color: #f8f9fa;
@@ -1099,7 +1091,6 @@ margin: 16px auto 0;
     flex: 1;
 }
 
-/* Metrics Content */
 .cdev-box-content {
     padding: 5px;
 }
@@ -1127,13 +1118,13 @@ margin: 16px auto 0;
 .cdev-count-present {
     font-weight: 700;
     font-size: 18px;
-    color: #28a745;  /* Green color for present */
+    color: #28a745;  
 }
 
 .cdev-count-absent {
     font-weight: 700;
     font-size: 18px;
-    color: #dc3545;  /* Red color for absent */
+    color: #dc3545; 
 }
 
 /* Responsive Layout */
